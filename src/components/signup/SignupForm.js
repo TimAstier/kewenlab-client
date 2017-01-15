@@ -80,7 +80,7 @@ class SignupForm extends React.Component {
       this.props.isUserExists(val).then(res => {
         let errors = this.state.errors;
         let invalid;
-        if(res.data.user) {
+        if(!isEmpty(res.data.user)) {
           errors[field] = 'There is user with such ' + field;
           invalid = true;
         } else {
