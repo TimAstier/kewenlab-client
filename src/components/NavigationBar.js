@@ -29,6 +29,13 @@ class NavigationBar extends React.Component {
 
     return (
     <Menu fixed="top">
+      <Menu.Item>
+        <img
+          className="logo"
+          src="http://www.9upk.com/android/softico/2016-3/20163261044960790.png"
+          alt="Kewen-lab logo"
+        />
+      </Menu.Item>
       <Link to="/" className="item header main-menu-header">Kewen-lab</Link>
       { isAuthenticated ? userLinks : guestLinks }
     </Menu>

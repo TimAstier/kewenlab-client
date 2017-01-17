@@ -1,5 +1,25 @@
 body {
-  margin: 0px;
-  padding: 80px;
+  display: block;
+  padding-top: 59px;
   font-family: sans-serif;
+}
+
+.center {
+  text-align: center;
+}
+
+#app {
+  height: 100%;
+  margin-top: -10px;
+}
+
+#main-container {
+  height: 100%;
+}
+
+#sidebar {
+  height: 100%;
+  width: 210px;
+  font-size: 15px;
+  overflow-y: scroll;
 }

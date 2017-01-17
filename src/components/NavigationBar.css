@@ -5,3 +5,7 @@
 .main-menu-header {
   font-size: 2em;
 }
+
+.logo {
+  width: 4.5em !important;
+}

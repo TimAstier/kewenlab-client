@@ -1,10 +1,11 @@
 import React from 'react';
+import { Message } from 'semantic-ui-react';
 
 class Greetings extends React.Component {
   render() {
     return (
-      <div className="jumbotron">
-        <h1>Hello World!</h1>
+      <div>
+        <Message size="massive" className="center">Welcome to Kenwen-lab</Message>
       </div>
     );
   }
