@@ -23,7 +23,7 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <Menu pointing secondary vertical id="sidebar">
+      <Menu pointing inverted vertical id="sidebar">
         <TextList textItems={this.props.textItems} />
       </Menu>
     );
