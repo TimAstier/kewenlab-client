@@ -15,5 +15,5 @@ export default (
     <Route path="/signup" component={SignupPage} />
     <Route path="/login" component={LoginPage} />
     <Route path="/new-event" component={requireAuth(NewEventPage)} />
-      </Route>
+  </Route>
 );

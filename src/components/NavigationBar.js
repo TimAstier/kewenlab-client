@@ -1,4 +1,5 @@
 import React from 'react';
+import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../actions/authActions';
@@ -13,30 +14,23 @@ class NavigationBar extends React.Component {
     const { isAuthenticated } = this.props.auth;
 
     const userLinks = (
-      <ul className="nav navbar-nav navbar-right">
-        <li><a href="#" onClick={this.logout.bind(this)}>Logout</a></li>
-      </ul>
+      <Menu.Menu position="right">
+        <a href="#" onClick={this.logout.bind(this)} className="item">Logout</a>
+      </Menu.Menu>
     );
 
     const guestLinks = (
-    <ul className="nav navbar-nav navbar-right">
-      <li><Link to="/signup" >Signup</Link></li>
-      <li><Link to="/login" >Login</Link></li>
-    </ul>
+      <Menu.Menu position="right">
+        <Link to="/signup" className="item">Signup</Link>
+        <Link to="/login" className="item">Login</Link>
+      </Menu.Menu>
     );
 
     return (
-    <nav className="navbar navbar-default">
-      <div className="container-fluid">
-        <div className="navbar-header">
-          <Link to="/" className="navbar-brand">Red Dice</Link>
-        </div>
-
-        <div className="collapse navbar-collapse">
-          { isAuthenticated ? userLinks : guestLinks }
-        </div>
-      </div>
-    </nav>
+    <Menu fixed="top" className="main-menu">
+      <Link to="/" className="item header">Kewen-lab</Link>
+      { isAuthenticated ? userLinks : guestLinks }
+    </Menu>
     );
   }
 }
