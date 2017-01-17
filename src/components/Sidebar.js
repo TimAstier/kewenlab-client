@@ -1,26 +1,24 @@
 import React from 'react';
-import { Menu } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react';
+import TextList from './sidebar/TextList';
 
 class Sidebar extends React.Component {
-  state = { activeItem: 'account' }
+  constructor(props) {
+    super(props);
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
+    this.state = {
+      textItems: [
+        { title: 'Text 1' },
+        { title: 'Text 2' },
+        { title: 'Text 3' }
+      ]
+    }
+  }
 
   render() {
-    const { activeItem } = this.state
-
     return (
       <Menu pointing secondary vertical id="sidebar">
-        <Menu.Item
-          name='account'
-          active={activeItem === 'account'}
-          onClick={this.handleItemClick}
-        />
-        <Menu.Item
-          name='settings'
-          active={activeItem === 'settings'}
-          onClick={this.handleItemClick}
-        />
+        <TextList textItems={this.state.textItems} />
       </Menu>
     );
   }
