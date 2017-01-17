@@ -23,3 +23,8 @@ body {
   font-size: 15px;
   overflow-y: scroll;
 }
+
+.alert {
+  margin-top: 20px;
+  text-align: center;
+}

@@ -1,12 +1,19 @@
 import React from 'react';
-import Sidebar from './Sidebar'
+import { connect } from 'react-redux';
+import Sidebar from './Sidebar';
+import { addFlashMessage } from '../actions/flashMessages';
 
 class MainScreen extends React.Component {
   render() {
+    const { addFlashMessage } = this.props;
     return (
-      <Sidebar />
+      <Sidebar addFlashMessage={addFlashMessage} />
     );
   }
 }
 
-export default MainScreen;
+MainScreen.propTypes = {
+  addFlashMessage: React.PropTypes.func.isRequired
+}
+
+export default connect(null, { addFlashMessage })(MainScreen);

@@ -16,10 +16,15 @@ class Sidebar extends React.Component {
   componentWillMount() {
     return this.props.getTextItems().then(
       (res) => {
+        // TODO: dispatch an action to update the Redux state
         this.setState({ textItems: res.data.texts });
       },
       (err) => {
-        // handle error
+        this.props.addFlashMessage({
+          type: 'error',
+          text: 'Error: could not retrieve texts from the server.'
+        });
+        this.context.router.push('/');
       }
     );
   }
@@ -34,7 +39,12 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
-  getTextItems: React.PropTypes.func.isRequired
+  getTextItems: React.PropTypes.func.isRequired,
+  addFlashMessage: React.PropTypes.func.isRequired
+}
+
+Sidebar.contextTypes = {
+  router: React.PropTypes.object.isRequired
 }
 
 export default connect(null, { getTextItems })(Sidebar);
