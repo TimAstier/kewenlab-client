@@ -3,6 +3,7 @@ import { Menu } from 'semantic-ui-react'
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../actions/authActions';
+import './NavigationBar.css';
 
 class NavigationBar extends React.Component {
   logout(e) {
@@ -14,21 +15,21 @@ class NavigationBar extends React.Component {
     const { isAuthenticated } = this.props.auth;
 
     const userLinks = (
-      <Menu.Menu position="right">
+      <Menu.Menu position="right" className="main-menu-link">
         <a href="#" onClick={this.logout.bind(this)} className="item">Logout</a>
       </Menu.Menu>
     );
 
     const guestLinks = (
-      <Menu.Menu position="right">
-        <Link to="/signup" className="item">Signup</Link>
+      <Menu.Menu position="right" className="main-menu-link">
+        <Link to="/signup" className="item color">Signup</Link>
         <Link to="/login" className="item">Login</Link>
       </Menu.Menu>
     );
 
     return (
-    <Menu fixed="top" className="main-menu">
-      <Link to="/" className="item header">Kewen-lab</Link>
+    <Menu fixed="top">
+      <Link to="/" className="item header main-menu-header">Kewen-lab</Link>
       { isAuthenticated ? userLinks : guestLinks }
     </Menu>
     );
