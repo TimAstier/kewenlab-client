@@ -1,18 +1,27 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 import TextList from './sidebar/TextList';
+import { getTextItems } from '../actions/sidebarActions';
 
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      textItems: [
-        { title: 'Text 1' },
-        { title: 'Text 2' },
-        { title: 'Text 3' }
-      ]
+      textItems: []
     }
+  }
+
+  componentWillMount() {
+    return this.props.getTextItems().then(
+      (res) => {
+        this.setState({ textItems: res.data.texts });
+      },
+      (err) => {
+        // handle error
+      }
+    );
   }
 
   render() {
@@ -24,4 +33,8 @@ class Sidebar extends React.Component {
   }
 }
 
-export default Sidebar;
+Sidebar.propTypes = {
+  getTextItems: React.PropTypes.func.isRequired
+}
+
+export default connect(null, { getTextItems })(Sidebar);

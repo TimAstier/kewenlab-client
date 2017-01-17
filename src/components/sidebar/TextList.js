@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
+import isEmpty from 'lodash/isEmpty';
 
 class TextList extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class TextList extends React.Component {
 
     // Defining the state in the constructor
     this.state = {
-      activeItem: this.props.textItems[0].title
+      activeItem: ''
     };
 
     // Binding the right context to the class methods
@@ -33,9 +34,10 @@ class TextList extends React.Component {
   }
 
   render() {
+    const textItems = this.props.textItems;
     return (
       <div>
-        { this.props.textItems.map(this.renderTextItem) }
+        { !isEmpty(textItems) ? textItems.map(this.renderTextItem) : null }
       </div>
     );
   }
