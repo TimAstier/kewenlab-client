@@ -7,6 +7,9 @@ class TextList extends React.Component {
     super(props);
 
     // Defining the state in the constructor
+    // Note: The current best practice is to use local state to handle
+    // the state of your user interface (UI) state rather than data.
+    // http://bit.ly/2iE2rWh
     this.state = {
       activeItem: ''
     };

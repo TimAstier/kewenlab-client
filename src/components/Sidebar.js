@@ -2,22 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 import TextList from './sidebar/TextList';
-import { getTextItems } from '../actions/sidebarActions';
+import { getTextItems, updateTextItems } from '../actions/sidebarActions';
 
 class Sidebar extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      textItems: []
-    }
-  }
 
   componentWillMount() {
     return this.props.getTextItems().then(
       (res) => {
-        // TODO: dispatch an action to update the Redux state
-        this.setState({ textItems: res.data.texts });
+        this.props.updateTextItems(res.data.texts);
       },
       (err) => {
         this.props.addFlashMessage({
@@ -32,7 +24,7 @@ class Sidebar extends React.Component {
   render() {
     return (
       <Menu pointing secondary vertical id="sidebar">
-        <TextList textItems={this.state.textItems} />
+        <TextList textItems={this.props.textItems} />
       </Menu>
     );
   }
@@ -40,11 +32,21 @@ class Sidebar extends React.Component {
 
 Sidebar.propTypes = {
   getTextItems: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired
+  addFlashMessage: React.PropTypes.func.isRequired,
+  updateTextItems: React.PropTypes.func.isRequired
 }
 
 Sidebar.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-export default connect(null, { getTextItems })(Sidebar);
+function mapStateToProps(store) {
+  return {
+    textItems: store.textItems
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { getTextItems, updateTextItems }
+)(Sidebar);
