@@ -16,7 +16,6 @@ class Sidebar extends React.Component {
           type: 'error',
           text: 'Error: could not retrieve texts from the server.'
         });
-        this.context.router.push('/');
       }
     );
   }
@@ -24,7 +23,10 @@ class Sidebar extends React.Component {
   render() {
     return (
       <Menu pointing inverted vertical id="sidebar">
-        <TextList textItems={this.props.textItems} />
+        <TextList
+          textItems={this.props.textItems}
+          addFlashMessage={this.props.addFlashMessage}
+        />
       </Menu>
     );
   }
@@ -33,7 +35,8 @@ class Sidebar extends React.Component {
 Sidebar.propTypes = {
   getTextItems: React.PropTypes.func.isRequired,
   addFlashMessage: React.PropTypes.func.isRequired,
-  updateTextItems: React.PropTypes.func.isRequired
+  updateTextItems: React.PropTypes.func.isRequired,
+  textItems: React.PropTypes.array.isRequired
 }
 
 Sidebar.contextTypes = {
@@ -42,7 +45,7 @@ Sidebar.contextTypes = {
 
 function mapStateToProps(store) {
   return {
-    textItems: store.textItems
+    textItems: store.texts.textItems
   };
 }
 

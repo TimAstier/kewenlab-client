@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
+import { getCurrentText, setCurrentText } from '../../actions/sidebarActions';
 
 class TextList extends React.Component {
   constructor(props) {
@@ -24,6 +26,7 @@ class TextList extends React.Component {
 
     return(
       <Menu.Item
+        data={textItem.id}
         key={i}
         name={textItem.title}
         active={activeItem === textItem.title}
@@ -32,8 +35,19 @@ class TextList extends React.Component {
     );
   }
 
-  handleItemClick(e, { name }) {
-    return this.setState({ activeItem: name });
+  handleItemClick(e, { name, data }) {
+    this.setState({ activeItem: name });
+    return this.props.getCurrentText(data).then(
+      (res) => {
+        this.props.setCurrentText(res.data.text);
+      },
+      (err) => {
+        this.props.addFlashMessage({
+          type: 'error',
+          text: 'Error: could not current text from the server.'
+        });
+      }
+    );
   }
 
   render() {
@@ -47,7 +61,10 @@ class TextList extends React.Component {
 }
 
 TextList.propTypes = {
+  getCurrentText: React.PropTypes.func.isRequired,
+  setCurrentText: React.PropTypes.func.isRequired,
+  addFlashMessage: React.PropTypes.func.isRequired,
   textItems: React.PropTypes.array.isRequired
 }
 
-export default TextList;
+export default connect(null, { getCurrentText, setCurrentText })(TextList);
