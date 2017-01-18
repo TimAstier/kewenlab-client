@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Form, TextArea, Button, Icon } from 'semantic-ui-react';
-import { setCurrentTextContent } from '../actions/textEditorActions';
+import { setCurrentTextContent, saveTextContent }
+  from '../actions/textEditorActions';
 
 class TextEditor extends React.Component {
   constructor(props) {
@@ -19,7 +20,8 @@ class TextEditor extends React.Component {
 
   onClick(e) {
     e.preventDefault();
-    // Save text
+    // TODO: Avoid ending the whole currentText object in payload
+    this.props.saveTextContent(this.props.currentText);
   }
 
   hasCurrentText() {
@@ -60,7 +62,8 @@ class TextEditor extends React.Component {
 
 TextEditor.propTypes = {
   currentText: React.PropTypes.object.isRequired,
-  setCurrentTextContent: React.PropTypes.func.isRequired
+  setCurrentTextContent: React.PropTypes.func.isRequired,
+  saveTextContent: React.PropTypes.func.isRequired
 }
 
 function mapStateToProps(store) {
@@ -71,5 +74,5 @@ function mapStateToProps(store) {
 
 export default connect(
   mapStateToProps,
-  { setCurrentTextContent }
+  { setCurrentTextContent, saveTextContent }
 )(TextEditor);
