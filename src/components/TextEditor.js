@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form, TextArea } from 'semantic-ui-react';
+import { Form, TextArea, Button, Icon } from 'semantic-ui-react';
 import { setCurrentTextContent } from '../actions/textEditorActions';
 
 class TextEditor extends React.Component {
@@ -8,6 +8,7 @@ class TextEditor extends React.Component {
     super(props);
 
     this.onChange = this.onChange.bind(this);
+    this.onClick = this.onClick.bind(this);
     this.hasCurrentText = this.hasCurrentText.bind(this);
     this.placeholder = this.placeholder.bind(this);
   }
@@ -16,12 +17,19 @@ class TextEditor extends React.Component {
     this.props.setCurrentTextContent(e.target.value);
   }
 
+  onClick(e) {
+    e.preventDefault();
+    // Save text
+  }
+
   hasCurrentText() {
     return this.props.currentText.id;
   }
 
   placeholder() {
-    return this.hasCurrentText() ? 'Write a text here...' : 'Select a text.';
+    const msg1 = 'Write a text here...';
+    const msg2 = '<-- Select a text or create a new one.';
+    return this.hasCurrentText() ? msg1 : msg2;
   }
 
   render() {
@@ -35,6 +43,15 @@ class TextEditor extends React.Component {
             onChange={this.onChange}
             readOnly={!this.hasCurrentText()}
           />
+          <Button
+            size='big'
+            primary
+            id='text-editor-save-btn'
+            onClick={this.onClick}
+          >
+            <Icon name='save' />
+            Save
+          </Button>
         </Form>
       </div>
     );
