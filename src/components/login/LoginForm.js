@@ -67,7 +67,7 @@ class LoginForm extends React.Component {
   render() {
     const { errors, identifier, password, isLoading } = this.state;
     return (
-      <form onSubmit={this.onSubmit} className="form">
+      <form onSubmit={this.onSubmit} id="login-form">
         <h1>Login</h1>
 
         { errors.form &&

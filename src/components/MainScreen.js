@@ -1,13 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Sidebar from './Sidebar';
+import TextEditor from './TextEditor';
 import { addFlashMessage } from '../actions/flashMessages';
 
 class MainScreen extends React.Component {
   render() {
     const { addFlashMessage } = this.props;
     return (
-      <Sidebar addFlashMessage={addFlashMessage} />
+      <div id="main-screen">
+        <Sidebar addFlashMessage={addFlashMessage} />
+        <TextEditor />
+      </div>
     );
   }
 }

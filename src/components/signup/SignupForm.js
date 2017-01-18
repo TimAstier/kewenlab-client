@@ -118,7 +118,7 @@ class SignupForm extends React.Component {
       <option key={val} value={val}>{key}</option>
     );
     return (
-      <form onSubmit={this.onSubmit} className="form">
+      <form onSubmit={this.onSubmit} id="signup-form">
         <h1>Create your account</h1>
 
 				<TextFieldGroup
