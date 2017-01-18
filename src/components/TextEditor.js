@@ -8,10 +8,20 @@ class TextEditor extends React.Component {
     super(props);
 
     this.onChange = this.onChange.bind(this);
+    this.hasCurrentText = this.hasCurrentText.bind(this);
+    this.placeholder = this.placeholder.bind(this);
   }
 
   onChange(e) {
     this.props.setCurrentTextContent(e.target.value);
+  }
+
+  hasCurrentText() {
+    return this.props.currentText.id;
+  }
+
+  placeholder() {
+    return this.hasCurrentText() ? 'Write a text here...' : 'Select a text.';
   }
 
   render() {
@@ -20,9 +30,10 @@ class TextEditor extends React.Component {
         <h2>课文</h2>
         <Form id="text-editor-form">
           <TextArea
-            placeholder='Start writing a new text...'
-            value={this.props.content}
+            placeholder={this.placeholder()}
+            value={this.props.currentText.content}
             onChange={this.onChange}
+            readOnly={!this.hasCurrentText()}
           />
         </Form>
       </div>
@@ -31,13 +42,13 @@ class TextEditor extends React.Component {
 }
 
 TextEditor.propTypes = {
-  content: React.PropTypes.string.isRequired,
+  currentText: React.PropTypes.object.isRequired,
   setCurrentTextContent: React.PropTypes.func.isRequired
 }
 
 function mapStateToProps(store) {
   return {
-    content: store.texts.currentText.content
+    currentText: store.texts.currentText
   }
 }
 

@@ -27,12 +27,13 @@ class NavigationBar extends React.Component {
       </Menu.Menu>
     );
 
+    // TODO: Add a self-hosted logo
     return (
     <Menu fixed="top">
       <Menu.Item>
         <img
           className="logo"
-          src="http://www.9upk.com/android/softico/2016-3/20163261044960790.png"
+          src="http://placehold.it/50x50"
           alt="Kewen-lab logo"
         />
       </Menu.Item>
