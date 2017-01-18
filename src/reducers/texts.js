@@ -1,8 +1,11 @@
-import { UPDATE_TEXT_ITEMS, SET_CURRENT_TEXT } from '../actions/types';
+import { UPDATE_TEXT_ITEMS, SET_CURRENT_TEXT,
+  SET_CURRENT_TEXT_CONTENT } from '../actions/types';
 
 const initialState = {
   textItems: [],
-  currentText: {}
+  currentText: {
+    content: ''
+  }
 };
 
 export default (state = initialState, action = {}) => {
@@ -17,6 +20,14 @@ export default (state = initialState, action = {}) => {
         textItems: state.textItems,
         currentText: action.currentText
       };
+    case SET_CURRENT_TEXT_CONTENT:
+      return {
+        ...state,
+        currentText: {
+          ...state.currentText,
+          content: action.content
+        }
+      }
     default:
       return state;
   }
