@@ -1,31 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Table, Label } from 'semantic-ui-react';
 import WordItem from './wordsarea/WordItem';
 import isEmpty from 'lodash/isEmpty';
 
 class WordsArea extends React.Component {
 
+  // TODO: Render in the right order
   renderWordItem(wordItem, i) {
     return(
       <WordItem
         key={i}
-        word={wordItem.word}
-        status={wordItem.status}
+        word={wordItem.chinese}
+        status={wordItem.status || ''}
       />
     );
   }
 
   render() {
-    // TODO: Take data from the server
-    // Fake Data
-    const wordItems = [
-      { word: '你好', status: '' },
-      { word: '我们', status: 'New' },
-      { word: '他', status: 'New' },
-      { word: '爱', status: '' },
-      { word: '中国', status: '' },
-      { word: '冰块', status: 'New' }
-    ];
+    const { words } = this.props;
 
     return (
       <div id='words-area'>
@@ -40,7 +33,7 @@ class WordsArea extends React.Component {
             </Table.Header>
 
             <Table.Body >
-              { !isEmpty(wordItems) ? wordItems.map(this.renderWordItem) : null }
+              { !isEmpty(words) ? words.map(this.renderWordItem) : null }
             </Table.Body>
           </Table>
         </div>
@@ -49,4 +42,14 @@ class WordsArea extends React.Component {
   }
 }
 
-export default WordsArea;
+WordsArea.propTypes = {
+  words: React.PropTypes.array.isRequired
+}
+
+function mapStateToProps(store) {
+  return {
+    words: store.texts.words
+  }
+}
+
+export default connect(mapStateToProps)(WordsArea);

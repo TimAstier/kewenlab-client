@@ -16,13 +16,21 @@ import { UPDATE_TEXT_ITEMS, SET_CURRENT_TEXT } from './types';
 
  export function getCurrentText(id) {
    return dispatch => {
-     return axios.get(`/api/texts/${id}`);
+     return axios.all([
+       axios.get(`/api/texts/${id}`),
+       axios.get(`/api/texts/${id}/chars`),
+       axios.get(`/api/texts/${id}/words`)
+     ]);
    };
  }
 
- export function setCurrentText(text) {
+ export function setCurrentText(text, chars, words) {
    return {
      type: SET_CURRENT_TEXT,
-     currentText: text
+     payload: {
+       currentText: text,
+       chars,
+       words  
+     }
    };
  }

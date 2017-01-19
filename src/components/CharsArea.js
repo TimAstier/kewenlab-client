@@ -1,32 +1,24 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Table, Label } from 'semantic-ui-react';
 import CharItem from './charsarea/CharItem';
 import isEmpty from 'lodash/isEmpty';
 
 class CharsArea extends React.Component {
 
+  // TODO: Render in the right order
   renderCharItem(charItem, i) {
     return(
       <CharItem
         key={i}
-        char={charItem.char}
-        status={charItem.status}
+        char={charItem.chinese}
+        status={charItem.status || ''}
       />
     );
   }
 
   render() {
-    // TODO: Take data from the server
-    // Fake Data
-    const charItems = [
-      { char: '你', status: '' },
-      { char: '我', status: 'New' },
-      { char: '他', status: 'New' },
-      { char: '爱', status: '' },
-      { char: '中', status: '' },
-      { char: '才', status: 'New' }
-    ];
-
+    const { chars } = this.props;
     return (
       <div id='chars-area'>
         <h2><Label basic circular color='black' className='main-label'>字</Label></h2>
@@ -40,14 +32,23 @@ class CharsArea extends React.Component {
             </Table.Header>
 
             <Table.Body>
-              { !isEmpty(charItems) ? charItems.map(this.renderCharItem) : null }
+              { !isEmpty(chars) ? chars.map(this.renderCharItem) : null }
             </Table.Body>
           </Table>
         </div>
       </div>
     );
   }
-
 }
 
-export default CharsArea;
+CharsArea.propTypes = {
+  chars: React.PropTypes.array.isRequired
+}
+
+function mapStateToProps(store) {
+  return {
+    chars: store.texts.chars
+  }
+}
+
+export default connect(mapStateToProps)(CharsArea);

@@ -39,12 +39,15 @@ class TextList extends React.Component {
     this.setState({ activeItem: name });
     return this.props.getCurrentText(data).then(
       (res) => {
-        this.props.setCurrentText(res.data.text);
+        const text = res[0].data.text;
+        const chars = res[1].data.chars;
+        const words = res[2].data.words;
+        this.props.setCurrentText(text, chars, words);
       },
       (err) => {
         this.props.addFlashMessage({
           type: 'error',
-          text: 'Error: could not current text from the server.'
+          text: 'Error: could not get text data from the server.'
         });
       }
     );
