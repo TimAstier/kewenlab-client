@@ -10,7 +10,6 @@ export function setCurrentTextContent(content) {
 
 // TODO: dispatch actions to handle async request
 export function saveTextContent(data) {
-  console.log(data);
   return dispatch => {
     return axios.put(`/api/texts/${data.id}`, data);
   }

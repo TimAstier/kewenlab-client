@@ -46,7 +46,12 @@ class NavigationBar extends React.Component {
           alt="Kewen-lab logo"
         />
       </Menu.Item>
-      <Link to="/" className="item header main-menu-header">Kewen Lab</Link>
+      <Link
+        to={ isAuthenticated ? '/edit' : '/' }
+        className="item header main-menu-header"
+      >
+        Kewen Lab
+      </Link>
       { isAuthenticated ? userLinks : guestLinks }
     </Menu>
     );
