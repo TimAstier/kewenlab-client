@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Label } from 'semantic-ui-react';
 import WordItem from './wordsarea/WordItem';
 import isEmpty from 'lodash/isEmpty';
 
@@ -29,7 +29,7 @@ class WordsArea extends React.Component {
 
     return (
       <div id='words-area'>
-        <h2>词</h2>
+        <h2><Label basic circular color='black' className='main-label'>词</Label></h2>
         <div className='table-wrapper'>
           <Table celled>
             <Table.Header>

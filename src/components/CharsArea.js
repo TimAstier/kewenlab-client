@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table } from 'semantic-ui-react';
+import { Table, Label } from 'semantic-ui-react';
 import CharItem from './charsarea/CharItem';
 import isEmpty from 'lodash/isEmpty';
 
@@ -29,7 +29,7 @@ class CharsArea extends React.Component {
 
     return (
       <div id='chars-area'>
-        <h2>字</h2>
+        <h2><Label basic circular color='black' className='main-label'>字</Label></h2>
         <div className='table-wrapper'>
           <Table celled>
             <Table.Header>

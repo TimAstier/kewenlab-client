@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form, TextArea, Button, Icon } from 'semantic-ui-react';
+import { Form, TextArea, Button, Icon, Label } from 'semantic-ui-react';
 import { setCurrentTextContent, saveTextContent }
   from '../actions/textEditorActions';
 
@@ -43,7 +43,7 @@ class TextEditor extends React.Component {
   render() {
     return (
       <div id="text-editor">
-        <h2>课文</h2>
+        <h2><Label basic color='black' className='main-label'>课文</Label></h2>
         <Form id="text-editor-form">
           <TextArea
             placeholder={this.placeholder()}
