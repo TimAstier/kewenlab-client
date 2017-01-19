@@ -89,9 +89,24 @@ h2 {
   float: left;
 }
 
+#chars-area > table {
+  margin-top: 0px;
+}
+
+.table-wrapper {
+  height: 600px;
+  overflow-y: scroll;
+}
+
 /* WordsArea */
 
 #words-area {
   height: 100%;
   margin-left: 960px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#words-area > table {
+  margin-top: 0px;
 }
