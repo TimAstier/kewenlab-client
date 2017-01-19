@@ -16,7 +16,16 @@ class NavigationBar extends React.Component {
 
     const userLinks = (
       <Menu.Menu position="right" className="main-menu-link">
-        <a href="#" onClick={this.logout.bind(this)} className="item">Logout</a>
+        <a href="http://app.forestadmin.com/6907"
+          className="item"
+          target='_blank'>
+          Open Admin
+        </a>
+        <a href="#"
+          onClick={this.logout.bind(this)}
+          className="item">
+          Logout
+        </a>
       </Menu.Menu>
     );
 
