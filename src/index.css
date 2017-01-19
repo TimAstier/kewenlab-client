@@ -1,3 +1,6 @@
+
+/* General rules */
+
 body {
   display: block;
   padding-top: 59px;
@@ -9,13 +12,17 @@ body {
   text-align: center;
 }
 
+h2 {
+  text-align: center;
+  height: 70px;
+  padding-top: 20px;
+}
+
 #app {
   height: 100%;
-  margin-top: -10px;
 }
 
 #main-container {
-  margin-top: 10px;
   height: 100%;
 }
 
@@ -24,18 +31,35 @@ body {
   width: 100%;
 }
 
+/* FlashMessages */
+
+.alert {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Signup & Login pages */
+
+#login-form, #signup-form {
+  padding-top: 50px;
+}
+
+/* Sidebar */
+
 #sidebar {
   height: 100%;
   width: 210px;
   font-size: 15px;
   overflow-y: scroll;
-  float:left;
+  float: left;
 }
+
+/* TextEditor */
 
 #text-editor {
   height: 100%;
   width: 550px;
-  float:left;
+  float: left;
 }
 
 #text-editor-form {
@@ -56,17 +80,18 @@ body {
   margin-top: 10px;
 }
 
-.alert {
-  margin-top: 20px;
-  text-align: center;
+/* CharsArea */
+
+#chars-area {
+  float: left;
+  height: 100%;
+  width: 200px;
+  float: left;
 }
 
-#login-form, #signup-form {
-  padding-top: 50px;
-}
+/* WordsArea */
 
-h2 {
-  text-align: center;
-  height: 70px;
-  padding-top: 20px;
+#words-area {
+  height: 100%;
+  margin-left: 960px;
 }

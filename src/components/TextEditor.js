@@ -8,6 +8,8 @@ class TextEditor extends React.Component {
   constructor(props) {
     super(props);
 
+    // TODO: Add an isSaved state for currentText
+
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.hasCurrentText = this.hasCurrentText.bind(this);
@@ -15,13 +17,17 @@ class TextEditor extends React.Component {
   }
 
   onChange(e) {
-    this.props.setCurrentTextContent(e.target.value);
+    return this.props.setCurrentTextContent(e.target.value);
   }
 
   onClick(e) {
     e.preventDefault();
-    // TODO: Avoid ending the whole currentText object in payload
-    this.props.saveTextContent(this.props.currentText);
+    // TODO: Avoid sending the whole currentText object in payload
+    if (this.hasCurrentText()) {
+      return this.props.saveTextContent(this.props.currentText);
+    } else {
+      return;
+    }
   }
 
   hasCurrentText() {
