@@ -28,6 +28,7 @@ import { UPDATE_TEXT_ITEMS, SET_CURRENT_TEXT } from './types';
    return {
      type: SET_CURRENT_TEXT,
      currentText: {
+       id: text.id,
        currentContent: text.content,
        currentChars: chars,
        currentWords: words

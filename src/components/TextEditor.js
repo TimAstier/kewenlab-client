@@ -22,9 +22,13 @@ class TextEditor extends React.Component {
 
   onClick(e) {
     e.preventDefault();
-    // TODO: Avoid sending the whole currentText object in payload
     if (this.hasCurrentText()) {
-      return this.props.saveTextContent(this.props.currentText);
+      // TODO: Use serializers to define which attributes to send in payload
+      const data = {
+        id: this.props.currentText.id,
+        content: this.props.currentText.currentContent
+      };
+      return this.props.saveTextContent(data);
     } else {
       return;
     }

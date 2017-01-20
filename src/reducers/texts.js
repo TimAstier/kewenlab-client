@@ -4,6 +4,7 @@ import { UPDATE_TEXT_ITEMS, SET_CURRENT_TEXT,
 const initialState = {
   textItems: [],
   currentText: {
+    id: null,
     currentContent: '',
     currentChars: [],
     currentWords: []
@@ -21,6 +22,7 @@ export default (state = initialState, action = {}) => {
       return {
         ...state,
         currentText: {
+          id: action.currentText.id,
           currentContent: action.currentText.currentContent,
           currentChars: action.currentText.currentChars,
           currentWords: action.currentText.currentWords
