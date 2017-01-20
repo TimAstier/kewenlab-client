@@ -6,7 +6,6 @@ import isEmpty from 'lodash/isEmpty';
 
 class CharsArea extends React.Component {
 
-  // TODO: Render in the right order
   renderCharItem(charItem, i) {
     return(
       <CharItem
@@ -17,11 +16,22 @@ class CharsArea extends React.Component {
     );
   }
 
-  render() {
+  // TODO: Render in the right order
+  renderCharItems() {
     const { currentChars } = this.props;
+    if (!isEmpty(currentChars)) {
+      return currentChars.map(this.renderCharItem);
+    } else {
+      return null;
+    }
+  }
+
+  render() {
     return (
       <div id='chars-area'>
-        <h2><Label basic circular color='black' className='main-label'>字</Label></h2>
+        <h2>
+          <Label basic circular color='black' className='main-label'>字</Label>
+        </h2>
         <div className='table-wrapper'>
           <Table celled>
             <Table.Header>
@@ -32,7 +42,7 @@ class CharsArea extends React.Component {
             </Table.Header>
 
             <Table.Body>
-              { !isEmpty(currentChars) ? currentChars.map(this.renderCharItem) : null }
+              { this.renderCharItems() }
             </Table.Body>
           </Table>
         </div>

@@ -6,7 +6,6 @@ import isEmpty from 'lodash/isEmpty';
 
 class WordsArea extends React.Component {
 
-  // TODO: Render in the right order
   renderWordItem(wordItem, i) {
     return(
       <WordItem
@@ -17,12 +16,22 @@ class WordsArea extends React.Component {
     );
   }
 
-  render() {
+  // TODO: Render in the right order
+  renderWordItems() {
     const { currentWords } = this.props;
+    if (!isEmpty(currentWords)) {
+      return currentWords.map(this.renderWordItem);
+    } else {
+      return null;
+    }
+  }
 
+  render() {
     return (
       <div id='words-area'>
-        <h2><Label basic circular color='black' className='main-label'>词</Label></h2>
+        <h2>
+          <Label basic circular color='black' className='main-label'>词</Label>
+        </h2>
         <div className='table-wrapper'>
           <Table celled>
             <Table.Header>
@@ -33,7 +42,7 @@ class WordsArea extends React.Component {
             </Table.Header>
 
             <Table.Body >
-              { !isEmpty(currentWords) ? currentWords.map(this.renderWordItem) : null }
+              { this.renderWordItems() }
             </Table.Body>
           </Table>
         </div>
