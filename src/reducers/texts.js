@@ -50,3 +50,13 @@ export default (state = initialState, action = {}) => {
       return state;
   }
 }
+
+// Selectors
+
+export const getSaved = (state = initialState) => {
+  if(state.currentText.currentContent === state.localData.localContent) {
+    return true;
+  } else {
+    return false;
+  }
+}

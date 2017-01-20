@@ -3,39 +3,25 @@ import { connect } from 'react-redux';
 import { Form, TextArea, Button, Icon, Label } from 'semantic-ui-react';
 import { setLocalContent, saveTextContent }
   from '../actions/textEditorActions';
+import { getSaved } from '../rootReducer';
 
 class TextEditor extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      saved: true
-    }
-
-    // TODO: Add an isSaved state for currentText
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.hasCurrentText = this.hasCurrentText.bind(this);
     this.placeholder = this.placeholder.bind(this);
   }
 
-  isSaved(inputContent) {
-    if(this.props.currentText.currentContent === inputContent) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   onChange(e) {
-    this.props.setLocalContent(e.target.value);
+    return this.props.setLocalContent(e.target.value);
     // In React, state changes are potentially asynchronous.
     // If you want to calculate some state that depends on the store state,
     // it is best to do this in a selector.
-    // See https://github.com/reactjs/react-redux/issues/291
     // See https://lpasslack.gitbooks.io/react-applications-with-idiomatic
     // -redux/content/docs/10-Colocating_Selectors_with_Reducers.html
-    return this.setState({ saved: this.isSaved(e.target.value) });
   }
 
   onClick(e) {
@@ -78,7 +64,7 @@ class TextEditor extends React.Component {
             primary
             id='text-editor-save-btn'
             onClick={this.onClick}
-            disabled={this.state.saved}
+            disabled={this.props.saved}
           >
             <Icon name='save' />
             Save
@@ -92,6 +78,7 @@ class TextEditor extends React.Component {
 TextEditor.propTypes = {
   currentText: React.PropTypes.object.isRequired,
   localContent: React.PropTypes.string.isRequired,
+  saved: React.PropTypes.bool.isRequired,
   setLocalContent: React.PropTypes.func.isRequired,
   saveTextContent: React.PropTypes.func.isRequired
 }
@@ -99,7 +86,8 @@ TextEditor.propTypes = {
 function mapStateToProps(store) {
   return {
     currentText: store.texts.currentText,
-    localContent: store.texts.localData.localContent
+    localContent: store.texts.localData.localContent,
+    saved: getSaved(store)
   }
 }
 
