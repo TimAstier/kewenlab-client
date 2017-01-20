@@ -47,7 +47,7 @@ class TextEditor extends React.Component {
         <Form id="text-editor-form">
           <TextArea
             placeholder={this.placeholder()}
-            value={this.props.currentText.content}
+            value={this.props.currentText.currentContent}
             onChange={this.onChange}
             readOnly={!this.hasCurrentText()}
           />

@@ -4,10 +4,10 @@ import { UPDATE_TEXT_ITEMS, SET_CURRENT_TEXT,
 const initialState = {
   textItems: [],
   currentText: {
-    content: ''
-  },
-  chars: [],
-  words: []
+    currentContent: '',
+    currentChars: [],
+    currentWords: []
+  }
 };
 
 export default (state = initialState, action = {}) => {
@@ -20,16 +20,18 @@ export default (state = initialState, action = {}) => {
     case SET_CURRENT_TEXT:
       return {
         ...state,
-        currentText: action.payload.currentText,
-        chars: action.payload.chars,
-        words: action.payload.words
+        currentText: {
+          currentContent: action.currentText.currentContent,
+          currentChars: action.currentText.currentChars,
+          currentWords: action.currentText.currentWords
+        }
       };
     case SET_CURRENT_TEXT_CONTENT:
       return {
         ...state,
         currentText: {
           ...state.currentText,
-          content: action.content
+          currentContent: action.currentContent
         }
       }
     default:

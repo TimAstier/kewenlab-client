@@ -18,7 +18,7 @@ class WordsArea extends React.Component {
   }
 
   render() {
-    const { words } = this.props;
+    const { currentWords } = this.props;
 
     return (
       <div id='words-area'>
@@ -33,7 +33,7 @@ class WordsArea extends React.Component {
             </Table.Header>
 
             <Table.Body >
-              { !isEmpty(words) ? words.map(this.renderWordItem) : null }
+              { !isEmpty(currentWords) ? currentWords.map(this.renderWordItem) : null }
             </Table.Body>
           </Table>
         </div>
@@ -43,12 +43,12 @@ class WordsArea extends React.Component {
 }
 
 WordsArea.propTypes = {
-  words: React.PropTypes.array.isRequired
+  currentWords: React.PropTypes.array.isRequired
 }
 
 function mapStateToProps(store) {
   return {
-    words: store.texts.words
+    currentWords: store.texts.currentText.currentWords
   }
 }
 

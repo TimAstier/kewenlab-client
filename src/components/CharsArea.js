@@ -18,7 +18,7 @@ class CharsArea extends React.Component {
   }
 
   render() {
-    const { chars } = this.props;
+    const { currentChars } = this.props;
     return (
       <div id='chars-area'>
         <h2><Label basic circular color='black' className='main-label'>字</Label></h2>
@@ -32,7 +32,7 @@ class CharsArea extends React.Component {
             </Table.Header>
 
             <Table.Body>
-              { !isEmpty(chars) ? chars.map(this.renderCharItem) : null }
+              { !isEmpty(currentChars) ? currentChars.map(this.renderCharItem) : null }
             </Table.Body>
           </Table>
         </div>
@@ -42,12 +42,12 @@ class CharsArea extends React.Component {
 }
 
 CharsArea.propTypes = {
-  chars: React.PropTypes.array.isRequired
+  currentChars: React.PropTypes.array.isRequired
 }
 
 function mapStateToProps(store) {
   return {
-    chars: store.texts.chars
+    currentChars: store.texts.currentText.currentChars
   }
 }
 

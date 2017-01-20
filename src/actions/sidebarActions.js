@@ -27,10 +27,10 @@ import { UPDATE_TEXT_ITEMS, SET_CURRENT_TEXT } from './types';
  export function setCurrentText(text, chars, words) {
    return {
      type: SET_CURRENT_TEXT,
-     payload: {
-       currentText: text,
-       chars,
-       words  
+     currentText: {
+       currentContent: text.content,
+       currentChars: chars,
+       currentWords: words
      }
    };
  }
