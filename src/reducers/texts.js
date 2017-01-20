@@ -1,5 +1,5 @@
 import { UPDATE_TEXT_ITEMS, SET_CURRENT_TEXT,
-  SET_CURRENT_TEXT_CONTENT } from '../actions/types';
+  SET_LOCAL_CONTENT } from '../actions/types';
 
 const initialState = {
   textItems: [],
@@ -8,6 +8,11 @@ const initialState = {
     currentContent: '',
     currentChars: [],
     currentWords: []
+  },
+  localData: {
+    localContent: '',
+    localChars: [],
+    localWords: []
   }
 };
 
@@ -26,14 +31,19 @@ export default (state = initialState, action = {}) => {
           currentContent: action.currentText.currentContent,
           currentChars: action.currentText.currentChars,
           currentWords: action.currentText.currentWords
+        },
+        localData: {
+          localContent: action.currentText.currentContent,
+          localChars: action.currentText.currentChars,
+          localWords: action.currentText.currentWords
         }
       };
-    case SET_CURRENT_TEXT_CONTENT:
+    case SET_LOCAL_CONTENT:
       return {
         ...state,
-        currentText: {
-          ...state.currentText,
-          currentContent: action.currentContent
+        localData: {
+          ...state.localData,
+          localContent: action.localContent
         }
       }
     default:

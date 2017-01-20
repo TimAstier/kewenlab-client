@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Form, TextArea, Button, Icon, Label } from 'semantic-ui-react';
-import { setCurrentTextContent, saveTextContent }
+import { setLocalContent, saveTextContent }
   from '../actions/textEditorActions';
 
 class TextEditor extends React.Component {
@@ -9,7 +9,6 @@ class TextEditor extends React.Component {
     super(props);
 
     // TODO: Add an isSaved state for currentText
-
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
     this.hasCurrentText = this.hasCurrentText.bind(this);
@@ -17,7 +16,7 @@ class TextEditor extends React.Component {
   }
 
   onChange(e) {
-    return this.props.setCurrentTextContent(e.target.value);
+    return this.props.setLocalContent(e.target.value);
   }
 
   onClick(e) {
@@ -26,7 +25,7 @@ class TextEditor extends React.Component {
       // TODO: Use serializers to define which attributes to send in payload
       const data = {
         id: this.props.currentText.id,
-        content: this.props.currentText.currentContent
+        content: this.props.localContent
       };
       return this.props.saveTextContent(data);
     } else {
@@ -51,7 +50,7 @@ class TextEditor extends React.Component {
         <Form id="text-editor-form">
           <TextArea
             placeholder={this.placeholder()}
-            value={this.props.currentText.currentContent}
+            value={this.props.localContent}
             onChange={this.onChange}
             readOnly={!this.hasCurrentText()}
           />
@@ -72,17 +71,19 @@ class TextEditor extends React.Component {
 
 TextEditor.propTypes = {
   currentText: React.PropTypes.object.isRequired,
-  setCurrentTextContent: React.PropTypes.func.isRequired,
+  localContent: React.PropTypes.string.isRequired,
+  setLocalContent: React.PropTypes.func.isRequired,
   saveTextContent: React.PropTypes.func.isRequired
 }
 
 function mapStateToProps(store) {
   return {
-    currentText: store.texts.currentText
+    currentText: store.texts.currentText,
+    localContent: store.texts.localData.localContent
   }
 }
 
 export default connect(
   mapStateToProps,
-  { setCurrentTextContent, saveTextContent }
+  { setLocalContent, saveTextContent }
 )(TextEditor);

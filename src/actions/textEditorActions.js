@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { SET_CURRENT_TEXT_CONTENT } from './types';
+import { SET_LOCAL_CONTENT } from './types';
 
-export function setCurrentTextContent(content) {
+export function setLocalContent(content) {
   return {
-    type: SET_CURRENT_TEXT_CONTENT,
-    currentContent: content
+    type: SET_LOCAL_CONTENT,
+    localContent: content
   }
 }
 
