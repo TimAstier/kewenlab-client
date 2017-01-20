@@ -8,6 +8,10 @@ class TextEditor extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      saved: true
+    }
+
     // TODO: Add an isSaved state for currentText
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
@@ -15,8 +19,23 @@ class TextEditor extends React.Component {
     this.placeholder = this.placeholder.bind(this);
   }
 
+  isSaved(inputContent) {
+    if(this.props.currentText.currentContent === inputContent) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   onChange(e) {
-    return this.props.setLocalContent(e.target.value);
+    this.props.setLocalContent(e.target.value);
+    // In React, state changes are potentially asynchronous.
+    // If you want to calculate some state that depends on the store state,
+    // it is best to do this in a selector.
+    // See https://github.com/reactjs/react-redux/issues/291
+    // See https://lpasslack.gitbooks.io/react-applications-with-idiomatic
+    // -redux/content/docs/10-Colocating_Selectors_with_Reducers.html
+    return this.setState({ saved: this.isSaved(e.target.value) });
   }
 
   onClick(e) {
@@ -59,6 +78,7 @@ class TextEditor extends React.Component {
             primary
             id='text-editor-save-btn'
             onClick={this.onClick}
+            disabled={this.state.saved}
           >
             <Icon name='save' />
             Save
