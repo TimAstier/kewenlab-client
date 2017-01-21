@@ -1,5 +1,4 @@
-import { UPDATE_TEXT_ITEMS, SET_CURRENT_TEXT,
-  SET_LOCAL_CONTENT } from '../actions/types';
+import { UPDATE_TEXT_ITEMS, SET_CURRENT_TEXT } from '../actions/types';
 
 const initialState = {
   textItems: [],
@@ -10,7 +9,6 @@ const initialState = {
     currentWords: []
   },
   localData: {
-    localContent: '',
     localChars: [],
     localWords: []
   }
@@ -38,14 +36,6 @@ export default (state = initialState, action = {}) => {
           localWords: action.currentText.currentWords
         }
       };
-    case SET_LOCAL_CONTENT:
-      return {
-        ...state,
-        localData: {
-          ...state.localData,
-          localContent: action.localContent
-        }
-      }
     default:
       return state;
   }

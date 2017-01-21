@@ -1,6 +1,8 @@
 import axios from 'axios';
+// Remove
 import { SET_LOCAL_CONTENT } from './types';
 
+// Remove
 export function setLocalContent(content) {
   return {
     type: SET_LOCAL_CONTENT,

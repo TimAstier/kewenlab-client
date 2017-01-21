@@ -1,0 +1,1 @@
+export const SET_LOCAL_CONTENT = 'SET_LOCAL_CONTENT';
