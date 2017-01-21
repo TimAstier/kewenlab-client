@@ -1,3 +1,3 @@
-import textEditor from './textEditor';
+import TextEditor from './TextEditor';
 
-export { textEditor };
+export { TextEditor };

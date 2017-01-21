@@ -6,8 +6,8 @@ import CharsArea from './CharsArea';
 import WordsArea from './WordsArea';
 import { addFlashMessage } from '../actions/flashMessages';
 
-const TextEditor = texteditor.components.textEditor;
-const Sidebar = sidebar.components.sidebar;
+const TextEditor = texteditor.components.TextEditor;
+const Sidebar = sidebar.components.Sidebar;
 
 class MainScreen extends React.Component {
   render() {

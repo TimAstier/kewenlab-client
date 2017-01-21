@@ -1,3 +1,4 @@
-import sidebar from './sidebar';
+import Sidebar from './Sidebar';
+import TextList from './TextList';
 
-export { sidebar };
+export { Sidebar, TextList };

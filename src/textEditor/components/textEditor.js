@@ -28,7 +28,7 @@ class TextEditor extends React.Component {
     if (this.hasCurrentText()) {
       // TODO: Use serializers to define which attributes to send in payload
       const data = {
-        id: this.props.currentText.id,
+        id: this.props.currentTextId,
         content: this.props.localContent
       };
       return this.props.saveTextContent(data);
