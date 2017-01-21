@@ -2,8 +2,10 @@ import { combineReducers } from 'redux';
 
 import flashMessages from './reducers/flashMessages';
 import auth from './reducers/auth';
-import texts, * as fromTexts from './reducers/texts';
+import texts from './reducers/texts';
 import textEditor from './textEditor';
+
+import * as fromTextEditor from './textEditor/reducer';
 
 // TODO: Use Immutable.js in reducers
 export default combineReducers({
@@ -15,5 +17,5 @@ export default combineReducers({
 
 // TODO: Use Reselect library
 export const getSaved = (state) => {
-  return fromTexts.getSaved(state.texts);
+  return fromTextEditor.getSaved(state.textEditor);
 }

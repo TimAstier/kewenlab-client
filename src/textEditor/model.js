@@ -1,5 +1,6 @@
 export type TextEditor = {
   localContent: string;
+  currentContent: string;
 };
 
 // This is the model of our module state (e.g. return type of the reducer)

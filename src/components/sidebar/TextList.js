@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
 import { getCurrentText, setCurrentText } from '../../actions/sidebarActions';
+import { setCurrentContent, setLocalContent } from '../../textEditor/actions';
 
 class TextList extends React.Component {
   constructor(props) {
@@ -43,6 +44,8 @@ class TextList extends React.Component {
         const chars = res[1].data.chars;
         const words = res[2].data.words;
         this.props.setCurrentText(text, chars, words);
+        this.props.setLocalContent(text.content);
+        this.props.setCurrentContent(text.content);
       },
       (err) => {
         this.props.addFlashMessage({
@@ -67,7 +70,9 @@ TextList.propTypes = {
   getCurrentText: React.PropTypes.func.isRequired,
   setCurrentText: React.PropTypes.func.isRequired,
   addFlashMessage: React.PropTypes.func.isRequired,
-  textItems: React.PropTypes.array.isRequired
+  textItems: React.PropTypes.array.isRequired,
+  setCurrentContent: React.PropTypes.func.isRequired,
+  setLocalContent: React.PropTypes.func.isRequired
 }
 
-export default connect(null, { getCurrentText, setCurrentText })(TextList);
+export default connect(null, { getCurrentText, setCurrentText, setCurrentContent, setLocalContent })(TextList);

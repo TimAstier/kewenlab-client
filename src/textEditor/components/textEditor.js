@@ -1,12 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Form, TextArea, Button, Icon, Label } from 'semantic-ui-react';
-import { saveTextContent }
-  from '../../actions/textEditorActions';
-//import { getSaved } from '../../rootReducer';
-
-//import { createStructuredSelector } from 'reselect';
-import { setLocalContent } from '../actions';
+import { setLocalContent, saveTextContent } from '../actions';
+import { getSaved } from '../../rootReducer';
 
 class TextEditor extends React.Component {
   constructor(props) {
@@ -14,7 +10,7 @@ class TextEditor extends React.Component {
 
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
-    //this.hasCurrentText = this.hasCurrentText.bind(this);
+    this.hasCurrentText = this.hasCurrentText.bind(this);
     this.placeholder = this.placeholder.bind(this);
   }
 
@@ -29,40 +25,38 @@ class TextEditor extends React.Component {
 
   onClick(e) {
     e.preventDefault();
-    //if (this.hasCurrentText()) {
+    if (this.hasCurrentText()) {
       // TODO: Use serializers to define which attributes to send in payload
       const data = {
         id: this.props.currentText.id,
         content: this.props.localContent
       };
       return this.props.saveTextContent(data);
-    // } else {
-    //   return;
-    // }
+     } else {
+       return;
+     }
   }
 
-  // hasCurrentText() {
-  //   return this.props.currentText.id;
-  // }
+  hasCurrentText() {
+    return this.props.currentText.id;
+  }
 
   placeholder() {
     const msg1 = 'Write a text here...';
-    //const msg2 = '<-- Select a text or create a new one.';
-    //return this.hasCurrentText() ? msg1 : msg2;
-    return msg1;
+    const msg2 = '<-- Select a text or create a new one.';
+    return this.hasCurrentText() ? msg1 : msg2;
   }
 
   render() {
-    // Update readonly
     return (
       <div id="text-editor">
         <h2><Label basic color='black' className='main-label'>课文</Label></h2>
         <Form id="text-editor-form">
           <TextArea
             placeholder={this.placeholder()}
-            value={this.localContent}
+            value={this.props.localContent}
             onChange={this.onChange}
-            readOnly={false}
+            readOnly={!this.hasCurrentText()}
           />
           <Button
             size='big'
@@ -81,18 +75,18 @@ class TextEditor extends React.Component {
 }
 
  TextEditor.propTypes = {
-//   currentText: React.PropTypes.object.isRequired,
+   currentText: React.PropTypes.object.isRequired,
    localContent: React.PropTypes.string.isRequired,
-//   saved: React.PropTypes.bool.isRequired,
-   setLocalContent: React.PropTypes.func.isRequired
-//   saveTextContent: React.PropTypes.func.isRequired
+   saved: React.PropTypes.bool.isRequired,
+   setLocalContent: React.PropTypes.func.isRequired,
+   saveTextContent: React.PropTypes.func.isRequired
  }
 
 function mapStateToProps(state) {
    return {
-       localContent: state.textEditor.localContent
-//     currentText: store.texts.currentText,
-//     saved: getSaved(store)
+       localContent: state.textEditor.localContent,
+       currentText: state.texts.currentText,
+       saved: getSaved(state)
    }
 }
 

@@ -4,7 +4,6 @@ const initialState = {
   textItems: [],
   currentText: {
     id: null,
-    currentContent: '',
     currentChars: [],
     currentWords: []
   },
@@ -26,27 +25,15 @@ export default (state = initialState, action = {}) => {
         ...state,
         currentText: {
           id: action.currentText.id,
-          currentContent: action.currentText.currentContent,
           currentChars: action.currentText.currentChars,
           currentWords: action.currentText.currentWords
         },
         localData: {
-          localContent: action.currentText.currentContent,
           localChars: action.currentText.currentChars,
           localWords: action.currentText.currentWords
         }
       };
     default:
       return state;
-  }
-}
-
-// Selectors
-
-export const getSaved = (state = initialState) => {
-  if(state.currentText.currentContent === state.localData.localContent) {
-    return true;
-  } else {
-    return false;
   }
 }
