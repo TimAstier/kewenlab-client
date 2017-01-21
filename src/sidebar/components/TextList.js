@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
-import { getCurrentText, setCurrentText } from '../../actions/sidebarActions';
+import { getCurrentText, setCurrentText } from '../actions';
 import { setCurrentContent, setLocalContent } from '../../textEditor/actions';
 
 class TextList extends React.Component {

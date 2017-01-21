@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
-import TextList from './sidebar/TextList';
-import { getTextItems, updateTextItems } from '../actions/sidebarActions';
+import TextList from './TextList';
+import { getTextItems, updateTextItems } from '../actions';
 
 class Sidebar extends React.Component {
 
@@ -43,9 +43,9 @@ Sidebar.contextTypes = {
   router: React.PropTypes.object.isRequired
 }
 
-function mapStateToProps(store) {
+function mapStateToProps(state) {
   return {
-    textItems: store.texts.textItems
+    textItems: state.sidebar.textItems
   };
 }
 

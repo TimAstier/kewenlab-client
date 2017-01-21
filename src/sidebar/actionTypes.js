@@ -1,0 +1,2 @@
+export const UPDATE_TEXT_ITEMS = 'UPDATE_TEXT_ITEMS';
+export const SET_CURRENT_TEXT = 'SET_CURRENT_TEXT';

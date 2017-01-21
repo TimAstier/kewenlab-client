@@ -38,7 +38,7 @@ class TextEditor extends React.Component {
   }
 
   hasCurrentText() {
-    return this.props.currentText.id;
+    return this.props.currentTextId;
   }
 
   placeholder() {
@@ -75,7 +75,7 @@ class TextEditor extends React.Component {
 }
 
  TextEditor.propTypes = {
-   currentText: React.PropTypes.object.isRequired,
+   currentTextId: React.PropTypes.number.isRequired,
    localContent: React.PropTypes.string.isRequired,
    saved: React.PropTypes.bool.isRequired,
    setLocalContent: React.PropTypes.func.isRequired,
@@ -85,7 +85,7 @@ class TextEditor extends React.Component {
 function mapStateToProps(state) {
    return {
        localContent: state.textEditor.localContent,
-       currentText: state.texts.currentText,
+       currentTextId: state.sidebar.currentTextId,
        saved: getSaved(state)
    }
 }
