@@ -2,22 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux';
 import sidebar from '../sidebar';
 import texteditor from '../textEditor';
-import CharsArea from './CharsArea';
-import WordsArea from './WordsArea';
+import charsArea from '../charsArea';
+//import WordsArea from './WordsArea';
 import { addFlashMessage } from '../actions/flashMessages';
 
 const TextEditor = texteditor.components.TextEditor;
 const Sidebar = sidebar.components.Sidebar;
+const CharsArea = charsArea.components.CharsArea;
 
 class MainScreen extends React.Component {
   render() {
     const { addFlashMessage } = this.props;
+    // TODO: Re-Adds Words Area
     return (
       <div id="main-screen">
         <Sidebar addFlashMessage={addFlashMessage} />
         <TextEditor />
         <CharsArea />
-        <WordsArea />
+
       </div>
     );
   }

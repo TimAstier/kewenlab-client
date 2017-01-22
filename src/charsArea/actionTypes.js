@@ -1,0 +1,2 @@
+export const SET_LOCAL_CHARS = 'SET_LOCAL_CHARS';
+export const SET_CURRENT_CHARS = 'SET_CURRENT_CHARS';

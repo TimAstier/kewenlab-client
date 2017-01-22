@@ -1,3 +1,4 @@
+This is especially useful if you are using TypeScript or Flow.
 export type TextEditor = {
   localContent: string;
   currentContent: string;

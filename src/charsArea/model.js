@@ -1,9 +1,9 @@
-export type Sidebar = {
-  textItems: array;
-  currentTextId: integer;
+export type CharsArea = {
+  localChars: array;
+  currentChars: array;
 };
 
 // This is the model of our module state (e.g. return type of the reducer)
-export type State = Sidebar;
+export type State = CharsArea;
 
 // Some utility functions that operates on our model

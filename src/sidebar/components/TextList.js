@@ -4,6 +4,7 @@ import { Menu } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
 import { getCurrentText, setCurrentText } from '../actions';
 import { setCurrentContent, setLocalContent } from '../../textEditor/actions';
+import { setCurrentChars, setLocalChars } from '../../charsArea/actions';
 
 class TextList extends React.Component {
   constructor(props) {
@@ -43,9 +44,11 @@ class TextList extends React.Component {
         const text = res[0].data.text;
         const chars = res[1].data.chars;
         const words = res[2].data.words;
-        this.props.setCurrentText(text, chars, words);
+        this.props.setCurrentText(text, words);
         this.props.setLocalContent(text.content);
         this.props.setCurrentContent(text.content);
+        this.props.setLocalChars(chars);
+        this.props.setCurrentChars(chars);
       },
       (err) => {
         this.props.addFlashMessage({
@@ -72,7 +75,18 @@ TextList.propTypes = {
   addFlashMessage: React.PropTypes.func.isRequired,
   textItems: React.PropTypes.array.isRequired,
   setCurrentContent: React.PropTypes.func.isRequired,
-  setLocalContent: React.PropTypes.func.isRequired
+  setLocalContent: React.PropTypes.func.isRequired,
+  setCurrentChars: React.PropTypes.func.isRequired,
+  setLocalChars: React.PropTypes.func.isRequired
 }
 
-export default connect(null, { getCurrentText, setCurrentText, setCurrentContent, setLocalContent })(TextList);
+export default connect(
+  null,
+  {
+    getCurrentText,
+    setCurrentText,
+    setCurrentContent,
+    setLocalContent,
+    setCurrentChars,
+    setLocalChars
+  })(TextList);

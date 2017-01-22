@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Table, Label } from 'semantic-ui-react';
-import CharItem from './charsarea/CharItem';
+import CharItem from './CharItem';
 import isEmpty from 'lodash/isEmpty';
 
 class CharsArea extends React.Component {
@@ -55,9 +55,9 @@ CharsArea.propTypes = {
   currentChars: React.PropTypes.array.isRequired
 }
 
-function mapStateToProps(store) {
+function mapStateToProps(state) {
   return {
-    currentChars: store.texts.currentText.currentChars
+    currentChars: state.charsArea.currentChars
   }
 }
 

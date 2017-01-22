@@ -2,9 +2,9 @@ import { combineReducers } from 'redux';
 
 import flashMessages from './reducers/flashMessages';
 import auth from './reducers/auth';
-import texts from './reducers/texts';
 import textEditor from './textEditor';
-import sidebar from './sidebar'
+import sidebar from './sidebar';
+import charsArea from './charsArea';
 
 import * as fromTextEditor from './textEditor/reducer';
 
@@ -12,9 +12,9 @@ import * as fromTextEditor from './textEditor/reducer';
 export default combineReducers({
   flashMessages,
   auth,
-  texts,
   [textEditor.constants.NAME]: textEditor.reducer,
-  [sidebar.constants.NAME]: sidebar.reducer
+  [sidebar.constants.NAME]: sidebar.reducer,
+  [charsArea.constants.NAME]: charsArea.reducer
 });
 
 // TODO: Use Reselect library
