@@ -2,13 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import sidebar from '../sidebar';
 import texteditor from '../textEditor';
-import charsArea from '../charsArea';
+import CharsArea from '../charsArea/containers/CharsArea';
 import wordsArea from '../wordsArea';
 import { addFlashMessage } from '../actions/flashMessages';
 
 const TextEditor = texteditor.components.TextEditor;
 const Sidebar = sidebar.components.Sidebar;
-const CharsArea = charsArea.components.CharsArea;
 const WordsArea = wordsArea.components.WordsArea;
 
 class MainScreen extends React.Component {
