@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Form, TextArea, Button, Icon, Label } from 'semantic-ui-react';
-import { setLocalContent, saveTextContent } from '../actions';
+import { setLocalContent, saveTextContent,
+  setCurrentContent } from '../actions';
 import { getSaved } from '../../rootReducer';
+import { addFlashMessage } from '../../actions/flashMessages';
 
 class TextEditor extends React.Component {
   constructor(props) {
@@ -26,7 +28,17 @@ class TextEditor extends React.Component {
         id: this.props.currentTextId,
         content: this.props.localContent
       };
-      return this.props.saveTextContent(data);
+      return this.props.saveTextContent(data).then(
+        (res) => {
+          this.props.setCurrentContent(this.props.localContent);
+        },
+        (err) => {
+          this.props.addFlashMessage({
+            type: 'error',
+            text: 'Error: could not save text on the server.'
+          });
+        }
+      );
      } else {
        return;
      }
@@ -41,7 +53,8 @@ class TextEditor extends React.Component {
     const msg2 = '<-- Select a text or create a new one.';
     return this.hasCurrentText() ? msg1 : msg2;
   }
-
+  
+  // TODO: Switch to readonly when isSaving
   render() {
     return (
       <div id="text-editor">
@@ -74,7 +87,9 @@ class TextEditor extends React.Component {
    localContent: React.PropTypes.string.isRequired,
    saved: React.PropTypes.bool.isRequired,
    setLocalContent: React.PropTypes.func.isRequired,
-   saveTextContent: React.PropTypes.func.isRequired
+   saveTextContent: React.PropTypes.func.isRequired,
+   setCurrentContent: React.PropTypes.func.isRequired,
+   addFlashMessage: React.PropTypes.func.isRequired
  }
 
 function mapStateToProps(state) {
@@ -87,5 +102,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { setLocalContent, saveTextContent }
+  { setLocalContent, saveTextContent, setCurrentContent, addFlashMessage }
 )(TextEditor);
