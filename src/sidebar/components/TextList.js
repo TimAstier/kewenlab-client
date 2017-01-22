@@ -5,6 +5,7 @@ import isEmpty from 'lodash/isEmpty';
 import { getCurrentText, setCurrentText } from '../actions';
 import { setCurrentContent, setLocalContent } from '../../textEditor/actions';
 import { setCurrentChars, setLocalChars } from '../../charsArea/actions';
+import { setCurrentWords, setLocalWords } from '../../wordsArea/actions';
 
 class TextList extends React.Component {
   constructor(props) {
@@ -44,11 +45,13 @@ class TextList extends React.Component {
         const text = res[0].data.text;
         const chars = res[1].data.chars;
         const words = res[2].data.words;
-        this.props.setCurrentText(text, words);
+        this.props.setCurrentText(text);
         this.props.setLocalContent(text.content);
         this.props.setCurrentContent(text.content);
         this.props.setLocalChars(chars);
         this.props.setCurrentChars(chars);
+        this.props.setLocalWords(words);
+        this.props.setCurrentWords(words);
       },
       (err) => {
         this.props.addFlashMessage({
@@ -77,7 +80,9 @@ TextList.propTypes = {
   setCurrentContent: React.PropTypes.func.isRequired,
   setLocalContent: React.PropTypes.func.isRequired,
   setCurrentChars: React.PropTypes.func.isRequired,
-  setLocalChars: React.PropTypes.func.isRequired
+  setLocalChars: React.PropTypes.func.isRequired,
+  setCurrentWords: React.PropTypes.func.isRequired,
+  setLocalWords: React.PropTypes.func.isRequired
 }
 
 export default connect(
@@ -88,5 +93,7 @@ export default connect(
     setCurrentContent,
     setLocalContent,
     setCurrentChars,
-    setLocalChars
+    setLocalChars,
+    setCurrentWords,
+    setLocalWords
   })(TextList);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Table, Label } from 'semantic-ui-react';
-import WordItem from './wordsarea/WordItem';
+import WordItem from './WordItem';
 import isEmpty from 'lodash/isEmpty';
 
 class WordsArea extends React.Component {
@@ -55,9 +55,9 @@ WordsArea.propTypes = {
   currentWords: React.PropTypes.array.isRequired
 }
 
-function mapStateToProps(store) {
+function mapStateToProps(state) {
   return {
-    currentWords: store.texts.currentText.currentWords
+    currentWords: state.wordsArea.currentWords
   }
 }
 

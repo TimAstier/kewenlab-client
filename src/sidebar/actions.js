@@ -24,13 +24,12 @@ export function getCurrentText(id) {
   };
 }
 
-export function setCurrentText(text, words) {
+export function setCurrentText(text) {
   return {
     type: t.SET_CURRENT_TEXT,
     currentText: {
       id: text.id,
-      currentContent: text.content,
-      currentWords: words
+      currentContent: text.content
     }
   };
 }

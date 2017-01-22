@@ -5,6 +5,7 @@ import auth from './reducers/auth';
 import textEditor from './textEditor';
 import sidebar from './sidebar';
 import charsArea from './charsArea';
+import wordsArea from './wordsArea';
 
 import * as fromTextEditor from './textEditor/reducer';
 
@@ -14,7 +15,8 @@ export default combineReducers({
   auth,
   [textEditor.constants.NAME]: textEditor.reducer,
   [sidebar.constants.NAME]: sidebar.reducer,
-  [charsArea.constants.NAME]: charsArea.reducer
+  [charsArea.constants.NAME]: charsArea.reducer,
+  [wordsArea.constants.NAME]: wordsArea.reducer
 });
 
 // TODO: Use Reselect library
