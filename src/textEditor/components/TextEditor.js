@@ -16,11 +16,6 @@ class TextEditor extends React.Component {
 
   onChange(e) {
     return this.props.setLocalContent(e.target.value);
-    // In React, state changes are potentially asynchronous.
-    // If you want to calculate some state that depends on the store state,
-    // it is best to do this in a selector.
-    // See https://lpasslack.gitbooks.io/react-applications-with-idiomatic
-    // -redux/content/docs/10-Colocating_Selectors_with_Reducers.html
   }
 
   onClick(e) {
