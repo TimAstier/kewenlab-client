@@ -6,7 +6,9 @@ const CharItem = ({ char, status }) => {
   function statusLabel(status) {
     if (status === 'New') {
       return(<Label color='blue' size='big'>{status}</Label>);
-    } else {
+    } else if (status === 'Not saved')
+      return(<Label color='red' size='big'>{status}</Label>);
+    else {
       return(status);
     }
   }

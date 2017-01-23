@@ -6,18 +6,18 @@ class CharsArea extends React.Component {
 
   render() {
     return (
-      <CharItemList currentChars={this.props.currentChars}/>
+      <CharItemList localChars={this.props.localChars}/>
     );
   }
 }
 
 CharsArea.propTypes = {
-  currentChars: React.PropTypes.array.isRequired
+  localChars: React.PropTypes.array.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    currentChars: state.charsArea.currentChars
+    localChars: state.charsArea.localChars
   }
 }
 

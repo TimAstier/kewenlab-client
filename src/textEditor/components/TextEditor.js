@@ -5,6 +5,10 @@ import { setLocalContent, saveTextContent,
   setCurrentContent } from '../actions';
 import { getSaved } from '../../rootReducer';
 import { addFlashMessage } from '../../actions/flashMessages';
+import { addNewLocalChars, removeDeletedLocalChars }
+  from '../../charsArea/actions';
+import isEmpty from 'lodash/isEmpty';
+import { toArrayOfUniqueChars } from '../../utils/custom';
 
 class TextEditor extends React.Component {
   constructor(props) {
@@ -17,6 +21,11 @@ class TextEditor extends React.Component {
   }
 
   onChange(e) {
+    const charsArray = toArrayOfUniqueChars(e.target.value);
+    this.props.removeDeletedLocalChars(charsArray);
+    if (!isEmpty(charsArray)) {
+      this.props.addNewLocalChars(charsArray);
+    }
     return this.props.setLocalContent(e.target.value);
   }
 
@@ -53,7 +62,7 @@ class TextEditor extends React.Component {
     const msg2 = '<-- Select a text or create a new one.';
     return this.hasCurrentText() ? msg1 : msg2;
   }
-  
+
   // TODO: Switch to readonly when isSaving
   render() {
     return (
@@ -89,7 +98,9 @@ class TextEditor extends React.Component {
    setLocalContent: React.PropTypes.func.isRequired,
    saveTextContent: React.PropTypes.func.isRequired,
    setCurrentContent: React.PropTypes.func.isRequired,
-   addFlashMessage: React.PropTypes.func.isRequired
+   addFlashMessage: React.PropTypes.func.isRequired,
+   addNewLocalChars: React.PropTypes.func.isRequired,
+   removeDeletedLocalChars: React.PropTypes.func.isRequired
  }
 
 function mapStateToProps(state) {
@@ -102,5 +113,12 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { setLocalContent, saveTextContent, setCurrentContent, addFlashMessage }
+  {
+    setLocalContent,
+    saveTextContent,
+    setCurrentContent,
+    addFlashMessage,
+    addNewLocalChars,
+    removeDeletedLocalChars
+  }
 )(TextEditor);

@@ -13,3 +13,17 @@ export function setCurrentChars(chars) {
     currentChars: chars
   }
 }
+
+export function addNewLocalChars(charsArray) {
+  return {
+    type: t.ADD_NEW_LOCAL_CHARS,
+    payload: charsArray
+  }
+}
+
+export function removeDeletedLocalChars(charsArray) {
+  return {
+    type: t.REMOVE_DELETED_LOCAL_CHARS,
+    payload: charsArray
+  }
+}

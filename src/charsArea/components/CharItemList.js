@@ -3,11 +3,13 @@ import { Table, Label } from 'semantic-ui-react';
 import CharItem from './CharItem';
 import isEmpty from 'lodash/isEmpty';
 
-function defineStatus(texts) {
-  if (isEmpty(texts)) {
+function defineStatus(item) {
+  if (item.id === null) {
+    return 'Not saved';
+  } else if (isEmpty(item.texts)) {
     return 'New';
   } else {
-    return texts[0].title;
+    return item.texts[0].title;
   }
 }
 
@@ -16,7 +18,7 @@ function renderCharItem(charItem, i) {
     <CharItem
       key={i}
       char={charItem.chinese}
-      status={defineStatus(charItem.texts)}
+      status={defineStatus(charItem)}
     />
   );
 }
@@ -29,7 +31,7 @@ function renderCharItems(chars) {
   }
 }
 
-const CharItemList = ({ currentChars }) => {
+const CharItemList = ({ localChars }) => {
   return (
     <div id='chars-area'>
       <h2>
@@ -45,7 +47,7 @@ const CharItemList = ({ currentChars }) => {
           </Table.Header>
 
           <Table.Body>
-            { renderCharItems(currentChars) }
+            { renderCharItems(localChars) }
           </Table.Body>
         </Table>
       </div>
@@ -54,7 +56,7 @@ const CharItemList = ({ currentChars }) => {
 }
 
 CharItemList.propTypes = {
-  currentChars: React.PropTypes.array.isRequired
+  localChars: React.PropTypes.array.isRequired
 }
 
 export default CharItemList;
