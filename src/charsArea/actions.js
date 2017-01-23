@@ -27,3 +27,9 @@ export function removeDeletedLocalChars(charsArray) {
     payload: charsArray
   }
 }
+
+export function clearCharsToDelete() {
+  return {
+    type: t.CLEAR_CHARS_TO_DELETE
+  }
+}

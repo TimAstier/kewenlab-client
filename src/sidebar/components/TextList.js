@@ -4,7 +4,8 @@ import { Menu } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
 import { getCurrentText, setCurrentText } from '../actions';
 import { setCurrentContent, setLocalContent } from '../../textEditor/actions';
-import { setCurrentChars, setLocalChars } from '../../charsArea/actions';
+import { setCurrentChars, setLocalChars, clearCharsToDelete }
+  from '../../charsArea/actions';
 import { setCurrentWords, setLocalWords } from '../../wordsArea/actions';
 
 class TextList extends React.Component {
@@ -45,6 +46,7 @@ class TextList extends React.Component {
         this.props.setCurrentContent(text.content);
         this.props.setLocalChars(chars);
         this.props.setCurrentChars(chars);
+        this.props.clearCharsToDelete();
         this.props.setLocalWords(words);
         this.props.setCurrentWords(words);
       },
@@ -77,7 +79,8 @@ TextList.propTypes = {
   setCurrentChars: React.PropTypes.func.isRequired,
   setLocalChars: React.PropTypes.func.isRequired,
   setCurrentWords: React.PropTypes.func.isRequired,
-  setLocalWords: React.PropTypes.func.isRequired
+  setLocalWords: React.PropTypes.func.isRequired,
+  clearCharsToDelete: React.PropTypes.func.isRequired
 }
 
 export default connect(
@@ -90,5 +93,6 @@ export default connect(
     setCurrentChars,
     setLocalChars,
     setCurrentWords,
-    setLocalWords
+    setLocalWords,
+    clearCharsToDelete
   })(TextList);

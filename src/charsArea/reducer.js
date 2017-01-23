@@ -3,13 +3,15 @@ import type { State } from './model';
 
 const initialState: State = {
   localChars: [],
-  currentChars: []
+  currentChars: [],
+  charsToDelete: []
 };
 
 export default (state = initialState, action: any): State => {
 
   // VERY UGLY - Should be a better way to do this...
-  let oldState = state.localChars;
+  let oldLocalChars = state.localChars;
+  let oldCharsToDelete = state.charsToDelete;
 
   switch (action.type) {
     case t.SET_LOCAL_CHARS:
@@ -33,21 +35,29 @@ export default (state = initialState, action: any): State => {
         });
         return {
           ...state,
-          localChars: oldState.concat(newChars)
+          localChars: oldLocalChars.concat(newChars)
         };
       case t.REMOVE_DELETED_LOCAL_CHARS:
+        let charsToDelete = [];
         return {
           ...state,
-          localChars: oldState.filter((charItem) => {
+          localChars: oldLocalChars.filter((charItem) => {
             if (action.payload.indexOf(charItem.chinese) < 0) {
-              console.log(charItem);
+              if (charItem.id !== null) {
+                charsToDelete.push(charItem);
+              }
               return false;
             } else {
               return true;
             }
-          })
+          }),
+          charsToDelete: oldCharsToDelete.concat(charsToDelete)
+        };
+      case t.CLEAR_CHARS_TO_DELETE:
+        return {
+          ...state,
+          charsToDelete: []
         }
-
     default:
       return state;
   }
