@@ -3,12 +3,20 @@ import { Table, Label } from 'semantic-ui-react';
 import CharItem from './CharItem';
 import isEmpty from 'lodash/isEmpty';
 
+function defineStatus(texts) {
+  if (isEmpty(texts)) {
+    return 'New';
+  } else {
+    return texts[0].title;
+  }
+}
+
 function renderCharItem(charItem, i) {
   return(
     <CharItem
       key={i}
       char={charItem.chinese}
-      status={charItem.status || ''}
+      status={defineStatus(charItem.texts)}
     />
   );
 }
