@@ -1,5 +1,6 @@
 import * as t from './actionTypes';
 import type { State } from './model';
+import isEqual from 'lodash/isEqual';
 
 const initialState: State = {
   localChars: [],
@@ -62,3 +63,15 @@ export default (state = initialState, action: any): State => {
       return state;
   }
 };
+
+// Selectors
+
+export const getSaved = (state = initialState) => {
+  return isEqual(state.currentChars, state.localChars);
+}
+
+export const countChanges = (state = initialState) => {
+  let localChars = state.localChars;
+  let newChars = localChars.filter(x => x.id === null);
+  return state.charsToDelete.length + newChars.length;
+}

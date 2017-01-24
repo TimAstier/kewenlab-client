@@ -7,8 +7,6 @@ import sidebar from './sidebar';
 import charsArea from './charsArea';
 import wordsArea from './wordsArea';
 
-import * as fromTextEditor from './textEditor/reducer';
-
 // TODO: Use Immutable.js in reducers
 export default combineReducers({
   flashMessages,
@@ -18,8 +16,3 @@ export default combineReducers({
   [charsArea.constants.NAME]: charsArea.reducer,
   [wordsArea.constants.NAME]: wordsArea.reducer
 });
-
-// TODO: Use Reselect library
-export const getSaved = (state) => {
-  return fromTextEditor.getSaved(state.textEditor);
-}

@@ -24,11 +24,8 @@ export default (state = initialState, action: any): State => {
 };
 
 // Selectors
+// TODO: Learn about Reselect
 
 export const getSaved = (state = initialState) => {
-  if(state.currentContent === state.localContent) {
-    return true;
-  } else {
-    return false;
-  }
+  return (state.currentContent === state.localContent);
 }

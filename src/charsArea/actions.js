@@ -1,3 +1,4 @@
+import axios from 'axios';
 import * as t from './actionTypes';
 
 export function setLocalChars(chars) {
@@ -31,5 +32,12 @@ export function removeDeletedLocalChars(charsArray) {
 export function clearCharsToDelete() {
   return {
     type: t.CLEAR_CHARS_TO_DELETE
+  }
+}
+
+// TODO: dispatch actions to handle async request
+export function saveChars(data) {
+  return dispatch => {
+    return axios.put(`/api/texts/${data.textId}/chars`, data);
   }
 }

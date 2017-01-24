@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Form, TextArea, Button, Icon, Label } from 'semantic-ui-react';
 import { setLocalContent, saveTextContent,
   setCurrentContent } from '../actions';
-import { getSaved } from '../../rootReducer';
+import { getSaved } from '../reducer';
 import { addFlashMessage } from '../../actions/flashMessages';
 import { addNewLocalChars, removeDeletedLocalChars }
   from '../../charsArea/actions';
@@ -107,7 +107,7 @@ function mapStateToProps(state) {
    return {
        localContent: state.textEditor.localContent,
        currentTextId: state.sidebar.currentTextId,
-       saved: getSaved(state)
+       saved: getSaved(state.textEditor)
    }
 }
 
