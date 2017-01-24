@@ -33,7 +33,7 @@ function renderCharItems(chars) {
 
 const CharItemList = ({ localChars }) => {
   return (
-    <div id='chars-area'>
+    <div id='chars-list'>
       <h2>
         <Label basic circular color='black' className='main-label'>字</Label>
       </h2>

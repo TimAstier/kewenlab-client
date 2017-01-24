@@ -21,7 +21,7 @@ const CharItem = ({ char, status }) => {
       </Table.Cell>
     </Table.Row>
   );
-}
+};
 
 CharItem.propTypes = {
   char: React.PropTypes.string.isRequired,

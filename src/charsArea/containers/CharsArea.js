@@ -1,12 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CharItemList from '../components/CharItemList';
+import CharControls from '../components/CharControls';
 
 class CharsArea extends React.Component {
 
   render() {
     return (
-      <CharItemList localChars={this.props.localChars}/>
+      <div id='chars-area'>
+        <CharItemList localChars={this.props.localChars}/>
+        <CharControls />
+      </div>
     );
   }
 }
