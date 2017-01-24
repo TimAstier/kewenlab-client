@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import CharItemList from '../components/CharItemList';
 import CharControls from '../components/CharControls';
 import { getSaved, countChanges } from '../reducer';
-import { saveChars } from '../actions';
+import { saveChars, setCurrentChars, setLocalChars } from '../actions';
 import { addFlashMessage } from '../../actions/flashMessages';
 
 class CharsArea extends React.Component {
@@ -23,8 +23,8 @@ class CharsArea extends React.Component {
     };
     return this.props.saveChars(data).then(
       (res) => {
-        //this.props.setCurrentChars(res.chars);
-        console.log(res);
+        this.props.setCurrentChars(res.data.chars);
+        this.props.setLocalChars(res.data.chars);
       },
       (err) => {
         this.props.addFlashMessage({
@@ -56,7 +56,9 @@ CharsArea.propTypes = {
   changeCount: React.PropTypes.number.isRequired,
   saveChars: React.PropTypes.func.isRequired,
   currentTextId: React.PropTypes.number.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired
+  addFlashMessage: React.PropTypes.func.isRequired,
+  setCurrentChars: React.PropTypes.func.isRequired,
+  setLocalChars: React.PropTypes.func.isRequired
 }
 
 function mapStateToProps(state) {
@@ -71,5 +73,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { saveChars, addFlashMessage }
+  { saveChars, addFlashMessage, setCurrentChars, setLocalChars }
 )(CharsArea);
