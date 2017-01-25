@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Menu } from 'semantic-ui-react';
-import TextList from './TextList';
+import TextList from '../components/TextList';
 import { getTextItems, updateTextItems } from '../actions';
 
 class Sidebar extends React.Component {
