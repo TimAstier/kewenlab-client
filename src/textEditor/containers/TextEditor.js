@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form, TextArea, Button, Icon, Label } from 'semantic-ui-react';
+import { Form, Label } from 'semantic-ui-react';
 import { setLocalContent, saveTextContent,
   setCurrentContent } from '../actions';
 import { getSaved } from '../reducer';
@@ -9,6 +9,8 @@ import { addNewLocalChars, removeDeletedLocalChars }
   from '../../charsArea/actions';
 import isEmpty from 'lodash/isEmpty';
 import { toArrayOfUniqueChars } from '../../utils/custom';
+import TextControls from '../components/TextControls';
+import TextInput from '../components/TextInput';
 
 class TextEditor extends React.Component {
   constructor(props) {
@@ -69,22 +71,13 @@ class TextEditor extends React.Component {
       <div id="text-editor">
         <h2><Label basic color='black' className='main-label'>课文</Label></h2>
         <Form id="text-editor-form">
-          <TextArea
+          <TextInput
             placeholder={this.placeholder()}
             value={this.props.localContent}
             onChange={this.onChange}
             readOnly={!this.hasCurrentText()}
           />
-          <Button
-            size='big'
-            primary
-            id='text-editor-save-btn'
-            onClick={this.onClick}
-            disabled={this.props.saved}
-          >
-            <Icon name='save' />
-            Save
-          </Button>
+          <TextControls onClick={this.onClick} saved={this.props.saved} />
         </Form>
       </div>
     );

@@ -1,18 +1,18 @@
 import React from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 
-const CharControls = ({ saved, changeCount, onClick }) => {
+const TextControls = ({saved, onClick}) => {
   return(
     <Button
       primary
-      id='chars-area-save-btn'
-      disabled={saved}
+      id='text-editor-save-btn'
       onClick={onClick}
+      disabled={saved}
     >
       <Icon name='save' />
-      {`Save (${changeCount})`}
+      Save
     </Button>
   );
 };
 
-export default CharControls;
+export default TextControls;
