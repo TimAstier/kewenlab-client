@@ -1,5 +1,5 @@
 export function toArrayOfUniqueChars(string) {
-  const allExceptChinese = /[A-z]|[0-9]|[.,\/#!?$%\^&\*;:{}=\-_`~()。？！]|\s/g;
+  const allExceptChinese = /[A-z]|[0-9]|[.,\/#!?$%\^&\*;:{}=\-_`~()。？！…，；：、]|\s/g;
   return(
     string
     .replace(allExceptChinese, '')
