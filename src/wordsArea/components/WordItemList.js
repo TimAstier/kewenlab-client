@@ -23,7 +23,7 @@ function renderWordItems(words) {
 
 const WordItemList = ({ currentWords }) => {
   return (
-    <div id='words-area'>
+    <div id='words-list'>
       <h2>
         <Label basic circular color='black' className='main-label'>词</Label>
       </h2>

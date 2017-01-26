@@ -15,4 +15,10 @@ const CharControls = ({ saved, changeCount, onClick }) => {
   );
 };
 
+CharControls.propTypes = {
+  saved: React.PropTypes.bool.isRequired,
+  changeCount: React.PropTypes.number.isRequired,
+  onClick: React.PropTypes.func.isRequired
+}
+
 export default CharControls;

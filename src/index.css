@@ -80,7 +80,7 @@ h2 {
   font-size: 16px;
 }
 
-#text-editor-save-btn, #chars-area-save-btn {
+#text-editor-save-btn, #chars-area-save-btn, #words-area-refresh-btn {
   margin-top: 10px;
 }
 
