@@ -2,16 +2,8 @@ import React from 'react';
 import { Table, Label } from 'semantic-ui-react';
 import CharItem from './CharItem';
 import isEmpty from 'lodash/isEmpty';
+import { defineStatus } from '../../utils/custom';
 
-function defineStatus(item) {
-  if (item.id === null) {
-    return 'Not saved';
-  } else if (isEmpty(item.texts)) {
-    return 'New';
-  } else {
-    return item.texts[0].title;
-  }
-}
 
 function renderCharItem(charItem, i) {
   return(
@@ -41,8 +33,8 @@ const CharItemList = ({ localChars }) => {
         <Table celled>
           <Table.Header>
             <Table.Row textAlign='center'>
-              <Table.HeaderCell>Char</Table.HeaderCell>
-              <Table.HeaderCell>Status</Table.HeaderCell>
+              <Table.HeaderCell fixed width={1}>Char</Table.HeaderCell>
+              <Table.HeaderCell fixed width={1}>Status</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 

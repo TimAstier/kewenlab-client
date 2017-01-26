@@ -2,13 +2,14 @@ import React from 'react';
 import { Table, Label } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
 import WordItem from './WordItem';
+import { defineStatus } from '../../utils/custom';
 
 function renderWordItem(wordItem, i) {
   return(
     <WordItem
       key={i}
       word={wordItem.chinese}
-      status={wordItem.status || ''}
+      status={defineStatus(wordItem)}
     />
   );
 }
@@ -31,8 +32,8 @@ const WordItemList = ({ currentWords }) => {
         <Table celled>
           <Table.Header>
             <Table.Row textAlign='center'>
-              <Table.HeaderCell>Word</Table.HeaderCell>
-              <Table.HeaderCell>Status</Table.HeaderCell>
+              <Table.HeaderCell fixed width={10}>Word</Table.HeaderCell>
+              <Table.HeaderCell fixed width={6}>Status</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
