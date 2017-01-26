@@ -33,8 +33,8 @@ const CharItemList = ({ localChars }) => {
         <Table celled>
           <Table.Header>
             <Table.Row textAlign='center'>
-              <Table.HeaderCell fixed width={1}>Char</Table.HeaderCell>
-              <Table.HeaderCell fixed width={1}>Status</Table.HeaderCell>
+              <Table.HeaderCell width={1}>Char</Table.HeaderCell>
+              <Table.HeaderCell width={1}>Status</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 

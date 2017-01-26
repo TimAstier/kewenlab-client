@@ -11,10 +11,10 @@ class CharsArea extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onClick = this.onClick.bind(this);
+    this.save = this.save.bind(this);
   }
 
-  onClick(e) {
+  save(e) {
     e.preventDefault();
     // TODO: Use serializers to define which attributes to send in payload
     const data = {
@@ -44,7 +44,7 @@ class CharsArea extends React.Component {
         <CharControls
           saved={this.props.saved}
           changeCount={this.props.changeCount}
-          onClick={this.onClick}
+          save={this.save}
         />
       </div>
     );

@@ -32,8 +32,8 @@ const WordItemList = ({ currentWords }) => {
         <Table celled>
           <Table.Header>
             <Table.Row textAlign='center'>
-              <Table.HeaderCell fixed width={10}>Word</Table.HeaderCell>
-              <Table.HeaderCell fixed width={6}>Status</Table.HeaderCell>
+              <Table.HeaderCell width={10}>Word</Table.HeaderCell>
+              <Table.HeaderCell width={6}>Status</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 

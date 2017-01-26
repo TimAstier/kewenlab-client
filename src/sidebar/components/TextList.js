@@ -6,7 +6,8 @@ import { getCurrentText, setCurrentText } from '../actions';
 import { setCurrentContent, setLocalContent } from '../../textEditor/actions';
 import { setCurrentChars, setLocalChars, clearCharsToDelete }
   from '../../charsArea/actions';
-import { setCurrentWords, setLocalWords } from '../../wordsArea/actions';
+import { setCurrentWords, setLocalWords, clearWordsToDelete }
+  from '../../wordsArea/actions';
 
 class TextList extends React.Component {
   constructor(props) {
@@ -49,6 +50,7 @@ class TextList extends React.Component {
         this.props.clearCharsToDelete();
         this.props.setLocalWords(words);
         this.props.setCurrentWords(words);
+        this.props.clearWordsToDelete();
       },
       (err) => {
         this.props.addFlashMessage({
@@ -80,7 +82,8 @@ TextList.propTypes = {
   setLocalChars: React.PropTypes.func.isRequired,
   setCurrentWords: React.PropTypes.func.isRequired,
   setLocalWords: React.PropTypes.func.isRequired,
-  clearCharsToDelete: React.PropTypes.func.isRequired
+  clearCharsToDelete: React.PropTypes.func.isRequired,
+  clearWordsToDelete: React.PropTypes.func.isRequired
 }
 
 export default connect(
@@ -94,5 +97,6 @@ export default connect(
     setLocalChars,
     setCurrentWords,
     setLocalWords,
-    clearCharsToDelete
+    clearCharsToDelete,
+    clearWordsToDelete
   })(TextList);

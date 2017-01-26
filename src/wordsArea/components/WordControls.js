@@ -1,21 +1,32 @@
 import React from 'react';
 import { Button, Icon } from 'semantic-ui-react';
 
-const WordControls = ({ saved, changeCount, onClick }) => {
+const WordControls = ({ saved, changeCount, refresh, save }) => {
   return(
-    <Button
-      primary
-      id='words-area-refresh-btn'
-      onClick={onClick}
-    >
-      <Icon name='refresh' />
-      Refresh
-    </Button>
+    <div>
+      <Button
+        id='words-area-refresh-btn'
+        circular icon='refresh'
+        onClick={refresh}
+      />
+      <Button
+        primary
+        id='words-area-save-btn'
+        disabled={saved}
+        onClick={save}
+      >
+        <Icon name='save' />
+        {`Save (${changeCount})`}
+      </Button>
+    </div>
   );
 };
 
 WordControls.propTypes = {
-  onClick: React.PropTypes.func.isRequired
+  refresh: React.PropTypes.func.isRequired,
+  save: React.PropTypes.func.isRequired,
+  saved: React.PropTypes.bool.isRequired,
+  changeCount: React.PropTypes.number.isRequired
 }
 
 export default WordControls;

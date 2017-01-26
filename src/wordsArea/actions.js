@@ -21,3 +21,30 @@ export function tokenize(data) {
     return axios.post(`/api/tokenizer`, data);
   }
 }
+
+export function addNewLocalWords(newLocalWords) {
+  return {
+    type: t.ADD_NEW_LOCAL_WORDS,
+    payload: newLocalWords
+  }
+}
+
+export function removeDeletedLocalWords(wordsArray) {
+  return {
+    type: t.REMOVE_DELETED_LOCAL_WORDS,
+    payload: wordsArray
+  }
+}
+
+export function clearWordsToDelete() {
+  return {
+    type: t.CLEAR_WORDS_TO_DELETE
+  }
+}
+
+// TODO: dispatch actions to handle async request
+export function saveWords(data) {
+  return dispatch => {
+    return axios.put(`/api/texts/${data.textId}/words`, data);
+  }
+}
