@@ -35,6 +35,13 @@ export function clearCharsToDelete() {
   }
 }
 
+export function setVisibilityFilter(value) {
+  return {
+    type: t.SET_VISIBILITY_FILTER,
+    payload: value
+  }
+}
+
 // TODO: dispatch actions to handle async request
 export function saveChars(data) {
   return dispatch => {

@@ -2,6 +2,7 @@ export type CharsArea = {
   localChars: array;
   currentChars: array;
   charsToDelete: array;
+  visibilityFilter: string;
 };
 
 // This is the model of our module state (e.g. return type of the reducer)

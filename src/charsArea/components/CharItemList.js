@@ -1,9 +1,9 @@
 import React from 'react';
 import { Table, Label } from 'semantic-ui-react';
 import CharItem from './CharItem';
+import StatusPicker from './StatusPicker';
 import isEmpty from 'lodash/isEmpty';
 import { defineStatus } from '../../utils/custom';
-
 
 function renderCharItem(charItem, i) {
   return(
@@ -23,7 +23,7 @@ function renderCharItems(chars) {
   }
 }
 
-const CharItemList = ({ localChars }) => {
+const CharItemList = ({ filteredLocalChars, onFilterClick, visibilityFilter }) => {
   return (
     <div id='chars-list'>
       <h2>
@@ -34,12 +34,17 @@ const CharItemList = ({ localChars }) => {
           <Table.Header>
             <Table.Row textAlign='center'>
               <Table.HeaderCell width={1}>Char</Table.HeaderCell>
-              <Table.HeaderCell width={1}>Status</Table.HeaderCell>
+              <Table.HeaderCell width={1}>
+                <StatusPicker
+                  onFilterClick={onFilterClick}
+                  visibilityFilter={visibilityFilter}
+                />
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
           <Table.Body>
-            { renderCharItems(localChars) }
+            { renderCharItems(filteredLocalChars) }
           </Table.Body>
         </Table>
       </div>
@@ -48,7 +53,9 @@ const CharItemList = ({ localChars }) => {
 }
 
 CharItemList.propTypes = {
-  localChars: React.PropTypes.array.isRequired
+  filteredLocalChars: React.PropTypes.array.isRequired,
+  onFilterClick: React.PropTypes.func.isRequired,
+  visibilityFilter: React.PropTypes.string.isRequired
 }
 
 export default CharItemList;

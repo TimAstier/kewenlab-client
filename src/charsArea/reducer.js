@@ -2,11 +2,13 @@ import * as t from './actionTypes';
 import type { State } from './model';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
+import { defineStatus } from '../utils/custom';
 
 const initialState: State = {
   localChars: [],
   currentChars: [],
-  charsToDelete: []
+  charsToDelete: [],
+  visibilityFilter: 'all'
 };
 
 export default (state = initialState, action: any): State => {
@@ -60,6 +62,11 @@ export default (state = initialState, action: any): State => {
           ...state,
           charsToDelete: []
         }
+        case t.SET_VISIBILITY_FILTER:
+          return {
+            ...state,
+            visibilityFilter: action.payload
+          };
     default:
       return state;
   }
@@ -84,4 +91,23 @@ export const getTotalChars = (state = initialState) => {
 export const countNewChars = (state = initialState) => {
   let currentChars = state.currentChars
   return currentChars.filter(x => isEmpty(x.texts)).length;
+}
+
+// TODO: Not saved filter
+export const filterLocalChars = (state = initialState) => {
+  let localChars = state.localChars;
+  switch(state.visibilityFilter) {
+    case 'all':
+      return localChars;
+    case 'new':
+      return localChars.filter(x => defineStatus(x) === 'new');
+    case 'notnew':
+      return localChars.filter(x => {
+        return (defineStatus(x) !== 'new') && (defineStatus(x) !== 'notsaved');
+      });
+      case 'notsaved':
+        return localChars.filter(x => defineStatus(x) === 'notsaved');
+    default:
+      return localChars;
+  }
 }

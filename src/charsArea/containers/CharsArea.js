@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import CharItemList from '../components/CharItemList';
 import CharControls from '../components/CharControls';
 import Stats from '../../components/common/Stats';
-import { getSaved, countChanges, getTotalChars, countNewChars }
-  from '../reducer';
-import { saveChars, setCurrentChars, setLocalChars, clearCharsToDelete }
-  from '../actions';
+import { getSaved, countChanges, getTotalChars,
+  countNewChars, filterLocalChars } from '../reducer';
+import { saveChars, setCurrentChars, setLocalChars,
+  clearCharsToDelete, setVisibilityFilter } from '../actions';
 import { addFlashMessage } from '../../actions/flashMessages';
 
 class CharsArea extends React.Component {
@@ -14,6 +14,11 @@ class CharsArea extends React.Component {
     super(props);
 
     this.save = this.save.bind(this);
+    this.onFilterClick = this.onFilterClick.bind(this);
+  }
+
+  onFilterClick(e, data) {
+    return this.props.setVisibilityFilter(data.value);
   }
 
   save(e) {
@@ -47,7 +52,11 @@ class CharsArea extends React.Component {
 
     return (
       <div id='chars-area'>
-        <CharItemList localChars={this.props.localChars} />
+        <CharItemList
+          filteredLocalChars={this.props.filteredLocalChars}
+          onFilterClick={this.onFilterClick}
+          visibilityFilter={this.props.visibilityFilter}
+        />
         {this.props.saved &&
           <Stats items={statItems} />
         }
@@ -73,7 +82,10 @@ CharsArea.propTypes = {
   setLocalChars: React.PropTypes.func.isRequired,
   clearCharsToDelete: React.PropTypes.func.isRequired,
   totalChars: React.PropTypes.number.isRequired,
-  totalNewChars: React.PropTypes.number.isRequired
+  totalNewChars: React.PropTypes.number.isRequired,
+  setVisibilityFilter: React.PropTypes.func.isRequired,
+  visibilityFilter: React.PropTypes.string.isRequired,
+  filteredLocalChars: React.PropTypes.array.isRequired
 }
 
 function mapStateToProps(state) {
@@ -84,7 +96,9 @@ function mapStateToProps(state) {
     changeCount: countChanges(state.charsArea),
     currentTextId: state.sidebar.currentTextId,
     totalChars: getTotalChars(state.charsArea),
-    totalNewChars: countNewChars(state.charsArea)
+    totalNewChars: countNewChars(state.charsArea),
+    visibilityFilter: state.charsArea.visibilityFilter,
+    filteredLocalChars: filterLocalChars(state.charsArea)
   }
 }
 
@@ -95,6 +109,7 @@ export default connect(
     addFlashMessage,
     setCurrentChars,
     setLocalChars,
-    clearCharsToDelete
+    clearCharsToDelete,
+    setVisibilityFilter
   }
 )(CharsArea);

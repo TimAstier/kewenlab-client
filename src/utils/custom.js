@@ -26,9 +26,9 @@ export function removeDuplicates(array) {
 
 export function defineStatus(item) {
   if (item.id === null) {
-    return 'Not saved';
+    return 'notsaved';
   } else if (isEmpty(item.texts)) {
-    return 'New';
+    return 'new';
   } else {
     return item.texts[0].title;
   }
