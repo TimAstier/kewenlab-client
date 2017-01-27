@@ -42,6 +42,13 @@ export function clearWordsToDelete() {
   }
 }
 
+export function setVisibilityFilter(value) {
+  return {
+    type: t.SET_WORD_VISIBILITY_FILTER,
+    payload: value
+  }
+}
+
 // TODO: dispatch actions to handle async request
 export function saveWords(data) {
   return dispatch => {

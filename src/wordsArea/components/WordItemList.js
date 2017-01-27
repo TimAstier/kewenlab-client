@@ -1,7 +1,8 @@
 import React from 'react';
 import { Table, Label } from 'semantic-ui-react';
-import isEmpty from 'lodash/isEmpty';
 import WordItem from './WordItem';
+import StatusPicker from '../../components/common/StatusPicker';
+import isEmpty from 'lodash/isEmpty';
 import { defineStatus } from '../../utils/custom';
 
 function renderWordItem(wordItem, i) {
@@ -22,7 +23,7 @@ function renderWordItems(words) {
   }
 }
 
-const WordItemList = ({ currentWords }) => {
+const WordItemList = ({ filteredLocalWords, onFilterClick, visibilityFilter }) => {
   return (
     <div id='words-list'>
       <h2>
@@ -33,12 +34,17 @@ const WordItemList = ({ currentWords }) => {
           <Table.Header>
             <Table.Row textAlign='center'>
               <Table.HeaderCell width={10}>Word</Table.HeaderCell>
-              <Table.HeaderCell width={6}>Status</Table.HeaderCell>
+              <Table.HeaderCell width={6}>
+                <StatusPicker
+                  onFilterClick={onFilterClick}
+                  visibilityFilter={visibilityFilter}
+                />
+              </Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
           <Table.Body >
-            { renderWordItems(currentWords) }
+            { renderWordItems(filteredLocalWords) }
           </Table.Body>
         </Table>
       </div>
@@ -47,7 +53,7 @@ const WordItemList = ({ currentWords }) => {
 }
 
 WordItemList.propTypes = {
-  currentWords: React.PropTypes.array.isRequired
+  filteredLocalWords: React.PropTypes.array.isRequired
 }
 
 export default WordItemList;

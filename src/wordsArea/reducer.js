@@ -2,11 +2,13 @@ import * as t from './actionTypes';
 import type { State } from './model';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
+import { defineStatus } from '../utils/custom';
 
 const initialState: State = {
   localWords: [],
   currentWords: [],
-  wordsToDelete: []
+  wordsToDelete: [],
+  visibilityFilter: 'all'
 };
 
 export default (state = initialState, action: any): State => {
@@ -60,6 +62,11 @@ export default (state = initialState, action: any): State => {
             ...state,
             wordsToDelete: []
           }
+        case t.SET_WORD_VISIBILITY_FILTER:
+          return {
+            ...state,
+            visibilityFilter: action.payload
+          };
     default:
       return state;
   }
@@ -84,4 +91,22 @@ export const getTotalWords = (state = initialState) => {
 export const countNewWords = (state = initialState) => {
   let currentWords = state.currentWords
   return currentWords.filter(x => isEmpty(x.texts)).length;
+}
+
+export const filterLocalWords = (state = initialState) => {
+  let localWords = state.localWords;
+  switch(state.visibilityFilter) {
+    case 'all':
+      return localWords;
+    case 'new':
+      return localWords.filter(x => defineStatus(x) === 'new');
+    case 'notnew':
+      return localWords.filter(x => {
+        return (defineStatus(x) !== 'new') && (defineStatus(x) !== 'notsaved');
+      });
+      case 'notsaved':
+        return localWords.filter(x => defineStatus(x) === 'notsaved');
+    default:
+      return localWords;
+  }
 }

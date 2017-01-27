@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Label } from 'semantic-ui-react';
 import CharItem from './CharItem';
-import StatusPicker from './StatusPicker';
+import StatusPicker from '../../components/common/StatusPicker';
 import isEmpty from 'lodash/isEmpty';
 import { defineStatus } from '../../utils/custom';
 

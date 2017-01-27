@@ -37,7 +37,7 @@ export function clearCharsToDelete() {
 
 export function setVisibilityFilter(value) {
   return {
-    type: t.SET_VISIBILITY_FILTER,
+    type: t.SET_CHAR_VISIBILITY_FILTER,
     payload: value
   }
 }

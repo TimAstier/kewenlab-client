@@ -62,11 +62,11 @@ export default (state = initialState, action: any): State => {
           ...state,
           charsToDelete: []
         }
-        case t.SET_VISIBILITY_FILTER:
-          return {
-            ...state,
-            visibilityFilter: action.payload
-          };
+      case t.SET_CHAR_VISIBILITY_FILTER:
+        return {
+          ...state,
+          visibilityFilter: action.payload
+        };
     default:
       return state;
   }
@@ -93,7 +93,6 @@ export const countNewChars = (state = initialState) => {
   return currentChars.filter(x => isEmpty(x.texts)).length;
 }
 
-// TODO: Not saved filter
 export const filterLocalChars = (state = initialState) => {
   let localChars = state.localChars;
   switch(state.visibilityFilter) {

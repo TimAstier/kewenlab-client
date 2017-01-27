@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import WordItemList from '../components/WordItemList';
 import WordControls from '../components/WordControls';
 import Stats from '../../components/common/Stats';
-import { getSaved, countChanges, getTotalWords, countNewWords }
-  from '../reducer';
+import { getSaved, countChanges, getTotalWords,
+  countNewWords, filterLocalWords } from '../reducer';
 import { tokenize, addNewLocalWords, removeDeletedLocalWords,
-  setLocalWords, setCurrentWords, saveWords, clearWordsToDelete }
-  from '../actions';
+  setLocalWords, setCurrentWords, saveWords, clearWordsToDelete,
+  setVisibilityFilter } from '../actions';
 import { addFlashMessage } from '../../actions/flashMessages';
 import { toChineseOnly, removeDuplicates } from '../../utils/custom';
 import isEmpty from 'lodash/isEmpty';
@@ -19,6 +19,11 @@ class WordsArea extends React.Component {
 
     this.refresh = this.refresh.bind(this);
     this.save = this.save.bind(this);
+    this.onFilterClick = this.onFilterClick.bind(this);
+  }
+
+  onFilterClick(e, data) {
+    return this.props.setVisibilityFilter(data.value);
   }
 
   refresh(e) {
@@ -78,7 +83,11 @@ class WordsArea extends React.Component {
 
     return (
       <div id='words-area'>
-        <WordItemList currentWords={this.props.localWords} />
+        <WordItemList
+          filteredLocalWords={this.props.filteredLocalWords}
+          onFilterClick={this.onFilterClick}
+          visibilityFilter={this.props.visibilityFilter}
+        />
         {this.props.saved &&
           <Stats items={statItems} />
         }
@@ -109,7 +118,10 @@ WordsArea.propTypes = {
   clearWordsToDelete: React.PropTypes.func.isRequired,
   wordsToDelete: React.PropTypes.array.isRequired,
   totalWords: React.PropTypes.number.isRequired,
-  totalNewWords: React.PropTypes.number.isRequired
+  totalNewWords: React.PropTypes.number.isRequired,
+  setVisibilityFilter: React.PropTypes.func.isRequired,
+  visibilityFilter: React.PropTypes.string.isRequired,
+  filteredLocalWords: React.PropTypes.array.isRequired
 }
 
 function mapStateToProps(state) {
@@ -121,7 +133,9 @@ function mapStateToProps(state) {
     currentTextId: state.sidebar.currentTextId,
     wordsToDelete: state.wordsArea.wordsToDelete,
     totalWords: getTotalWords(state.wordsArea),
-    totalNewWords: countNewWords(state.wordsArea)
+    totalNewWords: countNewWords(state.wordsArea),
+    visibilityFilter: state.wordsArea.visibilityFilter,
+    filteredLocalWords: filterLocalWords(state.wordsArea)
   }
 }
 
@@ -135,5 +149,6 @@ export default connect(
     setLocalWords,
     setCurrentWords,
     saveWords,
-    clearWordsToDelete
+    clearWordsToDelete,
+    setVisibilityFilter
   })(WordsArea);
