@@ -1,6 +1,6 @@
 import isEmpty from 'lodash/isEmpty';
 
-const allExceptChinese = /[A-z]|[0-9]|[.,\/#!?$%\^&\*;:{}=\-_`~()。？！…，；：、“”（）《》％]|\s/g;
+const allExceptChinese = /[A-z]|[0-9]|[.,\/#!?$%\^&\*;:{}=\-_`~()。？！…，；：、“”（）《》％·]|\s/g;
 
 export function toArrayOfUniqueChars(string) {
   return(

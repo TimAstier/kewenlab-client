@@ -1,6 +1,7 @@
 import * as t from './actionTypes';
 import type { State } from './model';
 import isEqual from 'lodash/isEqual';
+import isEmpty from 'lodash/isEmpty';
 
 const initialState: State = {
   localWords: [],
@@ -74,4 +75,13 @@ export const countChanges = (state = initialState) => {
   let localWords = state.localWords;
   let newWords = localWords.filter(x => x.id === null);
   return state.wordsToDelete.length + newWords.length;
+}
+
+export const getTotalWords = (state = initialState) => {
+  return state.currentWords.length;
+}
+
+export const countNewWords = (state = initialState) => {
+  let currentWords = state.currentWords
+  return currentWords.filter(x => isEmpty(x.texts)).length;
 }

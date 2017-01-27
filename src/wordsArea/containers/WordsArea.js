@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import WordItemList from '../components/WordItemList';
 import WordControls from '../components/WordControls';
-import { getSaved, countChanges } from '../reducer';
+import Stats from '../../components/common/Stats';
+import { getSaved, countChanges, getTotalWords, countNewWords }
+  from '../reducer';
 import { tokenize, addNewLocalWords, removeDeletedLocalWords,
   setLocalWords, setCurrentWords, saveWords, clearWordsToDelete }
   from '../actions';
@@ -69,9 +71,17 @@ class WordsArea extends React.Component {
   }
 
   render() {
+    const statItems = [
+      `New: ${this.props.totalNewWords}/${this.props.totalWords}`,
+      `${Math.round(this.props.totalNewWords/this.props.totalWords*100)}%`
+    ];
+
     return (
       <div id='words-area'>
         <WordItemList currentWords={this.props.localWords} />
+        {this.props.saved &&
+          <Stats items={statItems} />
+        }
         <WordControls
           refresh={this.refresh}
           saved={this.props.saved}
@@ -97,7 +107,9 @@ WordsArea.propTypes = {
   saveWords: React.PropTypes.func.isRequired,
   currentTextId: React.PropTypes.number.isRequired,
   clearWordsToDelete: React.PropTypes.func.isRequired,
-  wordsToDelete: React.PropTypes.array.isRequired
+  wordsToDelete: React.PropTypes.array.isRequired,
+  totalWords: React.PropTypes.number.isRequired,
+  totalNewWords: React.PropTypes.number.isRequired
 }
 
 function mapStateToProps(state) {
@@ -107,7 +119,9 @@ function mapStateToProps(state) {
     saved: getSaved(state.wordsArea),
     changeCount: countChanges(state.wordsArea),
     currentTextId: state.sidebar.currentTextId,
-    wordsToDelete: state.wordsArea.wordsToDelete
+    wordsToDelete: state.wordsArea.wordsToDelete,
+    totalWords: getTotalWords(state.wordsArea),
+    totalNewWords: countNewWords(state.wordsArea)
   }
 }
 

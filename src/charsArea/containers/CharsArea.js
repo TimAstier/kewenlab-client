@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CharItemList from '../components/CharItemList';
 import CharControls from '../components/CharControls';
-import { getSaved, countChanges } from '../reducer';
+import Stats from '../../components/common/Stats';
+import { getSaved, countChanges, getTotalChars, countNewChars }
+  from '../reducer';
 import { saveChars, setCurrentChars, setLocalChars, clearCharsToDelete }
   from '../actions';
 import { addFlashMessage } from '../../actions/flashMessages';
@@ -38,9 +40,17 @@ class CharsArea extends React.Component {
   }
 
   render() {
+    const statItems = [
+      `New: ${this.props.totalNewChars}/${this.props.totalChars}`,
+      `${Math.round(this.props.totalNewChars/this.props.totalChars*100)}%`
+    ];
+
     return (
       <div id='chars-area'>
         <CharItemList localChars={this.props.localChars} />
+        {this.props.saved &&
+          <Stats items={statItems} />
+        }
         <CharControls
           saved={this.props.saved}
           changeCount={this.props.changeCount}
@@ -61,7 +71,9 @@ CharsArea.propTypes = {
   addFlashMessage: React.PropTypes.func.isRequired,
   setCurrentChars: React.PropTypes.func.isRequired,
   setLocalChars: React.PropTypes.func.isRequired,
-  clearCharsToDelete: React.PropTypes.func.isRequired
+  clearCharsToDelete: React.PropTypes.func.isRequired,
+  totalChars: React.PropTypes.number.isRequired,
+  totalNewChars: React.PropTypes.number.isRequired
 }
 
 function mapStateToProps(state) {
@@ -70,7 +82,9 @@ function mapStateToProps(state) {
     charsToDelete: state.charsArea.charsToDelete,
     saved: getSaved(state.charsArea),
     changeCount: countChanges(state.charsArea),
-    currentTextId: state.sidebar.currentTextId
+    currentTextId: state.sidebar.currentTextId,
+    totalChars: getTotalChars(state.charsArea),
+    totalNewChars: countNewChars(state.charsArea)
   }
 }
 

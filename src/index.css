@@ -76,11 +76,11 @@ h2 {
 #text-editor-form > textarea {
   resize: none;
   max-height: 100%;
-  height: 600px;
+  height: 620px;
   font-size: 16px;
 }
 
-#text-editor-save-btn, #chars-area-save-btn, #words-area-refresh-btn {
+#text-editor-save-btn, #chars-area-save-btn, #words-area-save-btn, #wors-area-refresh-btn {
   margin-top: 10px;
 }
 
@@ -97,11 +97,6 @@ h2 {
   margin-top: 0px;
 }
 
-.table-wrapper {
-  height: 600px;
-  overflow-y: scroll;
-}
-
 /* WordsArea */
 
 #words-area {
@@ -113,4 +108,21 @@ h2 {
 
 #words-area > table {
   margin-top: 0px;
+}
+
+/* Char & Word Areas */
+
+.table-wrapper {
+  height: 620px;
+  overflow-y: scroll;
+}
+
+.tablestats {
+  height: 57px;
+  width: 110px;
+  float: right;
+}
+
+.tablestats div.item {
+  height: 15px;
 }

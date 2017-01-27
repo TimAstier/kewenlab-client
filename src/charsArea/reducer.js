@@ -1,6 +1,7 @@
 import * as t from './actionTypes';
 import type { State } from './model';
 import isEqual from 'lodash/isEqual';
+import isEmpty from 'lodash/isEmpty';
 
 const initialState: State = {
   localChars: [],
@@ -74,4 +75,13 @@ export const countChanges = (state = initialState) => {
   let localChars = state.localChars;
   let newChars = localChars.filter(x => x.id === null);
   return state.charsToDelete.length + newChars.length;
+}
+
+export const getTotalChars = (state = initialState) => {
+  return state.currentChars.length;
+}
+
+export const countNewChars = (state = initialState) => {
+  let currentChars = state.currentChars
+  return currentChars.filter(x => isEmpty(x.texts)).length;
 }
