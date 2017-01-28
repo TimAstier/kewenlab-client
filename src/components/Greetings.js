@@ -5,7 +5,7 @@ class Greetings extends React.Component {
   render() {
     return (
       <div>
-        <Message size="massive" className="center">Welcome to Kenwen-lab</Message>
+        <Message size="massive" className="center">Welcome to Kewen-lab</Message>
       </div>
     );
   }
