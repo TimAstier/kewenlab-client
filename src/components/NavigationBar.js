@@ -4,6 +4,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../actions/authActions';
 import './NavigationBar.css';
+import logo from '../logo.png';
 
 class NavigationBar extends React.Component {
   logout(e) {
@@ -42,7 +43,7 @@ class NavigationBar extends React.Component {
       <Menu.Item>
         <img
           className="logo"
-          src="http://placehold.it/50x50"
+          src={logo}
           alt="Kewen-lab logo"
         />
       </Menu.Item>
