@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as t from './actionTypes';
+import API_URL from '../config/api';
 
 export function setLocalContent(content) {
   return {
@@ -18,6 +19,6 @@ export function setCurrentContent(content) {
 // TODO: dispatch actions to handle async request
 export function saveTextContent(data) {
   return dispatch => {
-    return axios.put(`/api/texts/${data.id}`, data);
+    return axios.put(`${API_URL}/api/texts/${data.id}`, data);
   }
 }

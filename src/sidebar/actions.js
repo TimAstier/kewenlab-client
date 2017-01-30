@@ -1,9 +1,10 @@
 import axios from "axios";
 import * as t from './actionTypes';
+import API_URL from '../config/api';
 
 export function getTextItems() {
   return dispatch => {
-    return axios.get('/api/texts');
+    return axios.get(`${API_URL}/api/texts`);
   };
 }
 
@@ -17,9 +18,9 @@ export function updateTextItems(textItems) {
 export function getCurrentText(id) {
   return dispatch => {
     return axios.all([
-      axios.get(`/api/texts/${id}`),
-      axios.get(`/api/texts/${id}/chars`),
-      axios.get(`/api/texts/${id}/words`)
+      axios.get(`${API_URL}/api/texts/${id}`),
+      axios.get(`${API_URL}/api/texts/${id}/chars`),
+      axios.get(`${API_URL}/api/texts/${id}/words`)
     ]);
   };
 }

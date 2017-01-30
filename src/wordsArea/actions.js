@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as t from './actionTypes';
+import API_URL from '../config/api';
 
 export function setLocalWords(words) {
   return {
@@ -18,7 +19,7 @@ export function setCurrentWords(words) {
 // TODO: dispatch actions to handle async request
 export function tokenize(data) {
   return dispatch => {
-    return axios.post(`/api/tokenizer`, data);
+    return axios.post(`${API_URL}/api/tokenizer`, data);
   }
 }
 
@@ -52,6 +53,6 @@ export function setVisibilityFilter(value) {
 // TODO: dispatch actions to handle async request
 export function saveWords(data) {
   return dispatch => {
-    return axios.put(`/api/texts/${data.textId}/words`, data);
+    return axios.put(`${API_URL}/api/texts/${data.textId}/words`, data);
   }
 }
