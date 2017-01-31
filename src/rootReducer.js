@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import { routerReducer } from 'react-router-redux';
 
 import flashMessages from './reducers/flashMessages';
 import auth from './reducers/auth';
@@ -14,5 +15,6 @@ export default combineReducers({
   [textEditor.constants.NAME]: textEditor.reducer,
   [sidebar.constants.NAME]: sidebar.reducer,
   [charsArea.constants.NAME]: charsArea.reducer,
-  [wordsArea.constants.NAME]: wordsArea.reducer
+  [wordsArea.constants.NAME]: wordsArea.reducer,
+  routing: routerReducer
 });
