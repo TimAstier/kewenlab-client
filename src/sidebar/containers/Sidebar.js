@@ -1,10 +1,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Menu } from 'semantic-ui-react';
-import TextList from '../components/TextList';
-import { getTextItems, updateTextItems } from '../actions';
+import TextItemsMenu from '../components/TextItemsMenu';
+import CreateTextMenu from '../components/CreateTextMenu';
+import { getTextItems, updateTextItems, createNewText } from '../actions';
 
 class Sidebar extends React.Component {
+
+  constructor(props) {
+    super(props);
+
+    this.addText = this.addText.bind(this);
+  }
+
+  addText(e) {
+    e.preventDefault();
+    return this.props.createNewText().then(
+      (res) => {
+        console.log(res.data.text);
+        // Get new text Items
+        // Set current text as the new one (sent back in res)
+      },
+      (err) => {
+        this.props.addFlashMessage({
+          type: 'error',
+          text: 'Error: could not create new text.'
+        });
+      }
+    );
+  }
 
   componentWillMount() {
     return this.props.getTextItems().then(
@@ -22,12 +45,13 @@ class Sidebar extends React.Component {
 
   render() {
     return (
-      <Menu pointing inverted vertical id="sidebar">
-        <TextList
+      <div id='sidebar'>
+        <TextItemsMenu
           textItems={this.props.textItems}
           addFlashMessage={this.props.addFlashMessage}
         />
-      </Menu>
+        <CreateTextMenu onClick={this.addText} />
+      </div>
     );
   }
 }
@@ -36,7 +60,8 @@ Sidebar.propTypes = {
   getTextItems: React.PropTypes.func.isRequired,
   addFlashMessage: React.PropTypes.func.isRequired,
   updateTextItems: React.PropTypes.func.isRequired,
-  textItems: React.PropTypes.array.isRequired
+  textItems: React.PropTypes.array.isRequired,
+  createNewText: React.PropTypes.func.isRequired
 }
 
 Sidebar.contextTypes = {
@@ -51,5 +76,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getTextItems, updateTextItems }
+  { getTextItems, updateTextItems, createNewText }
 )(Sidebar);

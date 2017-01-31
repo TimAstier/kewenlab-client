@@ -9,7 +9,7 @@ import { setCurrentChars, setLocalChars, clearCharsToDelete }
 import { setCurrentWords, setLocalWords, clearWordsToDelete }
   from '../../wordsArea/actions';
 
-class TextList extends React.Component {
+class TextItemsMenu extends React.Component {
   constructor(props) {
     super(props);
 
@@ -64,14 +64,14 @@ class TextList extends React.Component {
   render() {
     const textItems = this.props.textItems;
     return (
-      <div>
+      <Menu pointing inverted vertical id='text-items-menu'>
         { !isEmpty(textItems) ? textItems.map(this.renderTextItem) : null }
-      </div>
+      </Menu>
     );
   }
 }
 
-TextList.propTypes = {
+TextItemsMenu.propTypes = {
   getCurrentText: React.PropTypes.func.isRequired,
   setCurrentText: React.PropTypes.func.isRequired,
   addFlashMessage: React.PropTypes.func.isRequired,
@@ -99,4 +99,4 @@ export default connect(
     setLocalWords,
     clearCharsToDelete,
     clearWordsToDelete
-  })(TextList);
+  })(TextItemsMenu);

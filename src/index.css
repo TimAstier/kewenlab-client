@@ -53,9 +53,23 @@ h2 {
 #sidebar {
   height: 100%;
   width: 210px;
+  float: left;
+  background-color: black;
+}
+
+#text-items-menu {
+  height: 93%;
+  width: 100%;
   font-size: 15px;
   overflow-y: scroll;
-  float: left;
+  margin-bottom: 0px;
+}
+
+#create-text-menu {
+  height: 7%;
+  width: 100%;
+  margin-top: 0px;
+  text-align: center;
 }
 
 /* TextEditor */
@@ -89,7 +103,7 @@ h2 {
 #chars-area {
   float: left;
   height: 100%;
-  width: 200px;
+  width: 280px;
   float: left;
 }
 
@@ -101,7 +115,7 @@ h2 {
 
 #words-area {
   height: 100%;
-  margin-left: 960px;
+  margin-left: 1040px;
   padding-left: 30px;
   padding-right: 30px;
 }

@@ -34,3 +34,9 @@ export function setCurrentText(text) {
     }
   };
 }
+
+export function createNewText() {
+  return dispatch => {
+    return axios.post(`${API_URL}/api/texts`);
+  };
+}
