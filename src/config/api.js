@@ -5,7 +5,7 @@ switch(process.env.NODE_ENV) {
     API_URL = 'http://localhost:8080';
     break;
   case 'production':
-    API_URL = 'https://damp-shelf-57274.herokuapp.com';
+    API_URL = process.env.API_URL;
     break;
   default:
     API_URL = 'undefined';
