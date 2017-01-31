@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Label } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
 import { getCurrentText, setCurrentText } from '../actions';
 import { setCurrentContent, setLocalContent } from '../../textEditor/actions';
@@ -31,7 +31,16 @@ class TextItemsMenu extends React.Component {
         name={textItem.title}
         active={activeItem === textItem.title}
         onClick={this.handleItemClick}
-      />
+      >
+        <Label
+          color='teal'
+          size='large'
+          circular
+        >
+          {textItem.order}
+        </Label>
+        {textItem.title}
+      </Menu.Item>
     );
   }
 

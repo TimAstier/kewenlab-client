@@ -16,9 +16,11 @@ class Sidebar extends React.Component {
     e.preventDefault();
     return this.props.createNewText().then(
       (res) => {
-        console.log(res.data.text);
-        // Get new text Items
-        // Set current text as the new one (sent back in res)
+        this.props.getTextItems().then(
+          (res) => {
+            this.props.updateTextItems(res.data.texts);
+          }
+        );
       },
       (err) => {
         this.props.addFlashMessage({
