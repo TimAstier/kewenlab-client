@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { logout } from '../actions/authActions';
 import './NavigationBar.css';
 import logo from '../logo.png';
+import ADMIN_URL from '../config/admin.js';
 
 class NavigationBar extends React.Component {
   logout(e) {
@@ -17,7 +18,7 @@ class NavigationBar extends React.Component {
 
     const userLinks = (
       <Menu.Menu position="right" className="main-menu-link">
-        <a href="http://app.forestadmin.com/6907"
+        <a href={ADMIN_URL}
           className="item"
           target='_blank'>
           Open Admin
