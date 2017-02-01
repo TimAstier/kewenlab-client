@@ -1,7 +1,4 @@
 import React from 'react';
-import timezones from '../../data/timezones';
-import map from 'lodash/map';
-import classnames from 'classnames';
 import TextFieldGroup from '../common/TextFieldGroup';
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
@@ -27,9 +24,6 @@ function validateInput(data) {
   if(!Validator.equals(data.password, data.passwordConfirmation)) {
     errors.passwordConfirmation = 'Passwords must match';
   }
-  if(Validator.isEmpty(data.timezone)) {
-    errors.timezone = 'This field is required';
-  }
 
   return {
     errors,
@@ -47,7 +41,6 @@ class SignupForm extends React.Component {
       email: '',
       password: '',
       passwordConfirmation: '',
-      timezone: '',
       errors: {},
       isLoading: false,
       invalid: false
@@ -114,9 +107,6 @@ class SignupForm extends React.Component {
 
   render() {
     const { errors } = this.state;
-    const options = map(timezones, (val, key) =>
-      <option key={val} value={val}>{key}</option>
-    );
     return (
       <form onSubmit={this.onSubmit} id="signup-form">
         <h1>Create your account</h1>
@@ -127,7 +117,7 @@ class SignupForm extends React.Component {
           checkUserExists={this.checkUserExists}
 					onChange={this.onChange}
 					value={this.state.username}
-					field="username"
+          field="username"
     />
 
 				<TextFieldGroup
@@ -156,23 +146,6 @@ class SignupForm extends React.Component {
 					field="passwordConfirmation"
           type="password"
     />
-
-        <div className={classnames("form-group",
-          { 'has-error': errors.timezone })}>
-          <label className="control-label">Timezone</label>
-          <select
-            value={this.state.timezone}
-            onChange={this.onChange}
-            name="timezone"
-            className="form-control"
-          >
-            <option value="" disabled>Choose your Timezone</option>
-            {options}
-          </select>
-          { errors.timezone &&
-            <span className="help-block">{errors.timezone}</span>
-          }
-        </div>
 
         <div className="form-group">
           <button
