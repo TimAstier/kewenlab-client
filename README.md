@@ -32,5 +32,7 @@ $ git push production master // This will run the build
 ## TODO
 - [ ] Serve the app with different strategy to handle refresh. See [option 1](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment) and [option 2](https://github.com/mars/heroku-cra-node).
 - [ ] Adjust the css to fit all screens size.
+- [x] Favicon.
+- [ ] Display words and chars in the right order.
 - [ ] Test in different browsers.
 - [ ] Better handle async calls (display loaders).
