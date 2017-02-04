@@ -30,9 +30,15 @@ $ git push production master // This will run the build
 - production - https://kewen-lab.herokuapp.com
 
 ## TODO
+- [x] Add favicon.
 - [ ] Serve the app with different strategy to handle refresh. See [option 1](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment) and [option 2](https://github.com/mars/heroku-cra-node).
 - [ ] Adjust the css to fit all screens size.
-- [x] Favicon.
 - [ ] Display words and chars in the right order.
 - [ ] Test in different browsers.
 - [ ] Better handle async calls (display loaders).
+- [ ] Remove redux devTools from production build.
+- [ ] Highlight words/char in text when clicked.
+- [ ] Manually added/removed chars/words should not be modified by save buttons.
+- [ ] Use Immutable.JS in all reducers.
+- [ ] Use plain key names instead of "payload" in actions.
+- [ ] Write tests for core functions, utils, reducers ...

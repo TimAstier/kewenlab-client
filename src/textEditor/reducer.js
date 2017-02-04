@@ -1,23 +1,17 @@
 import * as t from './actionTypes';
-import type { State } from './model';
+import { Map } from 'immutable';
 
-const initialState: State = {
+const INITIAL_STATE = Map({
   localContent: '',
   currentContent: ''
-};
+});
 
-export default (state = initialState, action: any): State => {
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case t.SET_LOCAL_CONTENT:
-      return {
-        ...state,
-        localContent: action.localContent
-      };
+      return state.set('localContent', action.localContent);
       case t.SET_CURRENT_CONTENT:
-        return {
-          ...state,
-          currentContent: action.currentContent
-        };
+        return state.set('currentContent', action.currentContent);
     default:
       return state;
   }
@@ -26,6 +20,6 @@ export default (state = initialState, action: any): State => {
 // Selectors
 // TODO: Learn about Reselect
 
-export const getSaved = (state = initialState) => {
-  return (state.currentContent === state.localContent);
+export const getSaved = (state = INITIAL_STATE) => {
+  return (state.get('currentContent') === state.get('localContent'));
 }

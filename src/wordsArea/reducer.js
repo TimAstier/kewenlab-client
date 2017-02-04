@@ -31,8 +31,10 @@ export default (state = initialState, action: any): State => {
         case t.ADD_NEW_LOCAL_WORDS:
           let newWords = [];
           action.payload.forEach((word) => {
+            // TODO: This foes not seem to be pure...
             let pos = state.localWords.map(e => e.chinese).indexOf(word);
             // No need to do anything if word is already in localWords
+            // TODO: Keep track of manually deleted words to avoid adding them
             if (pos < 0) {
               newWords.push({ id: null, chinese: word });
             }
@@ -47,6 +49,7 @@ export default (state = initialState, action: any): State => {
             ...state,
             localWords: oldLocalWords.filter((wordItem) => {
               if (action.payload.indexOf(wordItem.chinese) < 0) {
+                // TODO: Avoid removing words that were manually added
                 if (wordItem.id !== null) {
                   wordsToDelete.push(wordItem);
                 }

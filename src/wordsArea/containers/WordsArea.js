@@ -127,7 +127,7 @@ WordsArea.propTypes = {
 function mapStateToProps(state) {
   return {
     localWords: state.wordsArea.localWords,
-    localContent: state.textEditor.localContent,
+    localContent: state.textEditor.get('localContent'),
     saved: getSaved(state.wordsArea),
     changeCount: countChanges(state.wordsArea),
     currentTextId: state.sidebar.currentTextId,

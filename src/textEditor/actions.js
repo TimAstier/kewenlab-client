@@ -17,6 +17,7 @@ export function setCurrentContent(content) {
 }
 
 // TODO: dispatch actions to handle async request
+// TODO: test async actions
 export function saveTextContent(data) {
   return dispatch => {
     return axios.put(`${API_URL}/api/texts/${data.id}`, data);
