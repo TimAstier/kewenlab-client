@@ -1,21 +1,18 @@
 import isEmpty from 'lodash/isEmpty';
 
-const allExceptChinese = /[A-z]|[0-9]|[.,\/#!?$%\^&\*;:{}=\-_`~()。？！…，；：＂、“”（）《》％·]|\s/g;
+export function toChineseOnly(string) {
+  const allExceptChinese = /[A-z]|[0-9]|[.,\/#!?$%\^&\*;:{}=\-_`~()。？！…@€£+àçèé~<>，；：＂、“”（）《》％·]|\s/g;
+  return string.replace(allExceptChinese, '');
+};
 
 export function toArrayOfUniqueChars(string) {
   return(
-    string
-    .replace(allExceptChinese, '')
+    toChineseOnly(string)
     .split('')
     .filter((elem, index, self) => { return (index === self.indexOf(elem)); })
   );
 };
 
-export function toChineseOnly(string) {
-  return string.replace(allExceptChinese, '');
-};
-
-// Argument should be array of strings
 export function removeDuplicates(array) {
   return(
     array.filter((elem, index, self) => {
