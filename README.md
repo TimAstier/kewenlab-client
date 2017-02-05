@@ -42,3 +42,5 @@ $ git push production master // This will run the build
 - [ ] Use Immutable.JS in all reducers.
 - [ ] Use plain key names instead of "payload" in actions.
 - [ ] Write tests for core functions, utils, reducers ...
+- [ ] Use Normalizr to avoid storing everything in the store.
+- [ ] Investigate on redux-orm to manage relational data in the Redux store.
