@@ -130,7 +130,7 @@ function mapStateToProps(state) {
     localContent: state.textEditor.get('localContent'),
     saved: getSaved(state.wordsArea),
     changeCount: countChanges(state.wordsArea),
-    currentTextId: state.sidebar.currentTextId,
+    currentTextId: state.sidebar.get('currentTextId'),
     wordsToDelete: state.wordsArea.wordsToDelete,
     totalWords: getTotalWords(state.wordsArea),
     totalNewWords: countNewWords(state.wordsArea),

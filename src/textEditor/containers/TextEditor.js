@@ -99,7 +99,7 @@ class TextEditor extends React.Component {
 function mapStateToProps(state) {
    return {
        localContent: state.textEditor.get('localContent'),
-       currentTextId: state.sidebar.currentTextId,
+       currentTextId: state.sidebar.get('currentTextId'),
        saved: getSaved(state.textEditor)
    }
 }

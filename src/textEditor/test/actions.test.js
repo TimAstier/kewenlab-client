@@ -5,6 +5,7 @@ import * as t from '../actionTypes';
 describe('textEditor actions', () => {
 
   describe('setLocalContent', () => {
+
     it('creates an action to set localContent', () => {
       const content = '我们来学中文。';
       const expectedAction = {
@@ -42,7 +43,6 @@ describe('textEditor actions', () => {
       };
       expect(actions.setCurrentContent()).toEqual(expectedAction);
     });
-
 
   });
 

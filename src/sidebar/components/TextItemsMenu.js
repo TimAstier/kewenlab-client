@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Menu, Label } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
-import { getCurrentText, setCurrentText } from '../actions';
+import { getCurrentText, setCurrentTextId } from '../actions';
 import { setCurrentContent, setLocalContent } from '../../textEditor/actions';
 import { setCurrentChars, setLocalChars, clearCharsToDelete }
   from '../../charsArea/actions';
@@ -28,8 +28,7 @@ class TextItemsMenu extends React.Component {
       <Menu.Item
         data={textItem.id}
         key={i}
-        name={textItem.title}
-        active={activeItem === textItem.title}
+        active={activeItem === textItem.id}
         onClick={this.handleItemClick}
       >
         <Label
@@ -44,14 +43,14 @@ class TextItemsMenu extends React.Component {
     );
   }
 
-  handleItemClick(e, { name, data }) {
-    this.setState({ activeItem: name });
+  handleItemClick(e, { data }) {
+    this.setState({ activeItem: data });
     return this.props.getCurrentText(data).then(
       (res) => {
         const text = res[0].data.text;
         const chars = res[1].data.chars;
         const words = res[2].data.words;
-        this.props.setCurrentText(text);
+        this.props.setCurrentTextId(text);
         this.props.setLocalContent(text.content);
         this.props.setCurrentContent(text.content);
         this.props.setLocalChars(chars);
@@ -82,7 +81,7 @@ class TextItemsMenu extends React.Component {
 
 TextItemsMenu.propTypes = {
   getCurrentText: React.PropTypes.func.isRequired,
-  setCurrentText: React.PropTypes.func.isRequired,
+  setCurrentTextId: React.PropTypes.func.isRequired,
   addFlashMessage: React.PropTypes.func.isRequired,
   textItems: React.PropTypes.array.isRequired,
   setCurrentContent: React.PropTypes.func.isRequired,
@@ -99,7 +98,7 @@ export default connect(
   null,
   {
     getCurrentText,
-    setCurrentText,
+    setCurrentTextId,
     setCurrentContent,
     setLocalContent,
     setCurrentChars,

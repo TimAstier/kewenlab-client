@@ -94,7 +94,7 @@ function mapStateToProps(state) {
     charsToDelete: state.charsArea.charsToDelete,
     saved: getSaved(state.charsArea),
     changeCount: countChanges(state.charsArea),
-    currentTextId: state.sidebar.currentTextId,
+    currentTextId: state.sidebar.get('currentTextId'),
     totalChars: getTotalChars(state.charsArea),
     totalNewChars: countNewChars(state.charsArea),
     visibilityFilter: state.charsArea.visibilityFilter,

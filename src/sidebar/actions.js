@@ -2,19 +2,21 @@ import axios from "axios";
 import * as t from './actionTypes';
 import API_URL from '../config/api';
 
-export function getTextItems() {
-  return dispatch => {
-    return axios.get(`${API_URL}/api/texts`);
-  };
-}
-
-export function updateTextItems(textItems) {
+export function setTextItems(textItems) {
   return {
-    type: t.UPDATE_TEXT_ITEMS,
+    type: t.SET_TEXT_ITEMS,
     textItems
   };
 }
 
+export function setCurrentTextId(text) {
+  return {
+    type: t.SET_CURRENT_TEXT_ID,
+    currentTextId: text.id
+  };
+}
+
+// TODO: test async action creators
 export function getCurrentText(id) {
   return dispatch => {
     return axios.all([
@@ -25,15 +27,12 @@ export function getCurrentText(id) {
   };
 }
 
-export function setCurrentText(text) {
-  return {
-    type: t.SET_CURRENT_TEXT,
-    currentText: {
-      id: text.id,
-      currentContent: text.content
-    }
+export function getTextItems() {
+  return dispatch => {
+    return axios.get(`${API_URL}/api/texts`);
   };
 }
+
 
 export function createNewText() {
   return dispatch => {

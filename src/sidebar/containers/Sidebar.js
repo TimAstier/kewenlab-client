@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import TextItemsMenu from '../components/TextItemsMenu';
 import CreateTextMenu from '../components/CreateTextMenu';
-import { getTextItems, updateTextItems, createNewText } from '../actions';
+import { getTextItems, setTextItems, createNewText } from '../actions';
 
 class Sidebar extends React.Component {
 
@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
       (res) => {
         this.props.getTextItems().then(
           (res) => {
-            this.props.updateTextItems(res.data.texts);
+            this.props.setTextItems(res.data.texts);
           }
         );
       },
@@ -34,7 +34,7 @@ class Sidebar extends React.Component {
   componentWillMount() {
     return this.props.getTextItems().then(
       (res) => {
-        this.props.updateTextItems(res.data.texts);
+        this.props.setTextItems(res.data.texts);
       },
       (err) => {
         this.props.addFlashMessage({
@@ -61,7 +61,7 @@ class Sidebar extends React.Component {
 Sidebar.propTypes = {
   getTextItems: React.PropTypes.func.isRequired,
   addFlashMessage: React.PropTypes.func.isRequired,
-  updateTextItems: React.PropTypes.func.isRequired,
+  setTextItems: React.PropTypes.func.isRequired,
   textItems: React.PropTypes.array.isRequired,
   createNewText: React.PropTypes.func.isRequired
 }
@@ -72,11 +72,11 @@ Sidebar.contextTypes = {
 
 function mapStateToProps(state) {
   return {
-    textItems: state.sidebar.textItems
+    textItems: state.sidebar.get('textItems').toJS()
   };
 }
 
 export default connect(
   mapStateToProps,
-  { getTextItems, updateTextItems, createNewText }
+  { getTextItems, setTextItems, createNewText }
 )(Sidebar);
