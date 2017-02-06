@@ -53,7 +53,6 @@ describe('textEditor reducer', () => {
 
     expect(savedA).toEqual(true);
     expect(savedB).toEqual(false);
-
   });
 
 });

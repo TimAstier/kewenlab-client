@@ -90,15 +90,15 @@ CharsArea.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    localChars: state.charsArea.localChars,
-    charsToDelete: state.charsArea.charsToDelete,
-    saved: getSaved(state.charsArea),
-    changeCount: countChanges(state.charsArea),
-    currentTextId: state.sidebar.get('currentTextId'),
-    totalChars: getTotalChars(state.charsArea),
-    totalNewChars: countNewChars(state.charsArea),
-    visibilityFilter: state.charsArea.visibilityFilter,
-    filteredLocalChars: filterLocalChars(state.charsArea)
+    localChars: state.get('charsArea').get('localChars').toJS(),
+    charsToDelete: state.get('charsArea').get('charsToDelete').toJS(),
+    saved: getSaved(state.get('charsArea')),
+    changeCount: countChanges(state.get('charsArea')),
+    currentTextId: state.get('sidebar').get('currentTextId'),
+    totalChars: getTotalChars(state.get('charsArea')),
+    totalNewChars: countNewChars(state.get('charsArea')),
+    visibilityFilter: state.get('charsArea').get('visibilityFilter'),
+    filteredLocalChars: filterLocalChars(state.get('charsArea'))
   }
 }
 

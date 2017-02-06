@@ -72,7 +72,7 @@ Sidebar.contextTypes = {
 
 function mapStateToProps(state) {
   return {
-    textItems: state.sidebar.get('textItems').toJS()
+    textItems: state.get('sidebar').get('textItems').toJS()
   };
 }
 

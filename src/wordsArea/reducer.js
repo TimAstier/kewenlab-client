@@ -1,17 +1,17 @@
 import * as t from './actionTypes';
-import type { State } from './model';
+import { Map, List, fromJS } from 'immutable';
 import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
 import { defineStatus } from '../utils/custom';
 
-const initialState: State = {
-  localWords: [],
-  currentWords: [],
-  wordsToDelete: [],
+const initialState = Map({
+  localWords: List(),
+  currentWords: List(),
+  wordsToDelete: List(),
   visibilityFilter: 'all'
-};
+});
 
-export default (state = initialState, action: any): State => {
+export default (state = initialState, action) => {
 
   // VERY UGLY - Should be a better way to do this...
   let oldLocalWords = state.localWords;
@@ -19,57 +19,48 @@ export default (state = initialState, action: any): State => {
 
   switch (action.type) {
     case t.SET_LOCAL_WORDS:
+      return state.set('localWords', fromJS(action.localWords));
+    case t.SET_CURRENT_WORDS:
+      return state.set('currentWords', fromJS(action.currentWords));
+    case t.CLEAR_WORDS_TO_DELETE:
+      return state.set('wordsToDelete', List());
+    case t.ADD_NEW_LOCAL_WORDS:
+      let newWords = [];
+      action.payload.forEach((word) => {
+        // TODO: This foes not seem to be pure...
+        let pos = state.localWords.map(e => e.chinese).indexOf(word);
+        // No need to do anything if word is already in localWords
+        // TODO: Keep track of manually deleted words to avoid adding them
+        if (pos < 0) {
+          newWords.push({ id: null, chinese: word });
+        }
+      });
       return {
         ...state,
-        localWords: action.localWords
+        localWords: oldLocalWords.concat(newWords)
       };
-      case t.SET_CURRENT_WORDS:
-        return {
-          ...state,
-          currentWords: action.currentWords
-        };
-        case t.ADD_NEW_LOCAL_WORDS:
-          let newWords = [];
-          action.payload.forEach((word) => {
-            // TODO: This foes not seem to be pure...
-            let pos = state.localWords.map(e => e.chinese).indexOf(word);
-            // No need to do anything if word is already in localWords
-            // TODO: Keep track of manually deleted words to avoid adding them
-            if (pos < 0) {
-              newWords.push({ id: null, chinese: word });
+    case t.REMOVE_DELETED_LOCAL_WORDS:
+      let wordsToDelete = [];
+      return {
+        ...state,
+        localWords: oldLocalWords.filter((wordItem) => {
+          if (action.payload.indexOf(wordItem.chinese) < 0) {
+            // TODO: Avoid removing words that were manually added
+            if (wordItem.id !== null) {
+              wordsToDelete.push(wordItem);
             }
-          });
-          return {
-            ...state,
-            localWords: oldLocalWords.concat(newWords)
-          };
-        case t.REMOVE_DELETED_LOCAL_WORDS:
-          let wordsToDelete = [];
-          return {
-            ...state,
-            localWords: oldLocalWords.filter((wordItem) => {
-              if (action.payload.indexOf(wordItem.chinese) < 0) {
-                // TODO: Avoid removing words that were manually added
-                if (wordItem.id !== null) {
-                  wordsToDelete.push(wordItem);
-                }
-                return false;
-              } else {
-                return true;
-              }
-            }),
-            wordsToDelete: oldWordsToDelete.concat(wordsToDelete)
-          };
-        case t.CLEAR_WORDS_TO_DELETE:
-          return {
-            ...state,
-            wordsToDelete: []
+            return false;
+          } else {
+            return true;
           }
-        case t.SET_WORD_VISIBILITY_FILTER:
-          return {
-            ...state,
-            visibilityFilter: action.payload
-          };
+        }),
+        wordsToDelete: oldWordsToDelete.concat(wordsToDelete)
+      };
+    case t.SET_WORD_VISIBILITY_FILTER:
+      return {
+        ...state,
+        visibilityFilter: action.payload
+      };
     default:
       return state;
   }
@@ -82,23 +73,27 @@ export const getSaved = (state = initialState) => {
 }
 
 export const countChanges = (state = initialState) => {
-  let localWords = state.localWords;
-  let newWords = localWords.filter(x => x.id === null);
-  return state.wordsToDelete.length + newWords.length;
+  let newWords = state
+    .get('localWords')
+    .filter(x => x.id === null);
+  return state.get('wordsToDelete').size + newWords.length;
 }
 
 export const getTotalWords = (state = initialState) => {
-  return state.currentWords.length;
+  return state.get('currentWords').size;
 }
 
 export const countNewWords = (state = initialState) => {
-  let currentWords = state.currentWords
-  return currentWords.filter(x => isEmpty(x.texts)).length;
+  return state
+    .get('currentWords')
+    .toJS()
+    .filter(x => isEmpty(x.texts))
+    .length;
 }
 
 export const filterLocalWords = (state = initialState) => {
-  let localWords = state.localWords;
-  switch(state.visibilityFilter) {
+  let localWords = state.get('localWords').toJS();
+  switch(state.get('visibilityFilter')) {
     case 'all':
       return localWords;
     case 'new':

@@ -20,7 +20,7 @@ class FlashMessagesList extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    messages: state.flashMessages
+    messages: state.get('flashMessages').toJS()
   }
 }
 

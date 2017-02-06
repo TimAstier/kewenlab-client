@@ -19,14 +19,14 @@ export function setCurrentChars(chars) {
 export function addNewLocalChars(charsArray) {
   return {
     type: t.ADD_NEW_LOCAL_CHARS,
-    payload: charsArray
+    charsArray
   }
 }
 
 export function removeDeletedLocalChars(charsArray) {
   return {
     type: t.REMOVE_DELETED_LOCAL_CHARS,
-    payload: charsArray
+    charsArray
   }
 }
 
@@ -39,7 +39,7 @@ export function clearCharsToDelete() {
 export function setVisibilityFilter(value) {
   return {
     type: t.SET_CHAR_VISIBILITY_FILTER,
-    payload: value
+    filter: value
   }
 }
 

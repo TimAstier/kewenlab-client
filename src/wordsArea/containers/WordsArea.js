@@ -126,15 +126,15 @@ WordsArea.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    localWords: state.wordsArea.localWords,
-    localContent: state.textEditor.get('localContent'),
+    localWords: state.get('wordsArea').get('localWords').toJS(),
+    localContent: state.get('textEditor').get('localContent'),
     saved: getSaved(state.wordsArea),
     changeCount: countChanges(state.wordsArea),
-    currentTextId: state.sidebar.get('currentTextId'),
-    wordsToDelete: state.wordsArea.wordsToDelete,
+    currentTextId: state.get('sidebar').get('currentTextId'),
+    wordsToDelete: state.get('wordsArea').get('wordsToDelete').toJS(),
     totalWords: getTotalWords(state.wordsArea),
     totalNewWords: countNewWords(state.wordsArea),
-    visibilityFilter: state.wordsArea.visibilityFilter,
+    visibilityFilter: state.get('wordsArea').get('visibilityFilter'),
     filteredLocalWords: filterLocalWords(state.wordsArea)
   }
 }
