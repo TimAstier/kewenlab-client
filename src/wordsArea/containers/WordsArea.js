@@ -128,14 +128,14 @@ function mapStateToProps(state) {
   return {
     localWords: state.get('wordsArea').get('localWords').toJS(),
     localContent: state.get('textEditor').get('localContent'),
-    saved: getSaved(state.wordsArea),
-    changeCount: countChanges(state.wordsArea),
+    saved: getSaved(state.get('wordsArea')),
+    changeCount: countChanges(state.get('wordsArea')),
     currentTextId: state.get('sidebar').get('currentTextId'),
     wordsToDelete: state.get('wordsArea').get('wordsToDelete').toJS(),
-    totalWords: getTotalWords(state.wordsArea),
-    totalNewWords: countNewWords(state.wordsArea),
+    totalWords: getTotalWords(state.get('wordsArea')),
+    totalNewWords: countNewWords(state.get('wordsArea')),
     visibilityFilter: state.get('wordsArea').get('visibilityFilter'),
-    filteredLocalWords: filterLocalWords(state.wordsArea)
+    filteredLocalWords: filterLocalWords(state.get('wordsArea'))
   }
 }
 

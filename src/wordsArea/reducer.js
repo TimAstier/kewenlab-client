@@ -1,6 +1,5 @@
 import * as t from './actionTypes';
 import { Map, List, fromJS } from 'immutable';
-import isEqual from 'lodash/isEqual';
 import isEmpty from 'lodash/isEmpty';
 import { defineStatus } from '../utils/custom';
 
@@ -12,11 +11,6 @@ const initialState = Map({
 });
 
 export default (state = initialState, action) => {
-
-  // VERY UGLY - Should be a better way to do this...
-  let oldLocalWords = state.localWords;
-  let oldWordsToDelete = state.wordsToDelete;
-
   switch (action.type) {
     case t.SET_LOCAL_WORDS:
       return state.set('localWords', fromJS(action.localWords));
@@ -24,43 +18,36 @@ export default (state = initialState, action) => {
       return state.set('currentWords', fromJS(action.currentWords));
     case t.CLEAR_WORDS_TO_DELETE:
       return state.set('wordsToDelete', List());
+    case t.SET_WORD_VISIBILITY_FILTER:
+    return state.set('visibilityFilter', action.filter);
     case t.ADD_NEW_LOCAL_WORDS:
       let newWords = [];
-      action.payload.forEach((word) => {
-        // TODO: This foes not seem to be pure...
-        let pos = state.localWords.map(e => e.chinese).indexOf(word);
-        // No need to do anything if word is already in localWords
-        // TODO: Keep track of manually deleted words to avoid adding them
+      action.wordsArray.forEach((word) => {
+        let pos = state
+          .get('localWords')
+          .toJS()
+          .map(e => e.chinese)
+          .indexOf(word);
         if (pos < 0) {
           newWords.push({ id: null, chinese: word });
         }
       });
-      return {
-        ...state,
-        localWords: oldLocalWords.concat(newWords)
-      };
+      const newLocalWords = state.get('localWords').concat(fromJS(newWords));
+      return state.set('localWords', newLocalWords);
     case t.REMOVE_DELETED_LOCAL_WORDS:
       let wordsToDelete = [];
-      return {
-        ...state,
-        localWords: oldLocalWords.filter((wordItem) => {
-          if (action.payload.indexOf(wordItem.chinese) < 0) {
-            // TODO: Avoid removing words that were manually added
+      return state.merge(Map(fromJS({
+        localWords: state.get('localWords').toJS().filter((wordItem) => {
+          if (action.wordsArray.indexOf(wordItem.chinese) < 0) {
             if (wordItem.id !== null) {
               wordsToDelete.push(wordItem);
             }
             return false;
-          } else {
-            return true;
           }
+          return true;
         }),
-        wordsToDelete: oldWordsToDelete.concat(wordsToDelete)
-      };
-    case t.SET_WORD_VISIBILITY_FILTER:
-      return {
-        ...state,
-        visibilityFilter: action.payload
-      };
+        wordsToDelete: state.get('wordsToDelete').toJS().concat(wordsToDelete)
+      })));
     default:
       return state;
   }
@@ -69,14 +56,14 @@ export default (state = initialState, action) => {
 // Selectors
 
 export const getSaved = (state = initialState) => {
-  return isEqual(state.currentWords, state.localWords);
+  return state.get('currentWords').equals(state.get('localWords'));
 }
 
 export const countChanges = (state = initialState) => {
   let newWords = state
     .get('localWords')
-    .filter(x => x.id === null);
-  return state.get('wordsToDelete').size + newWords.length;
+    .filter(x => x.get('id') === null);
+  return state.get('wordsToDelete').size + newWords.size;
 }
 
 export const getTotalWords = (state = initialState) => {

@@ -23,17 +23,17 @@ export function tokenize(data) {
   }
 }
 
-export function addNewLocalWords(newLocalWords) {
+export function addNewLocalWords(wordsArray) {
   return {
     type: t.ADD_NEW_LOCAL_WORDS,
-    payload: newLocalWords
+    wordsArray
   }
 }
 
 export function removeDeletedLocalWords(wordsArray) {
   return {
     type: t.REMOVE_DELETED_LOCAL_WORDS,
-    payload: wordsArray
+    wordsArray
   }
 }
 
@@ -46,7 +46,7 @@ export function clearWordsToDelete() {
 export function setVisibilityFilter(value) {
   return {
     type: t.SET_WORD_VISIBILITY_FILTER,
-    payload: value
+    filter: value
   }
 }
 
