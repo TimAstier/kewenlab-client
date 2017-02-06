@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
+import { combineReducers } from 'redux-immutable';
+import routerReducer from './routerReducer';
 
 import flashMessages from './reducers/flashMessages';
 import auth from './reducers/auth';

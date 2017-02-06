@@ -6,6 +6,7 @@ import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux'
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
+import { Map } from 'immutable';
 
 import rootReducer from './rootReducer';
 import setAuthorizationToken from './utils/setAuthorizationToken';
@@ -15,15 +16,22 @@ import './index.css';
 
 import routes from './routes';
 
+const initialState = Map();
 const store = createStore(
   rootReducer,
+  initialState,
   composeWithDevTools(
     applyMiddleware(thunk)
   )
 );
 
 // Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(browserHistory, store)
+// Pass a selector for use with https://github.com/gajus/redux-immutable
+const history = syncHistoryWithStore(browserHistory, store, {
+  selectLocationState (state) {
+      return state.get('routing').toJS();
+  }
+});
 
 // Set jwtToken in every request's header
 if (localStorage.jwtToken) {
