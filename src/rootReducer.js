@@ -8,7 +8,6 @@ import sidebar from './sidebar';
 import charsArea from './charsArea';
 import wordsArea from './wordsArea';
 
-// TODO: Use Immutable.js in reducers
 export default combineReducers({
   flashMessages,
   auth,
