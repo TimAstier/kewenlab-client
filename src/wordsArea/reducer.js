@@ -1,6 +1,5 @@
 import * as t from './actionTypes';
 import { Map, List, fromJS } from 'immutable';
-import isEmpty from 'lodash/isEmpty';
 import { defineStatus } from '../utils/custom';
 
 const initialState = Map({
@@ -96,7 +95,7 @@ export const countNewWords = (state = initialState) => {
   return state
     .get('currentWords')
     .toJS()
-    .filter(x => isEmpty(x.texts))
+    .filter(x => defineStatus(x) === 'new')
     .length;
 }
 

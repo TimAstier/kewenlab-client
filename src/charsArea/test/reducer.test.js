@@ -341,16 +341,16 @@ describe('charsArea selectors', () => {
     const state = fromJS({
       localChars: [],
       currentChars: [
-        { id: 1, chinese: '我', texts: [] },
-        { id: 2, chinese: '你', texts: [{ title: 'Lesson 1' }] },
-        { id: 3, chinese: '谁', charText: { manuallyAdded: true } },
-        { id: 4, chinese: '说', charText: { manuallyDeleted: true } }
+        { id: 1, chinese: '我', texts: [] }, // new
+        { id: 3, chinese: '谁', charText: { manuallyAdded: true } }, // new
+        { id: 2, chinese: '你', texts: [{ title: 'Lesson 1' }] }, // not new
+        { id: 4, chinese: '说', charText: { manuallyDeleted: true } } // banned
       ],
       charsToDelete: [],
       visibilityFilter: 'all'
     });
 
-    expect(s.countNewChars(state)).toEqual(3);
+    expect(s.countNewChars(state)).toEqual(2);
   });
 
   it('filterLocalChars with "all" visibilityFilter', () => {
