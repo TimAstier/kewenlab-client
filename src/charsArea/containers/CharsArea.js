@@ -7,7 +7,7 @@ import { getSaved, countChanges, getTotalChars,
   countNewChars, filterLocalChars } from '../reducer';
 import { saveChars, setCurrentChars, setLocalChars,
   clearCharsToDelete, setVisibilityFilter } from '../actions';
-import { addFlashMessage } from '../../actions/flashMessages';
+import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
 
 class CharsArea extends React.Component {
   constructor(props) {
@@ -36,7 +36,7 @@ class CharsArea extends React.Component {
         this.props.clearCharsToDelete();
       },
       (err) => {
-        this.props.addFlashMessage({
+        this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not save chars on the server.'
         });
@@ -77,7 +77,7 @@ CharsArea.propTypes = {
   changeCount: React.PropTypes.number.isRequired,
   saveChars: React.PropTypes.func.isRequired,
   currentTextId: React.PropTypes.number.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired,
+  showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
   setCurrentChars: React.PropTypes.func.isRequired,
   setLocalChars: React.PropTypes.func.isRequired,
   clearCharsToDelete: React.PropTypes.func.isRequired,
@@ -106,7 +106,7 @@ export default connect(
   mapStateToProps,
   {
     saveChars,
-    addFlashMessage,
+    showFlashMessageWithTimeout,
     setCurrentChars,
     setLocalChars,
     clearCharsToDelete,

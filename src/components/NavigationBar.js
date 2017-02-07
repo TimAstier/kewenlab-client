@@ -38,7 +38,6 @@ class NavigationBar extends React.Component {
       </Menu.Menu>
     );
 
-    // TODO: Add a self-hosted logo
     return (
     <Menu fixed="top">
       <Menu.Item>

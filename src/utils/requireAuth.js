@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addFlashMessage } from '../actions/flashMessages';
+import { showFlashMessageWithTimeout } from '../actions/flashMessages';
 
 // Example of High Order Component
 
@@ -8,7 +8,7 @@ export default function(ComposedComponent) {
   class Authenticate extends React.Component {
     componentWillMount() {
       if (!this.props.isAuthenticated) {
-        this.props.addFlashMessage({
+        this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'You need to login to access this page.'
         });
@@ -31,7 +31,7 @@ export default function(ComposedComponent) {
 
   Authenticate.propTypes = {
     isAuthenticated: React.PropTypes.bool.isRequired,
-    addFlashMessage: React.PropTypes.func.isRequired
+    showFlashMessageWithTimeout: React.PropTypes.func.isRequired
   }
 
   Authenticate.contextTypes = {
@@ -44,5 +44,7 @@ export default function(ComposedComponent) {
     }
   }
 
-  return connect(mapStateToProps, { addFlashMessage })(Authenticate);
+  return connect(mapStateToProps,
+    { showFlashMessageWithTimeout }
+  )(Authenticate);
 }

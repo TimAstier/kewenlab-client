@@ -4,7 +4,7 @@ import { Form, Label } from 'semantic-ui-react';
 import { setLocalContent, saveTextContent,
   setCurrentContent } from '../actions';
 import { getSaved } from '../reducer';
-import { addFlashMessage } from '../../actions/flashMessages';
+import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
 import { addNewLocalChars, removeDeletedLocalChars }
   from '../../charsArea/actions';
 import isEmpty from 'lodash/isEmpty';
@@ -44,7 +44,7 @@ class TextEditor extends React.Component {
           this.props.setCurrentContent(this.props.localContent);
         },
         (err) => {
-          this.props.addFlashMessage({
+          this.props.showFlashMessageWithTimeout({
             type: 'error',
             text: 'Error: could not save text on the server.'
           });
@@ -91,7 +91,7 @@ class TextEditor extends React.Component {
    setLocalContent: React.PropTypes.func.isRequired,
    saveTextContent: React.PropTypes.func.isRequired,
    setCurrentContent: React.PropTypes.func.isRequired,
-   addFlashMessage: React.PropTypes.func.isRequired,
+   showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
    addNewLocalChars: React.PropTypes.func.isRequired,
    removeDeletedLocalChars: React.PropTypes.func.isRequired
  }
@@ -110,7 +110,7 @@ export default connect(
     setLocalContent,
     saveTextContent,
     setCurrentContent,
-    addFlashMessage,
+    showFlashMessageWithTimeout,
     addNewLocalChars,
     removeDeletedLocalChars
   }

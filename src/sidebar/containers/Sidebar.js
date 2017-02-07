@@ -23,7 +23,7 @@ class Sidebar extends React.Component {
         );
       },
       (err) => {
-        this.props.addFlashMessage({
+        this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not create new text.'
         });
@@ -37,7 +37,7 @@ class Sidebar extends React.Component {
         this.props.setTextItems(res.data.texts);
       },
       (err) => {
-        this.props.addFlashMessage({
+        this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not retrieve texts from the server.'
         });
@@ -50,7 +50,7 @@ class Sidebar extends React.Component {
       <div id='sidebar'>
         <TextItemsMenu
           textItems={this.props.textItems}
-          addFlashMessage={this.props.addFlashMessage}
+          showFlashMessageWithTimeout={this.props.showFlashMessageWithTimeout}
         />
         <CreateTextMenu onClick={this.addText} />
       </div>
@@ -60,7 +60,7 @@ class Sidebar extends React.Component {
 
 Sidebar.propTypes = {
   getTextItems: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired,
+  showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
   setTextItems: React.PropTypes.func.isRequired,
   textItems: React.PropTypes.array.isRequired,
   createNewText: React.PropTypes.func.isRequired

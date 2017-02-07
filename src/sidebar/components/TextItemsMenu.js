@@ -61,7 +61,7 @@ class TextItemsMenu extends React.Component {
         this.props.clearWordsToDelete();
       },
       (err) => {
-        this.props.addFlashMessage({
+        this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not get text data from the server.'
         });
@@ -82,7 +82,7 @@ class TextItemsMenu extends React.Component {
 TextItemsMenu.propTypes = {
   getCurrentText: React.PropTypes.func.isRequired,
   setCurrentTextId: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired,
+  showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
   textItems: React.PropTypes.array.isRequired,
   setCurrentContent: React.PropTypes.func.isRequired,
   setLocalContent: React.PropTypes.func.isRequired,

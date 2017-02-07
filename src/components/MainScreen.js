@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addFlashMessage } from '../actions/flashMessages';
+import { showFlashMessageWithTimeout } from '../actions/flashMessages';
 
 import Sidebar from '../sidebar/containers/Sidebar';
 import TextEditor from '../textEditor/containers/TextEditor';
@@ -10,11 +10,11 @@ import WordsArea from '../wordsArea/containers/WordsArea';
 
 class MainScreen extends React.Component {
   render() {
-    const { addFlashMessage } = this.props;
+    const { showFlashMessageWithTimeout } = this.props;
     // TODO: Re-Adds Words Area
     return (
       <div id="main-screen">
-        <Sidebar addFlashMessage={addFlashMessage} />
+        <Sidebar showFlashMessageWithTimeout={showFlashMessageWithTimeout} />
         <TextEditor />
         <CharsArea />
         <WordsArea />
@@ -24,7 +24,7 @@ class MainScreen extends React.Component {
 }
 
 MainScreen.propTypes = {
-  addFlashMessage: React.PropTypes.func.isRequired
+  showFlashMessageWithTimeout: React.PropTypes.func.isRequired
 }
 
-export default connect(null, { addFlashMessage })(MainScreen);
+export default connect(null, { showFlashMessageWithTimeout })(MainScreen);
