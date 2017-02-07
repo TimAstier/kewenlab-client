@@ -39,14 +39,28 @@ export default (state = initialState, action) => {
       return state.merge(Map(fromJS({
         localWords: state.get('localWords').toJS().filter((wordItem) => {
           if (action.wordsArray.indexOf(wordItem.chinese) < 0) {
-            // We only delete items that are not local
-            // and not manually added/deleted:
-            if (wordItem.id !== null &&
-              wordItem.wordText.manuallyAdded === false &&
+
+            // Select words to add in wordsToDelete
+            if (wordItem.hasOwnProperty('wordText') && wordItem.id !== null) {
+              // No need to put localWords in wordsToDelete
+              if(wordItem.wordText.manuallyAdded === false &&
               wordItem.wordText.manuallyDeleted === false) {
-              wordsToDelete.push(wordItem);
+                // We do not put in wordsToDelete currentWords
+                // that have been added or deleted manually
+                wordsToDelete.push(wordItem);
+              }
             }
-            return false;
+
+            // Filtering out of localWords
+            if (wordItem.hasOwnProperty('wordText') === false ||
+              wordItem.id === null) {
+              // localWords can be removed from localWords
+              return false;
+            } else if (wordItem.wordText.manuallyAdded === false &&
+            wordItem.wordText.manuallyDeleted === false) {
+              // currentWords are removed only if not manuallyAdded
+              return false;
+            }
           }
           return true;
         }),

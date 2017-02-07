@@ -35,7 +35,7 @@ $ git push production master // This will run the build
 - [x] Use plain key names instead of "payload" in actions.
 - [x] Write tests for utils and reducers.
 - [x] Hide notifications after X seconds.
-- [ ] Manually added/deleted chars/words should not be modified by save buttons.
+- [x] Manually added/deleted chars/words feature.
 - [ ] Display words and chars in the right order.
 - [ ] Auto-save after change.
 - [ ] Better handle async calls (display loaders).

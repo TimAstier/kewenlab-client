@@ -32,7 +32,7 @@ const StatusPicker = ({ onFilterClick, visibilityFilter }) => (
         active={isActive('notsaved', visibilityFilter)}
       />
       <Dropdown.Item
-        text='Deleted'
+        text='Banned'
         onClick={onFilterClick}
         value='manuallydeleted'
         active={isActive('manuallydeleted', visibilityFilter)}

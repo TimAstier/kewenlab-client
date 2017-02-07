@@ -4,6 +4,8 @@ import * as actions from '../actions';
 import reducer, * as s from '../reducer';
 
 // actionCreators are tested indirectly in reducer tests
+// Note: the duplicated wordsArea tests are not maintained
+// TODO: Remove duplicted wordsArea reducer's tests after the refactoring
 
 describe('charsArea reducer', () => {
 
@@ -156,44 +158,107 @@ describe('charsArea reducer', () => {
     expect(reducer(initialState, action)).toEqual(expectedState);
   });
 
-  // Removes items to delete from localItems
-  // Add items to delete to itemsToDelete
-  // Should not add items without ID to itemsToDelete
-  // Should not add manuallyAdded items to itemsToDelete
-  // Should not add manuallyDeleted items to itemsToDelete
-  it('handles REMOVE_DELETED_LOCAL_CHARS', () => {
-    const initialState = fromJS({
-      localChars: [
-        { id: 1, chinese: '我', charText: { manuallyAdded: false, manuallyDeleted: false } },
-        { id: 2, chinese: '你', charText: { manuallyAdded: false, manuallyDeleted: false } },
-        { id: null, chinese: '他', charText: { manuallyAdded: false, manuallyDeleted: false } },
-        { id: null, chinese: '火', charText: { manuallyAdded: true, manuallyDeleted: false } },
-        { id: 3, chinese: '山', charText: { manuallyAdded: true, manuallyDeleted: false } },
-        { id: 4, chinese: '地', charText: { manuallyAdded: false, manuallyDeleted: true } }
-      ],
-      currentChars: [
-        { id: 1, chinese: '我' },
-        { id: 2, chinese: '你' }
-      ],
-      charsToDelete: [],
-      visibilityFilter: 'all'
-    });
-    const action = actions.removeDeletedLocalChars(['你','木','水']);
-    const expectedState = fromJS({
-      localChars: [
-        { id: 2, chinese: '你', charText: { manuallyAdded: false, manuallyDeleted: false } }
-      ],
-      currentChars: [
-        { id: 1, chinese: '我' },
-        { id: 2, chinese: '你' }
-      ],
-      charsToDelete: [
-        { id: 1, chinese: '我', charText: { manuallyAdded: false, manuallyDeleted: false } }
-      ],
-      visibilityFilter: 'all'
+  describe('REMOVE_DELETED_LOCAL_CHARS', () => {
+
+    it('removes chars from localChars and add them to charsToDelete', () => {
+      const initialState = fromJS({
+        localChars: [
+          { id: 1, chinese: '我', charText: { manuallyAdded: false, manuallyDeleted: false } }
+        ],
+        currentChars: [],
+        charsToDelete: [],
+        visibilityFilter: 'all'
+      });
+      // Simulates when a user deletes everything in the text input:
+      const action = actions.removeDeletedLocalChars([]);
+      const expectedState = fromJS({
+        localChars: [],
+        currentChars: [],
+        charsToDelete: [
+          { id: 1, chinese: '我', charText: { manuallyAdded: false, manuallyDeleted: false } }
+        ],
+        visibilityFilter: 'all'
+      });
+
+      expect(reducer(initialState, action)).toEqual(expectedState);
     });
 
-    expect(reducer(initialState, action)).toEqual(expectedState);
+    it('does not add localChars to charsToDelete', () => {
+      const initialState = fromJS({
+        localChars: [
+          // a standard localChar
+          { id: null, chinese: '二' },
+          // a weird localChar
+          { id: null, chinese: '一', charText: { manuallyAdded: false, manuallyDeleted: false } },
+          // another weird localChar
+          { id: 1, chinese: '二' },
+          // a localChar that is in currentChars
+          { id: 1, chinese: '三', charText: { manuallyAdded: false, manuallyDeleted: false } }
+        ],
+        currentChars: [],
+        charsToDelete: [],
+        visibilityFilter: 'all'
+      });
+      // Simulates when a user deletes everything in the text input:
+      const action = actions.removeDeletedLocalChars([]);
+      const expectedState = fromJS({
+        localChars: [],
+        currentChars: [],
+        charsToDelete: [
+          { id: 1, chinese: '三', charText: { manuallyAdded: false, manuallyDeleted: false } }
+        ],
+        visibilityFilter: 'all'
+      });
+
+      expect(reducer(initialState, action)).toEqual(expectedState);
+    });
+
+    it('does not do anything with manuallyAdded chars', () => {
+      const initialState = fromJS({
+        localChars: [
+          { id: 1, chinese: '我', charText: { manuallyAdded: true, manuallyDeleted: false } }
+        ],
+        currentChars: [],
+        charsToDelete: [],
+        visibilityFilter: 'all'
+      });
+      // Simulates when a user deletes everything in the text input:
+      const action = actions.removeDeletedLocalChars([]);
+      const expectedState = fromJS({
+        localChars: [
+          { id: 1, chinese: '我', charText: { manuallyAdded: true, manuallyDeleted: false } }
+        ],
+        currentChars: [],
+        charsToDelete: [],
+        visibilityFilter: 'all'
+      });
+
+      expect(reducer(initialState, action)).toEqual(expectedState);
+    });
+
+    it('does not do anything with manuallyDeleted chars', () => {
+      const initialState = fromJS({
+        localChars: [
+          { id: 1, chinese: '我', charText: { manuallyAdded: false, manuallyDeleted: true } }
+        ],
+        currentChars: [],
+        charsToDelete: [],
+        visibilityFilter: 'all'
+      });
+      // Simulates when a user deletes everything in the text input:
+      const action = actions.removeDeletedLocalChars([]);
+      const expectedState = fromJS({
+        localChars: [
+          { id: 1, chinese: '我', charText: { manuallyAdded: false, manuallyDeleted: true } }
+        ],
+        currentChars: [],
+        charsToDelete: [],
+        visibilityFilter: 'all'
+      });
+
+      expect(reducer(initialState, action)).toEqual(expectedState);
+    });
+
   });
 
 });

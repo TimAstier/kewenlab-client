@@ -7,7 +7,7 @@ function statusLabel(status) {
   } else if (status === 'notsaved') {
     return(<Label color='red' size='big'>Not saved</Label>);
   } else if (status === 'manuallydeleted') {
-    return(<Label color='blue' size='big'>Deleted</Label>);
+    return(<Label color='red' size='big'>Banned</Label>);
   } else {
     return(status);
   }
@@ -26,7 +26,7 @@ function renderCustomIcon(manuallyAdded, manuallyDeleted) {
   } else if (manuallyDeleted) {
     return(
       <Popup
-        trigger={<Icon name='help' />}
+        trigger={<Icon name='ban' />}
         content="This character was manually deleted."
         positioning='top center'
         basic

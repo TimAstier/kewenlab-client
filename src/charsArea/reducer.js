@@ -23,12 +23,12 @@ export default (state = initialState, action) => {
     case t.ADD_NEW_LOCAL_CHARS:
       let newChars = [];
       action.charsArray.forEach((char) => {
-        let pos = state
+        let localIndex = state
           .get('localChars')
           .toJS()
           .map(e => e.chinese)
           .indexOf(char);
-        if (pos < 0) {
+        if (localIndex < 0) {
           newChars.push({ id: null, chinese: char });
         }
       });
@@ -39,14 +39,28 @@ export default (state = initialState, action) => {
       return state.merge(Map(fromJS({
         localChars: state.get('localChars').toJS().filter((charItem) => {
           if (action.charsArray.indexOf(charItem.chinese) < 0) {
-            // We only delete items that are not local
-            // and not manually added/deleted:
-            if (charItem.id !== null &&
-              charItem.charText.manuallyAdded === false &&
+
+            // Select chars to add in charsToDelete
+            if (charItem.hasOwnProperty('charText') && charItem.id !== null) {
+              // No need to put localChars in charsToDelete
+              if(charItem.charText.manuallyAdded === false &&
               charItem.charText.manuallyDeleted === false) {
-              charsToDelete.push(charItem);
+                // We do not put in charsToDelete currentChars
+                // that have been added or deleted manually
+                charsToDelete.push(charItem);
+              }
             }
-            return false;
+
+            // Filtering out of localChars
+            if (charItem.hasOwnProperty('charText') === false ||
+              charItem.id === null) {
+              // localChars can be removed from localChars
+              return false;
+            } else if (charItem.charText.manuallyAdded === false &&
+            charItem.charText.manuallyDeleted === false) {
+              // currentChars are removed only if not manuallyAdded
+              return false;
+            }
           }
           return true;
         }),
