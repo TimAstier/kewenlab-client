@@ -156,14 +156,20 @@ describe('charsArea reducer', () => {
     expect(reducer(initialState, action)).toEqual(expectedState);
   });
 
+  // Removes items to delete from localItems
+  // Add items to delete to itemsToDelete
+  // Should not add items without ID to itemsToDelete
+  // Should not add manuallyAdded items to itemsToDelete
+  // Should not add manuallyDeleted items to itemsToDelete
   it('handles REMOVE_DELETED_LOCAL_CHARS', () => {
     const initialState = fromJS({
       localChars: [
-        { id: 1, chinese: '我', charText: { manuallyAdded: false } },
-        { id: 2, chinese: '你', charText: { manuallyAdded: false } },
-        { id: null, chinese: '他', charText: { manuallyAdded: false } },
-        { id: null, chinese: '火', charText: { manuallyAdded: true } },
-        { id: 3, chinese: '山', charText: { manuallyAdded: true } }
+        { id: 1, chinese: '我', charText: { manuallyAdded: false, manuallyDeleted: false } },
+        { id: 2, chinese: '你', charText: { manuallyAdded: false, manuallyDeleted: false } },
+        { id: null, chinese: '他', charText: { manuallyAdded: false, manuallyDeleted: false } },
+        { id: null, chinese: '火', charText: { manuallyAdded: true, manuallyDeleted: false } },
+        { id: 3, chinese: '山', charText: { manuallyAdded: true, manuallyDeleted: false } },
+        { id: 4, chinese: '地', charText: { manuallyAdded: false, manuallyDeleted: true } }
       ],
       currentChars: [
         { id: 1, chinese: '我' },
@@ -175,14 +181,14 @@ describe('charsArea reducer', () => {
     const action = actions.removeDeletedLocalChars(['你','木','水']);
     const expectedState = fromJS({
       localChars: [
-        { id: 2, chinese: '你', charText: { manuallyAdded: false } }
+        { id: 2, chinese: '你', charText: { manuallyAdded: false, manuallyDeleted: false } }
       ],
       currentChars: [
         { id: 1, chinese: '我' },
         { id: 2, chinese: '你' }
       ],
       charsToDelete: [
-        { id: 1, chinese: '我', charText: { manuallyAdded: false } }
+        { id: 1, chinese: '我', charText: { manuallyAdded: false, manuallyDeleted: false } }
       ],
       visibilityFilter: 'all'
     });

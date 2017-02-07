@@ -156,14 +156,20 @@ describe('wordsArea reducer', () => {
     expect(reducer(initialState, action)).toEqual(expectedState);
   });
 
+  // Removes items to delete from localItems
+  // Add items to delete to itemsToDelete
+  // Should not add items without ID to itemsToDelete
+  // Should not add manuallyAdded items to itemsToDelete
+  // Should not add manuallyDeleted items to itemsToDelete
   it('handles REMOVE_DELETED_LOCAL_WORDS', () => {
     const initialState = fromJS({
       localWords: [
-        { id: 1, chinese: '我', wordText: { manuallyAdded: false } },
-        { id: 2, chinese: '你', wordText: { manuallyAdded: false } },
-        { id: null, chinese: '他', wordText: { manuallyAdded: false } },
-        { id: null, chinese: '火', wordText: { manuallyAdded: true } },
-        { id: 3, chinese: '山', wordText: { manuallyAdded: true } }
+        { id: 1, chinese: '我', wordText: { manuallyAdded: false, manuallyDeleted: false } },
+        { id: 2, chinese: '你', wordText: { manuallyAdded: false, manuallyDeleted: false } },
+        { id: null, chinese: '他', wordText: { manuallyAdded: false, manuallyDeleted: false } },
+        { id: null, chinese: '火', wordText: { manuallyAdded: true, manuallyDeleted: false } },
+        { id: 3, chinese: '山', wordText: { manuallyAdded: true, manuallyDeleted: false } },
+        { id: 4, chinese: '地', wordText: { manuallyAdded: false, manuallyDeleted: true } }
       ],
       currentWords: [
         { id: 1, chinese: '我' },
@@ -175,14 +181,14 @@ describe('wordsArea reducer', () => {
     const action = actions.removeDeletedLocalWords(['你','木','水']);
     const expectedState = fromJS({
       localWords: [
-        { id: 2, chinese: '你', wordText: { manuallyAdded: false } }
+        { id: 2, chinese: '你', wordText: { manuallyAdded: false, manuallyDeleted: false } }
       ],
       currentWords: [
         { id: 1, chinese: '我' },
         { id: 2, chinese: '你' }
       ],
       wordsToDelete: [
-        { id: 1, chinese: '我', wordText: { manuallyAdded: false } }
+        { id: 1, chinese: '我', wordText: { manuallyAdded: false, manuallyDeleted: false } }
       ],
       visibilityFilter: 'all'
     });
