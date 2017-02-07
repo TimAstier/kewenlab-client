@@ -71,7 +71,11 @@ export const countChanges = (state = initialState) => {
 };
 
 export const getTotalChars = (state = initialState) => {
-  return state.get('currentChars').size;
+  return state
+    .get('currentChars')
+    .toJS()
+    .filter(x => defineStatus(x) !== 'manuallydeleted')
+    .length;
 };
 
 export const countNewChars = (state = initialState) => {
@@ -86,15 +90,21 @@ export const filterLocalChars = (state = initialState) => {
   let localChars = state.get('localChars').toJS();
   switch(state.get('visibilityFilter')) {
     case 'all':
-      return localChars;
+      return localChars.filter(x => defineStatus(x) !== 'manuallydeleted');
     case 'new':
       return localChars.filter(x => defineStatus(x) === 'new');
     case 'notnew':
-      return localChars.filter(x => {
-        return (defineStatus(x) !== 'new') && (defineStatus(x) !== 'notsaved');
-      });
-      case 'notsaved':
-        return localChars.filter(x => defineStatus(x) === 'notsaved');
+    return localChars.filter(x => {
+      return(
+        (defineStatus(x) !== 'new') &&
+        (defineStatus(x) !== 'notsaved') &&
+        (defineStatus(x) !== 'manuallydeleted')
+      );
+    });
+    case 'notsaved':
+      return localChars.filter(x => defineStatus(x) === 'notsaved');
+    case 'manuallydeleted':
+      return localChars.filter(x => defineStatus(x) === 'manuallydeleted');
     default:
       return localChars;
   }

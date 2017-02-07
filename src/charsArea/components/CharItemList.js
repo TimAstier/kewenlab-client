@@ -10,12 +10,17 @@ function renderCharItem(charItem, i) {
     (charItem.hasOwnProperty('charText')) ?
     charItem.charText.manuallyAdded :
     false;
+    const manuallyDeleted =
+      (charItem.hasOwnProperty('charText')) ?
+      charItem.charText.manuallyDeleted :
+      false;
   return(
     <CharItem
       key={i}
       char={charItem.chinese}
       status={defineStatus(charItem)}
       manuallyAdded={manuallyAdded}
+      manuallyDeleted={manuallyDeleted}
     />
   );
 }

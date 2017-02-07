@@ -43,7 +43,8 @@ describe('custom utils', () => {
       const item = {
         id: null,
         chinese: '的',
-        texts: []
+        texts: [],
+        charText: { manuallyDeleted: false }
       };
 
       expect(customUtils.defineStatus(item)).toEqual('notsaved');
@@ -53,7 +54,8 @@ describe('custom utils', () => {
       const item = {
         id: 1,
         chinese: '的',
-        texts: []
+        texts: [],
+        charText: { manuallyDeleted: false }
       };
 
       expect(customUtils.defineStatus(item)).toEqual('new');
@@ -67,10 +69,33 @@ describe('custom utils', () => {
           { order: 1, title: 'Lesson 1' },
           { order: 2, title: 'Lesson 2' },
           { order: 3, title: 'Lesson 3' }
-        ]
+        ],
+        charText: { manuallyDeleted: false }
       };
 
       expect(customUtils.defineStatus(item)).toEqual('Lesson 1');
+    });
+
+    it('returns "manuallydeleted" status for chars', () => {
+      const item = {
+        id: 1,
+        chinese: '的',
+        texts: [],
+        charText: { manuallyDeleted: true }
+      };
+
+      expect(customUtils.defineStatus(item)).toEqual('manuallydeleted');
+    });
+
+    it('returns "manuallydeleted" status for words', () => {
+      const item = {
+        id: 1,
+        chinese: '的',
+        texts: [],
+        wordText: { manuallyDeleted: true }
+      };
+
+      expect(customUtils.defineStatus(item)).toEqual('manuallydeleted');
     });
 
   });

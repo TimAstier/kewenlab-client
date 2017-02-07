@@ -278,13 +278,14 @@ describe('charsArea selectors', () => {
       currentChars: [
         { id: 1, chinese: '我', texts: [] },
         { id: 2, chinese: '你', texts: [{ title: 'Lesson 1' }] },
-        { id: 3, chinese: '他', texts: [] }
+        { id: 3, chinese: '谁', charText: { manuallyAdded: true } },
+        { id: 4, chinese: '说', charText: { manuallyDeleted: true } }
       ],
       charsToDelete: [],
       visibilityFilter: 'all'
     });
 
-    expect(s.countNewChars(state)).toEqual(2);
+    expect(s.countNewChars(state)).toEqual(3);
   });
 
   it('filterLocalChars with "all" visibilityFilter', () => {
@@ -311,7 +312,7 @@ describe('charsArea selectors', () => {
       localChars: [
         { id: null, chinese: '我' },
         { id: 2, chinese: '你', texts: [{ title: 'Lesson 1' }] },
-        { id: 3, chinese: '他', texts: [] }
+        { id: 3, chinese: '他', texts: [], charText: { manuallyAdded: false } }
       ],
       currentChars: [],
       charsToDelete: [],
@@ -319,7 +320,7 @@ describe('charsArea selectors', () => {
     });
 
     expect(s.filterLocalChars(state)).toEqual([
-      { id: 3, chinese: '他', texts: [] }
+      { id: 3, chinese: '他', texts: [], charText: { manuallyAdded: false } }
     ]);
   });
 
@@ -354,6 +355,31 @@ describe('charsArea selectors', () => {
 
     expect(s.filterLocalChars(state)).toEqual([
       { id: null, chinese: '我' }
+    ]);
+  });
+
+  it('filterLocalChars with "manuallydeleted" visibilityFilter', () => {
+    const state = fromJS({
+      localChars: [
+        { id: null, chinese: '我' },
+        { id: 2,
+          chinese: '你',
+          texts: [{ title: 'Lesson 1' }],
+          charText: { manuallyDeleted: true }
+        },
+        { id: 3, chinese: '他', texts: [], charText: { manuallyDeleted: false } }
+      ],
+      currentChars: [],
+      charsToDelete: [],
+      visibilityFilter: 'manuallydeleted'
+    });
+
+    expect(s.filterLocalChars(state)).toEqual([
+      { id: 2,
+        chinese: '你',
+        texts: [{ title: 'Lesson 1' }],
+        charText: { manuallyDeleted: true }
+      }
     ]);
   });
 

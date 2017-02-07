@@ -31,6 +31,12 @@ const StatusPicker = ({ onFilterClick, visibilityFilter }) => (
         value='notsaved'
         active={isActive('notsaved', visibilityFilter)}
       />
+      <Dropdown.Item
+        text='Deleted'
+        onClick={onFilterClick}
+        value='manuallydeleted'
+        active={isActive('manuallydeleted', visibilityFilter)}
+      />
     </Dropdown.Menu>
   </Dropdown>
 );

@@ -71,7 +71,11 @@ export const countChanges = (state = initialState) => {
 }
 
 export const getTotalWords = (state = initialState) => {
-  return state.get('currentWords').size;
+  return state
+    .get('currentWords')
+    .toJS()
+    .filter(x => defineStatus(x) !== 'manuallydeleted')
+    .length;
 }
 
 export const countNewWords = (state = initialState) => {
@@ -86,15 +90,21 @@ export const filterLocalWords = (state = initialState) => {
   let localWords = state.get('localWords').toJS();
   switch(state.get('visibilityFilter')) {
     case 'all':
-      return localWords;
+      return localWords.filter(x => defineStatus(x) !== 'manuallydeleted');
     case 'new':
       return localWords.filter(x => defineStatus(x) === 'new');
     case 'notnew':
       return localWords.filter(x => {
-        return (defineStatus(x) !== 'new') && (defineStatus(x) !== 'notsaved');
+        return(
+          (defineStatus(x) !== 'new') &&
+          (defineStatus(x) !== 'notsaved') &&
+          (defineStatus(x) !== 'manuallydeleted')
+        );
       });
-      case 'notsaved':
-        return localWords.filter(x => defineStatus(x) === 'notsaved');
+    case 'notsaved':
+      return localWords.filter(x => defineStatus(x) === 'notsaved');
+    case 'manuallydeleted':
+      return localWords.filter(x => defineStatus(x) === 'manuallydeleted');
     default:
       return localWords;
   }

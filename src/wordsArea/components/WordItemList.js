@@ -10,12 +10,17 @@ function renderWordItem(wordItem, i) {
     (wordItem.hasOwnProperty('wordText')) ?
     wordItem.wordText.manuallyAdded :
     false;
+    const manuallyDeleted =
+      (wordItem.hasOwnProperty('wordText')) ?
+      wordItem.wordText.manuallyDeleted :
+      false;
   return(
     <WordItem
       key={i}
       word={wordItem.chinese}
       status={defineStatus(wordItem)}
       manuallyAdded={manuallyAdded}
+      manuallyDeleted={manuallyDeleted}
     />
   );
 }

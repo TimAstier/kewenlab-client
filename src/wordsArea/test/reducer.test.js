@@ -263,13 +263,15 @@ describe('wordsArea selectors', () => {
       ],
       currentWords: [
         { id: 1, chinese: '我' },
-        { id: 2, chinese: '你' }
+        { id: 2, chinese: '你' },
+        { id: 3, chinese: '谁', wordText: { manuallyAdded: true } },
+        { id: 4, chinese: '说', wordText: { manuallyDeleted: true } }
       ],
       wordsToDelete: [{ id: 2, chinese: '你' }],
       visibilityFilter: 'all'
     });
 
-    expect(s.getTotalWords(state)).toEqual(2);
+    expect(s.getTotalWords(state)).toEqual(3);
   });
 
   it('countNewWords', () => {
@@ -311,7 +313,7 @@ describe('wordsArea selectors', () => {
       localWords: [
         { id: null, chinese: '我' },
         { id: 2, chinese: '你', texts: [{ title: 'Lesson 1' }] },
-        { id: 3, chinese: '他', texts: [] }
+        { id: 3, chinese: '他', texts: [], wordText: { manuallyAdded: false } }
       ],
       currentWords: [],
       wordsToDelete: [],
@@ -319,7 +321,7 @@ describe('wordsArea selectors', () => {
     });
 
     expect(s.filterLocalWords(state)).toEqual([
-      { id: 3, chinese: '他', texts: [] }
+      { id: 3, chinese: '他', texts: [], wordText: { manuallyAdded: false } }
     ]);
   });
 
@@ -354,6 +356,31 @@ describe('wordsArea selectors', () => {
 
     expect(s.filterLocalWords(state)).toEqual([
       { id: null, chinese: '我' }
+    ]);
+  });
+
+  it('filterLocalWords with "manuallydeleted" visibilityFilter', () => {
+    const state = fromJS({
+      localWords: [
+        { id: null, chinese: '我' },
+        { id: 2,
+          chinese: '你',
+          texts: [{ title: 'Lesson 1' }],
+          wordText: { manuallyDeleted: true }
+        },
+        { id: 3, chinese: '他', texts: [], wordText: { manuallyDeleted: false } }
+      ],
+      currentWords: [],
+      wordsToDelete: [],
+      visibilityFilter: 'manuallydeleted'
+    });
+
+    expect(s.filterLocalWords(state)).toEqual([
+      { id: 2,
+        chinese: '你',
+        texts: [{ title: 'Lesson 1' }],
+        wordText: { manuallyDeleted: true }
+      }
     ]);
   });
 
