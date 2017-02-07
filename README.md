@@ -35,13 +35,13 @@ $ git push production master // This will run the build
 - [x] Use plain key names instead of "payload" in actions.
 - [x] Write tests for utils and reducers.
 - [x] Hide notifications after X seconds.
-- [ ] Display words and chars in the right order.
 - [ ] Manually added/removed chars/words should not be modified by save buttons.
+- [ ] Display words and chars in the right order.
 - [ ] Auto-save after change.
 - [ ] Better handle async calls (display loaders).
 - [ ] Write tests for components and async action creators.
 - [ ] Serve the app with different strategy to handle refresh. See [option 1](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment) and [option 2](https://github.com/mars/heroku-cra-node).
 - [ ] Adjust the css to fit all screens size.
 - [ ] Test in different browsers.
-- [ ] Remove redux devTools from production build. See https://github.com/reactjs/redux/blob/master/examples/real-world/src/store/configureStore.dev.js
+- [x] Remove redux devTools from production build.
 - [ ] Highlight words/char in text when clicked.
