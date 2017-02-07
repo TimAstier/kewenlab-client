@@ -6,11 +6,16 @@ import isEmpty from 'lodash/isEmpty';
 import { defineStatus } from '../../utils/custom';
 
 function renderCharItem(charItem, i) {
+  const manuallyAdded =
+    (charItem.hasOwnProperty('charText')) ?
+    charItem.charText.manuallyAdded :
+    false;
   return(
     <CharItem
       key={i}
       char={charItem.chinese}
       status={defineStatus(charItem)}
+      manuallyAdded={manuallyAdded}
     />
   );
 }

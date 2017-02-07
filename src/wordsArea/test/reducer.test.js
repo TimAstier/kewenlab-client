@@ -159,9 +159,11 @@ describe('wordsArea reducer', () => {
   it('handles REMOVE_DELETED_LOCAL_WORDS', () => {
     const initialState = fromJS({
       localWords: [
-        { id: 1, chinese: '我' },
-        { id: 2, chinese: '你' },
-        { id: null, chinese: '他' }
+        { id: 1, chinese: '我', wordText: { manuallyAdded: false } },
+        { id: 2, chinese: '你', wordText: { manuallyAdded: false } },
+        { id: null, chinese: '他', wordText: { manuallyAdded: false } },
+        { id: null, chinese: '火', wordText: { manuallyAdded: true } },
+        { id: 3, chinese: '山', wordText: { manuallyAdded: true } }
       ],
       currentWords: [
         { id: 1, chinese: '我' },
@@ -173,13 +175,15 @@ describe('wordsArea reducer', () => {
     const action = actions.removeDeletedLocalWords(['你','木','水']);
     const expectedState = fromJS({
       localWords: [
-        { id: 2, chinese: '你' }
+        { id: 2, chinese: '你', wordText: { manuallyAdded: false } }
       ],
       currentWords: [
         { id: 1, chinese: '我' },
         { id: 2, chinese: '你' }
       ],
-      wordsToDelete: [{ id: 1, chinese: '我' }],
+      wordsToDelete: [
+        { id: 1, chinese: '我', wordText: { manuallyAdded: false } }
+      ],
       visibilityFilter: 'all'
     });
 

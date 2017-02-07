@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Label } from 'semantic-ui-react';
+import { Table, Label, Icon, Popup } from 'semantic-ui-react';
 
 function statusLabel(status) {
   if (status === 'new') {
@@ -11,10 +11,25 @@ function statusLabel(status) {
   }
 }
 
-const WordItem = ({ word, status }) => {
+function renderManuallyAddedIcon(bool) {
+  if (bool) {
+    return(
+      <Popup
+        trigger={<Icon name='protect' />}
+        content="This word was manually added in the admin."
+        positioning='top center'
+        basic
+      />
+    );
+  } else {
+    return;
+  }
+}
+
+const WordItem = ({ word, status, manuallyAdded }) => {
   return (
     <Table.Row textAlign='center'>
-      <Table.Cell>{word}</Table.Cell>
+      <Table.Cell>{renderManuallyAddedIcon(manuallyAdded)}{word}</Table.Cell>
       <Table.Cell>
         {statusLabel(status)}
       </Table.Cell>
@@ -24,7 +39,8 @@ const WordItem = ({ word, status }) => {
 
 WordItem.propTypes = {
   word: React.PropTypes.string.isRequired,
-  status: React.PropTypes.string.isRequired
+  status: React.PropTypes.string.isRequired,
+  manuallyAdded: React.PropTypes.bool.isRequired
 }
 
 export default WordItem;

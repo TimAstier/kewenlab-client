@@ -39,7 +39,9 @@ export default (state = initialState, action) => {
       return state.merge(Map(fromJS({
         localWords: state.get('localWords').toJS().filter((wordItem) => {
           if (action.wordsArray.indexOf(wordItem.chinese) < 0) {
-            if (wordItem.id !== null) {
+            // We only delete items that are not local and not manually added
+            if (wordItem.id !== null &&
+              wordItem.wordText.manuallyAdded === false) {
               wordsToDelete.push(wordItem);
             }
             return false;

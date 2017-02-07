@@ -159,9 +159,11 @@ describe('charsArea reducer', () => {
   it('handles REMOVE_DELETED_LOCAL_CHARS', () => {
     const initialState = fromJS({
       localChars: [
-        { id: 1, chinese: '我' },
-        { id: 2, chinese: '你' },
-        { id: null, chinese: '他' }
+        { id: 1, chinese: '我', charText: { manuallyAdded: false } },
+        { id: 2, chinese: '你', charText: { manuallyAdded: false } },
+        { id: null, chinese: '他', charText: { manuallyAdded: false } },
+        { id: null, chinese: '火', charText: { manuallyAdded: true } },
+        { id: 3, chinese: '山', charText: { manuallyAdded: true } }
       ],
       currentChars: [
         { id: 1, chinese: '我' },
@@ -173,13 +175,15 @@ describe('charsArea reducer', () => {
     const action = actions.removeDeletedLocalChars(['你','木','水']);
     const expectedState = fromJS({
       localChars: [
-        { id: 2, chinese: '你' }
+        { id: 2, chinese: '你', charText: { manuallyAdded: false } }
       ],
       currentChars: [
         { id: 1, chinese: '我' },
         { id: 2, chinese: '你' }
       ],
-      charsToDelete: [{ id: 1, chinese: '我' }],
+      charsToDelete: [
+        { id: 1, chinese: '我', charText: { manuallyAdded: false } }
+      ],
       visibilityFilter: 'all'
     });
 

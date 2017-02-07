@@ -39,7 +39,9 @@ export default (state = initialState, action) => {
       return state.merge(Map(fromJS({
         localChars: state.get('localChars').toJS().filter((charItem) => {
           if (action.charsArray.indexOf(charItem.chinese) < 0) {
-            if (charItem.id !== null) {
+            // We only delete items that are not local and not manually added
+            if (charItem.id !== null &&
+              charItem.charText.manuallyAdded === false) {
               charsToDelete.push(charItem);
             }
             return false;
