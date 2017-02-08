@@ -8,6 +8,7 @@ import { setCurrentChars, setLocalChars, clearCharsToDelete }
   from '../../charsArea/actions';
 import { setCurrentWords, setLocalWords, clearWordsToDelete }
   from '../../wordsArea/actions';
+import { deserializeChars, deserializeWords } from '../../utils/deserializer';
 
 class TextItemsMenu extends React.Component {
   constructor(props) {
@@ -48,8 +49,8 @@ class TextItemsMenu extends React.Component {
     return this.props.getCurrentText(data).then(
       (res) => {
         const text = res[0].data.text;
-        const chars = res[1].data.chars;
-        const words = res[2].data.words;
+        const chars = deserializeChars(res[1].data.chars);
+        const words = deserializeWords(res[2].data.words);
         this.props.setCurrentTextId(text);
         this.props.setLocalContent(text.content);
         this.props.setCurrentContent(text.content);

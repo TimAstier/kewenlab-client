@@ -8,6 +8,7 @@ import { getSaved, countChanges, getTotalItems,
 import { saveChars, setCurrentChars, setLocalChars,
   clearCharsToDelete, setCharsVisibilityFilter } from '../actions';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
+import { deserializeChars } from '../../utils/deserializer';
 
 class CharsArea extends React.Component {
   constructor(props) {
@@ -29,10 +30,12 @@ class CharsArea extends React.Component {
       newChars: this.props.localChars.filter(x => x.id === null),
       charsToDelete: this.props.charsToDelete
     };
+    console.log(data.newChars);
+    console.log(data.charsToDelete);
     return this.props.saveChars(data).then(
       (res) => {
-        this.props.setCurrentChars(res.data.chars);
-        this.props.setLocalChars(res.data.chars);
+        this.props.setCurrentChars(deserializeChars(res.data.chars));
+        this.props.setLocalChars(deserializeChars(res.data.chars));
         this.props.clearCharsToDelete();
       },
       (err) => {

@@ -42,9 +42,7 @@ describe('custom utils', () => {
     it('returns "notsaved" status', () => {
       const item = {
         id: null,
-        chinese: '的',
-        texts: [],
-        charText: { manuallyDeleted: false }
+        chinese: '一',
       };
 
       expect(customUtils.defineStatus(item)).toEqual('notsaved');
@@ -53,9 +51,12 @@ describe('custom utils', () => {
     it('returns "new" status', () => {
       const item = {
         id: 1,
-        chinese: '的',
-        texts: [],
-        charText: { manuallyDeleted: false }
+        chinese: '一',
+        textId: 1,
+        order: 1,
+        manuallyAdded: false,
+        manuallyDeleted: false,
+        texts: []
       };
 
       expect(customUtils.defineStatus(item)).toEqual('new');
@@ -65,12 +66,15 @@ describe('custom utils', () => {
       const item = {
         id: 1,
         chinese: '的',
+        textId: 1,
+        order: 1,
+        manuallyAdded: false,
+        manuallyDeleted: false,
         texts: [
           { order: 1, title: 'Lesson 1' },
           { order: 2, title: 'Lesson 2' },
           { order: 3, title: 'Lesson 3' }
-        ],
-        charText: { manuallyDeleted: false }
+        ]
       };
 
       expect(customUtils.defineStatus(item)).toEqual('Lesson 1');
@@ -79,20 +83,12 @@ describe('custom utils', () => {
     it('returns "manuallydeleted" status for chars', () => {
       const item = {
         id: 1,
-        chinese: '的',
-        texts: [],
-        charText: { manuallyDeleted: true }
-      };
-
-      expect(customUtils.defineStatus(item)).toEqual('manuallydeleted');
-    });
-
-    it('returns "manuallydeleted" status for words', () => {
-      const item = {
-        id: 1,
-        chinese: '的',
-        texts: [],
-        wordText: { manuallyDeleted: true }
+        chinese: '一',
+        textId: 1,
+        order: 1,
+        manuallyAdded: false,
+        manuallyDeleted: true,
+        texts: [{ order: 1, title: 'Lesson 1' }]
       };
 
       expect(customUtils.defineStatus(item)).toEqual('manuallydeleted');

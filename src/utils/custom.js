@@ -24,11 +24,7 @@ export function removeDuplicates(array) {
 export function defineStatus(item) {
   if (item.id === null) {
     return 'notsaved';
-  } else if (item.hasOwnProperty('charText')
-    && item.charText.manuallyDeleted === true) {
-    return 'manuallydeleted'
-  } else if (item.hasOwnProperty('wordText')
-    && item.wordText.manuallyDeleted === true) {
+  } else if (item.manuallyDeleted === true) {
     return 'manuallydeleted'
   } else if (isEmpty(item.texts)) {
     return 'new';

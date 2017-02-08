@@ -214,7 +214,7 @@ describe('wordsArea selectors', () => {
     expect(s.countChanges(state)).toEqual(4);
   });
 
-  it('getTotalWords', () => {
+  xit('getTotalWords', () => {
     const state = fromJS({
       localWords: [
         { id: 1, chinese: '我' },
@@ -319,7 +319,7 @@ describe('wordsArea selectors', () => {
     ]);
   });
 
-  it('filterLocalWords with "manuallydeleted" visibilityFilter', () => {
+  xit('filterLocalWords with "manuallydeleted" visibilityFilter', () => {
     const state = fromJS({
       localWords: [
         { id: null, chinese: '我' },

@@ -80,9 +80,9 @@ describe('items selectors', () => {
       localItems: [],
       currentItems: [
         { id: 1, chinese: '我', texts: [] }, // new
-        { id: 3, chinese: '谁', charText: { manuallyAdded: true } }, // new
+        { id: 3, chinese: '谁', manuallyAdded: true }, // new
         { id: 2, chinese: '你', texts: [{ title: 'Lesson 1' }] }, // not new
-        { id: 4, chinese: '说', charText: { manuallyDeleted: true } } // banned
+        { id: 4, chinese: '说', manuallyDeleted: true } // banned
       ],
       itemsToDelete: [],
       visibilityFilter: 'all'
@@ -115,7 +115,7 @@ describe('items selectors', () => {
       localItems: [
         { id: null, chinese: '我' },
         { id: 2, chinese: '你', texts: [{ title: 'Lesson 1' }] },
-        { id: 3, chinese: '他', texts: [], charText: { manuallyAdded: false } }
+        { id: 3, chinese: '他', texts: [], manuallyAdded: false }
       ],
       currentItems: [],
       itemsToDelete: [],
@@ -123,7 +123,7 @@ describe('items selectors', () => {
     });
 
     expect(s.filterLocalItems(state)).toEqual([
-      { id: 3, chinese: '他', texts: [], charText: { manuallyAdded: false } }
+      { id: 3, chinese: '他', texts: [], manuallyAdded: false }
     ]);
   });
 
@@ -168,9 +168,9 @@ describe('items selectors', () => {
         { id: 2,
           chinese: '你',
           texts: [{ title: 'Lesson 1' }],
-          charText: { manuallyDeleted: true }
+          manuallyDeleted: true
         },
-        { id: 3, chinese: '他', texts: [], charText: { manuallyDeleted: false } }
+        { id: 3, chinese: '他', texts: [], manuallyDeleted: false }
       ],
       currentItems: [],
       itemsToDelete: [],
@@ -181,7 +181,7 @@ describe('items selectors', () => {
       { id: 2,
         chinese: '你',
         texts: [{ title: 'Lesson 1' }],
-        charText: { manuallyDeleted: true }
+        manuallyDeleted: true
       }
     ]);
   });

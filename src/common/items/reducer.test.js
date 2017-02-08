@@ -27,13 +27,11 @@ describe('items reducer', () => {
     const items = [{
         id: 1,
         chinese: '我',
-        texts: [],
-        charText: { id: 1, textId: 1, itemId: 1, order: 1 }
+        texts: []
       }, {
         id: 2,
         chinese: '你',
-        texts: [],
-        charText: { id: 2, textId: 1, itemId: 2, order: 2 }
+        texts: []
       }
     ];
     const action = actions.setLocalChars(items);
@@ -57,13 +55,11 @@ describe('items reducer', () => {
     const items = [{
         id: 1,
         chinese: '我',
-        texts: [],
-        charText: { id: 1, textId: 1, itemId: 1, order: 1 }
+        texts: []
       }, {
         id: 2,
         chinese: '你',
-        texts: [],
-        charText: { id: 2, textId: 1, itemId: 2, order: 2 }
+        texts: []
       }
     ];
     const action = actions.setCurrentChars(items);
@@ -84,13 +80,11 @@ describe('items reducer', () => {
       itemsToDelete: List([{
           id: 1,
           chinese: '我',
-          texts: [],
-          charText: { id: 1, textId: 1, itemId: 1, order: 1 }
+          texts: []
         }, {
           id: 2,
           chinese: '你',
-          texts: [],
-          charText: { id: 2, textId: 1, itemId: 2, order: 2 }
+          texts: []
         }]),
       visibilityFilter: 'all'
     });
@@ -162,7 +156,7 @@ describe('items reducer', () => {
     it('removes items from localItems and add them to itemsToDelete', () => {
       const initialState = fromJS({
         localItems: [
-          { id: 1, chinese: '我', charText: { manuallyAdded: false, manuallyDeleted: false } }
+          { id: 1, chinese: '我', manuallyAdded: false, manuallyDeleted: false }
         ],
         currentItems: [],
         itemsToDelete: [],
@@ -174,7 +168,7 @@ describe('items reducer', () => {
         localItems: [],
         currentItems: [],
         itemsToDelete: [
-          { id: 1, chinese: '我', charText: { manuallyAdded: false, manuallyDeleted: false } }
+          { id: 1, chinese: '我', manuallyAdded: false, manuallyDeleted: false }
         ],
         visibilityFilter: 'all'
       });
@@ -185,14 +179,10 @@ describe('items reducer', () => {
     it('does not add localItems to itemsToDelete', () => {
       const initialState = fromJS({
         localItems: [
-          // a standard localItem
+          // a localItem
           { id: null, chinese: '二' },
-          // a weird localItem
-          { id: null, chinese: '一', charText: { manuallyAdded: false, manuallyDeleted: false } },
-          // another weird localItem
-          { id: 1, chinese: '二' },
           // a localItem that is in currentItems
-          { id: 1, chinese: '三', charText: { manuallyAdded: false, manuallyDeleted: false } }
+          { id: 1, chinese: '三', manuallyAdded: false, manuallyDeleted: false }
         ],
         currentItems: [],
         itemsToDelete: [],
@@ -204,7 +194,7 @@ describe('items reducer', () => {
         localItems: [],
         currentItems: [],
         itemsToDelete: [
-          { id: 1, chinese: '三', charText: { manuallyAdded: false, manuallyDeleted: false } }
+          { id: 1, chinese: '三', manuallyAdded: false, manuallyDeleted: false }
         ],
         visibilityFilter: 'all'
       });
@@ -215,7 +205,7 @@ describe('items reducer', () => {
     it('does not do anything with manuallyAdded items', () => {
       const initialState = fromJS({
         localItems: [
-          { id: 1, chinese: '我', charText: { manuallyAdded: true, manuallyDeleted: false } }
+          { id: 1, chinese: '我', manuallyAdded: true, manuallyDeleted: false }
         ],
         currentItems: [],
         itemsToDelete: [],
@@ -225,7 +215,7 @@ describe('items reducer', () => {
       const action = actions.removeDeletedLocalChars([]);
       const expectedState = fromJS({
         localItems: [
-          { id: 1, chinese: '我', charText: { manuallyAdded: true, manuallyDeleted: false } }
+          { id: 1, chinese: '我', manuallyAdded: true, manuallyDeleted: false }
         ],
         currentItems: [],
         itemsToDelete: [],
@@ -238,7 +228,7 @@ describe('items reducer', () => {
     it('does not do anything with manuallyDeleted items', () => {
       const initialState = fromJS({
         localItems: [
-          { id: 1, chinese: '我', charText: { manuallyAdded: false, manuallyDeleted: true } }
+          { id: 1, chinese: '我', manuallyAdded: false, manuallyDeleted: true }
         ],
         currentItems: [],
         itemsToDelete: [],
@@ -248,7 +238,7 @@ describe('items reducer', () => {
       const action = actions.removeDeletedLocalChars([]);
       const expectedState = fromJS({
         localItems: [
-          { id: 1, chinese: '我', charText: { manuallyAdded: false, manuallyDeleted: true } }
+          { id: 1, chinese: '我', manuallyAdded: false, manuallyDeleted: true }
         ],
         currentItems: [],
         itemsToDelete: [],
