@@ -1,1 +1,1 @@
-export const NAME = 'wordsArea';
+export const NAME = 'words';

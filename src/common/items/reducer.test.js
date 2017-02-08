@@ -1,10 +1,14 @@
 import { List, Map, fromJS } from 'immutable';
-import * as actions from '../../charsArea/actions';
+import * as charsActions from '../../charsArea/actions';
+import * as wordsActions from '../../wordsArea/actions';
 import createItemsReducerWithNamedType from './reducer';
 
 const charsReducer = createItemsReducerWithNamedType('CHARS');
+const wordsReducer = createItemsReducerWithNamedType('WORDS');
 
-// actionCreators are tested indirectly in reducer tests
+// Those tests are for chars and words
+// actionCreators are tested indirectly
+// high-order reducer is tested indirectly
 
 describe('items reducer', () => {
 
@@ -34,7 +38,8 @@ describe('items reducer', () => {
         texts: []
       }
     ];
-    const action = actions.setLocalChars(items);
+    const charsAction = charsActions.setLocalChars(items);
+    const wordsAction = wordsActions.setLocalWords(items);
     const expectedState = Map({
       localItems: fromJS(items),
       currentItems: List(),
@@ -42,7 +47,8 @@ describe('items reducer', () => {
       visibilityFilter: 'all'
     });
 
-    expect(charsReducer(initialState, action)).toEqual(expectedState);
+    expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+    expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
   });
 
   it('handles SET_CURRENT_ITEMS', () => {
@@ -62,7 +68,8 @@ describe('items reducer', () => {
         texts: []
       }
     ];
-    const action = actions.setCurrentChars(items);
+    const charsAction = charsActions.setCurrentChars(items);
+    const wordsAction = wordsActions.setCurrentWords(items);
     const expectedState = Map({
       localItems: List(),
       currentItems: fromJS(items),
@@ -70,7 +77,8 @@ describe('items reducer', () => {
       visibilityFilter: 'all'
     });
 
-    expect(charsReducer(initialState, action)).toEqual(expectedState);
+    expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+    expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
   });
 
   it('handles CLEAR_ITEMS_TO_DELETE', () => {
@@ -88,7 +96,8 @@ describe('items reducer', () => {
         }]),
       visibilityFilter: 'all'
     });
-    const action = actions.clearCharsToDelete();
+    const charsAction = charsActions.clearCharsToDelete();
+    const wordsAction = wordsActions.clearWordsToDelete();
     const expectedState = Map({
       localItems: List(),
       currentItems: List(),
@@ -96,7 +105,8 @@ describe('items reducer', () => {
       visibilityFilter: 'all'
     });
 
-    expect(charsReducer(initialState, action)).toEqual(expectedState);
+    expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+    expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
   });
 
   it('handles SET_ITEMS_VISIBILITY_FILTER', () => {
@@ -106,7 +116,8 @@ describe('items reducer', () => {
       itemsToDelete: List(),
       visibilityFilter: 'all'
     });
-    const action = actions.setCharsVisibilityFilter('new');
+    const charsAction = charsActions.setCharsVisibilityFilter('new');
+    const wordsAction = wordsActions.setWordsVisibilityFilter('new');
     const expectedState = Map({
       localItems: List(),
       currentItems: List(),
@@ -114,7 +125,8 @@ describe('items reducer', () => {
       visibilityFilter: 'new'
     });
 
-    expect(charsReducer(initialState, action)).toEqual(expectedState);
+    expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+    expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
   });
 
   it('handles ADD_NEW_LOCAL_ITEMS', () => {
@@ -131,7 +143,8 @@ describe('items reducer', () => {
       itemsToDelete: [],
       visibilityFilter: 'all'
     });
-    const action = actions.addNewLocalChars(['你','木','水']);
+    const charsAction = charsActions.addNewLocalChars(['你','木','水']);
+    const wordsAction = wordsActions.addNewLocalWords(['你','木','水']);
     const expectedState = fromJS({
       localItems: [
         { id: 1, chinese: '我' },
@@ -148,7 +161,8 @@ describe('items reducer', () => {
       visibilityFilter: 'all'
     });
 
-    expect(charsReducer(initialState, action)).toEqual(expectedState);
+    expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+    expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
   });
 
   describe('REMOVE_DELETED_LOCAL_ITEMS', () => {
@@ -163,7 +177,8 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
       // Simulates when a user deletes everything in the text input:
-      const action = actions.removeDeletedLocalChars([]);
+      const charsAction = charsActions.removeDeletedLocalChars([]);
+      const wordsAction = wordsActions.removeDeletedLocalWords([]);
       const expectedState = fromJS({
         localItems: [],
         currentItems: [],
@@ -173,7 +188,8 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
 
-      expect(charsReducer(initialState, action)).toEqual(expectedState);
+      expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+      expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
     });
 
     it('does not add localItems to itemsToDelete', () => {
@@ -189,7 +205,8 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
       // Simulates when a user deletes everything in the text input:
-      const action = actions.removeDeletedLocalChars([]);
+      const charsAction = charsActions.removeDeletedLocalChars([]);
+      const wordsAction = wordsActions.removeDeletedLocalWords([]);
       const expectedState = fromJS({
         localItems: [],
         currentItems: [],
@@ -199,7 +216,8 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
 
-      expect(charsReducer(initialState, action)).toEqual(expectedState);
+      expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+      expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
     });
 
     it('does not do anything with manuallyAdded items', () => {
@@ -212,7 +230,8 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
       // Simulates when a user deletes everything in the text input:
-      const action = actions.removeDeletedLocalChars([]);
+      const charsAction = charsActions.removeDeletedLocalChars([]);
+      const wordsAction = wordsActions.removeDeletedLocalWords([]);
       const expectedState = fromJS({
         localItems: [
           { id: 1, chinese: '我', manuallyAdded: true, manuallyDeleted: false }
@@ -222,7 +241,8 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
 
-      expect(charsReducer(initialState, action)).toEqual(expectedState);
+      expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+      expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
     });
 
     it('does not do anything with manuallyDeleted items', () => {
@@ -235,7 +255,8 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
       // Simulates when a user deletes everything in the text input:
-      const action = actions.removeDeletedLocalChars([]);
+      const charsAction = charsActions.removeDeletedLocalChars([]);
+      const wordsAction = wordsActions.removeDeletedLocalWords([]);
       const expectedState = fromJS({
         localItems: [
           { id: 1, chinese: '我', manuallyAdded: false, manuallyDeleted: true }
@@ -245,7 +266,8 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
 
-      expect(charsReducer(initialState, action)).toEqual(expectedState);
+      expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+      expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
     });
 
   });

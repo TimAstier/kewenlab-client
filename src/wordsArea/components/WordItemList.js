@@ -6,21 +6,13 @@ import isEmpty from 'lodash/isEmpty';
 import { defineStatus } from '../../utils/custom';
 
 function renderWordItem(wordItem, i) {
-  const manuallyAdded =
-    (wordItem.hasOwnProperty('wordText')) ?
-    wordItem.wordText.manuallyAdded :
-    false;
-    const manuallyDeleted =
-      (wordItem.hasOwnProperty('wordText')) ?
-      wordItem.wordText.manuallyDeleted :
-      false;
   return(
     <WordItem
       key={i}
       word={wordItem.chinese}
       status={defineStatus(wordItem)}
-      manuallyAdded={manuallyAdded}
-      manuallyDeleted={manuallyDeleted}
+      manuallyAdded={wordItem.manuallyAdded || false}
+      manuallyDeleted={wordItem.manuallyDeleted || false}
     />
   );
 }

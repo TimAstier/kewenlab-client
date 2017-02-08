@@ -3,14 +3,15 @@ import { connect } from 'react-redux';
 import WordItemList from '../components/WordItemList';
 import WordControls from '../components/WordControls';
 import Stats from '../../components/common/Stats';
-import { getSaved, countChanges, getTotalWords,
-  countNewWords, filterLocalWords } from '../reducer';
+import { getSaved, countChanges, getTotalItems,
+  countNewItems, filterLocalItems } from '../../common/items/selectors';
 import { tokenize, addNewLocalWords, removeDeletedLocalWords,
   setLocalWords, setCurrentWords, saveWords, clearWordsToDelete,
-  setVisibilityFilter } from '../actions';
-import { addFlashMessage } from '../../actions/flashMessages';
+  setWordsVisibilityFilter } from '../actions';
+import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
 import { toChineseOnly, removeDuplicates } from '../../utils/custom';
 import isEmpty from 'lodash/isEmpty';
+import { deserializeWords } from '../../utils/deserializer';
 
 class WordsArea extends React.Component {
 
@@ -23,7 +24,7 @@ class WordsArea extends React.Component {
   }
 
   onFilterClick(e, data) {
-    return this.props.setVisibilityFilter(data.value);
+    return this.props.setWordsVisibilityFilter(data.value);
   }
 
   refresh(e) {
@@ -44,7 +45,7 @@ class WordsArea extends React.Component {
         }
       },
       (err) => {
-        this.props.addFlashMessage({
+        this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not tokenize text from the server.'
         });
@@ -62,12 +63,12 @@ class WordsArea extends React.Component {
     };
     return this.props.saveWords(data).then(
       (res) => {
-        this.props.setCurrentWords(res.data.words);
-        this.props.setLocalWords(res.data.words);
+        this.props.setCurrentWords(deserializeWords(res.data.words));
+        this.props.setLocalWords(deserializeWords(res.data.words));
         this.props.clearWordsToDelete();
       },
       (err) => {
-        this.props.addFlashMessage({
+        this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not save words on the server.'
         });
@@ -106,7 +107,7 @@ WordsArea.propTypes = {
   localWords: React.PropTypes.array.isRequired,
   localContent: React.PropTypes.string.isRequired,
   tokenize: React.PropTypes.func.isRequired,
-  addFlashMessage: React.PropTypes.func.isRequired,
+  showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
   addNewLocalWords: React.PropTypes.func.isRequired,
   removeDeletedLocalWords: React.PropTypes.func.isRequired,
   saved: React.PropTypes.bool.isRequired,
@@ -119,23 +120,23 @@ WordsArea.propTypes = {
   wordsToDelete: React.PropTypes.array.isRequired,
   totalWords: React.PropTypes.number.isRequired,
   totalNewWords: React.PropTypes.number.isRequired,
-  setVisibilityFilter: React.PropTypes.func.isRequired,
+  setWordsVisibilityFilter: React.PropTypes.func.isRequired,
   visibilityFilter: React.PropTypes.string.isRequired,
   filteredLocalWords: React.PropTypes.array.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    localWords: state.get('wordsArea').get('localWords').toJS(),
+    localWords: state.get('words').get('localItems').toJS(),
     localContent: state.get('textEditor').get('localContent'),
-    saved: getSaved(state.get('wordsArea')),
-    changeCount: countChanges(state.get('wordsArea')),
+    saved: getSaved(state.get('words')),
+    changeCount: countChanges(state.get('words')),
     currentTextId: state.get('sidebar').get('currentTextId'),
-    wordsToDelete: state.get('wordsArea').get('wordsToDelete').toJS(),
-    totalWords: getTotalWords(state.get('wordsArea')),
-    totalNewWords: countNewWords(state.get('wordsArea')),
-    visibilityFilter: state.get('wordsArea').get('visibilityFilter'),
-    filteredLocalWords: filterLocalWords(state.get('wordsArea'))
+    wordsToDelete: state.get('words').get('itemsToDelete').toJS(),
+    totalWords: getTotalItems(state.get('words')),
+    totalNewWords: countNewItems(state.get('words')),
+    visibilityFilter: state.get('words').get('visibilityFilter'),
+    filteredLocalWords: filterLocalItems(state.get('words'))
   }
 }
 
@@ -143,12 +144,12 @@ export default connect(
   mapStateToProps,
   {
     tokenize,
-    addFlashMessage,
+    showFlashMessageWithTimeout,
     addNewLocalWords,
     removeDeletedLocalWords,
     setLocalWords,
     setCurrentWords,
     saveWords,
     clearWordsToDelete,
-    setVisibilityFilter
+    setWordsVisibilityFilter
   })(WordsArea);

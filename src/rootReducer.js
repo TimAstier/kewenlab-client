@@ -11,6 +11,7 @@ import wordsArea from './wordsArea';
 import createItemsReducerWithNamedType from './common/items/reducer';
 
 const charsReducer = createItemsReducerWithNamedType('CHARS');
+const wordsReducer = createItemsReducerWithNamedType('WORDS');
 
 export default combineReducers({
   flashMessages,
@@ -18,6 +19,6 @@ export default combineReducers({
   [textEditor.constants.NAME]: textEditor.reducer,
   [sidebar.constants.NAME]: sidebar.reducer,
   [charsArea.constants.NAME]: charsReducer,
-  [wordsArea.constants.NAME]: wordsArea.reducer,
+  [wordsArea.constants.NAME]: wordsReducer,
   routing: routerReducer
 });
