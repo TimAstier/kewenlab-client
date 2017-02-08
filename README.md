@@ -36,13 +36,14 @@ $ git push production master // This will run the build
 - [x] Write tests for utils and reducers.
 - [x] Hide notifications after X seconds.
 - [x] Manually added/deleted chars/words feature.
-- [ ] Display words and chars in the right order.
+- [ ] Refactor chars/words actions/reducer codes into one. Maybe use this: http://redux.js.org/docs/recipes/reducers/ReusingReducerLogic.html and http://redux.js.org/docs/recipes/reducers/RefactoringReducersExample.html
+- [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Auto-save after change.
+- [ ] Display words and chars in the right order.
 - [ ] Better handle async calls (display loaders).
 - [ ] Write tests for components and async action creators.
 - [ ] Serve the app with different strategy to handle refresh. See [option 1](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment) and [option 2](https://github.com/mars/heroku-cra-node).
 - [ ] Adjust the css to fit all screens size.
 - [ ] Test in different browsers.
 - [x] Remove redux devTools from production build.
-- [ ] Refactor chars and words code into a single items code.
 - [ ] Highlight words/char in text when clicked.

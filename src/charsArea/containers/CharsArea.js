@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import CharItemList from '../components/CharItemList';
 import CharControls from '../components/CharControls';
 import Stats from '../../components/common/Stats';
-import { getSaved, countChanges, getTotalChars,
-  countNewChars, filterLocalChars } from '../reducer';
+import { getSaved, countChanges, getTotalItems,
+  countNewItems, filterLocalItems } from '../../common/items/selectors';
 import { saveChars, setCurrentChars, setLocalChars,
-  clearCharsToDelete, setVisibilityFilter } from '../actions';
+  clearCharsToDelete, setCharsVisibilityFilter } from '../actions';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
 
 class CharsArea extends React.Component {
@@ -18,7 +18,7 @@ class CharsArea extends React.Component {
   }
 
   onFilterClick(e, data) {
-    return this.props.setVisibilityFilter(data.value);
+    return this.props.setCharsVisibilityFilter(data.value);
   }
 
   save(e) {
@@ -83,22 +83,22 @@ CharsArea.propTypes = {
   clearCharsToDelete: React.PropTypes.func.isRequired,
   totalChars: React.PropTypes.number.isRequired,
   totalNewChars: React.PropTypes.number.isRequired,
-  setVisibilityFilter: React.PropTypes.func.isRequired,
+  setCharsVisibilityFilter: React.PropTypes.func.isRequired,
   visibilityFilter: React.PropTypes.string.isRequired,
   filteredLocalChars: React.PropTypes.array.isRequired
 }
 
 function mapStateToProps(state) {
   return {
-    localChars: state.get('charsArea').get('localChars').toJS(),
-    charsToDelete: state.get('charsArea').get('charsToDelete').toJS(),
-    saved: getSaved(state.get('charsArea')),
-    changeCount: countChanges(state.get('charsArea')),
+    localChars: state.get('chars').get('localItems').toJS(),
+    charsToDelete: state.get('chars').get('itemsToDelete').toJS(),
+    saved: getSaved(state.get('chars')),
+    changeCount: countChanges(state.get('chars')),
     currentTextId: state.get('sidebar').get('currentTextId'),
-    totalChars: getTotalChars(state.get('charsArea')),
-    totalNewChars: countNewChars(state.get('charsArea')),
-    visibilityFilter: state.get('charsArea').get('visibilityFilter'),
-    filteredLocalChars: filterLocalChars(state.get('charsArea'))
+    totalChars: getTotalItems(state.get('chars')),
+    totalNewChars: countNewItems(state.get('chars')),
+    visibilityFilter: state.get('chars').get('visibilityFilter'),
+    filteredLocalChars: filterLocalItems(state.get('chars'))
   }
 }
 
@@ -110,6 +110,6 @@ export default connect(
     setCurrentChars,
     setLocalChars,
     clearCharsToDelete,
-    setVisibilityFilter
+    setCharsVisibilityFilter
   }
 )(CharsArea);

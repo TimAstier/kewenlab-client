@@ -1,44 +1,43 @@
 import axios from 'axios';
-import * as t from './actionTypes';
 import API_URL from '../config/api';
 
-export function setLocalChars(chars) {
+export function setLocalChars(items) {
   return {
-    type: t.SET_LOCAL_CHARS,
-    localChars: chars
+    type: 'SET_LOCAL_CHARS',
+    localItems: items
   }
 }
 
-export function setCurrentChars(chars) {
+export function setCurrentChars(items) {
   return {
-    type: t.SET_CURRENT_CHARS,
-    currentChars: chars
+    type: 'SET_CURRENT_CHARS',
+    currentItems: items
   }
 }
 
-export function addNewLocalChars(charsArray) {
+export function addNewLocalChars(itemsArray) {
   return {
-    type: t.ADD_NEW_LOCAL_CHARS,
-    charsArray
+    type: 'ADD_NEW_LOCAL_CHARS',
+    itemsArray
   }
 }
 
-export function removeDeletedLocalChars(charsArray) {
+export function removeDeletedLocalChars(itemsArray) {
   return {
-    type: t.REMOVE_DELETED_LOCAL_CHARS,
-    charsArray
+    type: 'REMOVE_DELETED_LOCAL_CHARS',
+    itemsArray
   }
 }
 
 export function clearCharsToDelete() {
   return {
-    type: t.CLEAR_CHARS_TO_DELETE
+    type: 'CLEAR_CHARS_TO_DELETE'
   }
 }
 
-export function setVisibilityFilter(value) {
+export function setCharsVisibilityFilter(value) {
   return {
-    type: t.SET_CHAR_VISIBILITY_FILTER,
+    type: 'SET_CHARS_VISIBILITY_FILTER',
     filter: value
   }
 }
