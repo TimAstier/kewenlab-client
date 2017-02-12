@@ -3,32 +3,31 @@ import isEmpty from 'lodash/isEmpty';
 export function toChineseOnly(string) {
   const allExceptChinese = /[A-z]|[0-9]|[.,\/#!?$%\^&\*;:{}=\-_`~()。？！…@€£+àçèé~<>，；：＂、“”（）《》％·]|\s/g;
   return string.replace(allExceptChinese, '');
-};
+}
 
 export function toArrayOfUniqueChars(string) {
-  return(
+  return (
     toChineseOnly(string)
     .split('')
     .filter((elem, index, self) => { return (index === self.indexOf(elem)); })
   );
-};
+}
 
 export function removeDuplicates(array) {
-  return(
+  return (
     array.filter((elem, index, self) => {
       return (index === self.indexOf(elem));
     })
   );
-};
+}
 
 export function defineStatus(item) {
   if (item.id === null) {
     return 'notsaved';
   } else if (item.manuallyDeleted === true) {
-    return 'manuallydeleted'
+    return 'manuallydeleted';
   } else if (isEmpty(item.texts)) {
     return 'new';
-  } else {
-    return item.texts[0].title;
   }
-};
+  return item.texts[0].title;
+}

@@ -11,7 +11,6 @@ import WordsArea from '../wordsArea/containers/WordsArea';
 class MainScreen extends React.Component {
   render() {
     const { showFlashMessageWithTimeout } = this.props;
-    // TODO: Re-Adds Words Area
     return (
       <div id="main-screen">
         <Sidebar showFlashMessageWithTimeout={showFlashMessageWithTimeout} />
@@ -25,6 +24,6 @@ class MainScreen extends React.Component {
 
 MainScreen.propTypes = {
   showFlashMessageWithTimeout: React.PropTypes.func.isRequired
-}
+};
 
 export default connect(null, { showFlashMessageWithTimeout })(MainScreen);

@@ -23,9 +23,9 @@ class TextItemsMenu extends React.Component {
   }
 
   renderTextItem(textItem, i) {
-    const { activeItem } = this.state
+    const { activeItem } = this.state;
 
-    return(
+    return (
       <Menu.Item
         data={textItem.id}
         key={i}
@@ -33,8 +33,8 @@ class TextItemsMenu extends React.Component {
         onClick={this.handleItemClick}
       >
         <Label
-          color='teal'
-          size='large'
+          color="teal"
+          size="large"
           circular
         >
           {textItem.order}
@@ -61,7 +61,7 @@ class TextItemsMenu extends React.Component {
         this.props.setCurrentWords(words);
         this.props.clearWordsToDelete();
       },
-      (err) => {
+      () => {
         this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not get text data from the server.'
@@ -73,7 +73,7 @@ class TextItemsMenu extends React.Component {
   render() {
     const textItems = this.props.textItems;
     return (
-      <Menu pointing inverted vertical id='text-items-menu'>
+      <Menu pointing inverted vertical id="text-items-menu">
         { !isEmpty(textItems) ? textItems.map(this.renderTextItem) : null }
       </Menu>
     );
@@ -93,7 +93,7 @@ TextItemsMenu.propTypes = {
   setLocalWords: React.PropTypes.func.isRequired,
   clearCharsToDelete: React.PropTypes.func.isRequired,
   clearWordsToDelete: React.PropTypes.func.isRequired
-}
+};
 
 export default connect(
   null,

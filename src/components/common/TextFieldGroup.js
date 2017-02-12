@@ -4,7 +4,7 @@ import classnames from 'classnames';
 const TextFieldGroup = ({ field, value, label, error,
   type, onChange, checkUserExists }) => {
   return (
-    <div className={classnames("form-group",
+    <div className={classnames('form-group',
       { 'has-error': error })}>
       <label className="control-label">{label}</label>
       <input
@@ -20,7 +20,7 @@ const TextFieldGroup = ({ field, value, label, error,
       }
     </div>
   );
-}
+};
 
 TextFieldGroup.propTypes = {
   field: React.PropTypes.string.isRequired,
@@ -34,6 +34,6 @@ TextFieldGroup.propTypes = {
 
 TextFieldGroup.defaultProps = {
   type: 'text'
-}
+};
 
 export default TextFieldGroup;

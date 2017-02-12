@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import * as t from './actionTypes';
 import API_URL from '../config/api';
 
@@ -18,7 +18,7 @@ export function setCurrentTextId(text) {
 
 // TODO: test async action creators
 export function getCurrentText(id) {
-  return dispatch => {
+  return () => {
     return axios.all([
       axios.get(`${API_URL}/api/texts/${id}`),
       axios.get(`${API_URL}/api/texts/${id}/chars`),
@@ -28,14 +28,13 @@ export function getCurrentText(id) {
 }
 
 export function getTextItems() {
-  return dispatch => {
+  return () => {
     return axios.get(`${API_URL}/api/texts`);
   };
 }
 
-
 export function createNewText() {
-  return dispatch => {
+  return () => {
     return axios.post(`${API_URL}/api/texts`);
   };
 }

@@ -4,31 +4,31 @@ import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
 function validateInput(data) {
-  let errors = {};
+  const errors = {};
 
-  if(Validator.isEmpty(data.username)) {
+  if (Validator.isEmpty(data.username)) {
     errors.username = 'This field is required';
   }
-  if(Validator.isEmpty(data.email)) {
+  if (Validator.isEmpty(data.email)) {
     errors.email = 'This field is required';
   }
   if (!Validator.isEmail(data.email)) {
     errors.email = 'Email is invalid';
   }
-  if(Validator.isEmpty(data.password)) {
+  if (Validator.isEmpty(data.password)) {
     errors.password = 'This field is required';
   }
-  if(Validator.isEmpty(data.passwordConfirmation)) {
+  if (Validator.isEmpty(data.passwordConfirmation)) {
     errors.passwordConfirmation = 'This field is required';
   }
-  if(!Validator.equals(data.password, data.passwordConfirmation)) {
+  if (!Validator.equals(data.password, data.passwordConfirmation)) {
     errors.passwordConfirmation = 'Passwords must match';
   }
 
   return {
     errors,
     isValid: isEmpty(errors)
-  }
+  };
 }
 
 // Use class components for top-components to get hot reloading working
@@ -52,17 +52,11 @@ class SignupForm extends React.Component {
     this.checkUserExists = this.checkUserExists.bind(this);
   }
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
-  }
-
   isValid() {
     const { errors, isValid } = validateInput(this.state);
-
     if (!isValid) {
       this.setState({ errors });
     }
-
     return isValid;
   }
 
@@ -71,9 +65,9 @@ class SignupForm extends React.Component {
     const val = e.target.value;
     if (val !== '') {
       this.props.isUserExists(val).then(res => {
-        let errors = this.state.errors;
+        const errors = this.state.errors;
         let invalid;
-        if(!isEmpty(res.data.user)) {
+        if (!isEmpty(res.data.user)) {
           errors[field] = 'There is user with such ' + field;
           invalid = true;
         } else {
@@ -83,6 +77,10 @@ class SignupForm extends React.Component {
         this.setState({ errors, invalid });
       });
     }
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
   }
 
   onSubmit(e) {
@@ -101,7 +99,8 @@ class SignupForm extends React.Component {
         })
           // error from server
         .catch(error => {
-          this.setState({ errors: error.response.data, isLoading: false }) });
+          this.setState({ errors: error.response.data, isLoading: false });
+        });
     }
   }
 
@@ -168,6 +167,6 @@ SignupForm.propTypes = {
 
 SignupForm.contextTypes = {
   router: React.PropTypes.object.isRequired
-}
+};
 
 export default SignupForm;

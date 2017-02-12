@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import { defineStatus } from '../../utils/custom';
 
 function renderWordItem(wordItem, i) {
-  return(
+  return (
     <WordItem
       key={i}
       word={wordItem.chinese}
@@ -20,21 +20,20 @@ function renderWordItem(wordItem, i) {
 function renderWordItems(words) {
   if (!isEmpty(words)) {
     return words.map(renderWordItem);
-  } else {
-    return null;
   }
+  return null;
 }
 
 const WordItemList = ({ filteredLocalWords, onFilterClick, visibilityFilter }) => {
   return (
-    <div id='words-list'>
+    <div id="words-list">
       <h2>
-        <Label basic circular color='black' className='main-label'>词</Label>
+        <Label basic circular color="black" className="main-label">词</Label>
       </h2>
-      <div className='table-wrapper'>
+      <div className="table-wrapper">
         <Table celled>
           <Table.Header>
-            <Table.Row textAlign='center'>
+            <Table.Row textAlign="center">
               <Table.HeaderCell width={10}>Word</Table.HeaderCell>
               <Table.HeaderCell width={6}>
                 <StatusPicker
@@ -52,10 +51,12 @@ const WordItemList = ({ filteredLocalWords, onFilterClick, visibilityFilter }) =
       </div>
     </div>
   );
-}
+};
 
 WordItemList.propTypes = {
-  filteredLocalWords: React.PropTypes.array.isRequired
-}
+  filteredLocalWords: React.PropTypes.array.isRequired,
+  onFilterClick: React.PropTypes.func.isRequired,
+  visibilityFilter: React.PropTypes.string.isRequired
+};
 
 export default WordItemList;

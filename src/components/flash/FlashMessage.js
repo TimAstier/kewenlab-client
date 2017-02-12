@@ -15,7 +15,7 @@ class FlashMessage extends React.Component {
     const { type, text } = this.props.message;
     return (
       <div className={classnames('alert', {
-        'alert-success': type ==='success',
+        'alert-success': type === 'success',
         'alert-danger': type === 'error'
       })}>
         <button
@@ -31,6 +31,6 @@ class FlashMessage extends React.Component {
 FlashMessage.propTypes = {
   message: React.PropTypes.object.isRequired,
   deleteFlashMessage: React.PropTypes.func.isRequired
-}
+};
 
 export default FlashMessage;

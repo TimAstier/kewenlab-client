@@ -2,7 +2,7 @@ import React from 'react';
 import { TextArea } from 'semantic-ui-react';
 
 const TextInput = ({ placeholder, value, onChange, readOnly }) => {
-  return(
+  return (
     <TextArea
       placeholder={placeholder}
       value={value}
@@ -10,6 +10,13 @@ const TextInput = ({ placeholder, value, onChange, readOnly }) => {
       readOnly={readOnly}
     />
   );
-}
+};
+
+TextInput.propTypes = {
+  placeholder: React.PropTypes.string.isRequired,
+  value: React.PropTypes.string.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  readOnly: React.PropTypes.bool.isRequired
+};
 
 export default TextInput;

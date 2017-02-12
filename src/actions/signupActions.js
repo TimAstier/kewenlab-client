@@ -2,13 +2,12 @@ import axios from 'axios';
 import API_URL from '../config/api';
 
 export function userSignupRequest(userData) {
-  return dispatch => {
+  return () => {
     return axios.post(`${API_URL}/api/users`, userData);
-  }
-};
-
+  };
+}
 export function isUserExists(identifier) {
-  return dispatch => {
+  return () => {
     return axios.get(`${API_URL}/api/users/${identifier}`);
-  }
+  };
 }

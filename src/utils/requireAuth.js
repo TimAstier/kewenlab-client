@@ -31,17 +31,18 @@ export default function(ComposedComponent) {
 
   Authenticate.propTypes = {
     isAuthenticated: React.PropTypes.bool.isRequired,
-    showFlashMessageWithTimeout: React.PropTypes.func.isRequired
-  }
+    showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
+    router: React.PropTypes.object.isRequired
+  };
 
   Authenticate.contextTypes = {
     router: React.PropTypes.object.isRequired
-  }
+  };
 
   function mapStateToProps(state) {
     return {
       isAuthenticated: state.get('auth').get('isAuthenticated')
-    }
+    };
   }
 
   return connect(mapStateToProps,

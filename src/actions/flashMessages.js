@@ -9,14 +9,14 @@ export function addFlashMessage(message, id = shortid.generate()) {
       text: message.text,
       id
     }
-  }
+  };
 }
 
 export function deleteFlashMessage(id) {
   return {
     type: DELETE_FLASH_MESSAGE,
     id
-  }
+  };
 }
 
 // Based on: http://stackoverflow.com

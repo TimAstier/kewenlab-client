@@ -6,35 +6,35 @@ function isActive(itemFilter, currentFilter) {
 }
 
 const StatusPicker = ({ onFilterClick, visibilityFilter }) => (
-  <Dropdown text='Status'>
+  <Dropdown text="Status">
     <Dropdown.Menu>
       <Dropdown.Item
-        text='All'
+        text="All"
         onClick={onFilterClick}
-        value='all'
+        value="all"
         active={isActive('all', visibilityFilter)}
       />
-      <Dropdown.Item text='New'
+      <Dropdown.Item text="New"
         onClick={onFilterClick}
-        value='new'
+        value="new"
         active={isActive('new', visibilityFilter)}
       />
       <Dropdown.Item
-        text='Not new'
+        text="Not new"
         onClick={onFilterClick}
-        value='notnew'
+        value="notnew"
         active={isActive('notnew', visibilityFilter)}
       />
       <Dropdown.Item
-        text='Not saved'
+        text="Not saved"
         onClick={onFilterClick}
-        value='notsaved'
+        value="notsaved"
         active={isActive('notsaved', visibilityFilter)}
       />
       <Dropdown.Item
-        text='Banned'
+        text="Banned"
         onClick={onFilterClick}
-        value='manuallydeleted'
+        value="manuallydeleted"
         active={isActive('manuallydeleted', visibilityFilter)}
       />
     </Dropdown.Menu>

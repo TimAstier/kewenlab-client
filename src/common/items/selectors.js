@@ -6,7 +6,7 @@ export const getSaved = (state = INITIAL_STATE) => {
 };
 
 export const countChanges = (state = INITIAL_STATE) => {
-  let newItems = state
+  const newItems = state
     .get('localItems')
     .filter(x => x.get('id') === null);
   return state.get('itemsToDelete').size + newItems.size;
@@ -29,15 +29,15 @@ export const countNewItems = (state = INITIAL_STATE) => {
 };
 
 export const filterLocalItems = (state = INITIAL_STATE) => {
-  let localItems = state.get('localItems').toJS();
-  switch(state.get('visibilityFilter')) {
+  const localItems = state.get('localItems').toJS();
+  switch (state.get('visibilityFilter')) {
     case 'all':
       return localItems.filter(x => defineStatus(x) !== 'manuallydeleted');
     case 'new':
       return localItems.filter(x => defineStatus(x) === 'new');
     case 'notnew':
       return localItems.filter(x => {
-        return(
+        return (
           (defineStatus(x) !== 'new') &&
           (defineStatus(x) !== 'notsaved') &&
           (defineStatus(x) !== 'manuallydeleted')

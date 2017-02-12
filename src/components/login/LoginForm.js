@@ -6,20 +6,20 @@ import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 
 function validateInput(data) {
-  let errors = {};
+  const errors = {};
 
-  if(Validator.isEmpty(data.identifier)) {
+  if (Validator.isEmpty(data.identifier)) {
     errors.identifier = 'This field is required';
   }
 
-  if(Validator.isEmpty(data.password)) {
+  if (Validator.isEmpty(data.password)) {
     errors.password = 'This field is required';
   }
 
   return {
     errors,
     isValid: isEmpty(errors)
-  }
+  };
 }
 
 class LoginForm extends React.Component {
@@ -30,20 +30,10 @@ class LoginForm extends React.Component {
       password: '',
       errors: {},
       isLoading: false
-    }
+    };
 
     this.onSubmit = this.onSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
-  }
-
-  isValid() {
-    const { errors, isValid } = validateInput(this.state);
-
-    if (!isValid) {
-      this.setState({ errors });
-    }
-
-    return isValid;
   }
 
   onSubmit(e) {
@@ -51,7 +41,7 @@ class LoginForm extends React.Component {
     if (this.isValid()) {
       this.setState({ errors: {}, isLoading: true });
       this.props.login(this.state).then(
-        (res) => this.context.router.push('/edit'),
+        () => this.context.router.push('/edit'),
         (err) => this.setState({
           errors: err.response.data.errors,
           isLoading: false
@@ -62,6 +52,16 @@ class LoginForm extends React.Component {
 
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  isValid() {
+    const { errors, isValid } = validateInput(this.state);
+
+    if (!isValid) {
+      this.setState({ errors });
+    }
+
+    return isValid;
   }
 
   render() {
@@ -102,11 +102,11 @@ class LoginForm extends React.Component {
 
 LoginForm.propTypes = {
   login: React.PropTypes.func.isRequired
-}
+};
 
 LoginForm.contextTypes = {
   router: React.PropTypes.object.isRequired
-}
+};
 
 // This allows to bind this component with actions to dispatch
 // null (no state associated) login actions

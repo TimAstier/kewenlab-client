@@ -40,11 +40,10 @@ class WordsArea extends React.Component {
         this.props.removeDeletedLocalWords(newLocalWords);
         if (!isEmpty(newLocalWords)) {
           return this.props.addNewLocalWords(newLocalWords);
-        } else {
-          return;
         }
+        return false;
       },
-      (err) => {
+      () => {
         this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not tokenize text from the server.'
@@ -67,7 +66,7 @@ class WordsArea extends React.Component {
         this.props.setLocalWords(deserializeWords(res.data.words));
         this.props.clearWordsToDelete();
       },
-      (err) => {
+      () => {
         this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not save words on the server.'
@@ -79,11 +78,11 @@ class WordsArea extends React.Component {
   render() {
     const statItems = [
       `New: ${this.props.totalNewWords}/${this.props.totalWords}`,
-      `${Math.round(this.props.totalNewWords/this.props.totalWords*100)}%`
+      `${Math.round(this.props.totalNewWords / this.props.totalWords * 100)}%`
     ];
 
     return (
-      <div id='words-area'>
+      <div id="words-area">
         <WordItemList
           filteredLocalWords={this.props.filteredLocalWords}
           onFilterClick={this.onFilterClick}
@@ -123,7 +122,7 @@ WordsArea.propTypes = {
   setWordsVisibilityFilter: React.PropTypes.func.isRequired,
   visibilityFilter: React.PropTypes.string.isRequired,
   filteredLocalWords: React.PropTypes.array.isRequired
-}
+};
 
 function mapStateToProps(state) {
   return {
@@ -137,7 +136,7 @@ function mapStateToProps(state) {
     totalNewWords: countNewItems(state.get('words')),
     visibilityFilter: state.get('words').get('visibilityFilter'),
     filteredLocalWords: filterLocalItems(state.get('words'))
-  }
+  };
 }
 
 export default connect(

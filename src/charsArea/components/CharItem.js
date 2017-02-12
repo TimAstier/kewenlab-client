@@ -3,43 +3,41 @@ import { Table, Label, Icon, Popup } from 'semantic-ui-react';
 
 function statusLabel(status) {
   if (status === 'new') {
-    return(<Label color='blue' size='big'>New</Label>);
+    return (<Label color="blue" size="big">New</Label>);
   } else if (status === 'notsaved') {
-    return(<Label color='red' size='big'>Not saved</Label>);
+    return (<Label color="red" size="big">Not saved</Label>);
   } else if (status === 'manuallydeleted') {
-    return(<Label color='red' size='big'>Banned</Label>);
-  } else {
-    return(status);
+    return (<Label color="red" size="big">Banned</Label>);
   }
+  return status;
 }
 
 function renderCustomIcon(manuallyAdded, manuallyDeleted) {
   if (manuallyAdded) {
-    return(
+    return (
       <Popup
-        trigger={<Icon name='protect' />}
+        trigger={<Icon name="lock" />}
         content="This character was manually added in the admin."
-        positioning='top center'
+        positioning="top center"
         basic
       />
     );
   } else if (manuallyDeleted) {
-    return(
+    return (
       <Popup
-        trigger={<Icon name='ban' />}
+        trigger={<Icon name="ban" />}
         content="This character was manually deleted."
-        positioning='top center'
+        positioning="top center"
         basic
       />
     );
-  } else {
-    return;
   }
+  return false;
 }
 
 const CharItem = ({ char, status, manuallyAdded, manuallyDeleted }) => {
   return (
-    <Table.Row textAlign='center'>
+    <Table.Row textAlign="center">
       <Table.Cell>
         {renderCustomIcon(manuallyAdded, manuallyDeleted)}{char}
       </Table.Cell>
@@ -55,6 +53,6 @@ CharItem.propTypes = {
   status: React.PropTypes.string.isRequired,
   manuallyAdded: React.PropTypes.bool.isRequired,
   manuallyDeleted: React.PropTypes.bool.isRequired
-}
+};
 
 export default CharItem;

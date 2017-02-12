@@ -12,31 +12,12 @@ class Sidebar extends React.Component {
     this.addText = this.addText.bind(this);
   }
 
-  addText(e) {
-    e.preventDefault();
-    return this.props.createNewText().then(
-      (res) => {
-        this.props.getTextItems().then(
-          (res) => {
-            this.props.setTextItems(res.data.texts);
-          }
-        );
-      },
-      (err) => {
-        this.props.showFlashMessageWithTimeout({
-          type: 'error',
-          text: 'Error: could not create new text.'
-        });
-      }
-    );
-  }
-
   componentWillMount() {
     return this.props.getTextItems().then(
       (res) => {
         this.props.setTextItems(res.data.texts);
       },
-      (err) => {
+      () => {
         this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not retrieve texts from the server.'
@@ -45,9 +26,28 @@ class Sidebar extends React.Component {
     );
   }
 
+  addText(e) {
+    e.preventDefault();
+    return this.props.createNewText().then(
+      () => {
+        this.props.getTextItems().then(
+          (res) => {
+            this.props.setTextItems(res.data.texts);
+          }
+        );
+      },
+      () => {
+        this.props.showFlashMessageWithTimeout({
+          type: 'error',
+          text: 'Error: could not create new text.'
+        });
+      }
+    );
+  }
+
   render() {
     return (
-      <div id='sidebar'>
+      <div id="sidebar">
         <TextItemsMenu
           textItems={this.props.textItems}
           showFlashMessageWithTimeout={this.props.showFlashMessageWithTimeout}
@@ -64,11 +64,11 @@ Sidebar.propTypes = {
   setTextItems: React.PropTypes.func.isRequired,
   textItems: React.PropTypes.array.isRequired,
   createNewText: React.PropTypes.func.isRequired
-}
+};
 
 Sidebar.contextTypes = {
   router: React.PropTypes.object.isRequired
-}
+};
 
 function mapStateToProps(state) {
   return {

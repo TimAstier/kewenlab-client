@@ -8,11 +8,11 @@ const initialState = Map({
 });
 
 export default (state = initialState, action = {}) => {
-  switch(action.type) {
+  switch (action.type) {
     case SET_CURRENT_USER:
       return state.set('isAuthenticated', !isEmpty(action.user))
         .set('user', action.user);
     default:
       return state;
   }
-}
+};

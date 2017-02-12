@@ -5,7 +5,7 @@ import { List } from 'immutable';
 const initialState = List();
 
 export default (state = initialState, action = {}) => {
-  switch(action.type) {
+  switch (action.type) {
     case ADD_FLASH_MESSAGE:
       return state.push({
         type: action.message.type,
@@ -17,9 +17,8 @@ export default (state = initialState, action = {}) => {
       const index = findIndex(state.toJS(), { id: action.id });
       if (index >= 0) {
         return state.delete(index);
-      } else {
-        return state;
       }
+      return state;
     default:
       return state;
   }

@@ -6,7 +6,7 @@ import isEmpty from 'lodash/isEmpty';
 import { defineStatus } from '../../utils/custom';
 
 function renderCharItem(charItem, i) {
-  return(
+  return (
     <CharItem
       key={i}
       char={charItem.chinese}
@@ -20,21 +20,20 @@ function renderCharItem(charItem, i) {
 function renderCharItems(chars) {
   if (!isEmpty(chars)) {
     return chars.map(renderCharItem);
-  } else {
-    return null;
   }
+  return null;
 }
 
 const CharItemList = ({ filteredLocalChars, onFilterClick, visibilityFilter }) => {
   return (
-    <div id='chars-list'>
+    <div id="chars-list">
       <h2>
-        <Label basic circular color='black' className='main-label'>字</Label>
+        <Label basic circular color="black" className="main-label">字</Label>
       </h2>
-      <div className='table-wrapper'>
+      <div className="table-wrapper">
         <Table celled>
           <Table.Header>
-            <Table.Row textAlign='center'>
+            <Table.Row textAlign="center">
               <Table.HeaderCell width={1}>Char</Table.HeaderCell>
               <Table.HeaderCell width={1}>
                 <StatusPicker
@@ -52,12 +51,12 @@ const CharItemList = ({ filteredLocalChars, onFilterClick, visibilityFilter }) =
       </div>
     </div>
   );
-}
+};
 
 CharItemList.propTypes = {
   filteredLocalChars: React.PropTypes.array.isRequired,
   onFilterClick: React.PropTypes.func.isRequired,
   visibilityFilter: React.PropTypes.string.isRequired
-}
+};
 
 export default CharItemList;

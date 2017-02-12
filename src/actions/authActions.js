@@ -8,7 +8,7 @@ export function setCurrentUser(user) {
   return {
     type: SET_CURRENT_USER,
     user
-  }
+  };
 }
 
 export function logout() {
@@ -16,7 +16,7 @@ export function logout() {
     localStorage.removeItem('jwtToken');
     setAuthorizationToken(false);
     dispatch(setCurrentUser({}));
-  }
+  };
 }
 
 export function login(data) {
@@ -27,5 +27,5 @@ export function login(data) {
       setAuthorizationToken(token);
       dispatch(setCurrentUser(jwtDecode(token)));
     });
-  }
+  };
 }

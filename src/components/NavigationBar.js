@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu } from 'semantic-ui-react'
+import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../actions/authActions';
@@ -20,7 +20,7 @@ class NavigationBar extends React.Component {
       <Menu.Menu position="right" className="main-menu-link">
         <a href={ADMIN_URL}
           className="item"
-          target='_blank'>
+          target="_blank">
           Open Admin
         </a>
         <a href="#"
@@ -62,12 +62,12 @@ class NavigationBar extends React.Component {
 NavigationBar.propTypes = {
   auth: React.PropTypes.object.isRequired,
   logout: React.PropTypes.func.isRequired
-}
+};
 
 function mapStateToProps(state) {
   return {
     auth: state.get('auth').toJS()
-  }
+  };
 }
 
 // { logout } is a mapDispatchToProps shortcut
