@@ -48,6 +48,52 @@ describe('items reducer', () => {
     expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
   });
 
+  it('SET_CURRENT_ITEMS in the right order', () => {
+    const initialState = Map({
+      localItems: List(),
+      currentItems: List(),
+      itemsToDelete: List(),
+      visibilityFilter: 'all'
+    });
+    const items = [{
+      id: 1,
+      chinese: '三',
+      order: 2
+    }, {
+      id: 2,
+      chinese: '一',
+      order: 0
+    }, {
+      id: 3,
+      chinese: '二',
+      order: 1
+    }];
+    const charsAction = charsActions.setLocalChars(items);
+    const wordsAction = wordsActions.setLocalWords(items);
+    const expectedState = Map({
+      localItems: fromJS([
+        {
+          id: 2,
+          chinese: '一',
+          order: 0
+        }, {
+          id: 3,
+          chinese: '二',
+          order: 1
+        }, {
+          id: 1,
+          chinese: '三',
+          order: 2
+        }
+      ]),
+      currentItems: List(),
+      itemsToDelete: List(),
+      visibilityFilter: 'all'
+    });
+    expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+    expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
+  });
+
   it('handles SET_CURRENT_ITEMS', () => {
     const initialState = Map({
       localItems: List(),
@@ -73,6 +119,52 @@ describe('items reducer', () => {
       visibilityFilter: 'all'
     });
 
+    expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+    expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
+  });
+
+  it('SET_CURRENT_ITEMS in the right order', () => {
+    const initialState = Map({
+      localItems: List(),
+      currentItems: List(),
+      itemsToDelete: List(),
+      visibilityFilter: 'all'
+    });
+    const items = [{
+      id: 1,
+      chinese: '三',
+      order: 2
+    }, {
+      id: 2,
+      chinese: '一',
+      order: 0
+    }, {
+      id: 3,
+      chinese: '二',
+      order: 1
+    }];
+    const charsAction = charsActions.setCurrentChars(items);
+    const wordsAction = wordsActions.setCurrentWords(items);
+    const expectedState = Map({
+      localItems: List(),
+      currentItems: fromJS([
+        {
+          id: 2,
+          chinese: '一',
+          order: 0
+        }, {
+          id: 3,
+          chinese: '二',
+          order: 1
+        }, {
+          id: 1,
+          chinese: '三',
+          order: 2
+        }
+      ]),
+      itemsToDelete: List(),
+      visibilityFilter: 'all'
+    });
     expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
     expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
   });

@@ -10,11 +10,19 @@ export const INITIAL_STATE = Map({
 // case reducers (tested indirectly in slice reducer's test):
 
 function setLocalItems(state, action) {
-  return state.set('localItems', fromJS(action.localItems));
+  return state.set('localItems',
+    fromJS(action.localItems.sort((a, b) => {
+      return a.order - b.order;
+    }))
+  );
 }
 
 function setCurrentItems(state, action) {
-  return state.set('currentItems', fromJS(action.currentItems));
+  return state.set('currentItems',
+    fromJS(action.currentItems.sort((a, b) => {
+      return a.order - b.order;
+    }))
+  );
 }
 
 function clearItemsToDelete(state) {
