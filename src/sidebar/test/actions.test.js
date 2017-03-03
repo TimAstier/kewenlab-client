@@ -2,7 +2,6 @@ import * as t from '../actionTypes';
 import * as actions from '../actions';
 
 describe('sidebar actions', () => {
-
   it('creates an action to set currentTextId', () => {
     const text = { id: 1, title: 'Lesson 1', content: '你好', order: 2 };
     const expectedAction = {
@@ -24,5 +23,4 @@ describe('sidebar actions', () => {
     };
     expect(actions.setTextItems(textItems)).toEqual(expectedAction);
   });
-
 });

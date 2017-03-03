@@ -3,9 +3,7 @@ import * as t from '../actionTypes';
 
 // TODO: test async actions
 describe('textEditor actions', () => {
-
   describe('setLocalContent', () => {
-
     it('creates an action to set localContent', () => {
       const content = '我们来学中文。';
       const expectedAction = {
@@ -22,11 +20,9 @@ describe('textEditor actions', () => {
       };
       expect(actions.setLocalContent()).toEqual(expectedAction);
     });
-
   });
 
   describe('setCurrentContent', () => {
-
     it('creates an action to set currentContent', () => {
       const content = '我们来学中文。';
       const expectedAction = {
@@ -43,7 +39,5 @@ describe('textEditor actions', () => {
       };
       expect(actions.setCurrentContent()).toEqual(expectedAction);
     });
-
   });
-
 });

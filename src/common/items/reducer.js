@@ -17,7 +17,7 @@ function setCurrentItems(state, action) {
   return state.set('currentItems', fromJS(action.currentItems));
 }
 
-function clearItemsToDelete(state, action) {
+function clearItemsToDelete(state) {
   return state.set('itemsToDelete', List());
 }
 
@@ -25,16 +25,17 @@ function setItemsVisibilityFilter(state, action) {
   return state.set('visibilityFilter', action.filter);
 }
 
+// Idea: use the position in the array to determine the order?
 function addNewLocalItems(state, action) {
-  let newItems = [];
-  action.itemsArray.forEach((item) => {
-    let localIndex = state
-      .get('localItems')
-      .toJS()
-      .map(e => e.chinese)
-      .indexOf(item);
+  const newItems = [];
+  const localItems = state
+    .get('localItems')
+    .toJS()
+    .map(e => e.chinese);
+  action.itemsArray.forEach((item, i) => {
+    const localIndex = localItems.indexOf(item);
     if (localIndex < 0) {
-      newItems.push({ id: null, chinese: item });
+      newItems.push({ id: null, chinese: item, order: i });
     }
   });
   const newLocalItems = state.get('localItems').concat(fromJS(newItems));
@@ -42,16 +43,15 @@ function addNewLocalItems(state, action) {
 }
 
 // This probably requires refactoring (it does two things)
-function removeDeletedLocalItems (state, action) {
-  let itemsToDelete = [];
+function removeDeletedLocalItems(state, action) {
+  const itemsToDelete = [];
   return state.merge(Map(fromJS({
     localItems: state.get('localItems').toJS().filter((item) => {
       if (action.itemsArray.indexOf(item.chinese) < 0) {
-
         // Select items to add in itemsToDelete
         if (item.id !== null) {
           // No need to put localItems in itemsToDelete
-          if(item.manuallyAdded === false &&
+          if (item.manuallyAdded === false &&
           item.manuallyDeleted === false) {
             // We do not put in itemsToDelete currentItems
             // that have been added or deleted manually
@@ -85,7 +85,7 @@ export default (itemName = '') => {
       case `SET_CURRENT_${itemName}`:
         return setCurrentItems(state, action);
       case `CLEAR_${itemName}_TO_DELETE`:
-        return clearItemsToDelete(state, action);
+        return clearItemsToDelete(state);
       case `SET_${itemName}_VISIBILITY_FILTER`:
         return setItemsVisibilityFilter(state, action);
       case `ADD_NEW_LOCAL_${itemName}`:
@@ -95,5 +95,5 @@ export default (itemName = '') => {
       default:
         return state;
     }
-  }
+  };
 };

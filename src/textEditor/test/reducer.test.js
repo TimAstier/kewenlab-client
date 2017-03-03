@@ -3,7 +3,6 @@ import { Map } from 'immutable';
 import reducer, { getSaved } from '../reducer';
 
 describe('textEditor reducer', () => {
-
   it('returns the initial state', () => {
     expect(reducer(undefined, {})).toEqual(Map({
       localContent: '',
@@ -48,11 +47,10 @@ describe('textEditor reducer', () => {
       localContent: '',
       currentContent: '法国'
     });
-    let savedA = getSaved(stateA);
-    let savedB = getSaved(stateB);
+    const savedA = getSaved(stateA);
+    const savedB = getSaved(stateB);
 
     expect(savedA).toEqual(true);
     expect(savedB).toEqual(false);
   });
-
 });

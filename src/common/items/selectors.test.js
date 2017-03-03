@@ -2,7 +2,6 @@ import * as s from './selectors';
 import { fromJS } from 'immutable';
 
 describe('items selectors', () => {
-
   it('getSaved returns false', () => {
     const state = fromJS({
       localItems: [
@@ -185,5 +184,4 @@ describe('items selectors', () => {
       }
     ]);
   });
-
 });

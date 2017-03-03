@@ -2,7 +2,6 @@ import reducer from '../reducer';
 import { Map, List } from 'immutable';
 
 describe('sidebar reducer', () => {
-
   it('returns the initial state', () => {
     expect(reducer(undefined, {})).toEqual(Map({
       textItems: List([]),
@@ -49,5 +48,4 @@ describe('sidebar reducer', () => {
       currentTextId: 1
     }));
   });
-
 });

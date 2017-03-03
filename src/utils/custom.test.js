@@ -1,44 +1,38 @@
 import * as customUtils from './custom';
 
 describe('custom utils', () => {
-
   describe('toChineseOnly', () => {
-
     it('removes all non-Chinese chars from a string', () => {
-      const initialString = '你Hello guys!想186学.,\/#!?$%\^&\*;:{}[]=\-_`~()\
-        ！…，；：＂、“”（）《》％·中@€£+àçèé~<>文。？吗？';
+      const initialString = '你Hello guys!想186学.,\/#!?$%\^&\*;:{}[]=\-_`~()' +
+        '！…，；：＂、“”（）《》％·中@€£+àçèé~<>文。？吗？';
       const newString = customUtils.toChineseOnly(initialString);
 
       expect(newString).toEqual('你想学中文吗');
     });
-
   });
 
   describe('toArrayOfUniqueChars', () => {
-
     it('transforms strings to array of unique Chinese chars', () => {
       const initialString = 'Mr Wang: 你好，你和我一起去看我爸爸好不好？';
-      const expectedArray = ['你','好','和','我','一','起','去','看','爸','不'];
+      const expectedArray = ['你', '好', '和', '我', '一', '起',
+        '去', '看', '爸', '不'];
 
       expect(customUtils.toArrayOfUniqueChars(initialString))
         .toEqual(expectedArray);
     });
-
   });
 
   describe('removeDuplicates', () => {
-
     it('removes duplicate from array of strings', () => {
-      const intialArray = ['你好','中国','你好','去','你','爸爸','他','去','你好'];
-      const expectedArray = ['你好','中国','去','你','爸爸','他'];
+      const intialArray = ['你好', '中国', '你好', '去',
+        '你', '爸爸', '他', '去', '你好'];
+      const expectedArray = ['你好', '中国', '去', '你', '爸爸', '他'];
 
       expect(customUtils.removeDuplicates(intialArray)).toEqual(expectedArray);
     });
-
   });
 
   describe('defineStatus', () => {
-
     it('returns "notsaved" status', () => {
       const item = {
         id: null,
@@ -93,7 +87,5 @@ describe('custom utils', () => {
 
       expect(customUtils.defineStatus(item)).toEqual('manuallydeleted');
     });
-
   });
-
 });

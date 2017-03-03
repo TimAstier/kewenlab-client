@@ -1,7 +1,6 @@
 import { deserializeChars, deserializeWords } from './deserializer';
 
 describe('deserializer', () => {
-
   it('has a working deserializeChars function', () => {
     const charsArray = [{
       id: 1,
@@ -109,5 +108,4 @@ describe('deserializer', () => {
 
     expect(deserializeWords(wordsArray)).toEqual(expectedArray);
   });
-
 });

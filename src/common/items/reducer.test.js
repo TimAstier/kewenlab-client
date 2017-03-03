@@ -9,9 +9,7 @@ const wordsReducer = createItemsReducerWithNamedType('WORDS');
 // Those tests are for chars and words
 // actionCreators are tested indirectly
 // high-order reducer is tested indirectly
-
 describe('items reducer', () => {
-
   it('returns initial state', () => {
     expect(charsReducer(undefined, {})).toEqual(Map({
       localItems: List([]),
@@ -29,15 +27,14 @@ describe('items reducer', () => {
       visibilityFilter: 'all'
     });
     const items = [{
-        id: 1,
-        chinese: '我',
-        texts: []
-      }, {
-        id: 2,
-        chinese: '你',
-        texts: []
-      }
-    ];
+      id: 1,
+      chinese: '我',
+      texts: []
+    }, {
+      id: 2,
+      chinese: '你',
+      texts: []
+    }];
     const charsAction = charsActions.setLocalChars(items);
     const wordsAction = wordsActions.setLocalWords(items);
     const expectedState = Map({
@@ -59,15 +56,14 @@ describe('items reducer', () => {
       visibilityFilter: 'all'
     });
     const items = [{
-        id: 1,
-        chinese: '我',
-        texts: []
-      }, {
-        id: 2,
-        chinese: '你',
-        texts: []
-      }
-    ];
+      id: 1,
+      chinese: '我',
+      texts: []
+    }, {
+      id: 2,
+      chinese: '你',
+      texts: []
+    }];
     const charsAction = charsActions.setCurrentChars(items);
     const wordsAction = wordsActions.setCurrentWords(items);
     const expectedState = Map({
@@ -86,14 +82,14 @@ describe('items reducer', () => {
       localItems: List(),
       currentItems: List(),
       itemsToDelete: List([{
-          id: 1,
-          chinese: '我',
-          texts: []
-        }, {
-          id: 2,
-          chinese: '你',
-          texts: []
-        }]),
+        id: 1,
+        chinese: '我',
+        texts: []
+      }, {
+        id: 2,
+        chinese: '你',
+        texts: []
+      }]),
       visibilityFilter: 'all'
     });
     const charsAction = charsActions.clearCharsToDelete();
@@ -129,44 +125,75 @@ describe('items reducer', () => {
     expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
   });
 
-  it('handles ADD_NEW_LOCAL_ITEMS', () => {
-    const initialState = fromJS({
-      localItems: [
-        { id: 1, chinese: '我' },
-        { id: 2, chinese: '你' },
-        { id: null, chinese: '他' }
-      ],
-      currentItems: [
-        { id: 1, chinese: '我' },
-        { id: 2, chinese: '你' }
-      ],
-      itemsToDelete: [],
-      visibilityFilter: 'all'
-    });
-    const charsAction = charsActions.addNewLocalChars(['你','木','水']);
-    const wordsAction = wordsActions.addNewLocalWords(['你','木','水']);
-    const expectedState = fromJS({
-      localItems: [
-        { id: 1, chinese: '我' },
-        { id: 2, chinese: '你' },
-        { id: null, chinese: '他' },
-        { id: null, chinese: '木' },
-        { id: null, chinese: '水' }
-      ],
-      currentItems: [
-        { id: 1, chinese: '我' },
-        { id: 2, chinese: '你' }
-      ],
-      itemsToDelete: [],
-      visibilityFilter: 'all'
+  describe('ADD_NEW_LOCAL_ITEMS', () => {
+    it('adds new items to localItems with the correct order', () => {
+      const initialState = fromJS({
+        localItems: [
+          { id: 1, chinese: '我' },
+          { id: 2, chinese: '你' },
+          { id: null, chinese: '他' }
+        ],
+        currentItems: [
+          { id: 1, chinese: '我' },
+          { id: 2, chinese: '你' }
+        ],
+        itemsToDelete: [],
+        visibilityFilter: 'all'
+      });
+      const charsAction = charsActions.addNewLocalChars(['你', '木', '水']);
+      const wordsAction = wordsActions.addNewLocalWords(['你', '木', '水']);
+      const expectedState = fromJS({
+        localItems: [
+          { id: 1, chinese: '我' },
+          { id: 2, chinese: '你' },
+          { id: null, chinese: '他' },
+          { id: null, chinese: '木', order: 1 },
+          { id: null, chinese: '水', order: 2 }
+        ],
+        currentItems: [
+          { id: 1, chinese: '我' },
+          { id: 2, chinese: '你' }
+        ],
+        itemsToDelete: [],
+        visibilityFilter: 'all'
+      });
+
+      expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+      expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
     });
 
-    expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
-    expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
+    // Note: actual order is the defined by the array order
+    // The order attrbutes keep track of DB data to look for changes?
+    xit('updates localItems with the right order', () => {
+      const initialState = fromJS({
+        localItems: [
+          { id: 1, chinese: '我', order: 0 },
+          { id: 2, chinese: '想', order: 1 },
+          { id: null, chinese: '去', order: 2 }
+        ],
+        currentItems: [],
+        itemsToDelete: [],
+        visibilityFilter: 'all'
+      });
+      const charsAction = charsActions.addNewLocalChars(['去', '我', '去', '想']);
+      const wordsAction = wordsActions.addNewLocalWords(['去', '我', '去', '想']);
+      const expectedState = fromJS({
+        localItems: [
+          { id: null, chinese: '去', order: 2 },
+          { id: 1, chinese: '我', order: 0 },
+          { id: 2, chinese: '想', order: 1 }
+        ],
+        currentItems: [],
+        itemsToDelete: [],
+        visibilityFilter: 'all'
+      });
+
+      expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+      expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
+    });
   });
 
   describe('REMOVE_DELETED_LOCAL_ITEMS', () => {
-
     it('removes items from localItems and add them to itemsToDelete', () => {
       const initialState = fromJS({
         localItems: [
@@ -269,7 +296,5 @@ describe('items reducer', () => {
       expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
       expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
     });
-
   });
-
 });
