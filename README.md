@@ -38,8 +38,8 @@ $ git push production master // This will run the build
 - [x] Hide notifications after X seconds.
 - [x] Manually added/deleted chars/words feature.
 - [x] Refactor chars/words actions/reducer codes into one.
-- [ ] Save words and chars in the right order.
-- [ ] Display words and chars in the right order.
+- [x] Save words and chars in the right order.
+- [x] Display words and chars in the right order. 
 - [ ] Auto-save after change.
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Better handle async calls (display loaders).
