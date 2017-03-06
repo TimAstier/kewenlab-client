@@ -6,7 +6,8 @@ import Stats from '../../components/common/Stats';
 import { getSaved, countChanges, getTotalItems,
   countNewItems, filterLocalItems } from '../../common/items/selectors';
 import { saveChars, setCurrentChars, setLocalChars,
-  clearCharsToDelete, setCharsVisibilityFilter } from '../actions';
+  clearCharsToDelete, clearCharsToUpdate, setCharsVisibilityFilter }
+  from '../actions';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
 import { deserializeChars } from '../../utils/deserializer';
 
@@ -28,13 +29,15 @@ class CharsArea extends React.Component {
     const data = {
       textId: this.props.currentTextId,
       newChars: this.props.localChars.filter(x => x.id === null),
-      charsToDelete: this.props.charsToDelete
+      charsToDelete: this.props.charsToDelete,
+      charsToUpdate: this.props.charsToUpdate
     };
     return this.props.saveChars(data).then(
       (res) => {
         this.props.setCurrentChars(deserializeChars(res.data.chars));
         this.props.setLocalChars(deserializeChars(res.data.chars));
         this.props.clearCharsToDelete();
+        this.props.clearCharsToUpdate();
       },
       () => {
         this.props.showFlashMessageWithTimeout({
@@ -74,6 +77,7 @@ class CharsArea extends React.Component {
 CharsArea.propTypes = {
   localChars: React.PropTypes.array.isRequired,
   charsToDelete: React.PropTypes.array.isRequired,
+  charsToUpdate: React.PropTypes.array.isRequired,
   saved: React.PropTypes.bool.isRequired,
   changeCount: React.PropTypes.number.isRequired,
   saveChars: React.PropTypes.func.isRequired,
@@ -82,6 +86,7 @@ CharsArea.propTypes = {
   setCurrentChars: React.PropTypes.func.isRequired,
   setLocalChars: React.PropTypes.func.isRequired,
   clearCharsToDelete: React.PropTypes.func.isRequired,
+  clearCharsToUpdate: React.PropTypes.func.isRequired,
   totalChars: React.PropTypes.number.isRequired,
   totalNewChars: React.PropTypes.number.isRequired,
   setCharsVisibilityFilter: React.PropTypes.func.isRequired,
@@ -93,6 +98,7 @@ function mapStateToProps(state) {
   return {
     localChars: state.get('chars').get('localItems').toJS(),
     charsToDelete: state.get('chars').get('itemsToDelete').toJS(),
+    charsToUpdate: state.get('chars').get('itemsToUpdate').toJS(),
     saved: getSaved(state.get('chars')),
     changeCount: countChanges(state.get('chars')),
     currentTextId: state.get('sidebar').get('currentTextId'),
@@ -111,6 +117,7 @@ export default connect(
     setCurrentChars,
     setLocalChars,
     clearCharsToDelete,
+    clearCharsToUpdate,
     setCharsVisibilityFilter
   }
 )(CharsArea);

@@ -35,6 +35,19 @@ export function clearWordsToDelete() {
   };
 }
 
+export function updateWordsOrder(itemsArray) {
+  return {
+    type: 'UPDATE_WORDS_ORDER',
+    itemsArray
+  };
+}
+
+export function clearWordsToUpdate() {
+  return {
+    type: 'CLEAR_WORDS_TO_UPDATE'
+  };
+}
+
 export function setWordsVisibilityFilter(value) {
   return {
     type: 'SET_WORDS_VISIBILITY_FILTER',

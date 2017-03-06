@@ -7,7 +7,8 @@ import { getSaved, countChanges, getTotalItems,
   countNewItems, filterLocalItems } from '../../common/items/selectors';
 import { tokenize, addNewLocalWords, removeDeletedLocalWords,
   setLocalWords, setCurrentWords, saveWords, clearWordsToDelete,
-  setWordsVisibilityFilter } from '../actions';
+  setWordsVisibilityFilter, clearWordsToUpdate, updateWordsOrder }
+  from '../actions';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
 import { toChineseOnly, removeDuplicates } from '../../utils/custom';
 import isEmpty from 'lodash/isEmpty';
@@ -39,7 +40,8 @@ class WordsArea extends React.Component {
         newLocalWords = removeDuplicates(newLocalWords);
         this.props.removeDeletedLocalWords(newLocalWords);
         if (!isEmpty(newLocalWords)) {
-          return this.props.addNewLocalWords(newLocalWords);
+          this.props.addNewLocalWords(newLocalWords);
+          return this.props.updateWordsOrder(newLocalWords);
         }
         return false;
       },
@@ -58,13 +60,15 @@ class WordsArea extends React.Component {
     const data = {
       textId: this.props.currentTextId,
       newWords: this.props.localWords.filter(x => x.id === null),
-      wordsToDelete: this.props.wordsToDelete
+      wordsToDelete: this.props.wordsToDelete,
+      wordsToUpdate: this.props.wordsToUpdate
     };
     return this.props.saveWords(data).then(
       (res) => {
         this.props.setCurrentWords(deserializeWords(res.data.words));
         this.props.setLocalWords(deserializeWords(res.data.words));
         this.props.clearWordsToDelete();
+        this.props.clearWordsToUpdate();
       },
       () => {
         this.props.showFlashMessageWithTimeout({
@@ -116,7 +120,10 @@ WordsArea.propTypes = {
   saveWords: React.PropTypes.func.isRequired,
   currentTextId: React.PropTypes.number.isRequired,
   clearWordsToDelete: React.PropTypes.func.isRequired,
+  clearWordsToUpdate: React.PropTypes.func.isRequired,
+  updateWordsOrder: React.PropTypes.func.isRequired,
   wordsToDelete: React.PropTypes.array.isRequired,
+  wordsToUpdate: React.PropTypes.array.isRequired,
   totalWords: React.PropTypes.number.isRequired,
   totalNewWords: React.PropTypes.number.isRequired,
   setWordsVisibilityFilter: React.PropTypes.func.isRequired,
@@ -132,6 +139,7 @@ function mapStateToProps(state) {
     changeCount: countChanges(state.get('words')),
     currentTextId: state.get('sidebar').get('currentTextId'),
     wordsToDelete: state.get('words').get('itemsToDelete').toJS(),
+    wordsToUpdate: state.get('words').get('itemsToUpdate').toJS(),
     totalWords: getTotalItems(state.get('words')),
     totalNewWords: countNewItems(state.get('words')),
     visibilityFilter: state.get('words').get('visibilityFilter'),
@@ -150,5 +158,7 @@ export default connect(
     setCurrentWords,
     saveWords,
     clearWordsToDelete,
+    clearWordsToUpdate,
+    updateWordsOrder,
     setWordsVisibilityFilter
   })(WordsArea);

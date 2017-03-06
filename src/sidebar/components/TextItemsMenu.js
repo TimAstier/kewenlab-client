@@ -4,10 +4,10 @@ import { Menu, Label } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
 import { getCurrentText, setCurrentTextId } from '../actions';
 import { setCurrentContent, setLocalContent } from '../../textEditor/actions';
-import { setCurrentChars, setLocalChars, clearCharsToDelete }
-  from '../../charsArea/actions';
-import { setCurrentWords, setLocalWords, clearWordsToDelete }
-  from '../../wordsArea/actions';
+import { setCurrentChars, setLocalChars,
+  clearCharsToDelete, clearCharsToUpdate } from '../../charsArea/actions';
+import { setCurrentWords, setLocalWords,
+  clearWordsToDelete, clearWordsToUpdate } from '../../wordsArea/actions';
 import { deserializeChars, deserializeWords } from '../../utils/deserializer';
 
 class TextItemsMenu extends React.Component {
@@ -57,9 +57,11 @@ class TextItemsMenu extends React.Component {
         this.props.setLocalChars(chars);
         this.props.setCurrentChars(chars);
         this.props.clearCharsToDelete();
+        this.props.clearCharsToUpdate();
         this.props.setLocalWords(words);
         this.props.setCurrentWords(words);
         this.props.clearWordsToDelete();
+        this.props.clearWordsToUpdate();
       },
       () => {
         this.props.showFlashMessageWithTimeout({
@@ -92,7 +94,9 @@ TextItemsMenu.propTypes = {
   setCurrentWords: React.PropTypes.func.isRequired,
   setLocalWords: React.PropTypes.func.isRequired,
   clearCharsToDelete: React.PropTypes.func.isRequired,
-  clearWordsToDelete: React.PropTypes.func.isRequired
+  clearWordsToDelete: React.PropTypes.func.isRequired,
+  clearCharsToUpdate: React.PropTypes.func.isRequired,
+  clearWordsToUpdate: React.PropTypes.func.isRequired
 };
 
 export default connect(
@@ -107,5 +111,7 @@ export default connect(
     setCurrentWords,
     setLocalWords,
     clearCharsToDelete,
-    clearWordsToDelete
+    clearWordsToDelete,
+    clearCharsToUpdate,
+    clearWordsToUpdate
   })(TextItemsMenu);

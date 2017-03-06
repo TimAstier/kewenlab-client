@@ -4,6 +4,7 @@ export const INITIAL_STATE = Map({
   localItems: List(),
   currentItems: List(),
   itemsToDelete: List(),
+  itemsToUpdate: List(),
   visibilityFilter: 'all'
 });
 
@@ -83,6 +84,40 @@ function removeDeletedLocalItems(state, action) {
   })));
 }
 
+function updateItemsOrder(state, action) {
+  const localItems = state.get('localItems').toJS();
+  const savedItems = state.get('currentItems').toJS().map(x => x.chinese);
+  const itemsToUpdate = state.get('itemsToUpdate').toJS();
+  localItems.forEach((item, i) => {
+    const realOrder = action.itemsArray.indexOf(item.chinese);
+    if (item.order !== realOrder) {
+      // Update localItems with correct Order
+      const updatedItem = localItems[i];
+      updatedItem.order = realOrder;
+      localItems[i] = updatedItem;
+
+      // Add to itemsToUpdate if this item was previously saved
+      if (savedItems.indexOf(item.chinese) !== -1) {
+        // If already in itemsToUpdate, update instead of adding new
+        const index = itemsToUpdate.map(x => x.chinese).indexOf(item.chinese);
+        if (index !== -1) {
+          itemsToUpdate[index] = updatedItem;
+        } else {
+          itemsToUpdate.push(updatedItem);
+        }
+      }
+    }
+  });
+  return state.merge(Map(fromJS({
+    localItems,
+    itemsToUpdate
+  })));
+}
+
+function clearItemsToUpdate(state) {
+  return state.set('itemsToUpdate', List());
+}
+
 // high-order reducer:
 export default (itemName = '') => {
   // slice reducer:
@@ -100,6 +135,10 @@ export default (itemName = '') => {
         return addNewLocalItems(state, action);
       case `REMOVE_DELETED_LOCAL_${itemName}`:
         return removeDeletedLocalItems(state, action);
+      case `UPDATE_${itemName}_ORDER`:
+        return updateItemsOrder(state, action);
+      case `CLEAR_${itemName}_TO_UPDATE`:
+        return clearItemsToUpdate(state);
       default:
         return state;
     }

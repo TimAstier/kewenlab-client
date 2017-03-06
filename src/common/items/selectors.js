@@ -29,7 +29,10 @@ export const countNewItems = (state = INITIAL_STATE) => {
 };
 
 export const filterLocalItems = (state = INITIAL_STATE) => {
-  const localItems = state.get('localItems').toJS();
+  const localItems = state
+    .get('localItems')
+    .toJS()
+    .sort((a, b) => { return a.order - b.order; });
   switch (state.get('visibilityFilter')) {
     case 'all':
       return localItems.filter(x => defineStatus(x) !== 'manuallydeleted');

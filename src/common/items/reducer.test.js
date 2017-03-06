@@ -15,6 +15,7 @@ describe('items reducer', () => {
       localItems: List([]),
       currentItems: List([]),
       itemsToDelete: List([]),
+      itemsToUpdate: List([]),
       visibilityFilter: 'all'
     }));
   });
@@ -253,36 +254,6 @@ describe('items reducer', () => {
       expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
       expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
     });
-
-    // Note: actual order is the defined by the array order
-    // The order attrbutes keep track of DB data to look for changes?
-    xit('updates localItems with the right order', () => {
-      const initialState = fromJS({
-        localItems: [
-          { id: 1, chinese: '我', order: 0 },
-          { id: 2, chinese: '想', order: 1 },
-          { id: null, chinese: '去', order: 2 }
-        ],
-        currentItems: [],
-        itemsToDelete: [],
-        visibilityFilter: 'all'
-      });
-      const charsAction = charsActions.addNewLocalChars(['去', '我', '去', '想']);
-      const wordsAction = wordsActions.addNewLocalWords(['去', '我', '去', '想']);
-      const expectedState = fromJS({
-        localItems: [
-          { id: null, chinese: '去', order: 2 },
-          { id: 1, chinese: '我', order: 0 },
-          { id: 2, chinese: '想', order: 1 }
-        ],
-        currentItems: [],
-        itemsToDelete: [],
-        visibilityFilter: 'all'
-      });
-
-      expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
-      expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
-    });
   });
 
   describe('REMOVE_DELETED_LOCAL_ITEMS', () => {
@@ -388,5 +359,114 @@ describe('items reducer', () => {
       expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
       expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
     });
+  });
+
+  describe('UPDATE_ITEMS_ORDER', () => {
+    it('updates local order', () => {
+      const initialState = fromJS({
+        localItems: [
+          { id: 3, chinese: '一', order: 0 },
+          { id: 2, chinese: '二', order: 1 },
+          { id: 1, chinese: '三', order: 2 }
+        ],
+        currentItems: [],
+        itemsToDelete: [],
+        itemsToUpdate: [],
+        visibilityFilter: 'all'
+      });
+      const itemsArray = ['三', '一', '二'];
+      const charsAction = charsActions.updateCharsOrder(itemsArray);
+      const expectedState = fromJS({
+        localItems: [
+          { id: 3, chinese: '一', order: 1 },
+          { id: 2, chinese: '二', order: 2 },
+          { id: 1, chinese: '三', order: 0 }
+        ],
+        currentItems: [],
+        itemsToDelete: [],
+        itemsToUpdate: [],
+        visibilityFilter: 'all'
+      });
+
+      expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+    });
+
+    it('adds new-ordered-saved items to itemsToUpdate', () => {
+      const initialState = fromJS({
+        localItems: [
+          { id: null, chinese: '一', order: 0 },
+          { id: 0, chinese: '二', order: 1 },
+          { id: 1, chinese: '三', order: 2 }
+        ],
+        currentItems: [
+          { id: 0, chinese: '二', order: 1 },
+          { id: 1, chinese: '三', order: 0 }
+        ],
+        itemsToUpdate: []
+      });
+      const itemsArray = ['三', '二', '一'];
+      const charsAction = charsActions.updateCharsOrder(itemsArray);
+      const expectedState = fromJS({
+        localItems: [
+          { id: null, chinese: '一', order: 2 },
+          { id: 0, chinese: '二', order: 1 },
+          { id: 1, chinese: '三', order: 0 }
+        ],
+        currentItems: [
+          { id: 0, chinese: '二', order: 1 },
+          { id: 1, chinese: '三', order: 0 }
+        ],
+        itemsToUpdate: [
+          { id: 1, chinese: '三', order: 0 }
+        ]
+      });
+
+      expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+    });
+
+    it('does not create duplicates in itemsToUpdate', () => {
+      const initialState = fromJS({
+        localItems: [
+          { id: null, chinese: '一', order: 0 },
+          { id: 0, chinese: '二', order: 1 },
+          { id: 1, chinese: '三', order: 2 }
+        ],
+        currentItems: [
+          { id: 0, chinese: '二', order: 1 },
+          { id: 1, chinese: '三', order: 0 }
+        ],
+        itemsToUpdate: [{ id: 1, chinese: '三', order: 2 }]
+      });
+      const itemsArray = ['三', '二', '一'];
+      const charsAction = charsActions.updateCharsOrder(itemsArray);
+      const expectedState = fromJS({
+        localItems: [
+          { id: null, chinese: '一', order: 2 },
+          { id: 0, chinese: '二', order: 1 },
+          { id: 1, chinese: '三', order: 0 }
+        ],
+        currentItems: [
+          { id: 0, chinese: '二', order: 1 },
+          { id: 1, chinese: '三', order: 0 }
+        ],
+        itemsToUpdate: [
+          { id: 1, chinese: '三', order: 0 }
+        ]
+      });
+
+      expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+    });
+  });
+
+  it('handles CLEAR_ITEMS_TO_UPDATE', () => {
+    const initialState = fromJS({
+      itemsToUpdate: ['a', 'b', 'c']
+    });
+    const charsAction = charsActions.clearCharsToUpdate();
+    const expectedState = fromJS({
+      itemsToUpdate: []
+    });
+
+    expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
   });
 });

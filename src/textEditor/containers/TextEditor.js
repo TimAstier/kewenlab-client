@@ -5,7 +5,7 @@ import { setLocalContent, saveTextContent,
   setCurrentContent } from '../actions';
 import { getSaved } from '../reducer';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
-import { addNewLocalChars, removeDeletedLocalChars }
+import { addNewLocalChars, removeDeletedLocalChars, updateCharsOrder }
   from '../../charsArea/actions';
 import isEmpty from 'lodash/isEmpty';
 import { toArrayOfUniqueChars } from '../../utils/custom';
@@ -37,6 +37,7 @@ class TextEditor extends React.Component {
     this.props.removeDeletedLocalChars(charsArray);
     if (!isEmpty(charsArray)) {
       this.props.addNewLocalChars(charsArray);
+      this.props.updateCharsOrder(charsArray);
     }
     return this.props.setLocalContent(e.target.value);
   }
@@ -92,7 +93,8 @@ TextEditor.propTypes = {
   setCurrentContent: React.PropTypes.func.isRequired,
   showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
   addNewLocalChars: React.PropTypes.func.isRequired,
-  removeDeletedLocalChars: React.PropTypes.func.isRequired
+  removeDeletedLocalChars: React.PropTypes.func.isRequired,
+  updateCharsOrder: React.PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -111,6 +113,7 @@ export default connect(
     setCurrentContent,
     showFlashMessageWithTimeout,
     addNewLocalChars,
-    removeDeletedLocalChars
+    removeDeletedLocalChars,
+    updateCharsOrder
   }
 )(TextEditor);

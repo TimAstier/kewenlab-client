@@ -35,6 +35,19 @@ export function clearCharsToDelete() {
   };
 }
 
+export function updateCharsOrder(itemsArray) {
+  return {
+    type: 'UPDATE_CHARS_ORDER',
+    itemsArray
+  };
+}
+
+export function clearCharsToUpdate() {
+  return {
+    type: 'CLEAR_CHARS_TO_UPDATE'
+  };
+}
+
 export function setCharsVisibilityFilter(value) {
   return {
     type: 'SET_CHARS_VISIBILITY_FILTER',
