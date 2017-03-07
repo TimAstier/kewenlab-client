@@ -36,7 +36,7 @@ class WordsArea extends React.Component {
         {this.props.saved &&
           <Stats items={statItems} />
         }
-        {(process.env.REACT_APP_DEBUG || DEBUG) &&
+        {(DEBUG === 'on') &&
           <WordControls
             refresh={this.props.refresh}
             saved={this.props.saved}

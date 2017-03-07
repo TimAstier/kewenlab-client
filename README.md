@@ -29,7 +29,7 @@ $ git push production master // This will run the build
 - NODE_ENV=
 - REACT_APP_API_URL=
 - REACT_APP_ADMIN_URL=
-- REACT_APP_DEBUG=
+- REACT_APP_DEBUG= (on/off)
 
 Note: In order for Environment variables to be updated in the code after a change,
 the app needs to be rebuilt. This can be done by pushing an empty commit like so:
