@@ -5,47 +5,18 @@ import CharControls from '../components/CharControls';
 import Stats from '../../components/common/Stats';
 import { getSaved, countChanges, getTotalItems,
   countNewItems, filterLocalItems } from '../../common/items/selectors';
-import { saveChars, setCurrentChars, setLocalChars,
-  clearCharsToDelete, clearCharsToUpdate, setCharsVisibilityFilter }
-  from '../actions';
+import { setCharsVisibilityFilter } from '../actions';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
-import { deserializeChars } from '../../utils/deserializer';
 
 class CharsArea extends React.Component {
   constructor(props) {
     super(props);
 
-    this.save = this.save.bind(this);
     this.onFilterClick = this.onFilterClick.bind(this);
   }
 
   onFilterClick(e, data) {
     return this.props.setCharsVisibilityFilter(data.value);
-  }
-
-  save(e) {
-    e.preventDefault();
-    // TODO: Use serializers to define which attributes to send in payload
-    const data = {
-      textId: this.props.currentTextId,
-      newChars: this.props.localChars.filter(x => x.id === null),
-      charsToDelete: this.props.charsToDelete,
-      charsToUpdate: this.props.charsToUpdate
-    };
-    return this.props.saveChars(data).then(
-      (res) => {
-        this.props.setCurrentChars(deserializeChars(res.data.chars));
-        this.props.setLocalChars(deserializeChars(res.data.chars));
-        this.props.clearCharsToDelete();
-        this.props.clearCharsToUpdate();
-      },
-      () => {
-        this.props.showFlashMessageWithTimeout({
-          type: 'error',
-          text: 'Error: could not save chars on the server.'
-        });
-      }
-    );
   }
 
   render() {
@@ -67,7 +38,7 @@ class CharsArea extends React.Component {
         <CharControls
           saved={this.props.saved}
           changeCount={this.props.changeCount}
-          save={this.save}
+          save={this.props.save}
         />
       </div>
     );
@@ -75,18 +46,10 @@ class CharsArea extends React.Component {
 }
 
 CharsArea.propTypes = {
-  localChars: React.PropTypes.array.isRequired,
-  charsToDelete: React.PropTypes.array.isRequired,
-  charsToUpdate: React.PropTypes.array.isRequired,
+  save: React.PropTypes.func.isRequired,
   saved: React.PropTypes.bool.isRequired,
   changeCount: React.PropTypes.number.isRequired,
-  saveChars: React.PropTypes.func.isRequired,
-  currentTextId: React.PropTypes.number.isRequired,
   showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
-  setCurrentChars: React.PropTypes.func.isRequired,
-  setLocalChars: React.PropTypes.func.isRequired,
-  clearCharsToDelete: React.PropTypes.func.isRequired,
-  clearCharsToUpdate: React.PropTypes.func.isRequired,
   totalChars: React.PropTypes.number.isRequired,
   totalNewChars: React.PropTypes.number.isRequired,
   setCharsVisibilityFilter: React.PropTypes.func.isRequired,
@@ -96,12 +59,8 @@ CharsArea.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    localChars: state.get('chars').get('localItems').toJS(),
-    charsToDelete: state.get('chars').get('itemsToDelete').toJS(),
-    charsToUpdate: state.get('chars').get('itemsToUpdate').toJS(),
     saved: getSaved(state.get('chars')),
     changeCount: countChanges(state.get('chars')),
-    currentTextId: state.get('sidebar').get('currentTextId'),
     totalChars: getTotalItems(state.get('chars')),
     totalNewChars: countNewItems(state.get('chars')),
     visibilityFilter: state.get('chars').get('visibilityFilter'),
@@ -112,12 +71,7 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   {
-    saveChars,
     showFlashMessageWithTimeout,
-    setCurrentChars,
-    setLocalChars,
-    clearCharsToDelete,
-    clearCharsToUpdate,
     setCharsVisibilityFilter
   }
 )(CharsArea);

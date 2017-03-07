@@ -5,22 +5,13 @@ import WordControls from '../components/WordControls';
 import Stats from '../../components/common/Stats';
 import { getSaved, countChanges, getTotalItems,
   countNewItems, filterLocalItems } from '../../common/items/selectors';
-import { tokenize, addNewLocalWords, removeDeletedLocalWords,
-  setLocalWords, setCurrentWords, saveWords, clearWordsToDelete,
-  setWordsVisibilityFilter, clearWordsToUpdate, updateWordsOrder }
-  from '../actions';
+import { setWordsVisibilityFilter } from '../actions';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
-import { toChineseOnly, removeDuplicates } from '../../utils/custom';
-import isEmpty from 'lodash/isEmpty';
-import { deserializeWords } from '../../utils/deserializer';
 
 class WordsArea extends React.Component {
-
   constructor(props) {
     super(props);
 
-    this.refresh = this.refresh.bind(this);
-    this.save = this.save.bind(this);
     this.onFilterClick = this.onFilterClick.bind(this);
   }
 
@@ -28,60 +19,9 @@ class WordsArea extends React.Component {
     return this.props.setWordsVisibilityFilter(data.value);
   }
 
-  refresh(e) {
-    e.preventDefault();
-    // TODO: Use serializers to define which attributes to send in payload
-    const data = {
-      content: toChineseOnly(this.props.localContent)
-    };
-    return this.props.tokenize(data).then(
-      (res) => {
-        let newLocalWords = res.data;
-        newLocalWords = removeDuplicates(newLocalWords);
-        this.props.removeDeletedLocalWords(newLocalWords);
-        if (!isEmpty(newLocalWords)) {
-          this.props.addNewLocalWords(newLocalWords);
-          return this.props.updateWordsOrder(newLocalWords);
-        }
-        return false;
-      },
-      () => {
-        this.props.showFlashMessageWithTimeout({
-          type: 'error',
-          text: 'Error: could not tokenize text from the server.'
-        });
-      }
-    );
-  }
-
-  save(e) {
-    e.preventDefault();
-    // TODO: Use serializers to define which attributes to send in payload
-    const data = {
-      textId: this.props.currentTextId,
-      newWords: this.props.localWords.filter(x => x.id === null),
-      wordsToDelete: this.props.wordsToDelete,
-      wordsToUpdate: this.props.wordsToUpdate
-    };
-    return this.props.saveWords(data).then(
-      (res) => {
-        this.props.setCurrentWords(deserializeWords(res.data.words));
-        this.props.setLocalWords(deserializeWords(res.data.words));
-        this.props.clearWordsToDelete();
-        this.props.clearWordsToUpdate();
-      },
-      () => {
-        this.props.showFlashMessageWithTimeout({
-          type: 'error',
-          text: 'Error: could not save words on the server.'
-        });
-      }
-    );
-  }
-
   render() {
     const statItems = [
-      `New: ${this.props.totalNewWords}/${this.props.totalWords}`,
+      `New: ${this.props.totalNewWords} / ${this.props.totalWords}`,
       `${Math.round(this.props.totalNewWords / this.props.totalWords * 100)}%`
     ];
 
@@ -96,10 +36,10 @@ class WordsArea extends React.Component {
           <Stats items={statItems} />
         }
         <WordControls
-          refresh={this.refresh}
+          refresh={this.props.refresh}
           saved={this.props.saved}
           changeCount={this.props.changeCount}
-          save={this.save}
+          save={this.props.save}
         />
       </div>
     );
@@ -107,23 +47,11 @@ class WordsArea extends React.Component {
 }
 
 WordsArea.propTypes = {
-  localWords: React.PropTypes.array.isRequired,
-  localContent: React.PropTypes.string.isRequired,
-  tokenize: React.PropTypes.func.isRequired,
   showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
-  addNewLocalWords: React.PropTypes.func.isRequired,
-  removeDeletedLocalWords: React.PropTypes.func.isRequired,
+  refresh: React.PropTypes.func.isRequired,
+  save: React.PropTypes.func.isRequired,
   saved: React.PropTypes.bool.isRequired,
   changeCount: React.PropTypes.number.isRequired,
-  setLocalWords: React.PropTypes.func.isRequired,
-  setCurrentWords: React.PropTypes.func.isRequired,
-  saveWords: React.PropTypes.func.isRequired,
-  currentTextId: React.PropTypes.number.isRequired,
-  clearWordsToDelete: React.PropTypes.func.isRequired,
-  clearWordsToUpdate: React.PropTypes.func.isRequired,
-  updateWordsOrder: React.PropTypes.func.isRequired,
-  wordsToDelete: React.PropTypes.array.isRequired,
-  wordsToUpdate: React.PropTypes.array.isRequired,
   totalWords: React.PropTypes.number.isRequired,
   totalNewWords: React.PropTypes.number.isRequired,
   setWordsVisibilityFilter: React.PropTypes.func.isRequired,
@@ -133,13 +61,8 @@ WordsArea.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    localWords: state.get('words').get('localItems').toJS(),
-    localContent: state.get('textEditor').get('localContent'),
     saved: getSaved(state.get('words')),
     changeCount: countChanges(state.get('words')),
-    currentTextId: state.get('sidebar').get('currentTextId'),
-    wordsToDelete: state.get('words').get('itemsToDelete').toJS(),
-    wordsToUpdate: state.get('words').get('itemsToUpdate').toJS(),
     totalWords: getTotalItems(state.get('words')),
     totalNewWords: countNewItems(state.get('words')),
     visibilityFilter: state.get('words').get('visibilityFilter'),
@@ -150,15 +73,6 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   {
-    tokenize,
     showFlashMessageWithTimeout,
-    addNewLocalWords,
-    removeDeletedLocalWords,
-    setLocalWords,
-    setCurrentWords,
-    saveWords,
-    clearWordsToDelete,
-    clearWordsToUpdate,
-    updateWordsOrder,
     setWordsVisibilityFilter
   })(WordsArea);

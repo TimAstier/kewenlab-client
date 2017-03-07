@@ -1,14 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Label } from 'semantic-ui-react';
-import { setLocalContent, saveTextContent,
-  setCurrentContent } from '../actions';
 import { getSaved } from '../reducer';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
-import { addNewLocalChars, removeDeletedLocalChars, updateCharsOrder }
-  from '../../charsArea/actions';
-import isEmpty from 'lodash/isEmpty';
-import { toArrayOfUniqueChars } from '../../utils/custom';
 import TextControls from '../components/TextControls';
 import TextInput from '../components/TextInput';
 
@@ -16,8 +10,6 @@ class TextEditor extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onChange = this.onChange.bind(this);
-    this.onClick = this.onClick.bind(this);
     this.hasCurrentText = this.hasCurrentText.bind(this);
     this.placeholder = this.placeholder.bind(this);
   }
@@ -32,39 +24,6 @@ class TextEditor extends React.Component {
     return this.hasCurrentText() ? msg1 : msg2;
   }
 
-  onChange(e) {
-    const charsArray = toArrayOfUniqueChars(e.target.value);
-    this.props.removeDeletedLocalChars(charsArray);
-    if (!isEmpty(charsArray)) {
-      this.props.addNewLocalChars(charsArray);
-      this.props.updateCharsOrder(charsArray);
-    }
-    return this.props.setLocalContent(e.target.value);
-  }
-
-  onClick(e) {
-    e.preventDefault();
-    if (this.hasCurrentText()) {
-      // TODO: Use serializers to define which attributes to send in payload
-      const data = {
-        id: this.props.currentTextId,
-        content: this.props.localContent
-      };
-      return this.props.saveTextContent(data).then(
-        () => {
-          this.props.setCurrentContent(this.props.localContent);
-        },
-        () => {
-          this.props.showFlashMessageWithTimeout({
-            type: 'error',
-            text: 'Error: could not save text on the server.'
-          });
-        }
-      );
-    }
-    return false;
-  }
-
   // TODO: Switch to readonly when isSaving
   render() {
     return (
@@ -74,10 +33,10 @@ class TextEditor extends React.Component {
           <TextInput
             placeholder={this.placeholder()}
             value={this.props.localContent}
-            onChange={this.onChange}
+            onChange={this.props.onChange}
             readOnly={!this.hasCurrentText()}
           />
-          <TextControls onClick={this.onClick} saved={this.props.saved} />
+          <TextControls onClick={this.props.save} saved={this.props.saved} />
         </Form>
       </div>
     );
@@ -88,13 +47,9 @@ TextEditor.propTypes = {
   currentTextId: React.PropTypes.number.isRequired,
   localContent: React.PropTypes.string.isRequired,
   saved: React.PropTypes.bool.isRequired,
-  setLocalContent: React.PropTypes.func.isRequired,
-  saveTextContent: React.PropTypes.func.isRequired,
-  setCurrentContent: React.PropTypes.func.isRequired,
   showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
-  addNewLocalChars: React.PropTypes.func.isRequired,
-  removeDeletedLocalChars: React.PropTypes.func.isRequired,
-  updateCharsOrder: React.PropTypes.func.isRequired
+  save: React.PropTypes.func.isRequired,
+  onChange: React.PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -108,12 +63,6 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   {
-    setLocalContent,
-    saveTextContent,
-    setCurrentContent,
     showFlashMessageWithTimeout,
-    addNewLocalChars,
-    removeDeletedLocalChars,
-    updateCharsOrder
   }
 )(TextEditor);
