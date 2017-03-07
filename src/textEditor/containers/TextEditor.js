@@ -37,9 +37,6 @@ class TextEditor extends React.Component {
             onChange={this.props.onChange}
             readOnly={!this.hasCurrentText()}
           />
-          {DEBUG &&
-            <TextControls onClick={this.props.save} saved={this.props.saved} />
-          }
         </Form>
       </div>
     );

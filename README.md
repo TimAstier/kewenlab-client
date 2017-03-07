@@ -43,6 +43,7 @@ $ git push production master // This will run the build
 - [x] Display words and chars in the right order.
 - [x] Auto-save after change.
 - [ ] notSaved / saving / saved states
+- [ ] display version number
 - [ ] confirmation to leave if note saved
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Better handle async calls (display loaders).
