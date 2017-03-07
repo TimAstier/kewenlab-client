@@ -10,13 +10,12 @@ $ npm start
 ```
 
 ## Deployment
-The app is deployed to Heroku using this [buildpack](https://github.com/mars/create-react-app-buildpack).  
-Note: The current buildpack serves the app with Nginx server. It does not catch all URLs and refresh on browsers results in a 404 error.  
+The app is deployed to Heroku with a Node server as described [here](https://github.com/mars/heroku-cra-node).  
 ESLint config comes from https://github.com/rangle/react-redux-example/blob/master/.eslintrc
 
 ```
-$ heroku create kewen-lab -b https://github.com/mars/create-react-app-buildpack.git --remote production
-// Set environment variables on Heroku (need to be done before building)
+$ heroku create kewen-lab --remote production
+// Set environment variables on Heroku (IMPORTANT: need to be done before building)
 $ git push production master // This will run the build
 ```
 
@@ -25,9 +24,17 @@ $ git push production master // This will run the build
 - REACT_APP_API_URL=
 - REACT_APP_ADMIN_URL=
 
+Note: In order for Environment variables to be updated in the code after a change,
+the app needs to be rebuilt. This can be done by pushing an empty commit like so:
+
+```
+git commit --allow-empty -m "empty commit"
+git push heroku master
+``
+
 ## Environments
 - development - http://localhost:3000
-- staging - https://obscure-lake-53261.herokuapp.com
+- staging - https://limitless-fortress-75797.herokuapp.com
 - production - https://kewen-lab.herokuapp.com
 
 ## TODO
@@ -41,7 +48,7 @@ $ git push production master // This will run the build
 - [x] Save words and chars in the right order.
 - [x] Display words and chars in the right order.
 - [x] Auto-save after change.
-- [ ] Serve the app with different strategy to handle refresh. See [here](https://github.com/mars/create-react-app-buildpack#routing-clean-urls) OR [this](https://github.com/mars/heroku-cra-node)
+- [x] Serve the app with different strategy to handle refresh.
 - [ ] NotSaved / saving / saved states
 - [ ] Confirmation to leave if note saved
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
