@@ -35,7 +35,9 @@ class MainScreen extends React.Component {
     this.timer = null;
   }
 
-  saveTextEditor() {
+  saveTextEditor(e) {
+    // Not sure why this save method does not work as the other 2 without this
+    e.preventDefault();
     // TODO: Use serializers to define which attributes to send in payload
     const data = {
       id: this.props.currentTextId,
@@ -135,8 +137,8 @@ class MainScreen extends React.Component {
     );
   }
 
-  saveAll() {
-    this.saveTextEditor();
+  saveAll(e) {
+    this.saveTextEditor(e);
     this.saveCharsArea();
     this.refreshWords()
     .then(() => {
@@ -145,12 +147,13 @@ class MainScreen extends React.Component {
   }
 
   onTextEditorChange(e) {
+    e.persist();
     this.props.setLocalContent(e.target.value);
     this.refreshChars(toArrayOfUniqueChars(e.target.value));
     // The timer variable needs to be out of the function scope
     clearTimeout(this.timer);
     if (!DEBUG) {
-      this.timer = setTimeout(() => { this.saveAll(); }, 3000);
+      this.timer = setTimeout(() => { this.saveAll(e); }, 3000);
     }
     return this.timer;
   }
