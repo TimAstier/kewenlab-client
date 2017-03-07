@@ -41,13 +41,13 @@ $ git push production master // This will run the build
 - [x] Save words and chars in the right order.
 - [x] Display words and chars in the right order.
 - [x] Auto-save after change.
+- [ ] Serve the app with different strategy to handle refresh. See [here](https://github.com/mars/create-react-app-buildpack#routing-clean-urls) OR [this](https://github.com/mars/heroku-cra-node)
 - [ ] NotSaved / saving / saved states
 - [ ] Confirmation to leave if note saved
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Better handle async calls (display loaders).
 - [ ] Write tests for components.
 - [ ] Write tests for async action creators.
-- [ ] Serve the app with different strategy to handle refresh. See [option 1](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#deployment) and [option 2](https://github.com/mars/heroku-cra-node).
 - [ ] Adjust the css to fit all screens size.
 - [ ] Test in different browsers.
 - [x] Remove redux devTools from production build.
