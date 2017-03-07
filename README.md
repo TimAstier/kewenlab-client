@@ -24,6 +24,7 @@ $ git push production master // This will run the build
 - NODE_ENV=
 - REACT_APP_API_URL=
 - REACT_APP_ADMIN_URL=
+- REACT_APP_DEBUG=
 
 ## Environments
 - development - http://localhost:3000

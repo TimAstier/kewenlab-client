@@ -27,7 +27,6 @@ class TextEditor extends React.Component {
 
   // TODO: Switch to readonly when isSaving
   render() {
-    console.log(DEBUG);
     return (
       <div id="text-editor">
         <h2><Label basic color="black" className="main-label">课文</Label></h2>
