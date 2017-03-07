@@ -10,6 +10,11 @@ $ npm start
 // Need to run kewen-lab-server
 ```
 
+### Debug mode
+
+Activate debug mode by setting REACT_APP_DEBUG env var to true. This disable autosave and display save buttons.  
+
+
 ## Deployment
 The app is deployed to Heroku with a Node server as described [here](https://github.com/mars/heroku-cra-node).  
 ESLint config comes from https://github.com/rangle/react-redux-example/blob/master/.eslintrc

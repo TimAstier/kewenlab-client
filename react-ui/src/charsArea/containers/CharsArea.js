@@ -36,7 +36,7 @@ class CharsArea extends React.Component {
         {this.props.saved &&
           <Stats items={statItems} />
         }
-        {DEBUG &&
+        {(process.env.REACT_APP_DEBUG || DEBUG) &&
           <CharControls
             saved={this.props.saved}
             changeCount={this.props.changeCount}
