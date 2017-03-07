@@ -24,6 +24,7 @@ $ git push production master // This will run the build
 - NODE_ENV=
 - REACT_APP_API_URL=
 - REACT_APP_ADMIN_URL=
+- REACT_APP_DEBUG=
 
 Note: In order for Environment variables to be updated in the code after a change,
 the app needs to be rebuilt. This can be done by pushing an empty commit like so:
@@ -50,6 +51,7 @@ git push heroku master
 - [x] Display words and chars in the right order.
 - [x] Auto-save after change.
 - [x] Serve the app with different strategy to handle refresh.
+- [x] Debug mode.
 - [ ] NotSaved / saving / saved states
 - [ ] Confirmation to leave if note saved
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html

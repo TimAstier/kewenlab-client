@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import WordItemList from '../components/WordItemList';
-// import WordControls from '../components/WordControls';
+import WordControls from '../components/WordControls';
 import Stats from '../../components/common/Stats';
 import { getSaved, countChanges, getTotalItems,
   countNewItems, filterLocalItems } from '../../common/items/selectors';
 import { setWordsVisibilityFilter } from '../actions';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
+import DEBUG from '../../config/debug';
 
 class WordsArea extends React.Component {
   constructor(props) {
@@ -35,14 +36,14 @@ class WordsArea extends React.Component {
         {this.props.saved &&
           <Stats items={statItems} />
         }
-        {/*
+        {DEBUG &&
           <WordControls
             refresh={this.props.refresh}
             saved={this.props.saved}
             changeCount={this.props.changeCount}
             save={this.props.save}
           />
-        */}
+        }
       </div>
     );
   }
