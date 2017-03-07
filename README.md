@@ -4,6 +4,7 @@ It is based on the [create-react-app](https://github.com/facebookincubator/creat
 
 ## Development
 ```
+$ cd react-ui/
 $ npm install
 $ npm start
 // Need to run kewen-lab-server
