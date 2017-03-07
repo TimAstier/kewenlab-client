@@ -7,6 +7,7 @@ import { getSaved, countChanges, getTotalItems,
   countNewItems, filterLocalItems } from '../../common/items/selectors';
 import { setCharsVisibilityFilter } from '../actions';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
+import DEBUG from '../../config/debug';
 
 class CharsArea extends React.Component {
   constructor(props) {
@@ -35,11 +36,13 @@ class CharsArea extends React.Component {
         {this.props.saved &&
           <Stats items={statItems} />
         }
-        <CharControls
-          saved={this.props.saved}
-          changeCount={this.props.changeCount}
-          save={this.props.save}
-        />
+        {DEBUG &&
+          <CharControls
+            saved={this.props.saved}
+            changeCount={this.props.changeCount}
+            save={this.props.save}
+          />
+        }
       </div>
     );
   }
