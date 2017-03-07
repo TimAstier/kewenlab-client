@@ -153,7 +153,7 @@ class MainScreen extends React.Component {
     // The timer variable needs to be out of the function scope
     clearTimeout(this.timer);
     if (!DEBUG) {
-      this.timer = setTimeout(() => { this.saveAll(e); }, 3000);
+      this.timer = setTimeout(() => { this.saveAll(e); }, 1500);
     }
     return this.timer;
   }

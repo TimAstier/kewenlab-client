@@ -39,8 +39,10 @@ $ git push production master // This will run the build
 - [x] Manually added/deleted chars/words feature.
 - [x] Refactor chars/words actions/reducer codes into one.
 - [x] Save words and chars in the right order.
-- [x] Display words and chars in the right order. 
-- [ ] Auto-save after change.
+- [x] Display words and chars in the right order.
+- [x] Auto-save after change.
+- [ ] notSaved / saving / saved states
+- [ ] confirmation to leave if note saved
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Better handle async calls (display loaders).
 - [ ] Write tests for components.
