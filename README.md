@@ -24,7 +24,6 @@ $ git push production master // This will run the build
 - NODE_ENV=
 - REACT_APP_API_URL=
 - REACT_APP_ADMIN_URL=
-- REACT_APP_DEBUG=
 
 ## Environments
 - development - http://localhost:3000
@@ -42,9 +41,8 @@ $ git push production master // This will run the build
 - [x] Save words and chars in the right order.
 - [x] Display words and chars in the right order.
 - [x] Auto-save after change.
-- [ ] notSaved / saving / saved states
-- [ ] display version number
-- [ ] confirmation to leave if note saved
+- [ ] NotSaved / saving / saved states
+- [ ] Confirmation to leave if note saved
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Better handle async calls (display loaders).
 - [ ] Write tests for components.
