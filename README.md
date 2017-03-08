@@ -58,8 +58,9 @@ git push heroku master
 - [x] Serve the app with different strategy to handle refresh.
 - [x] Debug mode.
 - [x] Back to create-react-app with no config.
-- [ ] Correct handling of environvment vars.
-- [ ] NotSaved / saving / saved states
+- [x] Correct handling of environment vars.
+- [x] isSaving states for items with loaders displayed.
+- [ ] Global Saved selector with icon displayed.
 - [ ] Confirmation to leave if note saved
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Better handle async calls (display loaders).

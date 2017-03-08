@@ -1,4 +1,5 @@
 import axios from 'axios';
+import isEmpty from 'lodash/isEmpty';
 
 export function setLocalWords(items) {
   return {
@@ -54,16 +55,44 @@ export function setWordsVisibilityFilter(value) {
   };
 }
 
-// TODO: dispatch actions to handle async request
 export function saveWords(data) {
-  return () => {
+  return dispatch => {
+    dispatch({ type: 'SAVE_WORDS' });
     return axios.put(`${process.env.REACT_APP_API_URL}/api/texts/${data.textId}/words`, data);
   };
+}
+
+export function saveWordsSuccess(items) {
+  return dispatch => {
+    dispatch({ type: 'SAVE_WORDS_SUCCESS' });
+    dispatch(setCurrentWords(items));
+    dispatch(setLocalWords(items));
+    dispatch(clearWordsToDelete());
+    dispatch(clearWordsToUpdate());
+  };
+}
+
+export function saveWordsFailure() {
+    return {
+      type: 'SAVE_WORDS_FAILURE'
+    };
 }
 
 // TODO: dispatch actions to handle async request
 export function tokenize(data) {
   return () => {
     return axios.post(`${process.env.REACT_APP_API_URL}/api/tokenizer`, data);
+  };
+}
+
+// Combinations
+
+export function refreshWords(wordsArray) {
+  return dispatch => {
+    dispatch(removeDeletedLocalWords(wordsArray));
+    if (!isEmpty(wordsArray)) {
+      dispatch(addNewLocalWords(wordsArray));
+      return dispatch(updateWordsOrder(wordsArray));
+    }
   };
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Label } from 'semantic-ui-react';
+import { Table, Label, Loader } from 'semantic-ui-react';
 import CharItem from './CharItem';
 import StatusPicker from '../../components/common/StatusPicker';
 import isEmpty from 'lodash/isEmpty';
@@ -24,11 +24,17 @@ function renderCharItems(chars) {
   return null;
 }
 
-const CharItemList = ({ filteredLocalChars, onFilterClick, visibilityFilter }) => {
+const CharItemList = ({ filteredLocalChars, onFilterClick, visibilityFilter, isSaving }) => {
   return (
     <div id="chars-list">
       <h2>
-        <Label basic circular color="black" className="main-label">字</Label>
+        <Label basic circular color="black" className="main-label">
+          {isSaving ? (
+            <Loader active inline />
+          ) : (
+            '字'
+          )}
+        </Label>
       </h2>
       <div className="table-wrapper">
         <Table celled>

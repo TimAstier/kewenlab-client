@@ -2,19 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { showFlashMessageWithTimeout } from '../actions/flashMessages';
-import { saveTextContent, setCurrentContent,
+import { saveTextContent, saveTextContentSuccess, saveTextContentFailure,
   setLocalContent } from '../textEditor/actions';
-import { saveChars, setCurrentChars, setLocalChars,
-  clearCharsToDelete, clearCharsToUpdate, addNewLocalChars,
-  removeDeletedLocalChars, updateCharsOrder } from '../charsArea/actions';
-import { tokenize, removeDeletedLocalWords, addNewLocalWords,
-  updateWordsOrder, setCurrentWords, setLocalWords, saveWords,
-  clearWordsToDelete, clearWordsToUpdate } from '../wordsArea/actions';
+import { refreshChars, saveChars, saveCharsSuccess, saveCharsFailure }
+  from '../charsArea/actions';
+import { tokenize, refreshWords, saveWords, saveWordsSuccess,
+  saveWordsFailure } from '../wordsArea/actions';
 
 import { deserializeChars, deserializeWords } from '../utils/deserializer';
 import { toChineseOnly, removeDuplicates,
   toArrayOfUniqueChars } from '../utils/custom';
-import isEmpty from 'lodash/isEmpty';
 
 import Sidebar from '../sidebar/containers/Sidebar';
 import TextEditor from '../textEditor/containers/TextEditor';
@@ -27,7 +24,7 @@ class MainScreen extends React.Component {
 
     this.saveTextEditor = this.saveTextEditor.bind(this);
     this.saveCharsArea = this.saveCharsArea.bind(this);
-    this.refreshWords = this.refreshWords.bind(this);
+    this.tokenizeWords = this.tokenizeWords.bind(this);
     this.saveWordsArea = this.saveWordsArea.bind(this);
     this.saveAll = this.saveAll.bind(this);
     this.onTextEditorChange = this.onTextEditorChange.bind(this);
@@ -44,23 +41,16 @@ class MainScreen extends React.Component {
     };
     return this.props.saveTextContent(data).then(
       () => {
-        this.props.setCurrentContent(this.props.localContent);
+        this.props.saveTextContentSuccess(this.props.localContent);
       },
       () => {
+        this.props.saveTextContentFailure();
         this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not save text on the server.'
         });
       }
     );
-  }
-
-  refreshChars(charsArray) {
-    this.props.removeDeletedLocalChars(charsArray);
-    if (!isEmpty(charsArray)) {
-      this.props.addNewLocalChars(charsArray);
-      this.props.updateCharsOrder(charsArray);
-    }
   }
 
   saveCharsArea() {
@@ -73,12 +63,10 @@ class MainScreen extends React.Component {
     };
     return this.props.saveChars(data).then(
       (res) => {
-        this.props.setCurrentChars(deserializeChars(res.data.chars));
-        this.props.setLocalChars(deserializeChars(res.data.chars));
-        this.props.clearCharsToDelete();
-        this.props.clearCharsToUpdate();
+        this.props.saveCharsSuccess(deserializeChars(res.data.chars));
       },
       () => {
+        this.props.saveCharsFailure();
         this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not save chars on the server.'
@@ -87,7 +75,7 @@ class MainScreen extends React.Component {
     );
   }
 
-  refreshWords() {
+  tokenizeWords() {
     // TODO: Use serializers to define which attributes to send in payload
     const data = {
       content: toChineseOnly(this.props.localContent)
@@ -96,11 +84,7 @@ class MainScreen extends React.Component {
       (res) => {
         let newLocalWords = res.data;
         newLocalWords = removeDuplicates(newLocalWords);
-        this.props.removeDeletedLocalWords(newLocalWords);
-        if (!isEmpty(newLocalWords)) {
-          this.props.addNewLocalWords(newLocalWords);
-          return this.props.updateWordsOrder(newLocalWords);
-        }
+        this.props.refreshWords(newLocalWords);
         return false;
       },
       () => {
@@ -122,12 +106,10 @@ class MainScreen extends React.Component {
     };
     return this.props.saveWords(data).then(
       (res) => {
-        this.props.setCurrentWords(deserializeWords(res.data.words));
-        this.props.setLocalWords(deserializeWords(res.data.words));
-        this.props.clearWordsToDelete();
-        this.props.clearWordsToUpdate();
+        this.props.saveWordsSuccess(deserializeWords(res.data.words));
       },
       () => {
+        this.props.saveWordsFailure();
         this.props.showFlashMessageWithTimeout({
           type: 'error',
           text: 'Error: could not save words on the server.'
@@ -139,7 +121,7 @@ class MainScreen extends React.Component {
   saveAll(e) {
     this.saveTextEditor(e);
     this.saveCharsArea();
-    this.refreshWords()
+    this.tokenizeWords()
     .then(() => {
       this.saveWordsArea();
     });
@@ -148,10 +130,11 @@ class MainScreen extends React.Component {
   onTextEditorChange(e) {
     e.persist();
     this.props.setLocalContent(e.target.value);
-    this.refreshChars(toArrayOfUniqueChars(e.target.value));
+    this.props.refreshChars(toArrayOfUniqueChars(e.target.value));
     // The timer variable needs to be out of the function scope
     clearTimeout(this.timer);
     if ((process.env.REACT_APP_DEBUG !== 'on')) {
+      // TODO: Closure to use data at Change time instead of Timeout time
       this.timer = setTimeout(() => { this.saveAll(e); }, 1500);
     }
     return this.timer;
@@ -168,7 +151,7 @@ class MainScreen extends React.Component {
         />
         <CharsArea save={this.saveCharsArea} />
         <WordsArea
-          refresh={this.refreshWords}
+          refresh={this.tokenizeWords}
           save={this.saveWordsArea}
         />
       </div>
@@ -181,31 +164,25 @@ MainScreen.propTypes = {
   currentTextId: React.PropTypes.number.isRequired,
   localContent: React.PropTypes.string.isRequired,
   saveTextContent: React.PropTypes.func.isRequired,
-  setCurrentContent: React.PropTypes.func.isRequired,
+  saveTextContentSuccess: React.PropTypes.func.isRequired,
+  saveTextContentFailure: React.PropTypes.func.isRequired,
   setLocalContent: React.PropTypes.func.isRequired,
   localChars: React.PropTypes.array.isRequired,
   charsToDelete: React.PropTypes.array.isRequired,
   charsToUpdate: React.PropTypes.array.isRequired,
+  refreshChars: React.PropTypes.func.isRequired,
   saveChars: React.PropTypes.func.isRequired,
-  setCurrentChars: React.PropTypes.func.isRequired,
-  setLocalChars: React.PropTypes.func.isRequired,
-  clearCharsToDelete: React.PropTypes.func.isRequired,
-  clearCharsToUpdate: React.PropTypes.func.isRequired,
-  addNewLocalChars: React.PropTypes.func.isRequired,
-  removeDeletedLocalChars: React.PropTypes.func.isRequired,
-  updateCharsOrder: React.PropTypes.func.isRequired,
+  saveCharsSuccess: React.PropTypes.func.isRequired,
+  saveCharsFailure: React.PropTypes.func.isRequired,
   tokenize: React.PropTypes.func.isRequired,
-  removeDeletedLocalWords: React.PropTypes.func.isRequired,
-  addNewLocalWords: React.PropTypes.func.isRequired,
-  updateWordsOrder: React.PropTypes.func.isRequired,
   localWords: React.PropTypes.array.isRequired,
   wordsToDelete: React.PropTypes.array.isRequired,
   wordsToUpdate: React.PropTypes.array.isRequired,
+  refreshWords: React.PropTypes.func.isRequired,
   saveWords: React.PropTypes.func.isRequired,
-  setLocalWords: React.PropTypes.func.isRequired,
-  setCurrentWords: React.PropTypes.func.isRequired,
-  clearWordsToDelete: React.PropTypes.func.isRequired,
-  clearWordsToUpdate: React.PropTypes.func.isRequired
+  saveWordsSuccess: React.PropTypes.func.isRequired,
+  saveWordsFailure: React.PropTypes.func.isRequired
+
 };
 
 function mapStateToProps(state) {
@@ -225,24 +202,17 @@ export default connect(
   mapStateToProps,
   { showFlashMessageWithTimeout,
     saveTextContent,
-    setCurrentContent,
+    saveTextContentSuccess,
+    saveTextContentFailure,
     setLocalContent,
+    refreshChars,
     saveChars,
-    setCurrentChars,
-    setLocalChars,
-    clearCharsToDelete,
-    clearCharsToUpdate,
-    addNewLocalChars,
-    removeDeletedLocalChars,
-    updateCharsOrder,
+    saveCharsSuccess,
+    saveCharsFailure,
     tokenize,
-    removeDeletedLocalWords,
-    addNewLocalWords,
-    updateWordsOrder,
+    refreshWords,
     saveWords,
-    setLocalWords,
-    setCurrentWords,
-    clearWordsToDelete,
-    clearWordsToUpdate
+    saveWordsSuccess,
+    saveWordsFailure,
   }
 )(MainScreen);

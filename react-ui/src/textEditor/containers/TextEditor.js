@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Form, Label } from 'semantic-ui-react';
+import { Form, Label, Loader } from 'semantic-ui-react';
 import { getSaved } from '../reducer';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
 import TextControls from '../components/TextControls';
@@ -28,7 +28,13 @@ class TextEditor extends React.Component {
   render() {
     return (
       <div id="text-editor">
-        <h2><Label basic color="black" className="main-label">课文</Label></h2>
+        <h2><Label basic color="black" className="main-label">
+          {this.props.isSaving ? (
+            <Loader active inline />
+          ) : (
+            '课文'
+          )}
+        </Label></h2>
         <Form id="text-editor-form">
           <TextInput
             placeholder={this.placeholder()}
@@ -51,6 +57,7 @@ TextEditor.propTypes = {
   saved: React.PropTypes.bool.isRequired,
   showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
   save: React.PropTypes.func.isRequired,
+  isSaving: React.PropTypes.bool.isRequired,
   onChange: React.PropTypes.func.isRequired
 };
 
@@ -58,7 +65,8 @@ function mapStateToProps(state) {
   return {
     localContent: state.get('textEditor').get('localContent'),
     currentTextId: state.get('sidebar').get('currentTextId'),
-    saved: getSaved(state.get('textEditor'))
+    saved: getSaved(state.get('textEditor')),
+    isSaving: state.get('textEditor').get('isSaving')
   };
 }
 

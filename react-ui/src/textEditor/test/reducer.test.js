@@ -6,7 +6,8 @@ describe('textEditor reducer', () => {
   it('returns the initial state', () => {
     expect(reducer(undefined, {})).toEqual(Map({
       localContent: '',
-      currentContent: ''
+      currentContent: '',
+      isSaving: false
     }));
   });
 
@@ -35,6 +36,42 @@ describe('textEditor reducer', () => {
     expect(nextState).toEqual(Map({
       localContent: '法国',
       currentContent: '瑞典'
+    }));
+  });
+
+  it('handles SAVE_TEXT_CONTENT', () => {
+    const initialState = Map({
+      isSaving: false
+    });
+    const action = { type: 'SAVE_TEXT_CONTENT' };
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).toEqual(Map({
+      isSaving: true
+    }));
+  });
+
+  it('handles SAVE_TEXT_CONTENT_SUCCESS', () => {
+    const initialState = Map({
+      isSaving: true
+    });
+    const action = { type: 'SAVE_TEXT_CONTENT_SUCCESS' };
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).toEqual(Map({
+      isSaving: false
+    }));
+  });
+
+  it('handles SAVE_TEXT_CONTENT_FAILURE', () => {
+    const initialState = Map({
+      isSaving: true
+    });
+    const action = { type: 'SAVE_TEXT_CONTENT_FAILURE' };
+    const nextState = reducer(initialState, action);
+
+    expect(nextState).toEqual(Map({
+      isSaving: false
     }));
   });
 

@@ -16,7 +16,8 @@ describe('items reducer', () => {
       currentItems: List([]),
       itemsToDelete: List([]),
       itemsToUpdate: List([]),
-      visibilityFilter: 'all'
+      visibilityFilter: 'all',
+      isSaving: false
     }));
   });
 
@@ -439,6 +440,7 @@ describe('items reducer', () => {
       });
       const itemsArray = ['三', '二', '一'];
       const charsAction = charsActions.updateCharsOrder(itemsArray);
+      const wordsAction = wordsActions.updateWordsOrder(itemsArray);
       const expectedState = fromJS({
         localItems: [
           { id: null, chinese: '一', order: 2 },
@@ -455,6 +457,7 @@ describe('items reducer', () => {
       });
 
       expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+      expect(wordsReducer(initialState, wordsAction)).toEqual(expectedState);
     });
   });
 
@@ -468,5 +471,41 @@ describe('items reducer', () => {
     });
 
     expect(charsReducer(initialState, charsAction)).toEqual(expectedState);
+  });
+
+  it('handles SAVE_ITEMS', () => {
+    const intialState = Map({
+      isSaving: false
+    });
+    const charsAction = { type: 'SAVE_CHARS' };
+    const expectedState = Map({
+      isSaving: true
+    });
+
+    expect(charsReducer(intialState, charsAction)).toEqual(expectedState);
+  });
+
+  it('handles SAVE_ITEMS_SUCCESS', () => {
+    const intialState = Map({
+      isSaving: true
+    });
+    const charsAction = { type: 'SAVE_CHARS_SUCCESS' };
+    const expectedState = Map({
+      isSaving: false
+    });
+
+    expect(charsReducer(intialState, charsAction)).toEqual(expectedState);
+  });
+
+  it('handles SAVE_ITEMS_FAILURE', () => {
+    const intialState = Map({
+      isSaving: true
+    });
+    const charsAction = { type: 'SAVE_CHARS_FAILURE' };
+    const expectedState = Map({
+      isSaving: false
+    });
+
+    expect(charsReducer(intialState, charsAction)).toEqual(expectedState);
   });
 });

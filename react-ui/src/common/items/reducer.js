@@ -5,7 +5,8 @@ export const INITIAL_STATE = Map({
   currentItems: List(),
   itemsToDelete: List(),
   itemsToUpdate: List(),
-  visibilityFilter: 'all'
+  visibilityFilter: 'all',
+  isSaving: false
 });
 
 // case reducers (tested indirectly in slice reducer's test):
@@ -118,6 +119,18 @@ function clearItemsToUpdate(state) {
   return state.set('itemsToUpdate', List());
 }
 
+function saveItems(state) {
+  return state.set('isSaving', true);
+}
+
+function saveItemsSuccess(state) {
+  return state.set('isSaving', false);
+}
+
+function saveItemsFailure(state) {
+  return state.set('isSaving', false);
+}
+
 // high-order reducer:
 export default (itemName = '') => {
   // slice reducer:
@@ -139,6 +152,12 @@ export default (itemName = '') => {
         return updateItemsOrder(state, action);
       case `CLEAR_${itemName}_TO_UPDATE`:
         return clearItemsToUpdate(state);
+      case `SAVE_${itemName}`:
+        return saveItems(state);
+      case `SAVE_${itemName}_SUCCESS`:
+        return saveItemsSuccess(state);
+      case `SAVE_${itemName}_FAILURE`:
+        return saveItemsFailure(state);
       default:
         return state;
     }

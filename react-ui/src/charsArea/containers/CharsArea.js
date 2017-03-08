@@ -31,6 +31,7 @@ class CharsArea extends React.Component {
           filteredLocalChars={this.props.filteredLocalChars}
           onFilterClick={this.onFilterClick}
           visibilityFilter={this.props.visibilityFilter}
+          isSaving={this.props.isSaving}
         />
         {this.props.saved &&
           <Stats items={statItems} />
@@ -50,6 +51,7 @@ class CharsArea extends React.Component {
 CharsArea.propTypes = {
   save: React.PropTypes.func.isRequired,
   saved: React.PropTypes.bool.isRequired,
+  isSaving: React.PropTypes.bool.isRequired,
   changeCount: React.PropTypes.number.isRequired,
   showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
   totalChars: React.PropTypes.number.isRequired,
@@ -62,6 +64,7 @@ CharsArea.propTypes = {
 function mapStateToProps(state) {
   return {
     saved: getSaved(state.get('chars')),
+    isSaving: state.get('chars').get('isSaving'),
     changeCount: countChanges(state.get('chars')),
     totalChars: getTotalItems(state.get('chars')),
     totalNewChars: countNewItems(state.get('chars')),

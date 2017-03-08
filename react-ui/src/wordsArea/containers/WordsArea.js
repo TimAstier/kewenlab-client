@@ -31,6 +31,7 @@ class WordsArea extends React.Component {
           filteredLocalWords={this.props.filteredLocalWords}
           onFilterClick={this.onFilterClick}
           visibilityFilter={this.props.visibilityFilter}
+          isSaving={this.props.isSaving}
         />
         {this.props.saved &&
           <Stats items={statItems} />
@@ -52,6 +53,7 @@ WordsArea.propTypes = {
   showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
   refresh: React.PropTypes.func.isRequired,
   save: React.PropTypes.func.isRequired,
+  isSaving: React.PropTypes.bool.isRequired,
   saved: React.PropTypes.bool.isRequired,
   changeCount: React.PropTypes.number.isRequired,
   totalWords: React.PropTypes.number.isRequired,
@@ -64,6 +66,7 @@ WordsArea.propTypes = {
 function mapStateToProps(state) {
   return {
     saved: getSaved(state.get('words')),
+    isSaving: state.get('words').get('isSaving'),
     changeCount: countChanges(state.get('words')),
     totalWords: getTotalItems(state.get('words')),
     totalNewWords: countNewItems(state.get('words')),

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Label } from 'semantic-ui-react';
+import { Table, Label, Loader } from 'semantic-ui-react';
 import WordItem from './WordItem';
 import StatusPicker from '../../components/common/StatusPicker';
 import isEmpty from 'lodash/isEmpty';
@@ -24,11 +24,17 @@ function renderWordItems(words) {
   return null;
 }
 
-const WordItemList = ({ filteredLocalWords, onFilterClick, visibilityFilter }) => {
+const WordItemList = ({ filteredLocalWords, onFilterClick, visibilityFilter, isSaving }) => {
   return (
     <div id="words-list">
       <h2>
-        <Label basic circular color="black" className="main-label">词</Label>
+        <Label basic circular color="black" className="main-label">
+          {isSaving ? (
+            <Loader active inline />
+          ) : (
+            '词'
+          )}
+        </Label>
       </h2>
       <div className="table-wrapper">
         <Table celled>
