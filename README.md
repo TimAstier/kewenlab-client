@@ -1,6 +1,6 @@
 # Kewen-lab-client
 The application is built with react and redux.  
-It is based on the [create-react-app](https://github.com/facebookincubator/create-react-app) repository (after $ npm run eject).
+It is based on the [create-react-app](https://github.com/facebookincubator/create-react-app).
 
 ## Development
 ```
@@ -57,6 +57,8 @@ git push heroku master
 - [x] Auto-save after change.
 - [x] Serve the app with different strategy to handle refresh.
 - [x] Debug mode.
+- [x] Back to create-react-app with no config.
+- [ ] Correct handling of environvment vars.
 - [ ] NotSaved / saving / saved states
 - [ ] Confirmation to leave if note saved
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html

@@ -7,7 +7,6 @@ import { getSaved, countChanges, getTotalItems,
   countNewItems, filterLocalItems } from '../../common/items/selectors';
 import { setWordsVisibilityFilter } from '../actions';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
-import DEBUG from '../../config/debug';
 
 class WordsArea extends React.Component {
   constructor(props) {
@@ -36,7 +35,7 @@ class WordsArea extends React.Component {
         {this.props.saved &&
           <Stats items={statItems} />
         }
-        {(DEBUG === 'on') &&
+        {(process.env.REACT_APP_DEBUG === 'on') &&
           <WordControls
             refresh={this.props.refresh}
             saved={this.props.saved}

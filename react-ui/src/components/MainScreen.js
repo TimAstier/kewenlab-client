@@ -15,7 +15,6 @@ import { deserializeChars, deserializeWords } from '../utils/deserializer';
 import { toChineseOnly, removeDuplicates,
   toArrayOfUniqueChars } from '../utils/custom';
 import isEmpty from 'lodash/isEmpty';
-import DEBUG from '../config/debug';
 
 import Sidebar from '../sidebar/containers/Sidebar';
 import TextEditor from '../textEditor/containers/TextEditor';
@@ -152,7 +151,7 @@ class MainScreen extends React.Component {
     this.refreshChars(toArrayOfUniqueChars(e.target.value));
     // The timer variable needs to be out of the function scope
     clearTimeout(this.timer);
-    if ((DEBUG !== 'on')) {
+    if ((process.env.REACT_APP_DEBUG !== 'on')) {
       this.timer = setTimeout(() => { this.saveAll(e); }, 1500);
     }
     return this.timer;

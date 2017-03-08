@@ -1,5 +1,4 @@
 import axios from 'axios';
-import API_URL from '../config/api';
 
 export function setLocalChars(items) {
   return {
@@ -58,6 +57,6 @@ export function setCharsVisibilityFilter(value) {
 // TODO: dispatch actions to handle async request
 export function saveChars(data) {
   return () => {
-    return axios.put(`${API_URL}/api/texts/${data.textId}/chars`, data);
+    return axios.put(`${process.env.REACT_APP_API_URL}/api/texts/${data.textId}/chars`, data);
   };
 }

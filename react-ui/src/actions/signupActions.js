@@ -1,13 +1,12 @@
 import axios from 'axios';
-import API_URL from '../config/api';
 
 export function userSignupRequest(userData) {
   return () => {
-    return axios.post(`${API_URL}/api/users`, userData);
+    return axios.post(`${process.env.REACT_APP_API_URL}/api/users`, userData);
   };
 }
 export function isUserExists(identifier) {
   return () => {
-    return axios.get(`${API_URL}/api/users/${identifier}`);
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/users/${identifier}`);
   };
 }

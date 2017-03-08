@@ -5,7 +5,6 @@ import { getSaved } from '../reducer';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
 import TextControls from '../components/TextControls';
 import TextInput from '../components/TextInput';
-import DEBUG from '../../config/debug';
 
 class TextEditor extends React.Component {
   constructor(props) {
@@ -37,7 +36,7 @@ class TextEditor extends React.Component {
             onChange={this.props.onChange}
             readOnly={!this.hasCurrentText()}
           />
-          {(DEBUG === 'on') &&
+          {(process.env.REACT_APP_DEBUG === 'on') &&
             <TextControls onClick={this.props.save} saved={this.props.saved} />
           }
         </Form>

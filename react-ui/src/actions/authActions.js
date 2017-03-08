@@ -1,5 +1,4 @@
 import axios from 'axios';
-import API_URL from '../config/api';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
 import jwtDecode from 'jwt-decode';
 import { SET_CURRENT_USER } from './types';
@@ -21,7 +20,7 @@ export function logout() {
 
 export function login(data) {
   return dispatch => {
-    return axios.post(`${API_URL}/api/auth`, data).then(res => {
+    return axios.post(`${process.env.REACT_APP_API_URL}/api/auth`, data).then(res => {
       const token = res.data.token;
       localStorage.setItem('jwtToken', token);
       setAuthorizationToken(token);

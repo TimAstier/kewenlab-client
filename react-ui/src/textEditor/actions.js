@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as t from './actionTypes';
-import API_URL from '../config/api';
 
 export function setLocalContent(content) {
   return {
@@ -20,6 +19,6 @@ export function setCurrentContent(content) {
 // TODO: test async action creators
 export function saveTextContent(data) {
   return () => {
-    return axios.put(`${API_URL}/api/texts/${data.id}`, data);
+    return axios.put(`${process.env.REACT_APP_API_URL}/api/texts/${data.id}`, data);
   };
 }

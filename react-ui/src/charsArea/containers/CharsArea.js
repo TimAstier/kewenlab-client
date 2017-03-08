@@ -7,7 +7,6 @@ import { getSaved, countChanges, getTotalItems,
   countNewItems, filterLocalItems } from '../../common/items/selectors';
 import { setCharsVisibilityFilter } from '../actions';
 import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
-import DEBUG from '../../config/debug';
 
 class CharsArea extends React.Component {
   constructor(props) {
@@ -36,7 +35,7 @@ class CharsArea extends React.Component {
         {this.props.saved &&
           <Stats items={statItems} />
         }
-        {(DEBUG === 'on') &&
+        {(process.env.REACT_APP_DEBUG === 'on') &&
           <CharControls
             saved={this.props.saved}
             changeCount={this.props.changeCount}
