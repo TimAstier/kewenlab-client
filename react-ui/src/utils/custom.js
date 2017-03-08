@@ -1,6 +1,7 @@
 import isEmpty from 'lodash/isEmpty';
 
 export function toChineseOnly(string) {
+  // eslint-disable-next-line
   const allExceptChinese = /[A-z]|[0-9]|[.,\/#!?$%\^&\*;:{}=\-_`~()。？！…@€£+àçèé~<>，；：＂、“”（）《》％·]|\s/g;
   return string.replace(allExceptChinese, '');
 }
