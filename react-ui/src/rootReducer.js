@@ -7,6 +7,7 @@ import textEditor from './textEditor';
 import sidebar from './sidebar';
 import charsArea from './charsArea';
 import wordsArea from './wordsArea';
+import suggestionInput from './suggestionInput';
 
 import createItemsReducerWithNamedType from './common/items/reducer';
 
@@ -20,5 +21,6 @@ export default combineReducers({
   [sidebar.constants.NAME]: sidebar.reducer,
   [charsArea.constants.NAME]: charsReducer,
   [wordsArea.constants.NAME]: wordsReducer,
+  [suggestionInput.constants.NAME]: suggestionInput.reducer,
   routing: routerReducer
 });

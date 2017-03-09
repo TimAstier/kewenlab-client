@@ -19,8 +19,8 @@ const SuggestionForm = ({checked, value, handleChange,
           <label>Number of text(s) to consider</label>
           <input
             placeholder="0"
-            value={value}
-            onChange={handleChange}
+            value={(value === 0) ? '' : value}
+              onChange={handleChange}
           />
         </Form.Field>
         <Button type="submit" size="big">
@@ -33,7 +33,7 @@ const SuggestionForm = ({checked, value, handleChange,
 
 SuggestionForm.propTypes = {
   checked: React.PropTypes.bool.isRequired,
-  value: React.PropTypes.string.isRequired,
+  value: React.PropTypes.number.isRequired,
   handleChange: React.PropTypes.func.isRequired,
   handleCheck: React.PropTypes.func.isRequired,
   hidden: React.PropTypes.bool.isRequired

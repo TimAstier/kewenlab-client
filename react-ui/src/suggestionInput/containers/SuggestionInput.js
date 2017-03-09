@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SuggestionForm from '../components/SuggestionForm';
+import { setSuggestionTextNumber } from '../actions';
 
 class SuggestionInput extends React.Component {
   constructor(props) {
@@ -7,7 +9,6 @@ class SuggestionInput extends React.Component {
 
     this.state = {
       checked: false,
-      value: '',
       hidden: true
     }
 
@@ -16,14 +17,14 @@ class SuggestionInput extends React.Component {
   }
 
   handleChange(e) {
-    this.setState({value: e.target.value});
+    this.props.setSuggestionTextNumber(Number(e.target.value));
   }
 
   handleCheck(e) {
     const checked = this.state.checked
     this.setState({checked: !checked});
     this.setState({hidden: checked});
-    this.setState({value: ''});
+    this.props.setSuggestionTextNumber(0);
   }
 
   render() {
@@ -31,7 +32,7 @@ class SuggestionInput extends React.Component {
       <div id="suggestion-input">
         <SuggestionForm
           checked={this.state.checked}
-          value={this.state.value}
+          value={this.props.textNumber}
           handleChange={this.handleChange}
           handleCheck={this.handleCheck}
           hidden={this.state.hidden}
@@ -41,4 +42,18 @@ class SuggestionInput extends React.Component {
   }
 }
 
-export default SuggestionInput;
+SuggestionInput.propTypes = {
+  setSuggestionTextNumber: React.PropTypes.func.isRequired,
+  textNumber: React.PropTypes.number.isRequired
+}
+
+function mapStateToProps(state) {
+  return {
+    textNumber: state.get('suggestionInput').get('textNumber')
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  { setSuggestionTextNumber }
+)(SuggestionInput);
