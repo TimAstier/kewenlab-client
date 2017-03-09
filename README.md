@@ -63,7 +63,7 @@ git push heroku master
 - [ ] Global Saved selector with icon displayed.
 - [ ] Confirmation to leave if note saved
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
-- [ ] Better handle async calls (display loaders).
+- [ ] Loaders for Sidebar and contents.
 - [ ] Write tests for components.
 - [ ] Write tests for async action creators.
 - [ ] Adjust the css to fit all screens size.
