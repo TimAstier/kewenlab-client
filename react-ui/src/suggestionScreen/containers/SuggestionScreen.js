@@ -43,12 +43,12 @@ class SuggestionScreen extends React.Component {
           isFetching={this.props.isFetching}
         />
         <ItemList
-          suggestedItems={['一', '二', '三']}
+          suggestedItems={this.props.suggestedChars}
           type={'chars'}
           isFetching={this.props.isFetching}
         />
         <ItemList
-          suggestedItems={['水', '山', '地']}
+          suggestedItems={this.props.suggestedWords}
           type={'words'}
           isFetching={this.props.isFetching}
         />
@@ -64,14 +64,18 @@ SuggestionScreen.propTypes = {
   fetchSuggestions: React.PropTypes.func.isRequired,
   fetchSuggestionsSuccess: React.PropTypes.func.isRequired,
   fetchSuggestionFailure: React.PropTypes.func.isRequired,
-  isFetching: React.PropTypes.bool.isRequired
+  isFetching: React.PropTypes.bool.isRequired,
+  suggestedChars: React.PropTypes.array.isRequired,
+  suggestedWords: React.PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {
   return {
     currentTextId: state.get('sidebar').get('currentTextId'),
     textNumber: state.get('suggestionInput').get('textNumber'),
-    isFetching: state.get('suggestionScreen').get('isFetching')
+    isFetching: state.get('suggestionScreen').get('isFetching'),
+    suggestedChars: state.get('suggestionScreen').get('chars').toJS(),
+    suggestedWords: state.get('suggestionScreen').get('words').toJS()
   };
 }
 
