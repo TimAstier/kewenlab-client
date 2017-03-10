@@ -23,7 +23,13 @@ const SuggestionForm = ({checked, value, handleChange,
             onChange={handleChange}
           />
         </Form.Field>
-        <Button type="submit" size="big" onClick={onClick} loading={isFetching}>
+        <Button
+          type="submit"
+          size="big"
+          onClick={onClick}
+          loading={isFetching}
+          disabled={isFetching}
+        >
           Find suggestions
         </Button>
       </Form>

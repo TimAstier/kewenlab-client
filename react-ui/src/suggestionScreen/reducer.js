@@ -16,8 +16,10 @@ export default (state = INITIAL_STATE, action) => {
     case t.FETCH_SUGGESTIONS_FAILURE:
       return state.set('isFetching', false);
     case t.SET_SUGGESTIONS:
-      state.set('chars', fromJS(action.data.chars));
-      return state.set('words', fromJS(action.data.words));
+      return state.merge(fromJS({
+        chars: action.suggestions.data.chars,
+        words: action.suggestions.data.words
+      }));
     default:
       return state;
   }

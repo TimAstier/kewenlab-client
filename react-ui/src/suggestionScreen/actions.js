@@ -11,7 +11,7 @@ export function setSuggestions(data) {
 export function fetchSuggestions(data) {
   return dispatch => {
     dispatch({ type: t.FETCH_SUGGESTIONS });
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${data.id}/suggestions`, data);
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${data.currentTextId}/suggestions/${data.textNumber}`);
   };
 };
 

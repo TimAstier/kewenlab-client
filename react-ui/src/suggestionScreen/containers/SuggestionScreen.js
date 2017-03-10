@@ -20,7 +20,7 @@ class SuggestionScreen extends React.Component {
   findSuggestions(data) {
     return this.props.fetchSuggestions(data).then(
       (res) => {
-        return this.props.fetchSuggestionsSuccess(res.data.chars);
+        return this.props.fetchSuggestionsSuccess(res.data);
       },
       () => {
         this.props.fetchSuggestionFailure();
