@@ -5,6 +5,9 @@ import { showFlashMessageWithTimeout } from '../actions/flashMessages';
 
 import Sidebar from '../sidebar/containers/Sidebar';
 import SuggestionInput from '../suggestionInput/containers/SuggestionInput';
+import ItemList from './components/ItemList';
+// import WordItemList from './components/WordItemList';
+
 
 class MainScreen extends React.Component {
 
@@ -14,6 +17,14 @@ class MainScreen extends React.Component {
       <div id="main-screen">
         <Sidebar showFlashMessageWithTimeout={showFlashMessageWithTimeout} />
         <SuggestionInput />
+        <ItemList
+          suggestedItems={['一', '二', '三']}
+          type={'chars'}
+        />
+        <ItemList
+          suggestedItems={['水', '山', '地']}
+          type={'words'}
+        />
       </div>
     );
   }

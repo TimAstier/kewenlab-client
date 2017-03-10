@@ -20,7 +20,7 @@ const SuggestionForm = ({checked, value, handleChange,
           <input
             placeholder="0"
             value={(value === 0) ? '' : value}
-              onChange={handleChange}
+            onChange={handleChange}
           />
         </Form.Field>
         <Button type="submit" size="big">

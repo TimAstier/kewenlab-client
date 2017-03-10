@@ -105,7 +105,6 @@ h2 {
   float: left;
   height: 100%;
   width: 280px;
-  float: left;
 }
 
 #chars-area > table {
@@ -146,7 +145,7 @@ h2 {
 
 #suggestion-input {
   height: 100%;
-  width: 250px;
+  width: 550px;
   float: left;
 }
 
@@ -165,5 +164,22 @@ h2 {
 }
 
 #suggestion-form label {
-  font-size: 12px;
+  font-size: 16px;
+}
+
+/* Suggestion CharsList */
+
+#suggestion-chars-list {
+  float: left;
+  height: 100%;
+  width: 280px;
+}
+
+/* Suggestion WordsList */
+
+#suggestion-words-list {
+  height: 100%;
+  margin-left: 1040px;
+  padding-left: 30px;
+  padding-right: 30px;
 }
