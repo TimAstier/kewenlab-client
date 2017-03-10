@@ -2,7 +2,7 @@ import React from 'react';
 import { Segment, Form, Button, Radio } from 'semantic-ui-react';
 
 const SuggestionForm = ({checked, value, handleChange,
-  handleCheck, hidden}) => {
+  handleCheck, hidden, onClick, isFetching}) => {
 
   return (
     <Segment raised id="suggestion-form">
@@ -23,7 +23,7 @@ const SuggestionForm = ({checked, value, handleChange,
             onChange={handleChange}
           />
         </Form.Field>
-        <Button type="submit" size="big">
+        <Button type="submit" size="big" onClick={onClick} loading={isFetching}>
           Find suggestions
         </Button>
       </Form>
@@ -36,7 +36,10 @@ SuggestionForm.propTypes = {
   value: React.PropTypes.number.isRequired,
   handleChange: React.PropTypes.func.isRequired,
   handleCheck: React.PropTypes.func.isRequired,
-  hidden: React.PropTypes.bool.isRequired
+  hidden: React.PropTypes.bool.isRequired,
+  onClick: React.PropTypes.func.isRequired,
+  currentTextId: React.PropTypes.number.isRequired,
+  isFetching: React.PropTypes.bool.isRequired
 };
 
 export default SuggestionForm;

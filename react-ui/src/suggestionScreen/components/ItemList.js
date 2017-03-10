@@ -19,9 +19,12 @@ function renderItems(items) {
   return null;
 }
 
-const ItemList = ({ suggestedItems, type }) => {
+const ItemList = ({ suggestedItems, type, isFetching }) => {
   return (
-    <div id={(type === 'chars') ? 'suggestion-chars-list' : 'suggestion-words-list'}>
+    <div
+      id={(type === 'chars') ?'suggestion-chars-list' : 'suggestion-words-list'}
+      hidden={isFetching}
+    >
       <h2>
         <Label basic circular color="black" className="main-label">
           {(type === 'chars') ? '字' : '词'}
@@ -47,7 +50,8 @@ const ItemList = ({ suggestedItems, type }) => {
 
 ItemList.propTypes = {
   suggestedItems: React.PropTypes.array.isRequired,
-  type: React.PropTypes.string.isRequired
+  type: React.PropTypes.string.isRequired,
+  isFetching: React.PropTypes.bool.isRequired
 };
 
 export default ItemList;

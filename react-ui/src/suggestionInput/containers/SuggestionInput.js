@@ -14,6 +14,7 @@ class SuggestionInput extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
+    this.onClick = this.onClick.bind(this);
   }
 
   handleChange(e) {
@@ -27,6 +28,15 @@ class SuggestionInput extends React.Component {
     this.props.setSuggestionTextNumber(0);
   }
 
+  onClick(e) {
+    e.preventDefault();
+    const data = {
+      currentTextId: this.props.currentTextId,
+      textNumber: this.props.textNumber
+    }
+    this.props.findSuggestions(data);
+  }
+
   render() {
     return (
       <div id="suggestion-input">
@@ -36,6 +46,9 @@ class SuggestionInput extends React.Component {
           handleChange={this.handleChange}
           handleCheck={this.handleCheck}
           hidden={this.state.hidden}
+          onClick={this.onClick}
+          currentTextId={this.props.currentTextId}
+          isFetching={this.props.isFetching}
         />
       </div>
     );
@@ -44,7 +57,10 @@ class SuggestionInput extends React.Component {
 
 SuggestionInput.propTypes = {
   setSuggestionTextNumber: React.PropTypes.func.isRequired,
-  textNumber: React.PropTypes.number.isRequired
+  textNumber: React.PropTypes.number.isRequired,
+  findSuggestions: React.PropTypes.func.isRequired,
+  currentTextId: React.PropTypes.number.isRequired,
+  isFetching: React.PropTypes.bool.isRequired
 }
 
 function mapStateToProps(state) {

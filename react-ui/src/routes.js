@@ -6,7 +6,7 @@ import SignupPage from './components/signup/SignupPage';
 import Greetings from './components/Greetings';
 import LoginPage from './components/login/LoginPage';
 import EditScreen from './editScreen/EditScreen';
-import SuggestionScreen from './suggestionScreen/SuggestionScreen';
+import SuggestionScreen from './suggestionScreen/containers/SuggestionScreen';
 
 import requireAuth from './utils/requireAuth';
 
