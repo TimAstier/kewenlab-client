@@ -17,8 +17,8 @@ export default (state = INITIAL_STATE, action) => {
       return state.set('isFetching', false);
     case t.SET_SUGGESTIONS:
       return state.merge(fromJS({
-        chars: action.suggestions.data.chars,
-        words: action.suggestions.data.words
+        chars: action.suggestions.chars,
+        words: action.suggestions.words
       }));
     default:
       return state;
