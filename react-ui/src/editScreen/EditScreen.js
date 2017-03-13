@@ -10,8 +10,8 @@ import { tokenize, refreshWords, saveWords, saveWordsSuccess,
   saveWordsFailure } from '../wordsArea/actions';
 
 import { deserializeChars, deserializeWords } from '../utils/deserializer';
-import { toChineseOnly, removeDuplicates,
-  toArrayOfUniqueChars } from '../utils/custom';
+import { removeDuplicates, toArrayOfUniqueChars, preTokenization,
+  removeDolars } from '../utils/custom';
 
 import Sidebar from '../sidebar/containers/Sidebar';
 import TextEditor from '../textEditor/containers/TextEditor';
@@ -78,12 +78,13 @@ class MainScreen extends React.Component {
   tokenizeWords() {
     // TODO: Use serializers to define which attributes to send in payload
     const data = {
-      content: toChineseOnly(this.props.localContent)
+      content: preTokenization(this.props.localContent)
     };
     return this.props.tokenize(data).then(
       (res) => {
         let newLocalWords = res.data;
-        newLocalWords = removeDuplicates(newLocalWords);
+        newLocalWords = removeDolars(removeDuplicates(newLocalWords));
+        console.log(newLocalWords);
         this.props.refreshWords(newLocalWords);
         return false;
       },
