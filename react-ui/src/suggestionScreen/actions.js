@@ -5,7 +5,13 @@ export function setSuggestions(data) {
   return {
     type: t.SET_SUGGESTIONS,
     suggestions: data
-  }
+  };
+};
+
+export function clearSuggestions() {
+  return {
+    type: t.CLEAR_SUGGESTIONS
+  };
 };
 
 export function fetchSuggestions(data) {

@@ -20,6 +20,11 @@ export default (state = INITIAL_STATE, action) => {
         chars: action.suggestions.chars,
         words: action.suggestions.words
       }));
+    case t.CLEAR_SUGGESTIONS:
+      return state.merge(fromJS({
+        chars: [],
+        words: []
+      }));
     default:
       return state;
   }

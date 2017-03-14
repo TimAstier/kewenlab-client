@@ -8,6 +8,7 @@ import { setCurrentChars, setLocalChars,
   clearCharsToDelete, clearCharsToUpdate } from '../../charsArea/actions';
 import { setCurrentWords, setLocalWords,
   clearWordsToDelete, clearWordsToUpdate } from '../../wordsArea/actions';
+import { clearSuggestions } from '../../suggestionScreen/actions';
 import { deserializeChars, deserializeWords } from '../../utils/deserializer';
 
 class TextItemsMenu extends React.Component {
@@ -57,6 +58,7 @@ class TextItemsMenu extends React.Component {
         this.props.setCurrentWords(words);
         this.props.clearWordsToDelete();
         this.props.clearWordsToUpdate();
+        this.props.clearSuggestions();
       },
       () => {
         this.props.showFlashMessageWithTimeout({
@@ -92,7 +94,8 @@ TextItemsMenu.propTypes = {
   clearWordsToDelete: React.PropTypes.func.isRequired,
   clearCharsToUpdate: React.PropTypes.func.isRequired,
   clearWordsToUpdate: React.PropTypes.func.isRequired,
-  currentTextId: React.PropTypes.number.isRequired
+  currentTextId: React.PropTypes.number.isRequired,
+  clearSuggestions: React.PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -115,5 +118,6 @@ export default connect(
     clearCharsToDelete,
     clearWordsToDelete,
     clearCharsToUpdate,
-    clearWordsToUpdate
+    clearWordsToUpdate,
+    clearSuggestions
   })(TextItemsMenu);
