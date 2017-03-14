@@ -14,16 +14,12 @@ class TextItemsMenu extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeItem: ''
-    };
-
     this.handleItemClick = this.handleItemClick.bind(this);
     this.renderTextItem = this.renderTextItem.bind(this);
   }
 
   renderTextItem(textItem, i) {
-    const { activeItem } = this.state;
+    const activeItem = this.props.currentTextId;
 
     return (
       <Menu.Item
@@ -45,7 +41,6 @@ class TextItemsMenu extends React.Component {
   }
 
   handleItemClick(e, { data }) {
-    this.setState({ activeItem: data });
     return this.props.getCurrentText(data).then(
       (res) => {
         const text = res[0].data.text;
@@ -96,11 +91,18 @@ TextItemsMenu.propTypes = {
   clearCharsToDelete: React.PropTypes.func.isRequired,
   clearWordsToDelete: React.PropTypes.func.isRequired,
   clearCharsToUpdate: React.PropTypes.func.isRequired,
-  clearWordsToUpdate: React.PropTypes.func.isRequired
+  clearWordsToUpdate: React.PropTypes.func.isRequired,
+  currentTextId: React.PropTypes.number.isRequired
 };
 
+function mapStateToProps(state) {
+  return {
+    currentTextId: state.get('sidebar').get('currentTextId')
+  };
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   {
     getCurrentText,
     setCurrentTextId,
