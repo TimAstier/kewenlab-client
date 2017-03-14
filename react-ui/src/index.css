@@ -183,3 +183,14 @@ h2 {
   padding-left: 30px;
   padding-right: 30px;
 }
+
+/* screen level */
+
+#screen-message {
+  margin-top: 0px;
+  float: left;
+  height: 100%;
+  width: 1230px;
+  text-align: center;
+  padding-top: 100px;
+}

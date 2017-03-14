@@ -17,6 +17,7 @@ import Sidebar from '../sidebar/containers/Sidebar';
 import TextEditor from '../textEditor/containers/TextEditor';
 import CharsArea from '../charsArea/containers/CharsArea';
 import WordsArea from '../wordsArea/containers/WordsArea';
+import SelectMessage from '../components/common/SelectMessage';
 
 class MainScreen extends React.Component {
   constructor(props) {
@@ -142,19 +143,25 @@ class MainScreen extends React.Component {
   }
 
   render() {
-    const { showFlashMessageWithTimeout } = this.props;
+    const { showFlashMessageWithTimeout, currentTextId } = this.props;
     return (
       <div id="main-screen">
         <Sidebar showFlashMessageWithTimeout={showFlashMessageWithTimeout} />
-        <TextEditor
-          save={this.saveTextEditor}
-          onChange={this.onTextEditorChange}
-        />
-        <CharsArea save={this.saveCharsArea} />
-        <WordsArea
-          refresh={this.tokenizeWords}
-          save={this.saveWordsArea}
-        />
+        { currentTextId !== 0 ?
+          <div>
+            <TextEditor
+              save={this.saveTextEditor}
+              onChange={this.onTextEditorChange}
+            />
+            <CharsArea save={this.saveCharsArea} />
+            <WordsArea
+              refresh={this.tokenizeWords}
+              save={this.saveWordsArea}
+            />
+          </div>
+            :
+          <SelectMessage mode="Edit"/>
+        }
       </div>
     );
   }

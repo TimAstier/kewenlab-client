@@ -5,7 +5,7 @@ const Stats = ({ items }) => (
   <Segment className="tablestats" textAlign="center" >
     <List relaxed items={items} size="big" />
   </Segment>
-    );
+);
 
 Stats.propTypes = {
   items: React.PropTypes.array.isRequired

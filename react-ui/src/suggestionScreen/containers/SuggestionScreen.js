@@ -8,7 +8,7 @@ import { fetchSuggestions, fetchSuggestionsSuccess, fetchSuggestionFailure }
 import Sidebar from '../../sidebar/containers/Sidebar';
 import SuggestionInput from '../../suggestionInput/containers/SuggestionInput';
 import ItemList from '../components/ItemList';
-// import WordItemList from './components/WordItemList';
+import SelectMessage from '../../components/common/SelectMessage';
 
 class SuggestionScreen extends React.Component {
   constructor(props) {
@@ -33,25 +33,31 @@ class SuggestionScreen extends React.Component {
   }
 
   render() {
-    const { showFlashMessageWithTimeout } = this.props;
+    const { showFlashMessageWithTimeout, currentTextId } = this.props;
     return (
       <div id="main-screen">
         <Sidebar showFlashMessageWithTimeout={showFlashMessageWithTimeout} />
-        <SuggestionInput
-          currentTextId={this.props.currentTextId}
-          findSuggestions={this.findSuggestions}
-          isFetching={this.props.isFetching}
-        />
-        <ItemList
-          suggestedItems={this.props.suggestedChars}
-          type={'chars'}
-          isFetching={this.props.isFetching}
-        />
-        <ItemList
-          suggestedItems={this.props.suggestedWords}
-          type={'words'}
-          isFetching={this.props.isFetching}
-        />
+        { currentTextId !== 0 ?
+          <div>
+            <SuggestionInput
+              currentTextId={this.props.currentTextId}
+              findSuggestions={this.findSuggestions}
+              isFetching={this.props.isFetching}
+            />
+            <ItemList
+              suggestedItems={this.props.suggestedChars}
+              type={'chars'}
+              isFetching={this.props.isFetching}
+            />
+            <ItemList
+              suggestedItems={this.props.suggestedWords}
+              type={'words'}
+              isFetching={this.props.isFetching}
+            />
+          </div>
+            :
+          <SelectMessage mode="Suggestion"/>
+        }
       </div>
     );
   }
