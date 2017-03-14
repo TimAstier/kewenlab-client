@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Icon } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../actions/authActions';
@@ -52,6 +52,16 @@ class NavigationBar extends React.Component {
       >
         Kewen Lab
       </Link>
+      { isAuthenticated &&
+        <Menu.Menu className="main-menu-link">
+          <Link to="/edit" className="item color" activeClassName="active">
+            <Icon name='pencil' />
+          </Link>
+          <Link to="/suggestion" className="item color" activeClassName="active">
+            <Icon name='idea' />
+          </Link>
+        </Menu.Menu>
+      }
       { isAuthenticated ? userLinks : guestLinks }
     </Menu>
     );
