@@ -10,7 +10,7 @@ class SuggestionInput extends React.Component {
     this.state = {
       checked: false,
       hidden: true
-    }
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleCheck = this.handleCheck.bind(this);
@@ -21,8 +21,8 @@ class SuggestionInput extends React.Component {
     this.props.setSuggestionTextNumber(Number(e.target.value));
   }
 
-  handleCheck(e) {
-    const checked = this.state.checked
+  handleCheck() {
+    const checked = this.state.checked;
     this.setState({checked: !checked});
     this.setState({hidden: checked});
     this.props.setSuggestionTextNumber(0);
@@ -33,7 +33,7 @@ class SuggestionInput extends React.Component {
     const data = {
       currentTextId: this.props.currentTextId,
       textNumber: this.props.textNumber
-    }
+    };
     this.props.findSuggestions(data);
   }
 
@@ -61,7 +61,7 @@ SuggestionInput.propTypes = {
   findSuggestions: React.PropTypes.func.isRequired,
   currentTextId: React.PropTypes.number.isRequired,
   isFetching: React.PropTypes.bool.isRequired
-}
+};
 
 function mapStateToProps(state) {
   return {
