@@ -55,10 +55,10 @@ class NavigationBar extends React.Component {
       { isAuthenticated &&
         <Menu.Menu className="main-menu-link">
           <Link to="/edit" className="item color" activeClassName="active">
-            <Icon name='pencil' />
+            <Icon name="pencil" />
           </Link>
           <Link to="/suggestion" className="item color" activeClassName="active">
-            <Icon name='idea' />
+            <Icon name="idea" />
           </Link>
         </Menu.Menu>
       }

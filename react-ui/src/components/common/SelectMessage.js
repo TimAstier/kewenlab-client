@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Icon } from 'semantic-ui-react'
+import { Header, Icon } from 'semantic-ui-react';
 
 const SelectMessage = ({ mode }) => {
   let icon = '';
@@ -7,14 +7,14 @@ const SelectMessage = ({ mode }) => {
 
   if (mode === 'Edit') {
     icon = 'pencil';
-    headerMessage = 'Welcome to the Edit mode'
+    headerMessage = 'Welcome to the Edit mode';
   } else {
     icon = 'idea';
-    headerMessage = 'Welcome to the Suggestion mode'
+    headerMessage = 'Welcome to the Suggestion mode';
   }
 
   return (
-    <Header as='h1' icon id='screen-message'>
+    <Header as="h1" icon id="screen-message">
       <Icon name={icon} />
       {headerMessage}
       <Header.Subheader>
@@ -25,7 +25,7 @@ const SelectMessage = ({ mode }) => {
 };
 
 SelectMessage.propTypes = {
-  //mode: React.PropTypes.string.isRequired
+  mode: React.PropTypes.string.isRequired
 };
 
 export default SelectMessage;
