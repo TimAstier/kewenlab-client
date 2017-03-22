@@ -46,7 +46,9 @@ export function fetchTextItemsFailure() {
 }
 
 export function createNewText() {
-  return axios.post(`${process.env.REACT_APP_API_URL}/api/texts`);
+  return () => {
+    return axios.post(`${process.env.REACT_APP_API_URL}/api/texts`);
+  };
 }
 
 // Combinations
@@ -69,13 +71,9 @@ export function getTextItems() {
 
 export function addText() {
   return dispatch =>
-    createNewText().then(
+    dispatch(createNewText()).then(
       () => {
-        fetchTextItems().then(
-          (res) => {
-            dispatch(setTextItems(res.data.texts));
-          }
-        );
+        dispatch(getTextItems());
       },
       () => {
         dispatch(showFlashMessageWithTimeout({
