@@ -8,7 +8,7 @@ import sidebar from './sidebar';
 import charsArea from './charsArea';
 import wordsArea from './wordsArea';
 import suggestionInput from './suggestionInput';
-import suggestionScreen from './suggestionScreen';
+import suggestionScreen from './appscreens/suggestionScreen';
 
 import createItemsReducerWithNamedType from './common/items/reducer';
 

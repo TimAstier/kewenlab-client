@@ -1,14 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
+import { showFlashMessageWithTimeout } from '../../../actions/flashMessages';
 import { fetchSuggestions, fetchSuggestionsSuccess, fetchSuggestionFailure }
   from '../actions';
 
-import Sidebar from '../../sidebar/containers/Sidebar';
-import SuggestionInput from '../../suggestionInput/containers/SuggestionInput';
+import SuggestionInput from '../../../suggestionInput/containers/SuggestionInput';
 import ItemList from '../components/ItemList';
-import SelectMessage from '../../components/common/SelectMessage';
+import SelectMessage from '../../../components/common/SelectMessage';
 
 class SuggestionScreen extends React.Component {
   constructor(props) {
@@ -33,10 +32,9 @@ class SuggestionScreen extends React.Component {
   }
 
   render() {
-    const { showFlashMessageWithTimeout, currentTextId } = this.props;
+    const { currentTextId } = this.props;
     return (
-      <div id="main-screen">
-        <Sidebar showFlashMessageWithTimeout={showFlashMessageWithTimeout} />
+      <div id="suggestion-screen">
         { currentTextId !== 0 ?
           <div>
             <SuggestionInput

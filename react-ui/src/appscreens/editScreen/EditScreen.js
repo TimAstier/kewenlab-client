@@ -1,25 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { showFlashMessageWithTimeout } from '../actions/flashMessages';
+import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
 import { saveTextContent, saveTextContentSuccess, saveTextContentFailure,
-  setLocalContent } from '../textEditor/actions';
+  setLocalContent } from '../../textEditor/actions';
 import { refreshChars, saveChars, saveCharsSuccess, saveCharsFailure }
-  from '../charsArea/actions';
+  from '../../charsArea/actions';
 import { tokenize, refreshWords, saveWords, saveWordsSuccess,
-  saveWordsFailure } from '../wordsArea/actions';
+  saveWordsFailure } from '../../wordsArea/actions';
 
-import { deserializeChars, deserializeWords } from '../utils/deserializer';
+import { deserializeChars, deserializeWords } from '../../utils/deserializer';
 import { removeDuplicates, toArrayOfUniqueChars, preTokenization,
-  removeDolars } from '../utils/custom';
+  removeDolars } from '../../utils/custom';
 
-import Sidebar from '../sidebar/containers/Sidebar';
-import TextEditor from '../textEditor/containers/TextEditor';
-import CharsArea from '../charsArea/containers/CharsArea';
-import WordsArea from '../wordsArea/containers/WordsArea';
-import SelectMessage from '../components/common/SelectMessage';
+import TextEditor from '../../textEditor/containers/TextEditor';
+import CharsArea from '../../charsArea/containers/CharsArea';
+import WordsArea from '../../wordsArea/containers/WordsArea';
+import SelectMessage from '../../components/common/SelectMessage';
 
-class MainScreen extends React.Component {
+class EditScreen extends React.Component {
   constructor(props) {
     super(props);
 
@@ -142,10 +141,9 @@ class MainScreen extends React.Component {
   }
 
   render() {
-    const { showFlashMessageWithTimeout, currentTextId } = this.props;
+    const { currentTextId } = this.props;
     return (
-      <div id="main-screen">
-        <Sidebar showFlashMessageWithTimeout={showFlashMessageWithTimeout} />
+      <div id="edit-screen">
         { currentTextId !== 0 ?
           <div>
             <TextEditor
@@ -166,7 +164,7 @@ class MainScreen extends React.Component {
   }
 }
 
-MainScreen.propTypes = {
+EditScreen.propTypes = {
   showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
   currentTextId: React.PropTypes.number.isRequired,
   localContent: React.PropTypes.string.isRequired,
@@ -222,4 +220,4 @@ export default connect(
     saveWordsSuccess,
     saveWordsFailure,
   }
-)(MainScreen);
+)(EditScreen);

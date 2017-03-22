@@ -61,6 +61,9 @@ git push heroku master
 - [x] Correct handling of environment vars.
 - [x] isSaving states for items with loaders displayed.
 - [x] Loaders for Sidebar.
+- [x] Better orgnanize screens.
+- [ ] Create separate modules for pages.
+- [ ] Switching modes should not be handled in router (and not rerender sidebar)
 - [ ] Adjust the css to fit all screens size.
 - [ ] Move logic out of containers, back in actions. See: https://github.com/reactjs/redux/issues/291
 - [ ] Test in different browsers.

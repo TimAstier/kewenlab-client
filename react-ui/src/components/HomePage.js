@@ -2,7 +2,7 @@ import React from 'react';
 import { Message, Image } from 'semantic-ui-react';
 import logo from '../logo.png';
 
-class Greetings extends React.Component {
+class HomePage extends React.Component {
   render() {
     return (
       <div id="home-screen">
@@ -24,4 +24,4 @@ class Greetings extends React.Component {
   }
 }
 
-export default Greetings;
+export default HomePage;
