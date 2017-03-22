@@ -85,7 +85,6 @@ class MainScreen extends React.Component {
       (res) => {
         let newLocalWords = res.data;
         newLocalWords = removeDolars(removeDuplicates(newLocalWords));
-        console.log(newLocalWords);
         this.props.refreshWords(newLocalWords);
         return false;
       },

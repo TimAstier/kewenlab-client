@@ -5,7 +5,8 @@ describe('sidebar reducer', () => {
   it('returns the initial state', () => {
     expect(reducer(undefined, {})).toEqual(Map({
       textItems: List([]),
-      currentTextId: 0
+      currentTextId: 0,
+      isFetching: false
     }));
   });
 

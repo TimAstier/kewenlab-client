@@ -18,7 +18,7 @@ export function setCurrentContent(content) {
 // TODO: test async action creators
 export function saveTextContent(data) {
   return dispatch => {
-    dispatch ({ type: 'SAVE_TEXT_CONTENT' });
+    dispatch({ type: 'SAVE_TEXT_CONTENT' });
     return axios.put(`${process.env.REACT_APP_API_URL}/api/texts/${data.id}`, data);
   };
 }
@@ -28,8 +28,8 @@ export function saveTextContentSuccess(content) {
     dispatch({ type: 'SAVE_TEXT_CONTENT_SUCCESS' });
     return dispatch(setCurrentContent(content));
   };
-};
+}
 
 export function saveTextContentFailure() {
   return { type: 'SAVE_TEXT_CONTENT_FAILURE' };
-};
+}

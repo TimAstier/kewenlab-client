@@ -37,7 +37,7 @@ the app needs to be rebuilt. This can be done by pushing an empty commit like so
 ```
 git commit --allow-empty -m "empty commit"
 git push heroku master
-``
+```
 
 ## Environments
 - development - http://localhost:3000
@@ -60,13 +60,15 @@ git push heroku master
 - [x] Back to create-react-app with no config.
 - [x] Correct handling of environment vars.
 - [x] isSaving states for items with loaders displayed.
+- [x] Loaders for Sidebar.
+- [ ] Adjust the css to fit all screens size.
+- [ ] Move logic out of containers, back in actions. See: https://github.com/reactjs/redux/issues/291
+- [ ] Test in different browsers.
+- [ ] Loaders for contents.
 - [ ] Global Saved selector with icon displayed.
-- [ ] Confirmation to leave if note saved
+- [ ] Confirmation to leave if not saved
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
-- [ ] Loaders for Sidebar and contents.
 - [ ] Write tests for components.
 - [ ] Write tests for async action creators.
-- [ ] Adjust the css to fit all screens size.
-- [ ] Test in different browsers.
 - [x] Remove redux devTools from production build.
 - [ ] Highlight words/char in text when clicked.
