@@ -7,7 +7,10 @@ class App extends React.Component {
   render() {
     return (
       <div id="main-container">
-        <NavigationBar mode={this.props.mode} />
+        <NavigationBar
+          mode={this.props.mode}
+          pathname={this.props.location.pathname}
+        />
         <FlashMessagesList />
         {this.props.children}
       </div>
@@ -17,7 +20,8 @@ class App extends React.Component {
 
 App.propTypes = {
   children: React.PropTypes.object.isRequired,
-  mode: React.PropTypes.string.isRequired
+  mode: React.PropTypes.string.isRequired,
+  location: React.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

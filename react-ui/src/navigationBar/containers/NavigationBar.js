@@ -63,7 +63,7 @@ class NavigationBar extends React.Component {
       >
         Kewen Lab
       </Link>
-      { isAuthenticated &&
+      { isAuthenticated && this.props.pathname === '/app' &&
         <AppMenu
           mode={this.props.mode}
           setAppScreenModeToEdit={this.setAppScreenModeToEdit.bind(this)}
@@ -80,7 +80,8 @@ NavigationBar.propTypes = {
   auth: React.PropTypes.object.isRequired,
   logout: React.PropTypes.func.isRequired,
   mode: React.PropTypes.string.isRequired,
-  setAppScreenMode: React.PropTypes.func.isRequired
+  setAppScreenMode: React.PropTypes.func.isRequired,
+  pathname: React.PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
