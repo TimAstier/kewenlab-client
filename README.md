@@ -65,8 +65,8 @@ git push heroku master
 - [x] Switching modes should not be handled in router (to avoid rerender sidebar)
 - [ ] Create separate modules for pages.
 - [ ] Adjust the css to fit all screens size.
-- [ ] Move logic out of containers, back in actions. See: https://github.com/reactjs/redux/issues/291
 - [ ] Test in different browsers.
+- [ ] Move logic out of containers, back in actions. See: https://github.com/reactjs/redux/issues/291
 - [ ] Loaders for contents.
 - [ ] Global Saved selector with icon displayed.
 - [ ] Confirmation to leave if not saved

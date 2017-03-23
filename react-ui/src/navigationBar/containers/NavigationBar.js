@@ -3,7 +3,7 @@ import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/authActions';
-import '../NavigationBar.css';
+import './NavigationBar.css';
 import logo from '../../logo.png';
 import AppMenu from '../components/AppMenu';
 import { setAppScreenMode } from '../../mainScreen/actions';
