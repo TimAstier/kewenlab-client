@@ -1,0 +1,1 @@
+export const SET_APP_SCREEN_MODE = 'SET_APP_SCREEN_MODE';

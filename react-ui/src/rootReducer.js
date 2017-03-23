@@ -8,7 +8,8 @@ import sidebar from './sidebar';
 import charsArea from './charsArea';
 import wordsArea from './wordsArea';
 import suggestionInput from './suggestionInput';
-import suggestionScreen from './appscreens/suggestionScreen';
+import suggestionScreen from './mainScreen/suggestionScreen';
+import mainScreen from './mainScreen';
 
 import createItemsReducerWithNamedType from './common/items/reducer';
 
@@ -18,6 +19,7 @@ const wordsReducer = createItemsReducerWithNamedType('WORDS');
 export default combineReducers({
   flashMessages,
   auth,
+  [mainScreen.constants.NAME]: mainScreen.reducer,
   [textEditor.constants.NAME]: textEditor.reducer,
   [sidebar.constants.NAME]: sidebar.reducer,
   [charsArea.constants.NAME]: charsReducer,

@@ -8,7 +8,7 @@ import { setCurrentChars, setLocalChars,
   clearCharsToDelete, clearCharsToUpdate } from '../../charsArea/actions';
 import { setCurrentWords, setLocalWords,
   clearWordsToDelete, clearWordsToUpdate } from '../../wordsArea/actions';
-import { clearSuggestions } from '../../appscreens/suggestionScreen/actions';
+import { clearSuggestions } from '../../mainScreen/suggestionScreen/actions';
 import { deserializeChars, deserializeWords } from '../../utils/deserializer';
 
 class TextItemsMenu extends React.Component {

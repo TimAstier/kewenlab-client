@@ -1,12 +1,13 @@
 import React from 'react';
-import NavigationBar from './NavigationBar';
+import { connect } from 'react-redux';
+import NavigationBar from '../navigationBar/containers/NavigationBar';
 import FlashMessagesList from './flash/FlashMessagesList';
 
 class App extends React.Component {
   render() {
     return (
       <div id="main-container">
-        <NavigationBar />
+        <NavigationBar mode={this.props.mode} />
         <FlashMessagesList />
         {this.props.children}
       </div>
@@ -15,7 +16,14 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  children: React.PropTypes.object.isRequired
+  children: React.PropTypes.object.isRequired,
+  mode: React.PropTypes.string.isRequired
 };
 
-export default App;
+function mapStateToProps(state) {
+  return {
+    mode: state.get('mainScreen').get('mode')
+  };
+}
+
+export default connect(mapStateToProps)(App);

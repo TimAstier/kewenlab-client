@@ -5,15 +5,14 @@ import App from './components/App';
 import HomePage from './components/HomePage';
 import SignupPage from './components/signup/SignupPage';
 import LoginPage from './components/login/LoginPage';
-import MainScreen from './appscreens/MainScreen';
+import MainScreen from './mainScreen/MainScreen';
 
 import requireAuth from './utils/requireAuth';
 
 export default (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage} />
-    <Route path="/edit" component={requireAuth(() => <MainScreen mode="edit" />)} />
-    <Route path="/suggestion" component={requireAuth(() => <MainScreen mode="suggestion" />)} />
+    <Route path="/app" component={requireAuth(MainScreen)} />
     <Route path="/signup" component={SignupPage} />
     <Route path="/login" component={LoginPage} />
   </Route>

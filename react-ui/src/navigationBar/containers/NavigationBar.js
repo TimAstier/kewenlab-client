@@ -1,15 +1,26 @@
 import React from 'react';
-import { Menu, Icon } from 'semantic-ui-react';
+import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { logout } from '../actions/authActions';
-import './NavigationBar.css';
-import logo from '../logo.png';
+import { logout } from '../../actions/authActions';
+import '../NavigationBar.css';
+import logo from '../../logo.png';
+import AppMenu from '../components/AppMenu';
+import { setAppScreenMode } from '../../mainScreen/actions';
 
 class NavigationBar extends React.Component {
+
   logout(e) {
     e.preventDefault();
     this.props.logout();
+  }
+
+  setAppScreenModeToEdit() {
+    this.props.setAppScreenMode('edit');
+  }
+
+  setAppScreenModeToSuggestion() {
+    this.props.setAppScreenMode('suggestion');
   }
 
   render() {
@@ -47,20 +58,17 @@ class NavigationBar extends React.Component {
         />
       </Menu.Item>
       <Link
-        to={ isAuthenticated ? '/edit' : '/' }
+        to={ isAuthenticated ? '/app' : '/' }
         className="item header main-menu-header"
       >
         Kewen Lab
       </Link>
       { isAuthenticated &&
-        <Menu.Menu className="main-menu-link">
-          <Link to="/edit" className="item color" activeClassName="active">
-            <Icon name="pencil" />
-          </Link>
-          <Link to="/suggestion" className="item color" activeClassName="active">
-            <Icon name="idea" />
-          </Link>
-        </Menu.Menu>
+        <AppMenu
+          mode={this.props.mode}
+          setAppScreenModeToEdit={this.setAppScreenModeToEdit.bind(this)}
+          setAppScreenModeToSuggestion={this.setAppScreenModeToSuggestion.bind(this)}
+        />
       }
       { isAuthenticated ? userLinks : guestLinks }
     </Menu>
@@ -70,7 +78,9 @@ class NavigationBar extends React.Component {
 
 NavigationBar.propTypes = {
   auth: React.PropTypes.object.isRequired,
-  logout: React.PropTypes.func.isRequired
+  logout: React.PropTypes.func.isRequired,
+  mode: React.PropTypes.string.isRequired,
+  setAppScreenMode: React.PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -80,4 +90,7 @@ function mapStateToProps(state) {
 }
 
 // { logout } is a mapDispatchToProps shortcut
-export default connect(mapStateToProps, { logout })(NavigationBar);
+export default connect(
+  mapStateToProps,
+  { logout, setAppScreenMode }
+)(NavigationBar);

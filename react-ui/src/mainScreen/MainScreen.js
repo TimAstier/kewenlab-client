@@ -34,7 +34,13 @@ MainScreen.propTypes = {
   showFlashMessageWithTimeout: React.PropTypes.func.isRequired
 };
 
+function mapStateToProps(state) {
+  return {
+    mode: state.get('mainScreen').get('mode')
+  };
+}
+
 export default connect(
-  null,
+  mapStateToProps,
   { showFlashMessageWithTimeout }
 )(MainScreen);
