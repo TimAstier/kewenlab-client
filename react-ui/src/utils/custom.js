@@ -9,7 +9,7 @@ export function toChineseOnly(string) {
 export function preTokenization(string) {
   string = string.replace(/\n/g, '$');
   // eslint-disable-next-line
-  const allExceptChinese = /[A-z]|[0-9]|[.,\/#!?%\^&\*;:{}=\-_`~()。？！…@€£+àçèé~<>，；：＂、“”（）《》％·ĀāÁáǍǎÀàĒēÉéĚěÈèĪīÍíǏǐÌìŌōÓóǑǒÒòŪūÚúǓǔÙùÜüǗǘǙǚǛǜ˚ÅåE̊e̊i̊O̊o̊Ůů’]|\s/g;
+  const allExceptChinese = /[A-z]|[0-9]|[.,\/#!?%\^&\*;:{}=\-_`~()。？！–•…@€£+àçèé~<>，；：＂、“”（）《》％·ĀāÁáǍǎÀàĒēÉéĚěÈèĪīÍíǏǐÌìŌōÓóǑǒÒòŪūÚúǓǔÙùÜüǗǘǙǚǛǜ˚ÅåE̊e̊i̊O̊o̊Ůů’]|\s/g;
   return string.replace(allExceptChinese, '');
 }
 
