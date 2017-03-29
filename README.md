@@ -75,3 +75,11 @@ git push heroku master
 - [ ] Write tests for async action creators.
 - [x] Remove redux devTools from production build.
 - [ ] Highlight words/char in text when clicked.
+
+## Next steps: Collaborator features
+- [ ] Suggestion feature (2/2)
+- [ ] Project model
+- [ ] Guidelines model
+- [ ] Offer page, where users can add projects to their list
+- [ ] Edit text infos
+- [ ] Add contact infos / copyrights
