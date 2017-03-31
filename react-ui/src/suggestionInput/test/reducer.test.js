@@ -4,7 +4,6 @@ import reducer from '../reducer';
 import * as actions from '../actions';
 
 describe('suggestionInput reducer', () => {
-
   it('returns the initial state', () => {
     expect(reducer(undefined, {})).toEqual(Map({
       textNumber: 0
@@ -36,5 +35,4 @@ describe('suggestionInput reducer', () => {
       }));
     });
   });
-
 });

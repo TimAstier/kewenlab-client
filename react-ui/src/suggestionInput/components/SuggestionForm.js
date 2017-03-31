@@ -3,7 +3,6 @@ import { Segment, Form, Button, Radio } from 'semantic-ui-react';
 
 const SuggestionForm = ({checked, value, handleChange,
   handleCheck, hidden, onClick, isFetching}) => {
-
   return (
     <Segment raised id="suggestion-form">
       <Form>

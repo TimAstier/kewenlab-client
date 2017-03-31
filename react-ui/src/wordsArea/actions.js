@@ -73,9 +73,9 @@ export function saveWordsSuccess(items) {
 }
 
 export function saveWordsFailure() {
-    return {
-      type: 'SAVE_WORDS_FAILURE'
-    };
+  return {
+    type: 'SAVE_WORDS_FAILURE'
+  };
 }
 
 // TODO: dispatch actions to handle async request
@@ -94,5 +94,6 @@ export function refreshWords(wordsArray) {
       dispatch(addNewLocalWords(wordsArray));
       return dispatch(updateWordsOrder(wordsArray));
     }
+    return false;
   };
 }

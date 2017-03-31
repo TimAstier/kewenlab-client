@@ -63,10 +63,10 @@ git push heroku master
 - [x] Loaders for Sidebar.
 - [x] Better organize screens.
 - [x] Switching modes should not be handled in router (to avoid rerender sidebar)
+- [ ] Switch to Ducks file structure.
 - [ ] Create separate modules for pages.
 - [ ] Adjust the css to fit all screens size.
 - [ ] Test in different browsers.
-- [ ] Switch to Ducks file structure.
 - [ ] Loaders for contents.
 - [ ] Global Saved selector with icon displayed.
 - [ ] Confirmation to leave if not saved
