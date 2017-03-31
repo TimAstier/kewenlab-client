@@ -4,7 +4,7 @@ import axios from 'axios';
 export function setSuggestions(data) {
   return {
     type: t.SET_SUGGESTIONS,
-    suggestions: data
+    data
   };
 }
 
@@ -17,7 +17,7 @@ export function clearSuggestions() {
 export function fetchSuggestions(data) {
   return dispatch => {
     dispatch({ type: t.FETCH_SUGGESTIONS });
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${data.currentTextId}/suggestions/${data.textNumber}`);
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${data.currentTextId}/suggestions/${data.textNumber}/${data.currentUserId}`);
   };
 }
 
@@ -45,6 +45,14 @@ export function banWord(id) {
   return dispatch => {
     return axios.put(`${process.env.REACT_APP_API_URL}/api/words/${id}/ban`).then(() => {
       dispatch(removeWordSuggestion(id));
+    });
+  };
+}
+
+export function hideWord(wordId, currentUserId) {
+  return dispatch => {
+    return axios.put(`${process.env.REACT_APP_API_URL}/api/users/${currentUserId}/hideword/${wordId}`).then(() => {
+      dispatch(removeWordSuggestion(wordId));
     });
   };
 }

@@ -17,8 +17,10 @@ export default (state = INITIAL_STATE, action) => {
       return state.set('isFetching', false);
     case t.SET_SUGGESTIONS:
       return state.merge(fromJS({
-        chars: action.suggestions.chars,
-        words: action.suggestions.words
+        chars: action.data.chars,
+        words: action.data.words.filter(w => {
+          return action.data.hiddenWords.indexOf(w.id) === -1;
+        })
       }));
     case t.CLEAR_SUGGESTIONS:
       return state.merge(fromJS({

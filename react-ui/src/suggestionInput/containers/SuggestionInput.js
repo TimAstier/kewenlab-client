@@ -32,7 +32,8 @@ class SuggestionInput extends React.Component {
     e.preventDefault();
     const data = {
       currentTextId: this.props.currentTextId,
-      textNumber: this.props.textNumber
+      textNumber: this.props.textNumber,
+      currentUserId: this.props.currentUserId
     };
     this.props.findSuggestions(data);
   }
@@ -60,7 +61,8 @@ SuggestionInput.propTypes = {
   textNumber: React.PropTypes.number.isRequired,
   findSuggestions: React.PropTypes.func.isRequired,
   currentTextId: React.PropTypes.number.isRequired,
-  isFetching: React.PropTypes.bool.isRequired
+  isFetching: React.PropTypes.bool.isRequired,
+  currentUserId: React.PropTypes.number.isRequired
 };
 
 function mapStateToProps(state) {

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { showFlashMessageWithTimeout } from '../../../actions/flashMessages';
-import { fetchSuggestions, fetchSuggestionsSuccess, fetchSuggestionFailure, banWord }
+import { fetchSuggestions, fetchSuggestionsSuccess, fetchSuggestionFailure, banWord, hideWord }
   from '../actions';
 
 import SuggestionInput from '../../../suggestionInput/containers/SuggestionInput';
@@ -41,6 +41,7 @@ class SuggestionScreen extends React.Component {
               currentTextId={this.props.currentTextId}
               findSuggestions={this.findSuggestions}
               isFetching={this.props.isFetching}
+              currentUserId={this.props.currentUserId}
             />
             <ItemList
               suggestedItems={this.props.suggestedChars}
@@ -49,6 +50,8 @@ class SuggestionScreen extends React.Component {
             />
             <ItemList
               banWord={this.props.banWord}
+              hideWord={this.props.hideWord}
+              currentUserId={this.props.currentUserId}
               suggestedItems={this.props.suggestedWords}
               type={'words'}
               isFetching={this.props.isFetching}
@@ -72,7 +75,9 @@ SuggestionScreen.propTypes = {
   isFetching: React.PropTypes.bool.isRequired,
   suggestedChars: React.PropTypes.array.isRequired,
   suggestedWords: React.PropTypes.array.isRequired,
-  banWord: React.PropTypes.func.isRequired
+  banWord: React.PropTypes.func.isRequired,
+  hideWord: React.PropTypes.func.isRequired,
+  currentUserId: React.PropTypes.number.isRequired
 };
 
 function mapStateToProps(state) {
@@ -81,7 +86,8 @@ function mapStateToProps(state) {
     textNumber: state.get('suggestionInput').get('textNumber'),
     isFetching: state.get('suggestionScreen').get('isFetching'),
     suggestedChars: state.get('suggestionScreen').get('chars').toJS(),
-    suggestedWords: state.get('suggestionScreen').get('words').toJS()
+    suggestedWords: state.get('suggestionScreen').get('words').toJS(),
+    currentUserId: state.get('auth').get('user').id
   };
 }
 
@@ -92,6 +98,7 @@ export default connect(
     fetchSuggestions,
     fetchSuggestionsSuccess,
     fetchSuggestionFailure,
-    banWord
+    banWord,
+    hideWord
   }
 )(SuggestionScreen);

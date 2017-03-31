@@ -249,12 +249,29 @@ h2 {
 }
 
 .suggestion-item-ban {
-  position: absolute;
+  display: inline-block;
   margin-top: -3px;
   opacity: 0;
+  width: 10%;
 }
 
 .suggestion-item-ban:hover {
+  opacity: 1;
+}
+
+.suggestion-item-chinese {
+  display: inline-block;
+  width: 80%;
+}
+
+.suggestion-item-hide {
+  display: inline-block;
+  margin-top: -3px;
+  opacity: 0;
+  width: 10%;
+}
+
+.suggestion-item-hide:hover {
   opacity: 1;
 }
 
