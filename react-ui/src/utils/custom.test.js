@@ -71,7 +71,7 @@ describe('custom utils', () => {
         ]
       };
 
-      expect(customUtils.defineStatus(item)).toEqual('Lesson 1');
+      expect(customUtils.defineStatus(item)).toEqual('Text #1');
     });
 
     it('returns "manuallydeleted" status for chars', () => {

@@ -45,5 +45,5 @@ export function defineStatus(item) {
   } else if (isEmpty(item.texts)) {
     return 'new';
   }
-  return item.texts[0].title;
+  return 'Text #' + item.texts[0].order;
 }
