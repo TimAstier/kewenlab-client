@@ -136,6 +136,25 @@ h2 {
   margin-top: 0px;
 }
 
+#chars-list > .infos {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+#chars-list > .infos > .main-label {
+  margin-top: 7px;
+  margin-left: 47px;
+  display: inline-block;
+}
+
+#chars-list > .infos > .tablestats {
+  margin-top: 5px;
+  height: 45px;
+  width: 110px;
+  padding-top: 5px;
+  margin-right: 20px;
+}
+
 /* WordsArea */
 
 #words-area {
@@ -147,6 +166,25 @@ h2 {
 
 #words-area > table {
   margin-top: 0px;
+}
+
+#words-list > .infos {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+#words-list > .infos > .main-label {
+  margin-top: 7px;
+  margin-left: 87px;
+  display: inline-block;
+}
+
+#words-list > .infos > .tablestats {
+  margin-top: 5px;
+  height: 45px;
+  width: 110px;
+  padding-top: 5px;
+  margin-right: 10px;
 }
 
 /* Char & Word Areas */
@@ -228,4 +266,8 @@ h2 {
   width: 1230px;
   text-align: center;
   padding-top: 100px;
+}
+
+#edit-screen, #suggestion-screen {
+  padding-top: 20px;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Table, Label, Loader } from 'semantic-ui-react';
 import CharItem from './CharItem';
+import Stats from '../../components/common/Stats';
 import StatusPicker from '../../components/common/StatusPicker';
 import isEmpty from 'lodash/isEmpty';
 import { defineStatus } from '../../utils/custom';
@@ -24,10 +25,10 @@ function renderCharItems(chars) {
   return null;
 }
 
-const CharItemList = ({ filteredLocalChars, onFilterClick, visibilityFilter, isSaving }) => {
+const CharItemList = ({ filteredLocalChars, onFilterClick, visibilityFilter, isSaving, statItems }) => {
   return (
     <div id="chars-list">
-      <h2>
+      <div className="infos">
         <Label basic circular color="black" className="main-label">
           {isSaving ? (
             <Loader active inline />
@@ -35,7 +36,8 @@ const CharItemList = ({ filteredLocalChars, onFilterClick, visibilityFilter, isS
             '字'
           )}
         </Label>
-      </h2>
+        {!isSaving && <Stats items={statItems} />}
+      </div>
       <div className="table-wrapper">
         <Table celled>
           <Table.Header>
@@ -62,7 +64,9 @@ const CharItemList = ({ filteredLocalChars, onFilterClick, visibilityFilter, isS
 CharItemList.propTypes = {
   filteredLocalChars: React.PropTypes.array.isRequired,
   onFilterClick: React.PropTypes.func.isRequired,
-  visibilityFilter: React.PropTypes.string.isRequired
+  visibilityFilter: React.PropTypes.string.isRequired,
+  isSaving: React.PropTypes.bool.isRequired,
+  statItems: React.PropTypes.array.isRequired
 };
 
 export default CharItemList;

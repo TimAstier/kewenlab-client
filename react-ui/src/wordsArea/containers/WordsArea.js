@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import WordItemList from '../components/WordItemList';
 import WordControls from '../components/WordControls';
-import Stats from '../../components/common/Stats';
 import { getSaved, countChanges, getTotalItems,
   countNewItems, filterLocalItems } from '../../common/items/selectors';
 import { setWordsVisibilityFilter } from '../actions';
@@ -32,10 +31,8 @@ class WordsArea extends React.Component {
           onFilterClick={this.onFilterClick}
           visibilityFilter={this.props.visibilityFilter}
           isSaving={this.props.isSaving}
+          statItems={statItems}
         />
-        {this.props.saved &&
-          <Stats items={statItems} />
-        }
         {(process.env.REACT_APP_DEBUG === 'on') &&
           <WordControls
             refresh={this.props.refresh}
