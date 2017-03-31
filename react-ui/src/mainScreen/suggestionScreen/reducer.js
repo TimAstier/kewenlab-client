@@ -25,6 +25,11 @@ export default (state = INITIAL_STATE, action) => {
         chars: [],
         words: []
       }));
+    case t.REMOVE_WORD_SUGGESTION:
+      return state.set(
+        'words',
+        state.get('words').filter(w => w.get('id') !== action.id)
+      );
     default:
       return state;
   }

@@ -3,26 +3,27 @@ import { Table, Label } from 'semantic-ui-react';
 import Item from './Item';
 import isEmpty from 'lodash/isEmpty';
 
-function renderItem(item, i) {
-  return (
-    <Item
-      key={i}
-      item={item}
-    />
-  );
-}
-
-function renderItems(items) {
-  if (!isEmpty(items)) {
-    return items.map(renderItem);
+const ItemList = ({ suggestedItems, type, isFetching, banWord }) => {
+  function renderItem(item, i) {
+    return (
+      <Item
+        key={i}
+        item={item}
+        banWord={banWord}
+      />
+    );
   }
-  return null;
-}
 
-const ItemList = ({ suggestedItems, type, isFetching }) => {
+  function renderItems(items) {
+    if (!isEmpty(items)) {
+      return items.map(renderItem);
+    }
+    return null;
+  }
+
   return (
     <div
-      id={(type === 'chars') ?'suggestion-chars-list' : 'suggestion-words-list'}
+      id={(type === 'chars') ? 'suggestion-chars-list' : 'suggestion-words-list'}
       hidden={isFetching}
     >
       <h2>
@@ -51,7 +52,8 @@ const ItemList = ({ suggestedItems, type, isFetching }) => {
 ItemList.propTypes = {
   suggestedItems: React.PropTypes.array.isRequired,
   type: React.PropTypes.string.isRequired,
-  isFetching: React.PropTypes.bool.isRequired
+  isFetching: React.PropTypes.bool.isRequired,
+  banWord: React.PropTypes.func
 };
 
 export default ItemList;

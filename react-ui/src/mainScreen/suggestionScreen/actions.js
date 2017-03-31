@@ -33,3 +33,18 @@ export function fetchSuggestionFailure() {
     type: t.FETCH_SUGGESTIONS_FAILURE
   };
 }
+
+export function removeWordSuggestion(id) {
+  return {
+    type: t.REMOVE_WORD_SUGGESTION,
+    id
+  };
+}
+
+export function banWord(id) {
+  return dispatch => {
+    return axios.put(`${process.env.REACT_APP_API_URL}/api/words/${id}/ban`).then(() => {
+      dispatch(removeWordSuggestion(id));
+    });
+  };
+}

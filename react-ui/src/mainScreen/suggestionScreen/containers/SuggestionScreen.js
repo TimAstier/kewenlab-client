@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { showFlashMessageWithTimeout } from '../../../actions/flashMessages';
-import { fetchSuggestions, fetchSuggestionsSuccess, fetchSuggestionFailure }
+import { fetchSuggestions, fetchSuggestionsSuccess, fetchSuggestionFailure, banWord }
   from '../actions';
 
 import SuggestionInput from '../../../suggestionInput/containers/SuggestionInput';
@@ -48,6 +48,7 @@ class SuggestionScreen extends React.Component {
               isFetching={this.props.isFetching}
             />
             <ItemList
+              banWord={this.props.banWord}
               suggestedItems={this.props.suggestedWords}
               type={'words'}
               isFetching={this.props.isFetching}
@@ -70,7 +71,8 @@ SuggestionScreen.propTypes = {
   fetchSuggestionFailure: React.PropTypes.func.isRequired,
   isFetching: React.PropTypes.bool.isRequired,
   suggestedChars: React.PropTypes.array.isRequired,
-  suggestedWords: React.PropTypes.array.isRequired
+  suggestedWords: React.PropTypes.array.isRequired,
+  banWord: React.PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -89,6 +91,7 @@ export default connect(
     showFlashMessageWithTimeout,
     fetchSuggestions,
     fetchSuggestionsSuccess,
-    fetchSuggestionFailure
+    fetchSuggestionFailure,
+    banWord
   }
 )(SuggestionScreen);

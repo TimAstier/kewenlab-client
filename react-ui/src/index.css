@@ -209,6 +209,16 @@ h2 {
   padding-right: 30px;
 }
 
+.suggestion-item-ban {
+  position: absolute;
+  margin-top: -3px;
+  opacity: 0;
+}
+
+.suggestion-item-ban:hover {
+  opacity: 1;
+}
+
 /* screen level */
 
 #screen-message {
