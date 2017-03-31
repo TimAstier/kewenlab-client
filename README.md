@@ -66,7 +66,7 @@ git push heroku master
 - [ ] Create separate modules for pages.
 - [ ] Adjust the css to fit all screens size.
 - [ ] Test in different browsers.
-- [ ] Move logic out of containers, back in actions. See: https://github.com/reactjs/redux/issues/291
+- [ ] Switch to Ducks file structure.
 - [ ] Loaders for contents.
 - [ ] Global Saved selector with icon displayed.
 - [ ] Confirmation to leave if not saved
