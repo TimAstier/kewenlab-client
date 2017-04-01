@@ -1,7 +1,5 @@
 import { Map } from 'immutable';
-
-import reducer from '../reducer';
-import * as actions from '../actions';
+import reducer, * as actions from './suggestionInput';
 
 describe('suggestionInput reducer', () => {
   it('returns the initial state', () => {

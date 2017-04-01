@@ -51,20 +51,20 @@ export function setCurrentContent(content) {
 
 export function saveTextContent(data) {
   return dispatch => {
-    dispatch({ type: 'SAVE_TEXT_CONTENT' });
+    dispatch({ type: SAVE });
     return axios.put(`${process.env.REACT_APP_API_URL}/api/texts/${data.id}`, data);
   };
 }
 
 export function saveTextContentSuccess(content) {
   return dispatch => {
-    dispatch({ type: 'SAVE_TEXT_CONTENT_SUCCESS' });
+    dispatch({ type: SAVE_SUCCESS });
     return dispatch(setCurrentContent(content));
   };
 }
 
 export function saveTextContentFailure() {
-  return { type: 'SAVE_TEXT_CONTENT_FAILURE' };
+  return { type: SAVE_FAILURE };
 }
 
 // Selectors

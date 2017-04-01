@@ -1,7 +1,5 @@
 import { List, Map, fromJS } from 'immutable';
-import * as charsActions from '../../charsArea/actions';
-import * as wordsActions from '../../wordsArea/actions';
-import createItemsReducerWithNamedType from './reducer';
+import createItemsReducerWithNamedType, * as actions from './items';
 
 const charsReducer = createItemsReducerWithNamedType('CHARS');
 const wordsReducer = createItemsReducerWithNamedType('WORDS');
@@ -37,8 +35,8 @@ describe('items reducer', () => {
       chinese: '你',
       texts: []
     }];
-    const charsAction = charsActions.setLocalChars(items);
-    const wordsAction = wordsActions.setLocalWords(items);
+    const charsAction = actions.setLocalChars(items);
+    const wordsAction = actions.setLocalWords(items);
     const expectedState = Map({
       localItems: fromJS(items),
       currentItems: List(),
@@ -70,8 +68,8 @@ describe('items reducer', () => {
       chinese: '二',
       order: 1
     }];
-    const charsAction = charsActions.setLocalChars(items);
-    const wordsAction = wordsActions.setLocalWords(items);
+    const charsAction = actions.setLocalChars(items);
+    const wordsAction = actions.setLocalWords(items);
     const expectedState = Map({
       localItems: fromJS([
         {
@@ -112,8 +110,8 @@ describe('items reducer', () => {
       chinese: '你',
       texts: []
     }];
-    const charsAction = charsActions.setCurrentChars(items);
-    const wordsAction = wordsActions.setCurrentWords(items);
+    const charsAction = actions.setCurrentChars(items);
+    const wordsAction = actions.setCurrentWords(items);
     const expectedState = Map({
       localItems: List(),
       currentItems: fromJS(items),
@@ -145,8 +143,8 @@ describe('items reducer', () => {
       chinese: '二',
       order: 1
     }];
-    const charsAction = charsActions.setCurrentChars(items);
-    const wordsAction = wordsActions.setCurrentWords(items);
+    const charsAction = actions.setCurrentChars(items);
+    const wordsAction = actions.setCurrentWords(items);
     const expectedState = Map({
       localItems: List(),
       currentItems: fromJS([
@@ -186,8 +184,8 @@ describe('items reducer', () => {
       }]),
       visibilityFilter: 'all'
     });
-    const charsAction = charsActions.clearCharsToDelete();
-    const wordsAction = wordsActions.clearWordsToDelete();
+    const charsAction = actions.clearCharsToDelete();
+    const wordsAction = actions.clearWordsToDelete();
     const expectedState = Map({
       localItems: List(),
       currentItems: List(),
@@ -206,8 +204,8 @@ describe('items reducer', () => {
       itemsToDelete: List(),
       visibilityFilter: 'all'
     });
-    const charsAction = charsActions.setCharsVisibilityFilter('new');
-    const wordsAction = wordsActions.setWordsVisibilityFilter('new');
+    const charsAction = actions.setCharsVisibilityFilter('new');
+    const wordsAction = actions.setWordsVisibilityFilter('new');
     const expectedState = Map({
       localItems: List(),
       currentItems: List(),
@@ -234,8 +232,8 @@ describe('items reducer', () => {
         itemsToDelete: [],
         visibilityFilter: 'all'
       });
-      const charsAction = charsActions.addNewLocalChars(['你', '木', '水']);
-      const wordsAction = wordsActions.addNewLocalWords(['你', '木', '水']);
+      const charsAction = actions.addNewLocalChars(['你', '木', '水']);
+      const wordsAction = actions.addNewLocalWords(['你', '木', '水']);
       const expectedState = fromJS({
         localItems: [
           { id: 1, chinese: '我' },
@@ -268,8 +266,8 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
       // Simulates when a user deletes everything in the text input:
-      const charsAction = charsActions.removeDeletedLocalChars([]);
-      const wordsAction = wordsActions.removeDeletedLocalWords([]);
+      const charsAction = actions.removeDeletedLocalChars([]);
+      const wordsAction = actions.removeDeletedLocalWords([]);
       const expectedState = fromJS({
         localItems: [],
         currentItems: [],
@@ -296,8 +294,8 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
       // Simulates when a user deletes everything in the text input:
-      const charsAction = charsActions.removeDeletedLocalChars([]);
-      const wordsAction = wordsActions.removeDeletedLocalWords([]);
+      const charsAction = actions.removeDeletedLocalChars([]);
+      const wordsAction = actions.removeDeletedLocalWords([]);
       const expectedState = fromJS({
         localItems: [],
         currentItems: [],
@@ -321,8 +319,8 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
       // Simulates when a user deletes everything in the text input:
-      const charsAction = charsActions.removeDeletedLocalChars([]);
-      const wordsAction = wordsActions.removeDeletedLocalWords([]);
+      const charsAction = actions.removeDeletedLocalChars([]);
+      const wordsAction = actions.removeDeletedLocalWords([]);
       const expectedState = fromJS({
         localItems: [
           { id: 1, chinese: '我', manuallyAdded: true, manuallyDeleted: false }
@@ -346,8 +344,8 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
       // Simulates when a user deletes everything in the text input:
-      const charsAction = charsActions.removeDeletedLocalChars([]);
-      const wordsAction = wordsActions.removeDeletedLocalWords([]);
+      const charsAction = actions.removeDeletedLocalChars([]);
+      const wordsAction = actions.removeDeletedLocalWords([]);
       const expectedState = fromJS({
         localItems: [
           { id: 1, chinese: '我', manuallyAdded: false, manuallyDeleted: true }
@@ -376,7 +374,7 @@ describe('items reducer', () => {
         visibilityFilter: 'all'
       });
       const itemsArray = ['三', '一', '二'];
-      const charsAction = charsActions.updateCharsOrder(itemsArray);
+      const charsAction = actions.updateCharsOrder(itemsArray);
       const expectedState = fromJS({
         localItems: [
           { id: 3, chinese: '一', order: 1 },
@@ -406,7 +404,7 @@ describe('items reducer', () => {
         itemsToUpdate: []
       });
       const itemsArray = ['三', '二', '一'];
-      const charsAction = charsActions.updateCharsOrder(itemsArray);
+      const charsAction = actions.updateCharsOrder(itemsArray);
       const expectedState = fromJS({
         localItems: [
           { id: null, chinese: '一', order: 2 },
@@ -439,8 +437,8 @@ describe('items reducer', () => {
         itemsToUpdate: [{ id: 1, chinese: '三', order: 2 }]
       });
       const itemsArray = ['三', '二', '一'];
-      const charsAction = charsActions.updateCharsOrder(itemsArray);
-      const wordsAction = wordsActions.updateWordsOrder(itemsArray);
+      const charsAction = actions.updateCharsOrder(itemsArray);
+      const wordsAction = actions.updateWordsOrder(itemsArray);
       const expectedState = fromJS({
         localItems: [
           { id: null, chinese: '一', order: 2 },
@@ -465,7 +463,7 @@ describe('items reducer', () => {
     const initialState = fromJS({
       itemsToUpdate: ['a', 'b', 'c']
     });
-    const charsAction = charsActions.clearCharsToUpdate();
+    const charsAction = actions.clearCharsToUpdate();
     const expectedState = fromJS({
       itemsToUpdate: []
     });
@@ -477,7 +475,7 @@ describe('items reducer', () => {
     const intialState = Map({
       isSaving: false
     });
-    const charsAction = { type: 'SAVE_CHARS' };
+    const charsAction = { type: 'kewen-lab/items/SAVE_CHARS' };
     const expectedState = Map({
       isSaving: true
     });
@@ -489,7 +487,7 @@ describe('items reducer', () => {
     const intialState = Map({
       isSaving: true
     });
-    const charsAction = { type: 'SAVE_CHARS_SUCCESS' };
+    const charsAction = { type: 'kewen-lab/items/SAVE_CHARS_SUCCESS' };
     const expectedState = Map({
       isSaving: false
     });
@@ -501,7 +499,7 @@ describe('items reducer', () => {
     const intialState = Map({
       isSaving: true
     });
-    const charsAction = { type: 'SAVE_CHARS_FAILURE' };
+    const charsAction = { type: 'kewen-lab/items/SAVE_CHARS_FAILURE' };
     const expectedState = Map({
       isSaving: false
     });

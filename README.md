@@ -45,17 +45,18 @@ git push heroku master
 - production - https://kewen-lab.herokuapp.com
 
 ## TODO
-- [ ] Switch to Ducks file structure.
-- [ ] Move back handling of Mode in router? (now I know how to get pathname)...
+- [x] Switch to Ducks file structure.
 - [ ] Update tests
+- [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Move logic definition out of containers.
+- [ ] Explicit URLs like app/text/:id/edit
 - [ ] Make better separation between containers and components.
 - [ ] Move css into components and containers folders.
 - [ ] Better use of selectors. See http://blog.sapegin.me/all/react-structure
 - [ ] Adjust the css to fit all screens size.
 - [ ] Test in different browsers.
+- [ ] Loader on loading.
 - [ ] Confirmation to leave if not saved
-- [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Write tests for components.
 - [ ] Write tests for async action creators.
 - [ ] Highlight words/char in text when clicked.

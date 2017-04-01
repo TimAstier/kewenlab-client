@@ -1,47 +1,6 @@
-// action tests
-// TODO: test async actions
-describe('textEditor actions', () => {
-  describe('setLocalContent', () => {
-    it('creates an action to set localContent', () => {
-      const content = '我们来学中文。';
-      const expectedAction = {
-        type: t.SET_LOCAL_CONTENT,
-        localContent: content
-      };
-      expect(actions.setLocalContent(content)).toEqual(expectedAction);
-    });
-
-    it('creates an action to set empty localContent', () => {
-      const expectedAction = {
-        type: t.SET_LOCAL_CONTENT,
-        localContent: ''
-      };
-      expect(actions.setLocalContent()).toEqual(expectedAction);
-    });
-  });
-
-  describe('setCurrentContent', () => {
-    it('creates an action to set currentContent', () => {
-      const content = '我们来学中文。';
-      const expectedAction = {
-        type: t.SET_CURRENT_CONTENT,
-        currentContent: content
-      };
-      expect(actions.setCurrentContent(content)).toEqual(expectedAction);
-    });
-
-    it('creates an action to set empty currentContent', () => {
-      const expectedAction = {
-        type: t.SET_CURRENT_CONTENT,
-        currentContent: ''
-      };
-      expect(actions.setCurrentContent()).toEqual(expectedAction);
-    });
-  });
-});
-
-// reducer tests
-import reducer, { getSaved } from '../reducer';
+import { Map } from 'immutable';
+import reducer, * as actions from './textEditor';
+import { getSaved } from './textEditor';
 
 describe('textEditor reducer', () => {
   it('returns the initial state', () => {
@@ -57,7 +16,7 @@ describe('textEditor reducer', () => {
       localContent: '我还没变。',
       currentContent: '我没变。'
     });
-    const action = { type: 'SET_LOCAL_CONTENT', localContent: '我变了。' };
+    const action = actions.setLocalContent('我变了。');
     const nextState = reducer(initialState, action);
 
     expect(nextState).toEqual(Map({
@@ -71,7 +30,7 @@ describe('textEditor reducer', () => {
       localContent: '法国',
       currentContent: '中国'
     });
-    const action = { type: 'SET_CURRENT_CONTENT', currentContent: '瑞典' };
+    const action = actions.setCurrentContent('瑞典');
     const nextState = reducer(initialState, action);
 
     expect(nextState).toEqual(Map({
@@ -84,7 +43,7 @@ describe('textEditor reducer', () => {
     const initialState = Map({
       isSaving: false
     });
-    const action = { type: 'SAVE_TEXT_CONTENT' };
+    const action = { type: 'kewen-lab/textEditor/SAVE' };
     const nextState = reducer(initialState, action);
 
     expect(nextState).toEqual(Map({
@@ -96,7 +55,7 @@ describe('textEditor reducer', () => {
     const initialState = Map({
       isSaving: true
     });
-    const action = { type: 'SAVE_TEXT_CONTENT_SUCCESS' };
+    const action = { type: 'kewen-lab/textEditor/SAVE_SUCCESS' };
     const nextState = reducer(initialState, action);
 
     expect(nextState).toEqual(Map({
@@ -108,7 +67,7 @@ describe('textEditor reducer', () => {
     const initialState = Map({
       isSaving: true
     });
-    const action = { type: 'SAVE_TEXT_CONTENT_FAILURE' };
+    const action = { type: 'kewen-lab/textEditor/SAVE_FAILURE' };
     const nextState = reducer(initialState, action);
 
     expect(nextState).toEqual(Map({
