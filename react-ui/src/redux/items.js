@@ -168,27 +168,27 @@ export default (itemName = '') => {
   // slice reducer:
   return function itemsArea(state = INITIAL_STATE, action) {
     switch (action.type) {
-      case `SET_LOCAL_${itemName}`:
+      case `kewen-lab/items/SET_LOCAL_${itemName}`:
         return setLocalItems(state, action);
-      case `SET_CURRENT_${itemName}`:
+      case `kewen-lab/items/SET_CURRENT_${itemName}`:
         return setCurrentItems(state, action);
-      case `CLEAR_${itemName}_TO_DELETE`:
+      case `kewen-lab/items/CLEAR_${itemName}_TO_DELETE`:
         return clearItemsToDelete(state);
-      case `SET_${itemName}_VISIBILITY_FILTER`:
+      case `kewen-lab/items/SET_${itemName}_VISIBILITY_FILTER`:
         return setItemsVisibilityFilter(state, action);
-      case `ADD_NEW_LOCAL_${itemName}`:
+      case `kewen-lab/items/ADD_NEW_LOCAL_${itemName}`:
         return addNewLocalItems(state, action);
-      case `REMOVE_DELETED_LOCAL_${itemName}`:
+      case `kewen-lab/items/REMOVE_DELETED_LOCAL_${itemName}`:
         return removeDeletedLocalItems(state, action);
-      case `UPDATE_${itemName}_ORDER`:
+      case `kewen-lab/items/UPDATE_${itemName}_ORDER`:
         return updateItemsOrder(state, action);
-      case `CLEAR_${itemName}_TO_UPDATE`:
+      case `kewen-lab/items/CLEAR_${itemName}_TO_UPDATE`:
         return clearItemsToUpdate(state);
-      case `SAVE_${itemName}`:
+      case `kewen-lab/items/SAVE_${itemName}`:
         return saveItems(state);
-      case `SAVE_${itemName}_SUCCESS`:
+      case `kewen-lab/items/SAVE_${itemName}_SUCCESS`:
         return saveItemsSuccess(state);
-      case `SAVE_${itemName}_FAILURE`:
+      case `kewen-lab/items/SAVE_${itemName}_FAILURE`:
         return saveItemsFailure(state);
       default:
         return state;

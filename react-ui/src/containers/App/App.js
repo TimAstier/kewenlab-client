@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavigationBar } from '../.';
-import { FlashMessagesList } from '../../components';
+import { NavigationBar } from '../';
+import { FlashMessageList } from '../../components';
 
 class App extends React.Component {
   render() {
@@ -11,7 +11,7 @@ class App extends React.Component {
           mode={this.props.mode}
           pathname={this.props.location.pathname}
         />
-        <FlashMessagesList />
+        <FlashMessageList />
         {this.props.children}
       </div>
     );
@@ -26,7 +26,7 @@ App.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    mode: state.get('mainScreen').get('mode')
+    mode: state.get('mode').get('mode')
   };
 }
 

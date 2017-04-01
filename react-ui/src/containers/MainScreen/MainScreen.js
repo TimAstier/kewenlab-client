@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
-import { Sidebar, EditScreen, SuggestionScreen } from '../.';
+import { Sidebar, EditScreen, SuggestionScreen } from '../';
 
 class MainScreen extends React.Component {
 
@@ -34,7 +34,7 @@ MainScreen.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    mode: state.get('mainScreen').get('mode')
+    mode: state.get('mode').get('mode')
   };
 }
 

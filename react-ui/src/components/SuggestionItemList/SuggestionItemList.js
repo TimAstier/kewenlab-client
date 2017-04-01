@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Label } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
-import { SuggestionItem } from '../.';
+import { SuggestionItem } from '../';
 
 const SuggestionItemList = ({ suggestedItems, type, isFetching, banWord, hideWord, currentUserId }) => {
   function renderItem(item, i) {

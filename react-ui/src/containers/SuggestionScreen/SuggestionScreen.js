@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
 import { fetchSuggestions, fetchSuggestionsSuccess,
   fetchSuggestionFailure, banWord, hideWord } from '../../redux/suggestions';
-import { SuggestionInput } from '../.';
-import { ItemList, SelectMessage } from '../../components';
+import { SuggestionInput } from '../';
+import { SuggestionItemList, SelectMessage } from '../../components';
 
 class SuggestionScreen extends React.Component {
   constructor(props) {
@@ -40,12 +40,12 @@ class SuggestionScreen extends React.Component {
               isFetching={this.props.isFetching}
               currentUserId={this.props.currentUserId}
             />
-            <ItemList
+            <SuggestionItemList
               suggestedItems={this.props.suggestedChars}
               type={'chars'}
               isFetching={this.props.isFetching}
             />
-            <ItemList
+            <SuggestionItemList
               banWord={this.props.banWord}
               hideWord={this.props.hideWord}
               currentUserId={this.props.currentUserId}
@@ -81,9 +81,9 @@ function mapStateToProps(state) {
   return {
     currentTextId: state.get('sidebar').get('currentTextId'),
     textNumber: state.get('suggestionInput').get('textNumber'),
-    isFetching: state.get('suggestionScreen').get('isFetching'),
-    suggestedChars: state.get('suggestionScreen').get('chars').toJS(),
-    suggestedWords: state.get('suggestionScreen').get('words').toJS(),
+    isFetching: state.get('suggestions').get('isFetching'),
+    suggestedChars: state.get('suggestions').get('chars').toJS(),
+    suggestedWords: state.get('suggestions').get('words').toJS(),
     currentUserId: state.get('auth').get('user').id
   };
 }

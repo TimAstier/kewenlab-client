@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Label, Loader } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
-import { WordItem, Stats, StatusPicker } from '../.';
+import { WordItem, Stats, StatusPicker } from '../';
 import { defineStatus } from '../../utils/custom';
 
 function renderWordItem(wordItem, i) {

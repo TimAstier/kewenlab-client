@@ -10,7 +10,7 @@ import { refreshChars, saveChars, saveCharsSuccess, saveCharsFailure,
 import { deserializeChars, deserializeWords } from '../../utils/deserializer';
 import { removeDuplicates, toArrayOfUniqueChars, preTokenization,
   removeDolars } from '../../utils/custom';
-import { TextEditor, CharsArea, WordsArea } from '../.';
+import { TextEditor, CharsArea, WordsArea } from '../';
 import { SelectMessage } from '../../components';
 
 class EditScreen extends React.Component {

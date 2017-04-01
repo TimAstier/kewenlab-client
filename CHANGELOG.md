@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
+- Refactoring: reorganized /src files into ducks structure.
 
 ### Fixed
 

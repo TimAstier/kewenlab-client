@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
-import { TextFieldGroup } from '../.';
+import { TextFieldGroup } from '../';
 import { login } from '../../redux/auth';
 
 function validateInput(data) {

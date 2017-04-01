@@ -6,7 +6,7 @@ import { logout } from '../../redux/auth';
 import './NavigationBar.css';
 import logo from '../../logo.png';
 import { AppMenu } from '../../components';
-import { setAppScreenMode } from '../../redux/mode';
+import { setMode } from '../../redux/mode';
 
 class NavigationBar extends React.Component {
 
@@ -16,11 +16,11 @@ class NavigationBar extends React.Component {
   }
 
   setAppScreenModeToEdit() {
-    this.props.setAppScreenMode('edit');
+    this.props.setMode('edit');
   }
 
   setAppScreenModeToSuggestion() {
-    this.props.setAppScreenMode('suggestion');
+    this.props.setMode('suggestion');
   }
 
   render() {
@@ -80,7 +80,7 @@ NavigationBar.propTypes = {
   auth: React.PropTypes.object.isRequired,
   logout: React.PropTypes.func.isRequired,
   mode: React.PropTypes.string.isRequired,
-  setAppScreenMode: React.PropTypes.func.isRequired,
+  setMode: React.PropTypes.func.isRequired,
   pathname: React.PropTypes.string.isRequired
 };
 
@@ -93,5 +93,5 @@ function mapStateToProps(state) {
 // { logout } is a mapDispatchToProps shortcut
 export default connect(
   mapStateToProps,
-  { logout, setAppScreenMode }
+  { logout, setMode }
 )(NavigationBar);

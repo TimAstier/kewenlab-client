@@ -45,39 +45,19 @@ git push heroku master
 - production - https://kewen-lab.herokuapp.com
 
 ## TODO
-- [x] Add favicon.
-- [x] Use Immutable.JS in all reducers.
-- [x] Use plain key names instead of "payload" in actions.
-- [x] Write tests for utils and reducers.
-- [x] Hide notifications after X seconds.
-- [x] Manually added/deleted chars/words feature.
-- [x] Refactor chars/words actions/reducer codes into one.
-- [x] Save words and chars in the right order.
-- [x] Display words and chars in the right order.
-- [x] Auto-save after change.
-- [x] Serve the app with different strategy to handle refresh.
-- [x] Debug mode.
-- [x] Back to create-react-app with no config.
-- [x] Correct handling of environment vars.
-- [x] isSaving states for items with loaders displayed.
-- [x] Loaders for Sidebar.
-- [x] Better organize screens.
-- [x] Switching modes should not be handled in router (to avoid rerender sidebar)
 - [ ] Switch to Ducks file structure.
+- [ ] Move back handling of Mode in router? (now I know how to get pathname)...
+- [ ] Update tests
 - [ ] Move logic definition out of containers.
 - [ ] Make better separation between containers and components.
 - [ ] Move css into components and containers folders.
 - [ ] Better use of selectors. See http://blog.sapegin.me/all/react-structure
-- [ ] Create separate modules for pages.
 - [ ] Adjust the css to fit all screens size.
 - [ ] Test in different browsers.
-- [ ] Loaders for contents.
-- [ ] Global Saved selector with icon displayed.
 - [ ] Confirmation to leave if not saved
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Write tests for components.
 - [ ] Write tests for async action creators.
-- [x] Remove redux devTools from production build.
 - [ ] Highlight words/char in text when clicked.
 
 ## Next steps: Collaborator features
