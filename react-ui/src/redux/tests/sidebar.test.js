@@ -1,4 +1,4 @@
-import reducer, * as actions from './sidebar';
+import reducer, * as actions from '../sidebar';
 import { Map, List } from 'immutable';
 
 // reducer test

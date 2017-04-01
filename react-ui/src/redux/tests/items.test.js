@@ -1,5 +1,5 @@
 import { List, Map, fromJS } from 'immutable';
-import createItemsReducerWithNamedType, * as actions from './items';
+import createItemsReducerWithNamedType, * as actions from '../items';
 
 const charsReducer = createItemsReducerWithNamedType('CHARS');
 const wordsReducer = createItemsReducerWithNamedType('WORDS');

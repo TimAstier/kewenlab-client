@@ -3,8 +3,6 @@ import isEmpty from 'lodash/isEmpty';
 import { Map, List, fromJS } from 'immutable';
 import { defineStatus } from '../utils/custom';
 
-// TODO: Find a way to make chars and words DRY
-
 // Action Types
 // Chars
 const SET_LOCAL_CHARS = 'kewen-lab/items/SET_LOCAL_CHARS';

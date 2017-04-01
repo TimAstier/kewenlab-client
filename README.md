@@ -46,7 +46,7 @@ git push heroku master
 
 ## TODO
 - [x] Switch to Ducks file structure.
-- [ ] Update tests
+- [x] Update tests
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Move logic definition out of containers.
 - [ ] Explicit URLs like app/text/:id/edit

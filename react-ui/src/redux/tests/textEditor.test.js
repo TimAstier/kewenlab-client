@@ -1,6 +1,6 @@
 import { Map } from 'immutable';
-import reducer, * as actions from './textEditor';
-import { getSaved } from './textEditor';
+import reducer, * as actions from '../textEditor';
+import { getSaved } from '../textEditor';
 
 describe('textEditor reducer', () => {
   it('returns the initial state', () => {

@@ -1,4 +1,4 @@
-import * as s from './items';
+import * as s from '../items';
 import { fromJS } from 'immutable';
 
 describe('items selectors', () => {
