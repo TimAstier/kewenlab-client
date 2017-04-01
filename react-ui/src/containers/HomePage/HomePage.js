@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Message, Image, Button } from 'semantic-ui-react';
-import logo from '../logo.png';
+import logo from '../../logo.png';
 
 class HomePage extends React.Component {
   render() {

@@ -1,8 +1,8 @@
 import React from 'react';
-import SignupForm from './SignupForm';
 import { connect } from 'react-redux';
-import { userSignupRequest, isUserExists } from '../../actions/signupActions';
-import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
+import { SignupForm } from '../.';
+import { userSignupRequest, isUserExists } from '../../redux/signup';
+import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
 
 class SignupPage extends React.Component {
   render() {

@@ -1,22 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
+import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
 import { saveTextContent, saveTextContentSuccess, saveTextContentFailure,
-  setLocalContent } from '../../textEditor/actions';
-import { refreshChars, saveChars, saveCharsSuccess, saveCharsFailure }
-  from '../../charsArea/actions';
-import { tokenize, refreshWords, saveWords, saveWordsSuccess,
-  saveWordsFailure } from '../../wordsArea/actions';
-
+  setLocalContent } from '../../redux/textEditor';
+import { refreshChars, saveChars, saveCharsSuccess, saveCharsFailure,
+  tokenize, refreshWords, saveWords, saveWordsSuccess, saveWordsFailure }
+  from '../../redux/items';
 import { deserializeChars, deserializeWords } from '../../utils/deserializer';
 import { removeDuplicates, toArrayOfUniqueChars, preTokenization,
   removeDolars } from '../../utils/custom';
-
-import TextEditor from '../../textEditor/containers/TextEditor';
-import CharsArea from '../../charsArea/containers/CharsArea';
-import WordsArea from '../../wordsArea/containers/WordsArea';
-import SelectMessage from '../../components/common/SelectMessage';
+import { TextEditor, CharsArea, WordsArea } from '../.';
+import { SelectMessage } from '../../components';
 
 class EditScreen extends React.Component {
   constructor(props) {

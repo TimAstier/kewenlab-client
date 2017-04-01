@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showFlashMessageWithTimeout } from '../actions/flashMessages';
+import { showFlashMessageWithTimeout } from '../redux/flashMessages';
 
 // Example of High Order Component
 

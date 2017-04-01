@@ -32,7 +32,7 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
 // Action Creators
 export function addFlashMessage(message, id = shortid.generate()) {
   return {
-    type: ADD_FLASH_MESSAGE,
+    type: ADD,
     message: {
       type: message.type,
       text: message.text,
@@ -43,7 +43,7 @@ export function addFlashMessage(message, id = shortid.generate()) {
 
 export function deleteFlashMessage(id) {
   return {
-    type: DELETE_FLASH_MESSAGE,
+    type: DELETE,
     id
   };
 }

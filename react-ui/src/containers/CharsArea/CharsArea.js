@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import CharItemList from '../components/CharItemList';
-import CharControls from '../components/CharControls';
-import { getSaved, countChanges, getTotalItems,
-  countNewItems, filterLocalItems } from '../../common/items/selectors';
-import { setCharsVisibilityFilter } from '../actions';
-import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
+import { CharItemList, CharControls } from '../../components';
+import { getSaved, countChanges, getTotalItems, countNewItems,
+  filterLocalItems, setCharsVisibilityFilter } from '../../redux/items';
+import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
 
 class CharsArea extends React.Component {
   constructor(props) {

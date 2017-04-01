@@ -1,7 +1,7 @@
 import React from 'react';
-import TextFieldGroup from '../common/TextFieldGroup';
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
+import { TextFieldGroup } from '../.';
 
 function validateInput(data) {
   const errors = {};

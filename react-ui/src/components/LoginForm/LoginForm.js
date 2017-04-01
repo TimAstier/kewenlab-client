@@ -1,9 +1,9 @@
 import React from 'react';
-import TextFieldGroup from '../common/TextFieldGroup';
 import { connect } from 'react-redux';
-import { login } from '../../actions/authActions';
 import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
+import { TextFieldGroup } from '../.';
+import { login } from '../../redux/auth';
 
 function validateInput(data) {
   const errors = {};

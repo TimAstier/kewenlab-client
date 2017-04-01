@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import SuggestionForm from '../components/SuggestionForm';
-import { setSuggestionTextNumber } from '../actions';
+import { SuggestionForm } from '../../components';
+import { setSuggestionTextNumber } from '../../redux/suggestionInput';
 
 class SuggestionInput extends React.Component {
   constructor(props) {

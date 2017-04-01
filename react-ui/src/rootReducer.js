@@ -9,7 +9,7 @@ import suggestionInput from './redux/suggestionInput';
 import flashMessages from './redux/flashMessages';
 import auth from './redux/auth';
 
-import createItemsReducerWithNamedType from './redux.items';
+import createItemsReducerWithNamedType from './redux/items';
 
 const chars = createItemsReducerWithNamedType('CHARS');
 const words = createItemsReducerWithNamedType('WORDS');

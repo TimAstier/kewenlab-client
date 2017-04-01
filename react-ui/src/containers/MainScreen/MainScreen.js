@@ -1,9 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showFlashMessageWithTimeout } from '../actions/flashMessages';
-import { Sidebar } from '../containers';
-import EditScreen from './editScreen/EditScreen';
-import SuggestionScreen from './suggestionScreen/containers/SuggestionScreen';
+import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
+import { Sidebar, EditScreen, SuggestionScreen } from '../.';
 
 class MainScreen extends React.Component {
 

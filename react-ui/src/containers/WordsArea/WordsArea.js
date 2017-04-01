@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import WordItemList from '../components/WordItemList';
-import WordControls from '../components/WordControls';
+import { WordItemList, WordControls } from '../../components';
 import { getSaved, countChanges, getTotalItems,
-  countNewItems, filterLocalItems } from '../../common/items/selectors';
-import { setWordsVisibilityFilter } from '../actions';
-import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
+  countNewItems, filterLocalItems, setWordsVisibilityFilter } from '../../redux/items';
+import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
 
 class WordsArea extends React.Component {
   constructor(props) {

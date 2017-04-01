@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Button } from 'semantic-ui-react';
 
-const Item = ({ item, banWord, hideWord, currentUserId }) => {
+const SuggestionItem = ({ item, banWord, hideWord, currentUserId }) => {
   function onBanClick() {
     return banWord(item.id);
   }
@@ -27,11 +27,11 @@ const Item = ({ item, banWord, hideWord, currentUserId }) => {
   );
 };
 
-Item.propTypes = {
+SuggestionItem.propTypes = {
   item: React.PropTypes.object.isRequired,
   banWord: React.PropTypes.func.isRequired,
   hideWord: React.PropTypes.func.isRequired,
   currentUserId: React.PropTypes.number.isRequired
 };
 
-export default Item;
+export default SuggestionItem;

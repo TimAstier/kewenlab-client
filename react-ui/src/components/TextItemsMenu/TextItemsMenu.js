@@ -3,12 +3,11 @@ import { connect } from 'react-redux';
 import { Menu, Label } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
 import { getCurrentText, setCurrentTextId } from '../../redux/sidebar';
-import { setCurrentContent, setLocalContent } from '../../textEditor/actions';
+import { setCurrentContent, setLocalContent } from '../../redux/textEditor';
 import { setCurrentChars, setLocalChars,
-  clearCharsToDelete, clearCharsToUpdate } from '../../charsArea/actions';
-import { setCurrentWords, setLocalWords,
-  clearWordsToDelete, clearWordsToUpdate } from '../../wordsArea/actions';
-import { clearSuggestions } from '../../mainScreen/suggestionScreen/actions';
+  clearCharsToDelete, clearCharsToUpdate, setCurrentWords, setLocalWords,
+  clearWordsToDelete, clearWordsToUpdate } from '../../redux/items';
+import { clearSuggestions } from '../../redux/suggestions';
 import { deserializeChars, deserializeWords } from '../../utils/deserializer';
 
 class TextItemsMenu extends React.Component {

@@ -11,7 +11,7 @@ import { Map } from 'immutable';
 import rootReducer from './rootReducer';
 import setAuthorizationToken from './utils/setAuthorizationToken';
 import jwtDecode from 'jwt-decode';
-import { setCurrentUser } from './actions/authActions';
+import { setCurrentUser } from './redux/auth';
 import './index.css';
 
 import routes from './routes';

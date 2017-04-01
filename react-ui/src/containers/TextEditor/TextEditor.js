@@ -2,9 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Form, Label, Loader } from 'semantic-ui-react';
 import { getSaved } from '../../redux/textEditor';
-import { showFlashMessageWithTimeout } from '../../actions/flashMessages';
-import TextControls from '../../components/TextControls';
-import TextInput from '../../components/TextInput';
+import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
+import { TextControls, TextInput } from '../../components';
 
 class TextEditor extends React.Component {
   constructor(props) {

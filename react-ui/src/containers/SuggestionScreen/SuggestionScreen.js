@@ -1,13 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import { showFlashMessageWithTimeout } from '../../../actions/flashMessages';
-import { fetchSuggestions, fetchSuggestionsSuccess, fetchSuggestionFailure, banWord, hideWord }
-  from '../actions';
-
-import SuggestionInput from '../../../suggestionInput/containers/SuggestionInput';
-import ItemList from '../components/ItemList';
-import SelectMessage from '../../../components/common/SelectMessage';
+import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
+import { fetchSuggestions, fetchSuggestionsSuccess,
+  fetchSuggestionFailure, banWord, hideWord } from '../../redux/suggestions';
+import { SuggestionInput } from '../.';
+import { ItemList, SelectMessage } from '../../components';
 
 class SuggestionScreen extends React.Component {
   constructor(props) {

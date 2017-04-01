@@ -1,12 +1,12 @@
 import React from 'react';
 import { Table, Label } from 'semantic-ui-react';
-import Item from './Item';
 import isEmpty from 'lodash/isEmpty';
+import { SuggestionItem } from '../.';
 
-const ItemList = ({ suggestedItems, type, isFetching, banWord, hideWord, currentUserId }) => {
+const SuggestionItemList = ({ suggestedItems, type, isFetching, banWord, hideWord, currentUserId }) => {
   function renderItem(item, i) {
     return (
-      <Item
+      <SuggestionItem
         key={i}
         item={item}
         banWord={banWord}
@@ -51,7 +51,7 @@ const ItemList = ({ suggestedItems, type, isFetching, banWord, hideWord, current
   );
 };
 
-ItemList.propTypes = {
+SuggestionItemList.propTypes = {
   suggestedItems: React.PropTypes.array.isRequired,
   type: React.PropTypes.string.isRequired,
   isFetching: React.PropTypes.bool.isRequired,
@@ -60,4 +60,4 @@ ItemList.propTypes = {
   currentUserId: React.PropTypes.number
 };
 
-export default ItemList;
+export default SuggestionItemList;

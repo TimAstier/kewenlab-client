@@ -1,6 +1,6 @@
 import { List, Map } from 'immutable';
 import axios from 'axios';
-import { showFlashMessageWithTimeout } from '../actions/flashMessages';
+import { showFlashMessageWithTimeout } from './flashMessages';
 
 // Actions Types
 const SET = 'kewen-lab/sidebar/SET';

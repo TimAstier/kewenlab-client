@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import NavigationBar from '../navigationBar/containers/NavigationBar';
-import FlashMessagesList from './flash/FlashMessagesList';
+import { NavigationBar } from '../.';
+import { FlashMessagesList } from '../../components';
 
 class App extends React.Component {
   render() {

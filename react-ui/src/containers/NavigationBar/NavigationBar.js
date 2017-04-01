@@ -2,11 +2,11 @@ import React from 'react';
 import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { logout } from '../../actions/authActions';
+import { logout } from '../../redux/auth';
 import './NavigationBar.css';
 import logo from '../../logo.png';
-import AppMenu from '../components/AppMenu';
-import { setAppScreenMode } from '../../mainScreen/actions';
+import { AppMenu } from '../../components';
+import { setAppScreenMode } from '../../redux/mode';
 
 class NavigationBar extends React.Component {
 
