@@ -64,6 +64,7 @@ git push heroku master
 - [x] Better organize screens.
 - [x] Switching modes should not be handled in router (to avoid rerender sidebar)
 - [ ] Switch to Ducks file structure.
+- [ ] Better use of selectors. See http://blog.sapegin.me/all/react-structure
 - [ ] Create separate modules for pages.
 - [ ] Adjust the css to fit all screens size.
 - [ ] Test in different browsers.

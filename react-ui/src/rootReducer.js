@@ -1,30 +1,28 @@
 import { combineReducers } from 'redux-immutable';
-import routerReducer from './routerReducer';
 
-import flashMessages from './reducers/flashMessages';
-import auth from './reducers/auth';
-import textEditor from './textEditor';
-import sidebar from './sidebar';
-import charsArea from './charsArea';
-import wordsArea from './wordsArea';
-import suggestionInput from './suggestionInput';
-import suggestionScreen from './mainScreen/suggestionScreen';
-import mainScreen from './mainScreen';
+import routing from './redux/routing';
+import sidebar from './redux/sidebar';
+import textEditor from './redux/textEditor';
+import mode from './redux/mode';
+import suggestions from './redux/suggestions';
+import suggestionInput from './redux/suggestionInput';
+import flashMessages from './redux/flashMessages';
+import auth from './redux/auth';
 
-import createItemsReducerWithNamedType from './common/items/reducer';
+import createItemsReducerWithNamedType from './redux.items';
 
-const charsReducer = createItemsReducerWithNamedType('CHARS');
-const wordsReducer = createItemsReducerWithNamedType('WORDS');
+const chars = createItemsReducerWithNamedType('CHARS');
+const words = createItemsReducerWithNamedType('WORDS');
 
 export default combineReducers({
+  sidebar,
+  textEditor,
+  mode,
+  suggestions,
+  suggestionInput,
+  routing,
+  chars,
+  words,
   flashMessages,
   auth,
-  [mainScreen.constants.NAME]: mainScreen.reducer,
-  [textEditor.constants.NAME]: textEditor.reducer,
-  [sidebar.constants.NAME]: sidebar.reducer,
-  [charsArea.constants.NAME]: charsReducer,
-  [wordsArea.constants.NAME]: wordsReducer,
-  [suggestionInput.constants.NAME]: suggestionInput.reducer,
-  [suggestionScreen.constants.NAME]: suggestionScreen.reducer,
-  routing: routerReducer
 });
