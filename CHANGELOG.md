@@ -8,7 +8,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 ### Changed
-- Refactoring: reorganized /src files into ducks structure.
+- Refactoring (client):
+  - reorganized /src files in a better file structure (ducks).
+- Refactoring (server):
+  - load routes dynamically and split logic in services.
+  - systematically call catch(next) on routes.
+  - express error handler
 
 ### Fixed
 
