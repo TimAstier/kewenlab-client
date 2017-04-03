@@ -58,7 +58,7 @@ class EditScreen extends React.Component {
     };
     return this.props.saveChars(data).then(
       (res) => {
-        this.props.saveCharsSuccess(deserializeChars(res.data.chars));
+        this.props.saveCharsSuccess(deserializeChars(res.data));
       },
       () => {
         this.props.saveCharsFailure();
@@ -101,7 +101,7 @@ class EditScreen extends React.Component {
     };
     return this.props.saveWords(data).then(
       (res) => {
-        this.props.saveWordsSuccess(deserializeWords(res.data.words));
+        this.props.saveWordsSuccess(deserializeWords(res.data));
       },
       () => {
         this.props.saveWordsFailure();

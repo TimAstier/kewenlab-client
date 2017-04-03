@@ -47,9 +47,7 @@ git push heroku master
 ## TODO
 - [x] Switch to Ducks file structure.
 - [x] Update tests
-- [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Move logic definition out of containers.
-- [ ] Explicit URLs like app/text/:id/edit
 - [ ] Make better separation between containers and components.
 - [ ] Move css into components and containers folders.
 - [ ] Better use of selectors. See http://blog.sapegin.me/all/react-structure
@@ -57,9 +55,9 @@ git push heroku master
 - [ ] Test in different browsers.
 - [ ] Loader on loading.
 - [ ] Confirmation to leave if not saved
+- [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Write tests for components.
 - [ ] Write tests for async action creators.
-- [ ] Highlight words/char in text when clicked.
 
 ## Next steps: Collaborator features
 - [ ] Suggestion feature (2/2)
