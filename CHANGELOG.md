@@ -6,7 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
+### Changed
+### Fixed
 
+## [0.1.0] - 2017-04-03
 ### Changed
 - Refactoring (client):
   - reorganized /src files in a better file structure (ducks).
@@ -16,6 +19,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
   - express error handler
 
 ### Fixed
+  - Regression: strange behavior when saving items.
+    - Part 1 introduced in commit 5d6eb06e (missing ids in models)
+    - Part 2 introduced in commit 645e72a9 (break in promise chain)
 
 ## [0.0.0] - 2017-03-31
 ### Added
