@@ -1,7 +1,8 @@
 import React from 'react';
-import { Table, Button, Icon } from 'semantic-ui-react';
+import { Table, Button } from 'semantic-ui-react';
 
-const SuggestionItem = ({ item, banWord, hideWord, favoriteWord, currentUserId }) => {
+const SuggestionItem = ({ item, banWord, hideWord,
+  favoriteWord, unfavoriteWord, currentUserId }) => {
   function onBanClick() {
     return banWord(item.id);
   }
@@ -12,6 +13,10 @@ const SuggestionItem = ({ item, banWord, hideWord, favoriteWord, currentUserId }
 
   function onFavoriteClick() {
     return favoriteWord(item.id, currentUserId);
+  }
+
+  function onUnfavoriteClick() {
+    return unfavoriteWord(item.id, currentUserId);
   }
 
   return (
@@ -30,7 +35,7 @@ const SuggestionItem = ({ item, banWord, hideWord, favoriteWord, currentUserId }
           {
             (item.favorite === false) ?
               <Button icon="empty star" onClick={onFavoriteClick} />
-            : <Icon name="star" />
+            : <Button icon="star" onClick={onUnfavoriteClick} />
           }
         </div>
       </Table.Cell>
@@ -43,6 +48,7 @@ SuggestionItem.propTypes = {
   banWord: React.PropTypes.func.isRequired,
   hideWord: React.PropTypes.func.isRequired,
   favoriteWord: React.PropTypes.func.isRequired,
+  unfavoriteWord: React.PropTypes.func.isRequired,
   currentUserId: React.PropTypes.number.isRequired
 };
 

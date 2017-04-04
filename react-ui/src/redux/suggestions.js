@@ -8,7 +8,7 @@ const FETCH = 'kewen-lab/suggestions/FETCH';
 const FETCH_SUCCESS = 'kewen-lab/suggestions/FETCH_SUCCESS';
 const FETCH_FAILURE = 'kewen-lab/suggestions/FETCH_FAILURE';
 const REMOVE_WORD = 'kewen-lab/suggestions/REMOVE_WORD';
-const FAVORITE_SUCCESS = 'kewen-lab/suggestions/FAVORITE_SUCCESS';
+const TOGGLE_FAVORITE = 'kewen-lab/suggestions/TOGGLE_FAVORITE';
 
 // Reducer
 const INITIAL_STATE = Map({
@@ -40,10 +40,10 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
         'words',
         state.get('words').filter(w => w.get('id') !== action.id)
       );
-    case FAVORITE_SUCCESS:
+    case TOGGLE_FAVORITE:
       const updatedWords = state.get('words').map(t => {
         if (t.get('id') === action.id) {
-          return t.update('favorite', () => true);
+          return t.update('favorite', favorite => !favorite);
         }
         return t;
       });
@@ -94,9 +94,9 @@ export function removeWordSuggestion(id) {
   };
 }
 
-export function favoriteSuccess(id) {
+export function toggleFavorite(id) {
   return {
-    type: FAVORITE_SUCCESS,
+    type: TOGGLE_FAVORITE,
     id
   };
 }
@@ -120,8 +120,18 @@ export function favoriteWord(wordId, currentUserId) {
   return dispatch => {
     return axios.put(`${process.env.REACT_APP_API_URL}/api/users/${currentUserId}/favoriteword/${wordId}`)
       .then(() => {
-        dispatch(favoriteSuccess(wordId));
-        console.log('Word ' + wordId + ' favorited.');
+        dispatch(toggleFavorite(wordId));
+        // console.log('Word ' + wordId + ' favorited.');
+      });
+  };
+}
+
+export function unfavoriteWord(wordId, currentUserId) {
+  return dispatch => {
+    return axios.put(`${process.env.REACT_APP_API_URL}/api/users/${currentUserId}/unfavoriteword/${wordId}`)
+      .then(() => {
+        dispatch(toggleFavorite(wordId));
+        // console.log('Word ' + wordId + ' unfavorited.');
       });
   };
 }

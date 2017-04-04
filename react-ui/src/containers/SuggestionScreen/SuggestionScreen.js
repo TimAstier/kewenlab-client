@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
 import { fetchSuggestions, fetchSuggestionsSuccess,
-  fetchSuggestionFailure, banWord, hideWord, favoriteWord }
+  fetchSuggestionFailure, banWord, hideWord, favoriteWord, unfavoriteWord }
   from '../../redux/suggestions';
 import { SuggestionInput } from '../';
 import { SuggestionItemList, SelectMessage } from '../../components';
@@ -50,6 +50,7 @@ class SuggestionScreen extends React.Component {
               banWord={this.props.banWord}
               hideWord={this.props.hideWord}
               favoriteWord={this.props.favoriteWord}
+              unfavoriteWord={this.props.unfavoriteWord}
               currentUserId={this.props.currentUserId}
               suggestedItems={this.props.suggestedWords}
               type={'words'}
@@ -77,6 +78,7 @@ SuggestionScreen.propTypes = {
   banWord: React.PropTypes.func.isRequired,
   hideWord: React.PropTypes.func.isRequired,
   favoriteWord: React.PropTypes.func.isRequired,
+  unfavoriteWord: React.PropTypes.func.isRequired,
   currentUserId: React.PropTypes.number.isRequired
 };
 
@@ -100,6 +102,7 @@ export default connect(
     fetchSuggestionFailure,
     banWord,
     hideWord,
-    favoriteWord
+    favoriteWord,
+    unfavoriteWord
   }
 )(SuggestionScreen);
