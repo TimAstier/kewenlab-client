@@ -252,7 +252,7 @@ h2 {
   display: inline-block;
   margin-top: -3px;
   opacity: 0;
-  width: 10%;
+  width: 20%;
 }
 
 .suggestion-item-ban:hover {
@@ -261,12 +261,17 @@ h2 {
 
 .suggestion-item-chinese {
   display: inline-block;
-  width: 80%;
+  width: 60%;
 }
 
 .suggestion-item-hide {
   display: inline-block;
   margin-top: -3px;
+  width: 10%;
+}
+
+.suggestion-item-favorite {
+  display: inline-block;
   width: 10%;
 }
 

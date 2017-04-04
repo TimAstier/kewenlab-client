@@ -39,6 +39,9 @@ git commit --allow-empty -m "empty commit"
 git push heroku master
 ```
 
+## Misc
+- [Redux-Immutable.js update Lists](https://www.sitepoint.com/how-to-build-a-todo-app-using-react-redux-and-immutable-js/)
+
 ## Environments
 - development - http://localhost:3000
 - staging - https://limitless-fortress-75797.herokuapp.com
