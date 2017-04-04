@@ -27,9 +27,7 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
     case SET:
       return state.merge(fromJS({
         chars: action.data.chars,
-        words: action.data.words.filter(w => {
-          return action.data.hiddenWords.indexOf(w.id) === -1;
-        })
+        words: action.data.words
       }));
     case CLEAR:
       return state.merge(fromJS({
