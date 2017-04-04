@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button } from 'semantic-ui-react';
+import { Table, Button, Icon } from 'semantic-ui-react';
 
 const SuggestionItem = ({ item, banWord, hideWord,
   favoriteWord, unfavoriteWord, currentUserId }) => {
@@ -25,17 +25,17 @@ const SuggestionItem = ({ item, banWord, hideWord,
         <div className="suggestion-item-ban">
           <Button icon="ban" color="red" onClick={onBanClick} />
         </div>
-        <div className="suggestion-item-chinese">
-          {item.chinese}
-        </div>
         <div className="suggestion-item-hide">
           <Button icon="cancel" onClick={onHideClick} />
+        </div>
+        <div className="suggestion-item-chinese">
+          {item.chinese}
         </div>
         <div className="suggestion-item-favorite">
           {
             (item.favorite === false) ?
-              <Button icon="empty star" onClick={onFavoriteClick} />
-            : <Button icon="star" onClick={onUnfavoriteClick} />
+              <Icon name="empty star" onClick={onFavoriteClick} />
+            : <Icon name="star" onClick={onUnfavoriteClick} />
           }
         </div>
       </Table.Cell>
