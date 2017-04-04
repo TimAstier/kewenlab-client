@@ -11,9 +11,13 @@ $ npm start
 ```
 
 ### Debug mode
+Activate debug mode by setting REACT_APP_DEBUG env var to true. This disable autosave and display save buttons.
 
-Activate debug mode by setting REACT_APP_DEBUG env var to true. This disable autosave and display save buttons.  
-
+### Tests
+create-react-app offers a test command in watch mode:
+```
+$ npm test
+```
 
 ## Deployment
 The app is deployed to Heroku with a Node server as described [here](https://github.com/mars/heroku-cra-node).  
@@ -62,10 +66,14 @@ git push heroku master
 - [ ] Write tests for components.
 - [ ] Write tests for async action creators.
 
-## Next steps: Collaborator features
-- [ ] Suggestion feature (2/2)
-- [ ] Project model
-- [ ] Guidelines model
-- [ ] Offer page, where users can add projects to their list
-- [ ] Edit text infos
-- [ ] Add contact infos / copyrights
+## Kewen-lab v 1.0.0
+- [ ] Models
+- [ ] Get projects (in the scope of this user)
+- [ ] Get texts (in the scope of this project)
+- [ ] Cannot edit texts that are from a project that does not belong to user.
+  - front validation
+  - back validation
+- [ ] Possibility to switch projects
+- [ ] Suggestions and status -> consider only texts from this project
+- [ ] Associate text with project when creating a text
+- [ ] Possibility to move the order of a text (drag & drop).

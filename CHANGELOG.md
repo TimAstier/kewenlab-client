@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Changed
 ### Fixed
 
+## [0.2.0] - 2017-04-04
+### Added
+- Suggestion mode: favorite / unfavorite a word.
+
 ## [0.1.0] - 2017-04-03
 ### Changed
 - Refactoring (client):
