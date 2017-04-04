@@ -15,7 +15,7 @@ class HomePage extends React.Component {
           className="center"
           id="greetings"
         >
-          Welcome to kewen-lab
+          Welcome to KewenLab
         </Message>
         {isAuthenticated ?
           <Link to="/app" className="item color">

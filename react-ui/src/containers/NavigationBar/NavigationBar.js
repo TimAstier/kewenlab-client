@@ -54,14 +54,14 @@ class NavigationBar extends React.Component {
         <img
           className="logo"
           src={logo}
-          alt="Kewen-lab logo"
+          alt="KewenLab logo"
         />
       </Menu.Item>
       <Link
         to={ isAuthenticated ? '/app' : '/' }
         className="item header main-menu-header"
       >
-        Kewen Lab
+        KewenLab
       </Link>
       { isAuthenticated && this.props.pathname === '/app' &&
         <AppMenu
