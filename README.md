@@ -2,6 +2,18 @@
 The application is built with react and redux.  
 It is based on the [create-react-app](https://github.com/facebookincubator/create-react-app).
 
+## Kewen-lab v 1.0.0
+- [x] Models
+- [x] Get projects (in the scope of this user)
+- [x] Get texts (in the scope of this project)
+- [ ] Possibility to switch projects
+- [ ] Suggestions and status -> consider only texts from this project
+- [ ] Cannot edit texts that are from a project that does not belong to user.
+  - front validation
+  - back validation
+- [ ] Associate text with project when creating a text
+- [ ] Possibility to move the order of a text (drag & drop).
+
 ## Development
 ```
 $ cd react-ui/
@@ -62,15 +74,3 @@ git push heroku master
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Write tests for components.
 - [ ] Write tests for async action creators.
-
-## Kewen-lab v 1.0.0
-- [ ] Models
-- [ ] Get projects (in the scope of this user)
-- [ ] Get texts (in the scope of this project)
-- [ ] Cannot edit texts that are from a project that does not belong to user.
-  - front validation
-  - back validation
-- [ ] Possibility to switch projects
-- [ ] Suggestions and status -> consider only texts from this project
-- [ ] Associate text with project when creating a text
-- [ ] Possibility to move the order of a text (drag & drop).

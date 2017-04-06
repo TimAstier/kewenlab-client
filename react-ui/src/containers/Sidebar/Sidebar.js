@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { TextItemsMenu, CreateTextMenu, LoadingMenu } from '../../components';
+import { TextItemsMenu, CreateTextMenu, LoadingMenu,
+  ProjectSelector } from '../../components';
 import { getTextItems, addText, createNewText } from '../../redux/sidebar';
 
 class Sidebar extends React.Component {
@@ -18,6 +19,7 @@ class Sidebar extends React.Component {
   render() {
     return (
       <div id="sidebar">
+        <ProjectSelector/>
         { this.props.isFetching ?
           <LoadingMenu />
           :

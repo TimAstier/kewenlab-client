@@ -77,9 +77,22 @@ h2 {
   background-color: black;
 }
 
-#text-items-menu {
-  height: 93%;
+#project-selector-menu {
+  height: 10%;
   width: 100%;
+  text-align:center;
+}
+
+#project-selector {
+  position: relative;
+  top: 50%;
+  transform: perspective(1px) translateY(-50%);
+}
+
+#text-items-menu {
+  height: 83%;
+  width: 100%;
+  margin-top: 0px;
   font-size: 15px;
   overflow-y: scroll;
   overflow-x: hidden;
