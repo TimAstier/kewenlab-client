@@ -14,6 +14,9 @@ export default class ProjectSelector extends Component {
   }
 
   handleChange = (e, { value }) => {
+    if (this.state.value === value) {
+      return true;
+    }
     this.setState({ value });
     this.props.setCurrentProjectId(Number(value));
     return this.props.getTextItems(Number(value));

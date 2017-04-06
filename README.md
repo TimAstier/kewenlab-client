@@ -6,7 +6,7 @@ It is based on the [create-react-app](https://github.com/facebookincubator/creat
 - [x] Models
 - [x] Get projects (in the scope of this user)
 - [x] Get texts (in the scope of this project)
-- [ ] Possibility to switch projects
+- [x] Possibility to switch projects
 - [ ] Suggestions and status -> consider only texts from this project
 - [ ] Cannot edit texts that are from a project that does not belong to user.
   - front validation
