@@ -13,7 +13,12 @@ export default class ProjectSelector extends Component {
     this.fetchOptions();
   }
 
-  handleChange = (e, { value }) => this.setState({ value });
+  handleChange = (e, { value }) => {
+    this.setState({ value });
+    this.props.setCurrentProjectId(Number(value));
+    return this.props.getTextItems();
+  };
+
   handleSearchChange = (e, value) => this.setState({ searchQuery: value });
 
   fetchOptions = () => {
@@ -21,7 +26,8 @@ export default class ProjectSelector extends Component {
     this.props.fetchProjectItems()
       .then(projects => {
         this.setState({ isFetching: false });
-        return this.props.setProjectItems(projects);
+        this.props.setProjectItems(projects);
+        return this.setState({ value: projects.data.data[0].id });
       });
   }
 
@@ -52,5 +58,7 @@ export default class ProjectSelector extends Component {
 ProjectSelector.propTypes = {
   fetchProjectItems: PropTypes.func.isRequired,
   setProjectItems: PropTypes.func.isRequired,
-  options: PropTypes.array.isRequired
+  options: PropTypes.array.isRequired,
+  setCurrentProjectId: PropTypes.func.isRequired,
+  getTextItems: PropTypes.func.isRequired
 };

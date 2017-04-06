@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { TextItemsMenu, CreateTextMenu, LoadingMenu,
   ProjectSelector } from '../../components';
 import { getTextItems, addText, createNewText } from '../../redux/sidebar';
-import { fetch, set } from '../../redux/projects';
+import { fetch, set, setCurrentProjectId } from '../../redux/projects';
 
 class Sidebar extends React.Component {
 
@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
 
   getOptions(projectItems) {
     const options = projectItems.map(itm => {
-      return { key: itm.id, text: itm.title, value: itm.title };
+      return { key: itm.id, text: itm.title, value: itm.id };
     });
     return options;
   }
@@ -35,6 +35,8 @@ class Sidebar extends React.Component {
         <ProjectSelector
           fetchProjectItems={this.fetchProjectItems}
           setProjectItems={this.props.set}
+          setCurrentProjectId={this.props.setCurrentProjectId}
+          getTextItems={this.props.getTextItems}
           options={this.getOptions(this.props.projectItems)}
         />
         { this.props.isFetching ?
@@ -60,7 +62,8 @@ Sidebar.propTypes = {
   createNewText: PropTypes.func.isRequired,
   currentUserId: PropTypes.number.isRequired,
   set: PropTypes.func.isRequired,
-  projectItems: PropTypes.array.isRequired
+  projectItems: PropTypes.array.isRequired,
+  setCurrentProjectId: PropTypes.func.isRequired
 };
 
 Sidebar.contextTypes = {
@@ -78,5 +81,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getTextItems, addText, createNewText, set }
+  { getTextItems, addText, createNewText, set, setCurrentProjectId }
 )(Sidebar);
