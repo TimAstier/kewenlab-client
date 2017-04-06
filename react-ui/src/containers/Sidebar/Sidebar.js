@@ -14,10 +14,6 @@ class Sidebar extends React.Component {
     this.fetchProjectItems = this.fetchProjectItems.bind(this);
   }
 
-  componentWillMount() {
-    return this.props.getTextItems();
-  }
-
   fetchProjectItems() {
     return fetch(this.props.currentUserId);
   }

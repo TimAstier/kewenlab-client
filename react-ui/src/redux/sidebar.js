@@ -1,6 +1,7 @@
 import { List, Map } from 'immutable';
 import axios from 'axios';
 import { showFlashMessageWithTimeout } from './flashMessages';
+import { deserializeTexts } from '../utils/deserializer';
 
 // Actions Types
 const SET = 'kewen-lab/sidebar/SET';
@@ -59,17 +60,17 @@ export function createNewText() {
   };
 }
 
-export function fetchTextItems() {
+export function fetchTextItems(projectId) {
   return dispatch => {
     dispatch({ type: FETCH });
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/texts`);
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}/texts`);
   };
 }
 
 export function fetchTextItemsSuccess(data) {
   return dispatch => {
     dispatch({ type: FETCH_SUCCESS });
-    return dispatch(setTextItems(data));
+    return dispatch(setTextItems(deserializeTexts(data)));
   };
 }
 
@@ -77,9 +78,9 @@ export function fetchTextItemsFailure() {
   return { type: FETCH_FAILURE };
 }
 
-export function getTextItems() {
+export function getTextItems(projectId) {
   return dispatch =>
-    dispatch(fetchTextItems()).then(
+    dispatch(fetchTextItems(projectId)).then(
       (res) => {
         dispatch(fetchTextItemsSuccess(res.data.texts));
       },

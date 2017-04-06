@@ -16,7 +16,7 @@ export default class ProjectSelector extends Component {
   handleChange = (e, { value }) => {
     this.setState({ value });
     this.props.setCurrentProjectId(Number(value));
-    return this.props.getTextItems();
+    return this.props.getTextItems(Number(value));
   };
 
   handleSearchChange = (e, value) => this.setState({ searchQuery: value });
@@ -27,7 +27,8 @@ export default class ProjectSelector extends Component {
       .then(projects => {
         this.setState({ isFetching: false });
         this.props.setProjectItems(projects);
-        return this.setState({ value: projects.data.data[0].id });
+        this.setState({ value: projects.data.data[0].id });
+        return this.props.getTextItems(projects.data.data[0].id);
       });
   }
 

@@ -28,6 +28,20 @@ export const deserializeWords = (wordsArray) => {
   });
 };
 
+export const deserializeTexts = (textsArray) => {
+  return textsArray
+    .map(txt => {
+      return {
+        id: txt.id,
+        title: txt.title,
+        order: txt.textProject.order
+      };
+    })
+    .sort((a, b) => {
+      return a.order - b.order;
+    });
+};
+
 export const deserializeProjects = (projects) => {
   return projects.data.data.map(e => {
     return {
