@@ -44,12 +44,12 @@ export function setCurrentTextId(text) {
   return { type: SET_CURRENT_TEXT_ID, currentTextId: text.id };
 }
 
-export function getCurrentText(id) {
+export function getCurrentText(textId, projectId) {
   return () => {
     return axios.all([
-      axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${id}`),
-      axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${id}/chars`),
-      axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${id}/words`)
+      axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${textId}`),
+      axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${textId}/chars/${projectId}`),
+      axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${textId}/words`)
     ]);
   };
 }

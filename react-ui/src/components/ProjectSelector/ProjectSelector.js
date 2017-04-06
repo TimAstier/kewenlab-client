@@ -31,6 +31,7 @@ export default class ProjectSelector extends Component {
         this.setState({ isFetching: false });
         this.props.setProjectItems(projects);
         this.setState({ value: projects.data.data[0].id });
+        this.props.setCurrentProjectId(Number(projects.data.data[0].id));
         return this.props.getTextItems(projects.data.data[0].id);
       });
   }

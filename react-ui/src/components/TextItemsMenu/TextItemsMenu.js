@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Menu, Label } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
@@ -41,7 +41,7 @@ class TextItemsMenu extends React.Component {
   }
 
   handleItemClick(e, { data }) {
-    return this.props.getCurrentText(data).then(
+    return this.props.getCurrentText(data, this.props.currentProjectId).then(
       (res) => {
         const text = res[0].data.text;
         const chars = deserializeChars(res[1].data.chars);
@@ -79,27 +79,29 @@ class TextItemsMenu extends React.Component {
 }
 
 TextItemsMenu.propTypes = {
-  getCurrentText: React.PropTypes.func.isRequired,
-  setCurrentTextId: React.PropTypes.func.isRequired,
-  showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
-  textItems: React.PropTypes.array.isRequired,
-  setCurrentContent: React.PropTypes.func.isRequired,
-  setLocalContent: React.PropTypes.func.isRequired,
-  setCurrentChars: React.PropTypes.func.isRequired,
-  setLocalChars: React.PropTypes.func.isRequired,
-  setCurrentWords: React.PropTypes.func.isRequired,
-  setLocalWords: React.PropTypes.func.isRequired,
-  clearCharsToDelete: React.PropTypes.func.isRequired,
-  clearWordsToDelete: React.PropTypes.func.isRequired,
-  clearCharsToUpdate: React.PropTypes.func.isRequired,
-  clearWordsToUpdate: React.PropTypes.func.isRequired,
-  currentTextId: React.PropTypes.number.isRequired,
-  clearSuggestions: React.PropTypes.func.isRequired
+  getCurrentText: PropTypes.func.isRequired,
+  setCurrentTextId: PropTypes.func.isRequired,
+  showFlashMessageWithTimeout: PropTypes.func.isRequired,
+  textItems: PropTypes.array.isRequired,
+  setCurrentContent: PropTypes.func.isRequired,
+  setLocalContent: PropTypes.func.isRequired,
+  setCurrentChars: PropTypes.func.isRequired,
+  setLocalChars: PropTypes.func.isRequired,
+  setCurrentWords: PropTypes.func.isRequired,
+  setLocalWords: PropTypes.func.isRequired,
+  clearCharsToDelete: PropTypes.func.isRequired,
+  clearWordsToDelete: PropTypes.func.isRequired,
+  clearCharsToUpdate: PropTypes.func.isRequired,
+  clearWordsToUpdate: PropTypes.func.isRequired,
+  currentTextId: PropTypes.number.isRequired,
+  clearSuggestions: PropTypes.func.isRequired,
+  currentProjectId: PropTypes.number.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    currentTextId: state.get('sidebar').get('currentTextId')
+    currentTextId: state.get('sidebar').get('currentTextId'),
+    currentProjectId: state.get('projects').get('currentProjectId')
   };
 }
 
