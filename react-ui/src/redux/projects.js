@@ -12,7 +12,7 @@ const SET_CURRENT_PROJECT_ID = 'kewen-lab/sidebar/SET_CURRENT_PROJECT_ID';
 // Reducer
 const INITIAL_STATE = Map({
   items: List(),
-  currentProjectId: null
+  currentProjectId: 0
 });
 
 export default function reducer(state = INITIAL_STATE, action = {}) {
