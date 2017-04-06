@@ -1,4 +1,4 @@
-import isEmpty from 'lodash/isEmpty';
+import _ from 'lodash'
 
 export function toChineseOnly(string) {
   // eslint-disable-next-line
@@ -42,8 +42,11 @@ export function defineStatus(item) {
     return 'notsaved';
   } else if (item.manuallyDeleted === true) {
     return 'manuallydeleted';
-  } else if (isEmpty(item.texts)) {
+  } else if (item.texts.length === 1) {
     return 'new';
   }
-  return 'Text #' + item.texts[0].order;
+  const orders = item.texts.map(t => {
+    return t.textProjects[0].order;
+  });
+  return 'Text #' + _.min(orders);
 }

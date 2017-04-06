@@ -1,3 +1,5 @@
+import { defineStatus } from './custom';
+
 export const deserializeChars = (charsArray) => {
   return charsArray.map(char => {
     return {
@@ -8,7 +10,7 @@ export const deserializeChars = (charsArray) => {
       order: char.charText.order,
       manuallyAdded: char.charText.manuallyAdded,
       manuallyDeleted: char.charText.manuallyDeleted,
-      texts: char.texts
+      status: defineStatus(char)
     };
   });
 };
@@ -23,7 +25,7 @@ export const deserializeWords = (wordsArray) => {
       order: word.wordText.order,
       manuallyAdded: word.wordText.manuallyAdded,
       manuallyDeleted: word.wordText.manuallyDeleted,
-      texts: word.texts
+      status: defineStatus(word)
     };
   });
 };
