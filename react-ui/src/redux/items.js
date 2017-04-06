@@ -74,7 +74,12 @@ function addNewLocalItems(state, action) {
   action.itemsArray.forEach((item, i) => {
     const localIndex = localItems.indexOf(item);
     if (localIndex < 0) {
-      newItems.push({ id: null, chinese: item, order: i });
+      newItems.push({
+        id: null,
+        chinese: item,
+        order: i,
+        status: 'notsaved'
+      });
     }
   });
   const newLocalItems = state.get('localItems').concat(fromJS(newItems));

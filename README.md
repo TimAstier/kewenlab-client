@@ -7,7 +7,10 @@ It is based on the [create-react-app](https://github.com/facebookincubator/creat
 - [x] Get projects (in the scope of this user)
 - [x] Get texts (in the scope of this project)
 - [x] Possibility to switch projects
-- [ ] Suggestions and status -> consider only texts from this project
+- [x] status -> consider only texts from this project
+- [x] suggestions -> consider only texts from this project
+- [ ] Clear editScreen when switching project
+- [ ] Protect texts that originate from a different project.
 - [ ] Cannot edit texts that are from a project that does not belong to user.
   - front validation
   - back validation

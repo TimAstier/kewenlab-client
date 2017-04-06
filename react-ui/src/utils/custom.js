@@ -38,9 +38,7 @@ export function removeDolars(array) {
 }
 
 export function defineStatus(item) {
-  if (item.id === null) {
-    return 'notsaved';
-  } else if (item.manuallyDeleted === true) {
+  if (item.manuallyDeleted === true) {
     return 'manuallydeleted';
   } else if (item.texts.length === 1) {
     return 'new';
