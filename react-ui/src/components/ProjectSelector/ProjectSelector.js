@@ -1,12 +1,5 @@
 import React, { Component, PropTypes } from 'react';
 import { Dropdown } from 'semantic-ui-react';
-import _ from 'lodash';
-import faker from 'faker';
-
-const getOptions = () => _.times(3, () => {
-  const name = faker.name.findName();
-  return { key: name, text: name, value: _.snakeCase(name) };
-});
 
 export default class ProjectSelector extends Component {
   componentWillMount() {
@@ -15,30 +8,27 @@ export default class ProjectSelector extends Component {
       multiple: true,
       search: true,
       searchQuery: null,
-      value: [],
-      options: getOptions(),
+      value: undefined
     });
+    this.fetchOptions();
   }
 
-  handleChange = (e, { value }) => this.setState({ value })
+  handleChange = (e, { value }) => this.setState({ value });
+  handleSearchChange = (e, value) => this.setState({ searchQuery: value });
 
   fetchOptions = () => {
     this.setState({ isFetching: true });
-
-    setTimeout(() => {
-      this.setState({ isFetching: false, options: getOptions() });
-      this.selectRandom();
-    }, 500);
+    this.props.fetchProjectItems()
+      .then(projects => {
+        this.setState({ isFetching: false });
+        return this.props.setProjectItems(projects);
+      });
   }
 
-  selectRandom = () => {
-    const { multiple, options } = this.state;
-    const value = _.sample(options).value;
-    this.setState({ value: multiple ? [value] : value });
-  }
+  toggleSearch = (e) => this.setState({ search: e.target.checked })
 
   render() {
-    const { options, isFetching, value } = this.state;
+    const { isFetching, search, value } = this.state;
 
     return (
       <div id="project-selector-menu">
@@ -46,7 +36,8 @@ export default class ProjectSelector extends Component {
           id="project-selector"
           placeholder="Select Project"
           selection
-          options={options}
+          search={search}
+          options={this.props.options}
           value={value}
           onChange={this.handleChange}
           onSearchChange={this.handleSearchChange}
@@ -59,5 +50,7 @@ export default class ProjectSelector extends Component {
 }
 
 ProjectSelector.propTypes = {
-  onClick: PropTypes.func.isRequired
+  fetchProjectItems: PropTypes.func.isRequired,
+  setProjectItems: PropTypes.func.isRequired,
+  options: PropTypes.array.isRequired
 };

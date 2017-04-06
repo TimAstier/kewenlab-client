@@ -27,3 +27,12 @@ export const deserializeWords = (wordsArray) => {
     };
   });
 };
+
+export const deserializeProjects = (projects) => {
+  return projects.data.data.map(e => {
+    return {
+      id: e.id,
+      title: e.attributes.title
+    };
+  });
+};

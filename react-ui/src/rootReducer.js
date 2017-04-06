@@ -8,6 +8,7 @@ import suggestions from './redux/suggestions';
 import suggestionInput from './redux/suggestionInput';
 import flashMessages from './redux/flashMessages';
 import auth from './redux/auth';
+import projects from './redux/projects';
 
 import createItemsReducerWithNamedType from './redux/items';
 
@@ -25,4 +26,5 @@ export default combineReducers({
   words,
   flashMessages,
   auth,
+  projects
 });

@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { TextItemsMenu, CreateTextMenu, LoadingMenu,
   ProjectSelector } from '../../components';
 import { getTextItems, addText, createNewText } from '../../redux/sidebar';
+import { fetch, set } from '../../redux/projects';
 
 class Sidebar extends React.Component {
 
@@ -10,16 +11,32 @@ class Sidebar extends React.Component {
     super(props);
 
     this.addText = this.props.addText.bind(this);
+    this.fetchProjectItems = this.fetchProjectItems.bind(this);
   }
 
   componentWillMount() {
     return this.props.getTextItems();
   }
 
+  fetchProjectItems() {
+    return fetch(this.props.currentUserId);
+  }
+
+  getOptions(projectItems) {
+    const options = projectItems.map(itm => {
+      return { key: itm.id, text: itm.title, value: itm.title };
+    });
+    return options;
+  }
+
   render() {
     return (
       <div id="sidebar">
-        <ProjectSelector/>
+        <ProjectSelector
+          fetchProjectItems={this.fetchProjectItems}
+          setProjectItems={this.props.set}
+          options={this.getOptions(this.props.projectItems)}
+        />
         { this.props.isFetching ?
           <LoadingMenu />
           :
@@ -35,12 +52,15 @@ class Sidebar extends React.Component {
 }
 
 Sidebar.propTypes = {
-  getTextItems: React.PropTypes.func.isRequired,
-  showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
-  addText: React.PropTypes.func.isRequired,
-  textItems: React.PropTypes.array.isRequired,
-  isFetching: React.PropTypes.bool.isRequired,
-  createNewText: React.PropTypes.func.isRequired
+  getTextItems: PropTypes.func.isRequired,
+  showFlashMessageWithTimeout: PropTypes.func.isRequired,
+  addText: PropTypes.func.isRequired,
+  textItems: PropTypes.array.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  createNewText: PropTypes.func.isRequired,
+  currentUserId: PropTypes.number.isRequired,
+  set: PropTypes.func.isRequired,
+  projectItems: PropTypes.array.isRequired
 };
 
 Sidebar.contextTypes = {
@@ -50,11 +70,13 @@ Sidebar.contextTypes = {
 function mapStateToProps(state) {
   return {
     textItems: state.get('sidebar').get('textItems').toJS(),
-    isFetching: state.get('sidebar').get('isFetching')
+    isFetching: state.get('sidebar').get('isFetching'),
+    currentUserId: state.get('auth').get('user').id,
+    projectItems: state.get('projects').get('items').toJS()
   };
 }
 
 export default connect(
   mapStateToProps,
-  { getTextItems, addText, createNewText }
+  { getTextItems, addText, createNewText, set }
 )(Sidebar);
