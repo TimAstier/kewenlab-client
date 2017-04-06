@@ -112,6 +112,13 @@ h2 {
   transform: perspective(1px) translateY(-50%);
 }
 
+/* Project Selector */
+#project-selector .item {
+  height: 40px;
+  font-size: 14px;
+  color: black;
+}
+
 /* TextEditor */
 
 #text-editor {
