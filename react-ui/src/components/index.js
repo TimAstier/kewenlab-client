@@ -9,6 +9,7 @@ export { default as FlashMessageList } from './FlashMessageList/FlashMessageList
 export { default as LoadingMenu } from './LoadingMenu/LoadingMenu';
 export { default as LoginForm } from './LoginForm/LoginForm';
 export { default as LoginPage } from './LoginPage/LoginPage';
+export { default as ProjectSelector } from './ProjectSelector/ProjectSelector';
 export { default as SelectMessage } from './SelectMessage/SelectMessage';
 export { default as SignupForm } from './SignupForm/SignupForm';
 export { default as SignupPage } from './SignupPage/SignupPage';

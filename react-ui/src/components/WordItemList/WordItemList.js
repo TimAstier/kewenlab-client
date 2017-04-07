@@ -2,14 +2,13 @@ import React from 'react';
 import { Table, Label, Loader } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
 import { WordItem, Stats, StatusPicker } from '../';
-import { defineStatus } from '../../utils/custom';
 
 function renderWordItem(wordItem, i) {
   return (
     <WordItem
       key={i}
       word={wordItem.chinese}
-      status={defineStatus(wordItem)}
+      status={wordItem.status}
       manuallyAdded={wordItem.manuallyAdded || false}
       manuallyDeleted={wordItem.manuallyDeleted || false}
     />

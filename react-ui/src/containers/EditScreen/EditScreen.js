@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
@@ -54,7 +54,8 @@ class EditScreen extends React.Component {
       textId: this.props.currentTextId,
       newChars: this.props.localChars.filter(x => x.id === null),
       charsToDelete: this.props.charsToDelete,
-      charsToUpdate: this.props.charsToUpdate
+      charsToUpdate: this.props.charsToUpdate,
+      projectId: this.props.currentProjectId
     };
     return this.props.saveChars(data).then(
       (res) => {
@@ -97,7 +98,8 @@ class EditScreen extends React.Component {
       textId: this.props.currentTextId,
       newWords: this.props.localWords.filter(x => x.id === null),
       wordsToDelete: this.props.wordsToDelete,
-      wordsToUpdate: this.props.wordsToUpdate
+      wordsToUpdate: this.props.wordsToUpdate,
+      projectId: this.props.currentProjectId
     };
     return this.props.saveWords(data).then(
       (res) => {
@@ -160,28 +162,29 @@ class EditScreen extends React.Component {
 }
 
 EditScreen.propTypes = {
-  showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
-  currentTextId: React.PropTypes.number.isRequired,
-  localContent: React.PropTypes.string.isRequired,
-  saveTextContent: React.PropTypes.func.isRequired,
-  saveTextContentSuccess: React.PropTypes.func.isRequired,
-  saveTextContentFailure: React.PropTypes.func.isRequired,
-  setLocalContent: React.PropTypes.func.isRequired,
-  localChars: React.PropTypes.array.isRequired,
-  charsToDelete: React.PropTypes.array.isRequired,
-  charsToUpdate: React.PropTypes.array.isRequired,
-  refreshChars: React.PropTypes.func.isRequired,
-  saveChars: React.PropTypes.func.isRequired,
-  saveCharsSuccess: React.PropTypes.func.isRequired,
-  saveCharsFailure: React.PropTypes.func.isRequired,
-  tokenize: React.PropTypes.func.isRequired,
-  localWords: React.PropTypes.array.isRequired,
-  wordsToDelete: React.PropTypes.array.isRequired,
-  wordsToUpdate: React.PropTypes.array.isRequired,
-  refreshWords: React.PropTypes.func.isRequired,
-  saveWords: React.PropTypes.func.isRequired,
-  saveWordsSuccess: React.PropTypes.func.isRequired,
-  saveWordsFailure: React.PropTypes.func.isRequired
+  showFlashMessageWithTimeout: PropTypes.func.isRequired,
+  currentTextId: PropTypes.number.isRequired,
+  localContent: PropTypes.string.isRequired,
+  saveTextContent: PropTypes.func.isRequired,
+  saveTextContentSuccess: PropTypes.func.isRequired,
+  saveTextContentFailure: PropTypes.func.isRequired,
+  setLocalContent: PropTypes.func.isRequired,
+  localChars: PropTypes.array.isRequired,
+  charsToDelete: PropTypes.array.isRequired,
+  charsToUpdate: PropTypes.array.isRequired,
+  refreshChars: PropTypes.func.isRequired,
+  saveChars: PropTypes.func.isRequired,
+  saveCharsSuccess: PropTypes.func.isRequired,
+  saveCharsFailure: PropTypes.func.isRequired,
+  tokenize: PropTypes.func.isRequired,
+  localWords: PropTypes.array.isRequired,
+  wordsToDelete: PropTypes.array.isRequired,
+  wordsToUpdate: PropTypes.array.isRequired,
+  refreshWords: PropTypes.func.isRequired,
+  saveWords: PropTypes.func.isRequired,
+  saveWordsSuccess: PropTypes.func.isRequired,
+  saveWordsFailure: PropTypes.func.isRequired,
+  currentProjectId: PropTypes.number.isRequired
 
 };
 
@@ -194,7 +197,8 @@ function mapStateToProps(state) {
     charsToUpdate: state.get('chars').get('itemsToUpdate').toJS(),
     localWords: state.get('words').get('localItems').toJS(),
     wordsToDelete: state.get('words').get('itemsToDelete').toJS(),
-    wordsToUpdate: state.get('words').get('itemsToUpdate').toJS()
+    wordsToUpdate: state.get('words').get('itemsToUpdate').toJS(),
+    currentProjectId: state.get('projects').get('currentProjectId')
   };
 }
 

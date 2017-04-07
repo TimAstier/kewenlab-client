@@ -1,7 +1,6 @@
 import axios from 'axios';
 import isEmpty from 'lodash/isEmpty';
 import { Map, List, fromJS } from 'immutable';
-import { defineStatus } from '../utils/custom';
 
 // Action Types
 // Chars
@@ -75,7 +74,12 @@ function addNewLocalItems(state, action) {
   action.itemsArray.forEach((item, i) => {
     const localIndex = localItems.indexOf(item);
     if (localIndex < 0) {
-      newItems.push({ id: null, chinese: item, order: i });
+      newItems.push({
+        id: null,
+        chinese: item,
+        order: i,
+        status: 'notsaved'
+      });
     }
   });
   const newLocalItems = state.get('localItems').concat(fromJS(newItems));
@@ -395,7 +399,7 @@ export const getTotalItems = (state = INITIAL_STATE) => {
   return state
     .get('currentItems')
     .toJS()
-    .filter(x => defineStatus(x) !== 'manuallydeleted')
+    .filter(x => x.status !== 'manuallydeleted')
     .length;
 };
 
@@ -403,7 +407,7 @@ export const countNewItems = (state = INITIAL_STATE) => {
   return state
     .get('currentItems')
     .toJS()
-    .filter(x => defineStatus(x) === 'new')
+    .filter(x => x.status === 'new')
     .length;
 };
 
@@ -414,21 +418,21 @@ export const filterLocalItems = (state = INITIAL_STATE) => {
     .sort((a, b) => { return a.order - b.order; });
   switch (state.get('visibilityFilter')) {
     case 'all':
-      return localItems.filter(x => defineStatus(x) !== 'manuallydeleted');
+      return localItems.filter(x => x.status !== 'manuallydeleted');
     case 'new':
-      return localItems.filter(x => defineStatus(x) === 'new');
+      return localItems.filter(x => x.status === 'new');
     case 'notnew':
       return localItems.filter(x => {
         return (
-          (defineStatus(x) !== 'new') &&
-          (defineStatus(x) !== 'notsaved') &&
-          (defineStatus(x) !== 'manuallydeleted')
+          (x.status !== 'new') &&
+          (x.status !== 'notsaved') &&
+          (x.status !== 'manuallydeleted')
         );
       });
     case 'notsaved':
-      return localItems.filter(x => defineStatus(x) === 'notsaved');
+      return localItems.filter(x => x.status === 'notsaved');
     case 'manuallydeleted':
-      return localItems.filter(x => defineStatus(x) === 'manuallydeleted');
+      return localItems.filter(x => x.status === 'manuallydeleted');
     default:
       return localItems;
   }

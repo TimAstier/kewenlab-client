@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { SuggestionForm } from '../../components';
 import { setSuggestionTextNumber } from '../../redux/suggestionInput';
@@ -31,9 +31,10 @@ class SuggestionInput extends React.Component {
   onClick(e) {
     e.preventDefault();
     const data = {
-      currentTextId: this.props.currentTextId,
+      textId: this.props.currentTextId,
       textNumber: this.props.textNumber,
-      currentUserId: this.props.currentUserId
+      userId: this.props.currentUserId,
+      projectId: this.props.currentProjectId
     };
     this.props.findSuggestions(data);
   }
@@ -57,12 +58,13 @@ class SuggestionInput extends React.Component {
 }
 
 SuggestionInput.propTypes = {
-  setSuggestionTextNumber: React.PropTypes.func.isRequired,
-  textNumber: React.PropTypes.number.isRequired,
-  findSuggestions: React.PropTypes.func.isRequired,
-  currentTextId: React.PropTypes.number.isRequired,
-  isFetching: React.PropTypes.bool.isRequired,
-  currentUserId: React.PropTypes.number.isRequired
+  setSuggestionTextNumber: PropTypes.func.isRequired,
+  textNumber: PropTypes.number.isRequired,
+  findSuggestions: PropTypes.func.isRequired,
+  currentTextId: PropTypes.number.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  currentUserId: PropTypes.number.isRequired,
+  currentProjectId: PropTypes.number.isRequired
 };
 
 function mapStateToProps(state) {

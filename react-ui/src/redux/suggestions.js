@@ -68,9 +68,10 @@ export function clearSuggestions() {
 }
 
 export function fetchSuggestions(data) {
+  const { textId, textNumber, userId, projectId } = data;
   return dispatch => {
     dispatch({ type: FETCH });
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${data.currentTextId}/suggestions/${data.textNumber}/${data.currentUserId}`);
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${textId}/suggestions/${textNumber}/${userId}/${projectId}`);
   };
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
 import { fetchSuggestions, fetchSuggestionsSuccess,
@@ -40,6 +40,7 @@ class SuggestionScreen extends React.Component {
               findSuggestions={this.findSuggestions}
               isFetching={this.props.isFetching}
               currentUserId={this.props.currentUserId}
+              currentProjectId={this.props.currentProjectId}
             />
             <SuggestionItemList
               suggestedItems={this.props.suggestedChars}
@@ -66,20 +67,21 @@ class SuggestionScreen extends React.Component {
 }
 
 SuggestionScreen.propTypes = {
-  showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
-  currentTextId: React.PropTypes.number.isRequired,
-  textNumber: React.PropTypes.number.isRequired,
-  fetchSuggestions: React.PropTypes.func.isRequired,
-  fetchSuggestionsSuccess: React.PropTypes.func.isRequired,
-  fetchSuggestionFailure: React.PropTypes.func.isRequired,
-  isFetching: React.PropTypes.bool.isRequired,
-  suggestedChars: React.PropTypes.array.isRequired,
-  suggestedWords: React.PropTypes.array.isRequired,
-  banWord: React.PropTypes.func.isRequired,
-  hideWord: React.PropTypes.func.isRequired,
-  favoriteWord: React.PropTypes.func.isRequired,
-  unfavoriteWord: React.PropTypes.func.isRequired,
-  currentUserId: React.PropTypes.number.isRequired
+  showFlashMessageWithTimeout: PropTypes.func.isRequired,
+  currentTextId: PropTypes.number.isRequired,
+  textNumber: PropTypes.number.isRequired,
+  fetchSuggestions: PropTypes.func.isRequired,
+  fetchSuggestionsSuccess: PropTypes.func.isRequired,
+  fetchSuggestionFailure: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  suggestedChars: PropTypes.array.isRequired,
+  suggestedWords: PropTypes.array.isRequired,
+  banWord: PropTypes.func.isRequired,
+  hideWord: PropTypes.func.isRequired,
+  favoriteWord: PropTypes.func.isRequired,
+  unfavoriteWord: PropTypes.func.isRequired,
+  currentUserId: PropTypes.number.isRequired,
+  currentProjectId: PropTypes.number.isRequired
 };
 
 function mapStateToProps(state) {
@@ -89,7 +91,8 @@ function mapStateToProps(state) {
     isFetching: state.get('suggestions').get('isFetching'),
     suggestedChars: state.get('suggestions').get('chars').toJS(),
     suggestedWords: state.get('suggestions').get('words').toJS(),
-    currentUserId: state.get('auth').get('user').id
+    currentUserId: state.get('auth').get('user').id,
+    currentProjectId: state.get('projects').get('currentProjectId')
   };
 }
 

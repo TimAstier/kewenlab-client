@@ -1,3 +1,5 @@
+import { defineStatus } from './custom';
+
 export const deserializeChars = (charsArray) => {
   return charsArray.map(char => {
     return {
@@ -8,7 +10,7 @@ export const deserializeChars = (charsArray) => {
       order: char.charText.order,
       manuallyAdded: char.charText.manuallyAdded,
       manuallyDeleted: char.charText.manuallyDeleted,
-      texts: char.texts
+      status: defineStatus(char)
     };
   });
 };
@@ -23,7 +25,30 @@ export const deserializeWords = (wordsArray) => {
       order: word.wordText.order,
       manuallyAdded: word.wordText.manuallyAdded,
       manuallyDeleted: word.wordText.manuallyDeleted,
-      texts: word.texts
+      status: defineStatus(word)
+    };
+  });
+};
+
+export const deserializeTexts = (textsArray) => {
+  return textsArray
+    .map(txt => {
+      return {
+        id: txt.id,
+        title: txt.title,
+        order: txt.textProject.order
+      };
+    })
+    .sort((a, b) => {
+      return a.order - b.order;
+    });
+};
+
+export const deserializeProjects = (projects) => {
+  return projects.data.data.map(e => {
+    return {
+      id: e.id,
+      title: e.attributes.title
     };
   });
 };

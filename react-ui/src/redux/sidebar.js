@@ -1,6 +1,7 @@
 import { List, Map } from 'immutable';
 import axios from 'axios';
 import { showFlashMessageWithTimeout } from './flashMessages';
+import { deserializeTexts } from '../utils/deserializer';
 
 // Actions Types
 const SET = 'kewen-lab/sidebar/SET';
@@ -43,33 +44,34 @@ export function setCurrentTextId(text) {
   return { type: SET_CURRENT_TEXT_ID, currentTextId: text.id };
 }
 
-export function getCurrentText(id) {
+export function getCurrentText(textId, projectId) {
   return () => {
     return axios.all([
-      axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${id}`),
-      axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${id}/chars`),
-      axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${id}/words`)
+      axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${textId}`),
+      axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${textId}/chars/${projectId}`),
+      axios.get(`${process.env.REACT_APP_API_URL}/api/texts/${textId}/words/${projectId}`)
     ]);
   };
 }
 
-export function createNewText() {
+export function createNewText(projectId, userId) {
   return () => {
-    return axios.post(`${process.env.REACT_APP_API_URL}/api/texts`);
+    const data = { projectId, userId };
+    return axios.post(`${process.env.REACT_APP_API_URL}/api/texts`, data);
   };
 }
 
-export function fetchTextItems() {
+export function fetchTextItems(projectId) {
   return dispatch => {
     dispatch({ type: FETCH });
-    return axios.get(`${process.env.REACT_APP_API_URL}/api/texts`);
+    return axios.get(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}/texts`);
   };
 }
 
 export function fetchTextItemsSuccess(data) {
   return dispatch => {
     dispatch({ type: FETCH_SUCCESS });
-    return dispatch(setTextItems(data));
+    return dispatch(setTextItems(deserializeTexts(data)));
   };
 }
 
@@ -77,9 +79,9 @@ export function fetchTextItemsFailure() {
   return { type: FETCH_FAILURE };
 }
 
-export function getTextItems() {
+export function getTextItems(projectId) {
   return dispatch =>
-    dispatch(fetchTextItems()).then(
+    dispatch(fetchTextItems(projectId)).then(
       (res) => {
         dispatch(fetchTextItemsSuccess(res.data.texts));
       },
@@ -93,11 +95,11 @@ export function getTextItems() {
     );
 }
 
-export function addText() {
+export function addText(projectId, userId) {
   return dispatch =>
-    dispatch(createNewText()).then(
+    dispatch(createNewText(projectId, userId)).then(
       () => {
-        dispatch(getTextItems());
+        dispatch(getTextItems(projectId));
       },
       () => {
         dispatch(showFlashMessageWithTimeout({

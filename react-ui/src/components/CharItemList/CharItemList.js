@@ -2,14 +2,13 @@ import React from 'react';
 import { Table, Label, Loader } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
 import { CharItem, Stats, StatusPicker } from '../';
-import { defineStatus } from '../../utils/custom';
 
 function renderCharItem(charItem, i) {
   return (
     <CharItem
       key={i}
       char={charItem.chinese}
-      status={defineStatus(charItem)}
+      status={charItem.status}
       manuallyAdded={charItem.manuallyAdded || false}
       manuallyDeleted={charItem.manuallyDeleted || false}
     />
