@@ -6,6 +6,8 @@ It is based on the [create-react-app](https://github.com/facebookincubator/creat
 - [ ] Protect texts that originate from a different project.
   - front validation
   - back validation
+- [ ] Do not allow find suggestions when no text is selected.
+  - [ ] Do not display textEditor and suggestionScreen when no text is selected.
 - [ ] Possibility to move the order of a text (drag & drop).
 
 ## Development
