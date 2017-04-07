@@ -10,8 +10,10 @@ It is based on the [create-react-app](https://github.com/facebookincubator/creat
 - [x] status -> consider only texts from this project
 - [x] suggestions -> consider only texts from this project
 - [x] Clear editScreen when switching project
-- [ ] Associate text with project when creating a text
-- [ ] Configure Forest names to make it easier to link texts to projects
+- [x] Associate text with project when creating a text
+- [x] Configure Forest names to make it easier to link texts to projects
+- [ ] Order cannot be null
+- [ ] Link texts to users when creating new text
 - [ ] Protect texts that originate from a different project.
   - front validation
   - back validation
