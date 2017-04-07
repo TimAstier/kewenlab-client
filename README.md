@@ -2,14 +2,6 @@
 The application is built with react and redux.  
 It is based on the [create-react-app](https://github.com/facebookincubator/create-react-app).
 
-## Kewen-lab v 1.0.0
-- [ ] Protect texts that originate from a different project.
-  - front validation
-  - back validation
-- [ ] Do not allow find suggestions when no text is selected.
-  - [ ] Do not display textEditor and suggestionScreen when no text is selected.
-- [ ] Possibility to move the order of a text (drag & drop).
-
 ## Development
 ```
 $ cd react-ui/
@@ -55,22 +47,3 @@ git push heroku master
 - development - http://localhost:3000
 - staging - https://limitless-fortress-75797.herokuapp.com
 - production - https://kewen-lab.herokuapp.com
-
-## TODO
-- [x] Switch to Ducks file structure.
-- [x] Update tests
-- [ ] Move logic definition out of containers, in operations files.
-- [ ] Clean methods and props importing/passing in components.
-- [ ] Migrate css to components.
-- [ ] Make better separation between containers and components.
-- [ ] Move css into components and containers folders.
-- [ ] Better use of selectors. See http://blog.sapegin.me/all/react-structure
-- [ ] Adjust the css to fit all screens size.
-- [ ] Test in different browsers.
-- [ ] Loader on loading.
-- [ ] Confirmation to leave if not saved
-- [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
-- [ ] Write tests for components.
-- [ ] Write tests for routes.
-- [ ] Write tests for services. (use fixtures, superagent, see Forest)
-- [ ] Write tests for async action creators / operationq.
