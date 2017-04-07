@@ -3,17 +3,6 @@ The application is built with react and redux.
 It is based on the [create-react-app](https://github.com/facebookincubator/create-react-app).
 
 ## Kewen-lab v 1.0.0
-- [x] Models
-- [x] Get projects (in the scope of this user)
-- [x] Get texts (in the scope of this project)
-- [x] Possibility to switch projects
-- [x] status -> consider only texts from this project
-- [x] suggestions -> consider only texts from this project
-- [x] Clear editScreen when switching project
-- [x] Associate text with project when creating a text
-- [x] Configure Forest names to make it easier to link texts to projects
-- [x] Order cannot be null
-- [ ] Link texts to users when creating new text
 - [ ] Protect texts that originate from a different project.
   - front validation
   - back validation

@@ -4,10 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.0.0] - 2017-04-07
 ### Added
+- Texts can now be organized among projects.
+- Projects and texts belongs to users.
+- Possibility to switch projects via a dropdown menu.
+
 ### Changed
+- Items status are now calculated in deserializers and stored in redux state.
+- Items status and suggestions are calculated in the scope of the current project.
+- Text orders is now defined on the textProject joined table.
+
 ### Fixed
+- Error when saving lists - increased the limit of body-parser in the server.
+- Wrong origin status - use of 'require: true' in sequelize queries.
 
 ## [0.2.0] - 2017-04-04
 ### Added
