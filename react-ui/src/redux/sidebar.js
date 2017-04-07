@@ -54,9 +54,10 @@ export function getCurrentText(textId, projectId) {
   };
 }
 
-export function createNewText() {
+export function createNewText(projectId) {
   return () => {
-    return axios.post(`${process.env.REACT_APP_API_URL}/api/texts`);
+    const data = { projectId };
+    return axios.post(`${process.env.REACT_APP_API_URL}/api/texts`, data);
   };
 }
 
@@ -94,11 +95,11 @@ export function getTextItems(projectId) {
     );
 }
 
-export function addText() {
+export function addText(projectId) {
   return dispatch =>
-    dispatch(createNewText()).then(
+    dispatch(createNewText(projectId)).then(
       () => {
-        dispatch(getTextItems());
+        dispatch(getTextItems(projectId));
       },
       () => {
         dispatch(showFlashMessageWithTimeout({

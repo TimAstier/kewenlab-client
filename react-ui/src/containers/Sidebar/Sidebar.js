@@ -14,7 +14,7 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.addText = this.props.addText.bind(this);
+    this.onAddTextClick = this.onAddTextClick.bind(this);
     this.fetchProjectItems = this.fetchProjectItems.bind(this);
   }
 
@@ -27,6 +27,10 @@ class Sidebar extends React.Component {
       return { key: itm.id, text: itm.title, value: itm.id };
     });
     return options;
+  }
+
+  onAddTextClick() {
+    return this.props.addText(this.props.currentProjectId);
   }
 
   // TODO: define this kind of method in a seaparate 'operations' files
@@ -65,7 +69,9 @@ class Sidebar extends React.Component {
             showFlashMessageWithTimeout={this.props.showFlashMessageWithTimeout}
           />
         }
-        <CreateTextMenu onClick={this.addText} />
+        <CreateTextMenu
+          onClick={this.onAddTextClick}
+        />
       </div>
     );
   }
@@ -91,7 +97,8 @@ Sidebar.propTypes = {
   clearCharsToUpdate: PropTypes.func.isRequired,
   clearCharsToDelete: PropTypes.func.isRequired,
   clearWordsToUpdate: PropTypes.func.isRequired,
-  clearWordsToDelete: PropTypes.func.isRequired
+  clearWordsToDelete: PropTypes.func.isRequired,
+  currentProjectId: PropTypes.number.isRequired
 };
 
 Sidebar.contextTypes = {
@@ -103,7 +110,8 @@ function mapStateToProps(state) {
     textItems: state.get('sidebar').get('textItems').toJS(),
     isFetching: state.get('sidebar').get('isFetching'),
     currentUserId: state.get('auth').get('user').id,
-    projectItems: state.get('projects').get('items').toJS()
+    projectItems: state.get('projects').get('items').toJS(),
+    currentProjectId: state.get('projects').get('currentProjectId')
   };
 }
 
