@@ -18,6 +18,7 @@ export default class ProjectSelector extends Component {
       return true;
     }
     this.setState({ value });
+    this.props.resetTextEditor();
     this.props.setCurrentProjectId(Number(value));
     return this.props.getTextItems(Number(value));
   };
@@ -65,5 +66,6 @@ ProjectSelector.propTypes = {
   setProjectItems: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired,
   setCurrentProjectId: PropTypes.func.isRequired,
-  getTextItems: PropTypes.func.isRequired
+  getTextItems: PropTypes.func.isRequired,
+  resetTextEditor: PropTypes.func.isRequired
 };

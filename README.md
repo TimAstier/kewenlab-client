@@ -8,12 +8,12 @@ It is based on the [create-react-app](https://github.com/facebookincubator/creat
 - [x] Get texts (in the scope of this project)
 - [x] Possibility to switch projects
 - [x] status -> consider only texts from this project
-- [ ] suggestions -> consider only texts from this project
-- [ ] Clear editScreen when switching project
+- [x] suggestions -> consider only texts from this project
+- [x] Clear editScreen when switching project
+- [ ] Associate text with project when creating a text
 - [ ] Protect texts that originate from a different project.
   - front validation
   - back validation
-- [ ] Associate text with project when creating a text
 - [ ] Possibility to move the order of a text (drag & drop).
 
 ## Development
@@ -65,10 +65,9 @@ git push heroku master
 ## TODO
 - [x] Switch to Ducks file structure.
 - [x] Update tests
-- [ ] Stop sending so many things in URL params. Use data / body.
-- [ ] Migrate css to components.
+- [ ] Move logic definition out of containers, in operations files.
 - [ ] Clean methods and props importing/passing in components.
-- [ ] Move logic definition out of containers.
+- [ ] Migrate css to components.
 - [ ] Make better separation between containers and components.
 - [ ] Move css into components and containers folders.
 - [ ] Better use of selectors. See http://blog.sapegin.me/all/react-structure

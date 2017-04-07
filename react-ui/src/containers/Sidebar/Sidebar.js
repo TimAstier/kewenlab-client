@@ -4,6 +4,10 @@ import { TextItemsMenu, CreateTextMenu, LoadingMenu,
   ProjectSelector } from '../../components';
 import { getTextItems, addText, createNewText } from '../../redux/sidebar';
 import { fetch, set, setCurrentProjectId } from '../../redux/projects';
+import { setLocalContent, setCurrentContent } from '../../redux/textEditor';
+import { setLocalChars, setCurrentChars, setLocalWords, setCurrentWords,
+  clearCharsToUpdate, clearCharsToDelete, clearWordsToUpdate,
+  clearWordsToDelete } from '../../redux/items';
 
 class Sidebar extends React.Component {
 
@@ -25,6 +29,23 @@ class Sidebar extends React.Component {
     return options;
   }
 
+  // TODO: define this kind of method in a seaparate 'operations' files
+  // This avoids importing so many functions in this file
+  // AND avoid binding everything to the store
+
+  resetTextEditor() {
+    this.props.setLocalContent('');
+    this.props.setCurrentContent('');
+    this.props.setLocalChars([]);
+    this.props.setCurrentChars([]);
+    this.props.setLocalWords([]);
+    this.props.setCurrentWords([]);
+    this.props.clearCharsToUpdate();
+    this.props.clearCharsToDelete();
+    this.props.clearWordsToUpdate();
+    return this.props.clearWordsToDelete();
+  }
+
   render() {
     return (
       <div id="sidebar">
@@ -34,6 +55,7 @@ class Sidebar extends React.Component {
           setCurrentProjectId={this.props.setCurrentProjectId}
           getTextItems={this.props.getTextItems}
           options={this.getOptions(this.props.projectItems)}
+          resetTextEditor={this.resetTextEditor.bind(this)}
         />
         { this.props.isFetching ?
           <LoadingMenu />
@@ -59,7 +81,17 @@ Sidebar.propTypes = {
   currentUserId: PropTypes.number.isRequired,
   set: PropTypes.func.isRequired,
   projectItems: PropTypes.array.isRequired,
-  setCurrentProjectId: PropTypes.func.isRequired
+  setCurrentProjectId: PropTypes.func.isRequired,
+  setLocalContent: PropTypes.func.isRequired,
+  setCurrentContent: PropTypes.func.isRequired,
+  setLocalChars: PropTypes.func.isRequired,
+  setCurrentChars: PropTypes.func.isRequired,
+  setLocalWords: PropTypes.func.isRequired,
+  setCurrentWords: PropTypes.func.isRequired,
+  clearCharsToUpdate: PropTypes.func.isRequired,
+  clearCharsToDelete: PropTypes.func.isRequired,
+  clearWordsToUpdate: PropTypes.func.isRequired,
+  clearWordsToDelete: PropTypes.func.isRequired
 };
 
 Sidebar.contextTypes = {
@@ -77,5 +109,21 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { getTextItems, addText, createNewText, set, setCurrentProjectId }
+  {
+    getTextItems,
+    addText,
+    createNewText,
+    set,
+    setCurrentProjectId,
+    setLocalContent,
+    setCurrentContent,
+    setLocalChars,
+    setCurrentChars,
+    setLocalWords,
+    setCurrentWords,
+    clearCharsToUpdate,
+    clearCharsToDelete,
+    clearWordsToUpdate,
+    clearWordsToDelete
+  }
 )(Sidebar);
