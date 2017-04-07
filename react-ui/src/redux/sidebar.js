@@ -54,9 +54,9 @@ export function getCurrentText(textId, projectId) {
   };
 }
 
-export function createNewText(projectId) {
+export function createNewText(projectId, userId) {
   return () => {
-    const data = { projectId };
+    const data = { projectId, userId };
     return axios.post(`${process.env.REACT_APP_API_URL}/api/texts`, data);
   };
 }
@@ -95,9 +95,9 @@ export function getTextItems(projectId) {
     );
 }
 
-export function addText(projectId) {
+export function addText(projectId, userId) {
   return dispatch =>
-    dispatch(createNewText(projectId)).then(
+    dispatch(createNewText(projectId, userId)).then(
       () => {
         dispatch(getTextItems(projectId));
       },

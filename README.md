@@ -12,7 +12,7 @@ It is based on the [create-react-app](https://github.com/facebookincubator/creat
 - [x] Clear editScreen when switching project
 - [x] Associate text with project when creating a text
 - [x] Configure Forest names to make it easier to link texts to projects
-- [ ] Order cannot be null
+- [x] Order cannot be null
 - [ ] Link texts to users when creating new text
 - [ ] Protect texts that originate from a different project.
   - front validation
