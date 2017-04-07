@@ -78,4 +78,6 @@ git push heroku master
 - [ ] Confirmation to leave if not saved
 - [ ] Refactor chars/words components/containers codes into one. Maybe use this: https://facebook.github.io/react/docs/higher-order-components.html
 - [ ] Write tests for components.
-- [ ] Write tests for async action creators.
+- [ ] Write tests for routes.
+- [ ] Write tests for services. (use fixtures, superagent, see Forest)
+- [ ] Write tests for async action creators / operationq.
