@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { NavigationBar } from '../';
 import { FlashMessageList } from '../../components';
@@ -19,9 +19,9 @@ class App extends React.Component {
 }
 
 App.propTypes = {
-  children: React.PropTypes.object.isRequired,
-  mode: React.PropTypes.string.isRequired,
-  location: React.PropTypes.object.isRequired
+  children: PropTypes.object.isRequired,
+  mode: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

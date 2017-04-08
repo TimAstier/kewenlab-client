@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { CharItemList, CharControls } from '../../components';
 import { getSaved, countChanges, getTotalItems, countNewItems,
@@ -44,16 +44,16 @@ class CharsArea extends React.Component {
 }
 
 CharsArea.propTypes = {
-  save: React.PropTypes.func.isRequired,
-  saved: React.PropTypes.bool.isRequired,
-  isSaving: React.PropTypes.bool.isRequired,
-  changeCount: React.PropTypes.number.isRequired,
-  showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
-  totalChars: React.PropTypes.number.isRequired,
-  totalNewChars: React.PropTypes.number.isRequired,
-  setCharsVisibilityFilter: React.PropTypes.func.isRequired,
-  visibilityFilter: React.PropTypes.string.isRequired,
-  filteredLocalChars: React.PropTypes.array.isRequired
+  save: PropTypes.func.isRequired,
+  saved: PropTypes.bool.isRequired,
+  isSaving: PropTypes.bool.isRequired,
+  changeCount: PropTypes.number.isRequired,
+  showFlashMessageWithTimeout: PropTypes.func.isRequired,
+  totalChars: PropTypes.number.isRequired,
+  totalNewChars: PropTypes.number.isRequired,
+  setCharsVisibilityFilter: PropTypes.func.isRequired,
+  visibilityFilter: PropTypes.string.isRequired,
+  filteredLocalChars: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {

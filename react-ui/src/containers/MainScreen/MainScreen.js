@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
 import { Sidebar, EditScreen, SuggestionScreen } from '../';
 
 class MainScreen extends React.Component {
 
+  // TODO: Manage this with react-router
   renderAppScreen(mode) {
     switch (mode) {
       case 'edit':
@@ -17,10 +17,10 @@ class MainScreen extends React.Component {
   }
 
   render() {
-    const { showFlashMessageWithTimeout, mode } = this.props;
+    const { mode } = this.props;
     return (
       <div id="main-screen">
-        <Sidebar showFlashMessageWithTimeout={showFlashMessageWithTimeout} />
+        <Sidebar/>
         {this.renderAppScreen(mode)}
       </div>
     );
@@ -28,8 +28,7 @@ class MainScreen extends React.Component {
 }
 
 MainScreen.propTypes = {
-  mode: React.PropTypes.string.isRequired,
-  showFlashMessageWithTimeout: React.PropTypes.func.isRequired
+  mode: React.PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {
@@ -38,7 +37,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { showFlashMessageWithTimeout }
-)(MainScreen);
+export default connect(mapStateToProps)(MainScreen);

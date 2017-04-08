@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { WordItemList, WordControls } from '../../components';
 import { getSaved, countChanges, getTotalItems,
@@ -45,17 +45,17 @@ class WordsArea extends React.Component {
 }
 
 WordsArea.propTypes = {
-  showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
-  refresh: React.PropTypes.func.isRequired,
-  save: React.PropTypes.func.isRequired,
-  isSaving: React.PropTypes.bool.isRequired,
-  saved: React.PropTypes.bool.isRequired,
-  changeCount: React.PropTypes.number.isRequired,
-  totalWords: React.PropTypes.number.isRequired,
-  totalNewWords: React.PropTypes.number.isRequired,
-  setWordsVisibilityFilter: React.PropTypes.func.isRequired,
-  visibilityFilter: React.PropTypes.string.isRequired,
-  filteredLocalWords: React.PropTypes.array.isRequired
+  showFlashMessageWithTimeout: PropTypes.func.isRequired,
+  refresh: PropTypes.func.isRequired,
+  save: PropTypes.func.isRequired,
+  isSaving: PropTypes.bool.isRequired,
+  saved: PropTypes.bool.isRequired,
+  changeCount: PropTypes.number.isRequired,
+  totalWords: PropTypes.number.isRequired,
+  totalNewWords: PropTypes.number.isRequired,
+  setWordsVisibilityFilter: PropTypes.func.isRequired,
+  visibilityFilter: PropTypes.string.isRequired,
+  filteredLocalWords: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Form, Label, Loader } from 'semantic-ui-react';
 import { getSaved } from '../../redux/textEditor';
@@ -43,13 +43,13 @@ class TextEditor extends React.Component {
 }
 
 TextEditor.propTypes = {
-  currentTextId: React.PropTypes.number.isRequired,
-  localContent: React.PropTypes.string.isRequired,
-  saved: React.PropTypes.bool.isRequired,
-  showFlashMessageWithTimeout: React.PropTypes.func.isRequired,
-  save: React.PropTypes.func.isRequired,
-  isSaving: React.PropTypes.bool.isRequired,
-  onChange: React.PropTypes.func.isRequired
+  currentTextId: PropTypes.number.isRequired,
+  localContent: PropTypes.string.isRequired,
+  saved: PropTypes.bool.isRequired,
+  showFlashMessageWithTimeout: PropTypes.func.isRequired,
+  save: PropTypes.func.isRequired,
+  isSaving: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -63,7 +63,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  {
-    showFlashMessageWithTimeout,
-  }
+  { showFlashMessageWithTimeout }
 )(TextEditor);

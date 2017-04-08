@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { Message, Image, Button } from 'semantic-ui-react';
@@ -41,7 +41,7 @@ class HomePage extends React.Component {
 }
 
 HomePage.propTypes = {
-  auth: React.PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {

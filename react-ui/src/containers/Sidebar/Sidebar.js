@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { TextItemsMenu, CreateTextMenu, LoadingMenu,
   ProjectSelector } from '../../components';
+import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
 import { getTextItems, addText, createNewText } from '../../redux/sidebar';
 import { fetch, set, setCurrentProjectId } from '../../redux/projects';
 import { setLocalContent, setCurrentContent } from '../../redux/textEditor';
@@ -133,6 +134,7 @@ export default connect(
     clearCharsToUpdate,
     clearCharsToDelete,
     clearWordsToUpdate,
-    clearWordsToDelete
+    clearWordsToDelete,
+    showFlashMessageWithTimeout
   }
 )(Sidebar);
