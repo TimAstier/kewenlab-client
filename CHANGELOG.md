@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+##[UNRELEASED]
+
+### Changed
+- Refactoring: Make async API calls DRY with fetch/success/failure helper.
+- Refactoring: Move logic out of containers when possible.
+
+### Fixed
+- Existing tests that were failing since 1.0.0
+
 ##[1.0.1] - 2017-04-07
 ### Fixed
 - Words already used in a project should not appear in suggestions
