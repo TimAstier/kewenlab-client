@@ -33,11 +33,10 @@ class WordsArea extends React.Component {
         />
         {(process.env.REACT_APP_DEBUG === 'on') &&
           <WordControls
-            refresh={this.props.refresh}
+            tokenize={this.props.tokenize}
             saved={this.props.saved}
             changeCount={this.props.changeCount}
             save={this.props.save}
-            localContent={this.props.localContent}
           />
         }
       </div>
@@ -47,7 +46,7 @@ class WordsArea extends React.Component {
 
 WordsArea.propTypes = {
   showFlashMessageWithTimeout: PropTypes.func.isRequired,
-  refresh: PropTypes.func.isRequired,
+  tokenize: PropTypes.func.isRequired,
   save: PropTypes.func.isRequired,
   isSaving: PropTypes.bool.isRequired,
   saved: PropTypes.bool.isRequired,
@@ -56,8 +55,7 @@ WordsArea.propTypes = {
   totalNewWords: PropTypes.number.isRequired,
   setWordsVisibilityFilter: PropTypes.func.isRequired,
   visibilityFilter: PropTypes.string.isRequired,
-  filteredLocalWords: PropTypes.array.isRequired,
-  localContent: PropTypes.string.isRequired
+  filteredLocalWords: PropTypes.array.isRequired
 };
 
 function mapStateToProps(state) {

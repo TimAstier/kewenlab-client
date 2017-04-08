@@ -5,10 +5,7 @@ import { TextItemsMenu, CreateTextMenu, LoadingMenu,
 import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
 import { getTextItems, addText, createNewText } from '../../redux/sidebar';
 import { fetch, set, setCurrentProjectId } from '../../redux/projects';
-import { setLocalContent, setCurrentContent } from '../../redux/textEditor';
-import { setLocalChars, setCurrentChars, setLocalWords, setCurrentWords,
-  clearCharsToUpdate, clearCharsToDelete, clearWordsToUpdate,
-  clearWordsToDelete } from '../../redux/items';
+import { resetEditScreen } from './operations';
 
 class Sidebar extends React.Component {
 
@@ -35,23 +32,6 @@ class Sidebar extends React.Component {
     return this.props.addText(currentProjectId, currentUserId);
   }
 
-  // TODO: define this kind of method in a seaparate 'operations' files
-  // This avoids importing so many functions in this file
-  // AND avoid binding everything to the store
-
-  resetTextEditor() {
-    this.props.setLocalContent('');
-    this.props.setCurrentContent('');
-    this.props.setLocalChars([]);
-    this.props.setCurrentChars([]);
-    this.props.setLocalWords([]);
-    this.props.setCurrentWords([]);
-    this.props.clearCharsToUpdate();
-    this.props.clearCharsToDelete();
-    this.props.clearWordsToUpdate();
-    return this.props.clearWordsToDelete();
-  }
-
   render() {
     return (
       <div id="sidebar">
@@ -61,7 +41,7 @@ class Sidebar extends React.Component {
           setCurrentProjectId={this.props.setCurrentProjectId}
           getTextItems={this.props.getTextItems}
           options={this.getOptions(this.props.projectItems)}
-          resetTextEditor={this.resetTextEditor.bind(this)}
+          resetEditScreen={this.props.resetEditScreen}
         />
         { this.props.isFetching ?
           <LoadingMenu />
@@ -90,17 +70,8 @@ Sidebar.propTypes = {
   set: PropTypes.func.isRequired,
   projectItems: PropTypes.array.isRequired,
   setCurrentProjectId: PropTypes.func.isRequired,
-  setLocalContent: PropTypes.func.isRequired,
-  setCurrentContent: PropTypes.func.isRequired,
-  setLocalChars: PropTypes.func.isRequired,
-  setCurrentChars: PropTypes.func.isRequired,
-  setLocalWords: PropTypes.func.isRequired,
-  setCurrentWords: PropTypes.func.isRequired,
-  clearCharsToUpdate: PropTypes.func.isRequired,
-  clearCharsToDelete: PropTypes.func.isRequired,
-  clearWordsToUpdate: PropTypes.func.isRequired,
-  clearWordsToDelete: PropTypes.func.isRequired,
-  currentProjectId: PropTypes.number.isRequired
+  currentProjectId: PropTypes.number.isRequired,
+  resetEditScreen: PropTypes.func.isRequired
 };
 
 Sidebar.contextTypes = {
@@ -125,16 +96,7 @@ export default connect(
     createNewText,
     set,
     setCurrentProjectId,
-    setLocalContent,
-    setCurrentContent,
-    setLocalChars,
-    setCurrentChars,
-    setLocalWords,
-    setCurrentWords,
-    clearCharsToUpdate,
-    clearCharsToDelete,
-    clearWordsToUpdate,
-    clearWordsToDelete,
-    showFlashMessageWithTimeout
+    showFlashMessageWithTimeout,
+    resetEditScreen
   }
 )(Sidebar);

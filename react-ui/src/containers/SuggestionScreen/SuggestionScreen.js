@@ -1,33 +1,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
-import { fetchSuggestions, fetchSuggestionsSuccess,
-  fetchSuggestionFailure, banWord, hideWord, favoriteWord, unfavoriteWord }
+import { banWord, hideWord, favoriteWord, unfavoriteWord }
   from '../../redux/suggestions';
 import { SuggestionInput } from '../';
 import { SuggestionItemList, SelectMessage } from '../../components';
+import { getSuggestions } from './operations';
 
 class SuggestionScreen extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.findSuggestions = this.findSuggestions.bind(this);
-  }
-
-  findSuggestions(data) {
-    return this.props.fetchSuggestions(data).then(
-      (res) => {
-        return this.props.fetchSuggestionsSuccess(res.data);
-      },
-      () => {
-        this.props.fetchSuggestionFailure();
-        return this.props.showFlashMessageWithTimeout({
-          type: 'error',
-          text: 'Error: could not get suggestions from the server.'
-        });
-      }
-    );
-  }
 
   render() {
     const { currentTextId } = this.props;
@@ -37,7 +16,7 @@ class SuggestionScreen extends React.Component {
           <div>
             <SuggestionInput
               currentTextId={this.props.currentTextId}
-              findSuggestions={this.findSuggestions}
+              findSuggestions={this.props.getSuggestions}
               isFetching={this.props.isFetching}
               currentUserId={this.props.currentUserId}
               currentProjectId={this.props.currentProjectId}
@@ -67,12 +46,8 @@ class SuggestionScreen extends React.Component {
 }
 
 SuggestionScreen.propTypes = {
-  showFlashMessageWithTimeout: PropTypes.func.isRequired,
   currentTextId: PropTypes.number.isRequired,
   textNumber: PropTypes.number.isRequired,
-  fetchSuggestions: PropTypes.func.isRequired,
-  fetchSuggestionsSuccess: PropTypes.func.isRequired,
-  fetchSuggestionFailure: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,
   suggestedChars: PropTypes.array.isRequired,
   suggestedWords: PropTypes.array.isRequired,
@@ -81,7 +56,8 @@ SuggestionScreen.propTypes = {
   favoriteWord: PropTypes.func.isRequired,
   unfavoriteWord: PropTypes.func.isRequired,
   currentUserId: PropTypes.number.isRequired,
-  currentProjectId: PropTypes.number.isRequired
+  currentProjectId: PropTypes.number.isRequired,
+  getSuggestions: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -99,13 +75,10 @@ function mapStateToProps(state) {
 export default connect(
   mapStateToProps,
   {
-    showFlashMessageWithTimeout,
-    fetchSuggestions,
-    fetchSuggestionsSuccess,
-    fetchSuggestionFailure,
     banWord,
     hideWord,
     favoriteWord,
-    unfavoriteWord
+    unfavoriteWord,
+    getSuggestions
   }
 )(SuggestionScreen);
