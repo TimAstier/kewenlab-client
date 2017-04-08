@@ -7,6 +7,14 @@
     "name": "Tim Astier",
     "url": "https://github.com/TimAstier"
   },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "lint": "eslint *.js .; exit 0",
+    "lint:watch": "watch 'npm run lint'"
+  },
   "dependencies": {
     "axios": "^0.15.3",
     "classnames": "^2.2.5",
@@ -28,13 +36,5 @@
   },
   "devDependencies": {
     "react-scripts": "0.9.4"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "lint": "eslint *.js .; exit 0",
-    "lint:watch": "watch 'npm run lint'"
   }
 }

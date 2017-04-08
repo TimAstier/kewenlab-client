@@ -1,4 +1,4 @@
-import _ from 'lodash'
+import _ from 'lodash';
 
 export function toChineseOnly(string) {
   // eslint-disable-next-line
