@@ -9,20 +9,19 @@ export function tokenizeWords(localContent) {
     const data = {
       content: preTokenization(localContent)
     };
-    return dispatch(tokenize(data)).then(
-      (res) => {
-        let newLocalWords = res.data;
+    return dispatch(tokenize(data))
+      .then(response => {
+        let newLocalWords = response.data;
         newLocalWords = removeDolars(removeDuplicates(newLocalWords));
         dispatch(refreshWords(newLocalWords));
         return false;
-      },
-      () => {
-        // TODO: Return real error from the server
+      })
+      .catch(err => {
+        const { status, message } = err.response.data.errors[0];
         dispatch(showFlashMessageWithTimeout({
           type: 'error',
-          text: 'Error: could not tokenize text from the server.'
+          text: 'Error - "' + message + '" (' + status + ')'
         }));
-      }
-    );
+      });
   };
 }

@@ -28,10 +28,6 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
 
 // Action Creators
 
-export function fetch(userId) {
-  return axios.get(`${process.env.REACT_APP_API_URL}/api/projects/${userId}`);
-}
-
 export function set(projects) {
   return {
     type: SET,
@@ -44,4 +40,8 @@ export function setCurrentProjectId(id) {
     type: SET_CURRENT_PROJECT_ID,
     id
   };
+}
+
+export function fetch(userId) {
+  return axios.get(`${process.env.REACT_APP_API_URL}/api/projects/${userId}`);
 }
