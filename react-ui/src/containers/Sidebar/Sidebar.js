@@ -45,6 +45,7 @@ class Sidebar extends React.Component {
           getTextItems={this.props.getTextItems}
           options={this.getOptions(this.props.projectItems)}
           resetEditScreen={this.props.resetEditScreen}
+          showFlashMessageWithTimeout={this.props.showFlashMessageWithTimeout}
         />
         { this.props.isFetching ?
           <LoadingMenu />

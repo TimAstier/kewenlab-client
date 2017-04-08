@@ -1,4 +1,5 @@
 import { showFlashMessageWithTimeout } from '../redux/flashMessages';
+import checkNetwork from './checkNetwork';
 
 export default function apiCall(data, call, success, failure) {
   return dispatch =>
@@ -9,15 +10,7 @@ export default function apiCall(data, call, success, failure) {
       .catch(err => {
         dispatch(failure());
         const type = 'error';
-        let text = '';
-        if (!navigator.onLine) { // Browser is offline?
-          text = 'No Internet connexion';
-        } else if (err.response === undefined) { // No response from the server
-          text = 'No response from the server';
-        } else { // Error message from the server
-          const { status, message } = err.response.data.errors[0];
-          text = 'Error - "' + message + '" (' + status + ')';
-        }
+        const text = checkNetwork(err);
         dispatch(showFlashMessageWithTimeout({ type, text }));
       });
 }

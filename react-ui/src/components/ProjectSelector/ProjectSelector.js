@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { Dropdown } from 'semantic-ui-react';
+import checkNetwork from '../../helpers/checkNetwork';
 
 export default class ProjectSelector extends Component {
   componentWillMount() {
@@ -34,6 +35,12 @@ export default class ProjectSelector extends Component {
         this.setState({ value: projects.data.data[0].id });
         this.props.setCurrentProjectId(Number(projects.data.data[0].id));
         return this.props.getTextItems(projects.data.data[0].id);
+      })
+      .catch(err => {
+        this.setState({ isFetching: false });
+        const type = 'error';
+        const text = checkNetwork(err);
+        this.props.showFlashMessageWithTimeout({ type, text });
       });
   }
 
@@ -67,5 +74,6 @@ ProjectSelector.propTypes = {
   options: PropTypes.array.isRequired,
   setCurrentProjectId: PropTypes.func.isRequired,
   getTextItems: PropTypes.func.isRequired,
-  resetEditScreen: PropTypes.func.isRequired
+  resetEditScreen: PropTypes.func.isRequired,
+  showFlashMessageWithTimeout: PropTypes.func.isRequired
 };
