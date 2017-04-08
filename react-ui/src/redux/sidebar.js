@@ -83,5 +83,6 @@ export function getTextItems(data) {
 }
 
 export function addText(data) {
-  return apiCall(data, createNewText, getTextItems, null);
+  const fail = () => { return { type: 'kewen-lab/addText/FAIL' }; };
+  return apiCall(data, createNewText, getTextItems, fail);
 }

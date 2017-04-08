@@ -9,6 +9,7 @@ import { setCurrentChars, setLocalChars,
   clearWordsToDelete, clearWordsToUpdate } from '../../redux/items';
 import { clearSuggestions } from '../../redux/suggestions';
 import { deserializeChars, deserializeWords } from '../../utils/deserializer';
+import checkNetwork from '../../helpers/checkNetwork';
 
 class TextItemsMenu extends React.Component {
   constructor(props) {
@@ -59,11 +60,10 @@ class TextItemsMenu extends React.Component {
         this.props.clearWordsToUpdate();
         this.props.clearSuggestions();
       },
-      () => {
-        this.props.showFlashMessageWithTimeout({
-          type: 'error',
-          text: 'Error: could not get text data from the server.'
-        });
+      (err) => {
+        const type = 'error';
+        const text = checkNetwork(err);
+        this.props.showFlashMessageWithTimeout({ type, text });
       }
     );
   }
