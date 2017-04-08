@@ -8,10 +8,16 @@ export default function apiCall(data, call, success, failure) {
       })
       .catch(err => {
         dispatch(failure());
-        const { status, message } = err.response.data.errors[0];
-        dispatch(showFlashMessageWithTimeout({
-          type: 'error',
-          text: 'Error - "' + message + '" (' + status + ')'
-        }));
+        const type = 'error';
+        let text = '';
+        if (!navigator.onLine) { // Browser is offline?
+          text = 'No Internet connexion';
+        } else if (err.response === undefined) { // No response from the server
+          text = 'No response from the server';
+        } else { // Error message from the server
+          const { status, message } = err.response.data.errors[0];
+          text = 'Error - "' + message + '" (' + status + ')';
+        }
+        dispatch(showFlashMessageWithTimeout({ type, text }));
       });
 }
