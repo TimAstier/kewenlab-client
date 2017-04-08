@@ -37,6 +37,7 @@ class WordsArea extends React.Component {
             saved={this.props.saved}
             changeCount={this.props.changeCount}
             save={this.props.save}
+            localContent={this.props.localContent}
           />
         }
       </div>
@@ -55,7 +56,8 @@ WordsArea.propTypes = {
   totalNewWords: PropTypes.number.isRequired,
   setWordsVisibilityFilter: PropTypes.func.isRequired,
   visibilityFilter: PropTypes.string.isRequired,
-  filteredLocalWords: PropTypes.array.isRequired
+  filteredLocalWords: PropTypes.array.isRequired,
+  localContent: PropTypes.string.isRequired
 };
 
 function mapStateToProps(state) {

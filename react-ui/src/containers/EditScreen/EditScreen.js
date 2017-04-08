@@ -5,13 +5,13 @@ import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
 import { saveTextContent, saveTextContentSuccess, saveTextContentFailure,
   setLocalContent } from '../../redux/textEditor';
 import { refreshChars, saveChars, saveCharsSuccess, saveCharsFailure,
-  tokenize, refreshWords, saveWords, saveWordsSuccess, saveWordsFailure }
+  refreshWords, saveWords, saveWordsSuccess, saveWordsFailure }
   from '../../redux/items';
 import { deserializeChars, deserializeWords } from '../../utils/deserializer';
-import { removeDuplicates, toArrayOfUniqueChars, preTokenization,
-  removeDolars } from '../../utils/custom';
+import { toArrayOfUniqueChars } from '../../utils/custom';
 import { TextEditor, CharsArea, WordsArea } from '../';
 import { SelectMessage } from '../../components';
+import { tokenizeWords } from './operations';
 
 class EditScreen extends React.Component {
   constructor(props) {
@@ -19,7 +19,6 @@ class EditScreen extends React.Component {
 
     this.saveTextEditor = this.saveTextEditor.bind(this);
     this.saveCharsArea = this.saveCharsArea.bind(this);
-    this.tokenizeWords = this.tokenizeWords.bind(this);
     this.saveWordsArea = this.saveWordsArea.bind(this);
     this.saveAll = this.saveAll.bind(this);
     this.onTextEditorChange = this.onTextEditorChange.bind(this);
@@ -71,27 +70,6 @@ class EditScreen extends React.Component {
     );
   }
 
-  tokenizeWords() {
-    // TODO: Use serializers to define which attributes to send in payload
-    const data = {
-      content: preTokenization(this.props.localContent)
-    };
-    return this.props.tokenize(data).then(
-      (res) => {
-        let newLocalWords = res.data;
-        newLocalWords = removeDolars(removeDuplicates(newLocalWords));
-        this.props.refreshWords(newLocalWords);
-        return false;
-      },
-      () => {
-        this.props.showFlashMessageWithTimeout({
-          type: 'error',
-          text: 'Error: could not tokenize text from the server.'
-        });
-      }
-    );
-  }
-
   saveWordsArea() {
     // TODO: Use serializers to define which attributes to send in payload
     const data = {
@@ -118,7 +96,7 @@ class EditScreen extends React.Component {
   saveAll(e) {
     this.saveTextEditor(e);
     this.saveCharsArea();
-    this.tokenizeWords()
+    tokenizeWords(this.props.localContent)
     .then(() => {
       this.saveWordsArea();
     });
@@ -149,8 +127,9 @@ class EditScreen extends React.Component {
             />
             <CharsArea save={this.saveCharsArea} />
             <WordsArea
-              refresh={this.tokenizeWords}
+              refresh={this.props.tokenizeWords}
               save={this.saveWordsArea}
+              localContent={this.props.localContent}
             />
           </div>
             :
@@ -176,7 +155,6 @@ EditScreen.propTypes = {
   saveChars: PropTypes.func.isRequired,
   saveCharsSuccess: PropTypes.func.isRequired,
   saveCharsFailure: PropTypes.func.isRequired,
-  tokenize: PropTypes.func.isRequired,
   localWords: PropTypes.array.isRequired,
   wordsToDelete: PropTypes.array.isRequired,
   wordsToUpdate: PropTypes.array.isRequired,
@@ -184,7 +162,8 @@ EditScreen.propTypes = {
   saveWords: PropTypes.func.isRequired,
   saveWordsSuccess: PropTypes.func.isRequired,
   saveWordsFailure: PropTypes.func.isRequired,
-  currentProjectId: PropTypes.number.isRequired
+  currentProjectId: PropTypes.number.isRequired,
+  tokenizeWords: PropTypes.func.isRequired
 
 };
 
@@ -213,10 +192,10 @@ export default connect(
     saveChars,
     saveCharsSuccess,
     saveCharsFailure,
-    tokenize,
     refreshWords,
     saveWords,
     saveWordsSuccess,
     saveWordsFailure,
+    tokenizeWords
   }
 )(EditScreen);
