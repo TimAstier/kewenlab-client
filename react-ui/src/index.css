@@ -66,6 +66,14 @@ h2 {
   z-index: 1;
 }
 
+#login-error {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  z-index: 1;
+}
+
 /* Signup & Login pages */
 
 #login-form, #signup-form {

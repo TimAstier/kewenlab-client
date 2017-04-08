@@ -42,10 +42,22 @@ class LoginForm extends React.Component {
       this.setState({ errors: {}, isLoading: true });
       this.props.login(this.state).then(
         () => this.context.router.push('/app'),
-        (err) => this.setState({
-          errors: err.response.data.errors[0],
-          isLoading: false
-        })
+        (err) => {
+          if (!navigator.onLine) {
+            const status = 501; // To display form error messages
+            const message = 'No Internet conexion';
+            const errors = { status, message };
+            this.setState({
+              errors,
+              isLoading: false
+            });
+          } else {
+            this.setState({
+              errors: err.response.data.errors[0],
+              isLoading: false
+            });
+          }
+        }
       );
     }
   }
@@ -71,7 +83,7 @@ class LoginForm extends React.Component {
         <h1>Login</h1>
 
         { errors.hasOwnProperty('status') && errors.status !== 500 &&
-          <div className="alert alert-danger">{errors.message}</div> }
+          <div className="alert alert-danger" id="login-error">{errors.message}</div> }
 
         <TextFieldGroup
           field="identifier"
