@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { setLocalContent } from '../../redux/textEditor';
-import { refreshChars, refreshWords } from '../../redux/items';
+import { setLocalContent, saveTextEditor } from '../../redux/textEditor';
+import { refreshChars, refreshWords, saveCharsArea, saveWordsArea }
+  from '../../redux/items';
 import { toArrayOfUniqueChars } from '../../utils/custom';
 import { TextEditor, CharsArea, WordsArea } from '../';
 import { SelectMessage } from '../../components';
-import { tokenizeWords, saveCharsArea, saveWordsArea, saveTextEditor } from './operations';
+import { tokenizeWords } from './operations';
 
 class EditScreen extends React.Component {
   constructor(props) {

@@ -1,10 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { banWord, hideWord, favoriteWord, unfavoriteWord }
+import { banWord, hideWord, favoriteWord, unfavoriteWord, getSuggestions }
   from '../../redux/suggestions';
 import { SuggestionInput } from '../';
 import { SuggestionItemList, SelectMessage } from '../../components';
-import { getSuggestions } from './operations';
 
 class SuggestionScreen extends React.Component {
 

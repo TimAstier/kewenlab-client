@@ -1,6 +1,8 @@
 import axios from 'axios';
 import isEmpty from 'lodash/isEmpty';
 import { Map, List, fromJS } from 'immutable';
+import apiCall from '../helpers/apiCall';
+import { deserializeChars, deserializeWords } from '../utils/deserializer';
 
 // Action Types
 // Chars
@@ -261,7 +263,8 @@ export function saveChars(data) {
   };
 }
 
-export function saveCharsSuccess(items) {
+export function saveCharsSuccess(data) {
+  const items = deserializeChars(data);
   return dispatch => {
     dispatch({ type: SAVE_CHARS_SUCCESS });
     dispatch(setCurrentChars(items));
@@ -349,7 +352,8 @@ export function saveWords(data) {
   };
 }
 
-export function saveWordsSuccess(items) {
+export function saveWordsSuccess(data) {
+  const items = deserializeWords(data);
   return dispatch => {
     dispatch({ type: SAVE_WORDS_SUCCESS });
     dispatch(setCurrentWords(items));
@@ -380,6 +384,14 @@ export function refreshWords(wordsArray) {
     }
     return false;
   };
+}
+
+export function saveCharsArea(data) {
+  return apiCall(data, saveChars, saveCharsSuccess, saveCharsFailure);
+}
+
+export function saveWordsArea(data) {
+  return apiCall(data, saveWords, saveWordsSuccess, saveWordsFailure);
 }
 
 // Selectors

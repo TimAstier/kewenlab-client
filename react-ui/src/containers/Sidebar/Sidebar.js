@@ -29,7 +29,10 @@ class Sidebar extends React.Component {
 
   onAddTextClick() {
     const { currentProjectId, currentUserId } = this.props;
-    return this.props.addText(currentProjectId, currentUserId);
+    return this.props.addText({
+      projectId: currentProjectId,
+      userId: currentUserId
+    });
   }
 
   render() {

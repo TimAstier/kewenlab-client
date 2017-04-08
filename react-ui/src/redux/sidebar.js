@@ -1,6 +1,6 @@
 import { List, Map } from 'immutable';
 import axios from 'axios';
-import { showFlashMessageWithTimeout } from './flashMessages';
+import apiCall from '../helpers/apiCall';
 import { deserializeTexts } from '../utils/deserializer';
 
 // Actions Types
@@ -54,58 +54,34 @@ export function getCurrentText(textId, projectId) {
   };
 }
 
-export function createNewText(projectId, userId) {
+export function createNewText(data) {
   return () => {
-    const data = { projectId, userId };
     return axios.post(`${process.env.REACT_APP_API_URL}/api/texts`, data);
   };
 }
 
-export function fetchTextItems(projectId) {
+export function fetch(projectId) {
   return dispatch => {
     dispatch({ type: FETCH });
     return axios.get(`${process.env.REACT_APP_API_URL}/api/projects/${projectId}/texts`);
   };
 }
 
-export function fetchTextItemsSuccess(data) {
+export function fetchSuccess(data) {
   return dispatch => {
     dispatch({ type: FETCH_SUCCESS });
-    return dispatch(setTextItems(deserializeTexts(data)));
+    return dispatch(setTextItems(deserializeTexts(data.texts)));
   };
 }
 
-export function fetchTextItemsFailure() {
+export function fetchFailure() {
   return { type: FETCH_FAILURE };
 }
 
-export function getTextItems(projectId) {
-  return dispatch =>
-    dispatch(fetchTextItems(projectId)).then(
-      (res) => {
-        dispatch(fetchTextItemsSuccess(res.data.texts));
-      },
-      () => {
-        dispatch(fetchTextItemsFailure());
-        dispatch(showFlashMessageWithTimeout({
-          type: 'error',
-          text: 'Error: could not retrieve texts from the server.'
-        }));
-      }
-    );
+export function getTextItems(data) {
+  return apiCall(data, fetch, fetchSuccess, fetchFailure);
 }
 
-export function addText(projectId, userId) {
-  return dispatch =>
-    dispatch(createNewText(projectId, userId)).then(
-      () => {
-        dispatch(getTextItems(projectId));
-      },
-      () => {
-        dispatch(showFlashMessageWithTimeout({
-          type: 'error',
-          text: 'Error: could not create new text.'
-        }));
-      }
-    );
+export function addText(data) {
+  return apiCall(data, createNewText, getTextItems, null);
 }

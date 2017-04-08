@@ -1,5 +1,6 @@
 import { Map, List, fromJS} from 'immutable';
 import axios from 'axios';
+import apiCall from '../helpers/apiCall';
 
 // Action Types
 const SET = 'kewen-lab/suggestions/SET';
@@ -67,7 +68,7 @@ export function clearSuggestions() {
   };
 }
 
-export function fetchSuggestions(data) {
+export function fetch(data) {
   const { textId, textNumber, userId, projectId } = data;
   return dispatch => {
     dispatch({ type: FETCH });
@@ -75,17 +76,21 @@ export function fetchSuggestions(data) {
   };
 }
 
-export function fetchSuggestionsSuccess(data) {
+export function fetchSuccess(data) {
   return dispatch => {
     dispatch({ type: FETCH_SUCCESS });
     return dispatch(setSuggestions(data));
   };
 }
 
-export function fetchSuggestionFailure() {
+export function fetchFailure() {
   return {
     type: FETCH_FAILURE
   };
+}
+
+export function getSuggestions(data) {
+  return apiCall(data, fetch, fetchSuccess, fetchFailure);
 }
 
 export function removeWordSuggestion(id) {

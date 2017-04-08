@@ -1,5 +1,6 @@
 import { Map } from 'immutable';
 import axios from 'axios';
+import apiCall from '../helpers/apiCall';
 
 // Actions Types
 
@@ -49,14 +50,14 @@ export function setCurrentContent(content) {
   };
 }
 
-export function saveTextContent(data) {
+export function save(data) {
   return dispatch => {
     dispatch({ type: SAVE });
     return axios.put(`${process.env.REACT_APP_API_URL}/api/texts/${data.id}`, data);
   };
 }
 
-export function saveTextContentSuccess(data) {
+export function saveSuccess(data) {
   const content = data.affected[1][0].content;
   return dispatch => {
     dispatch({ type: SAVE_SUCCESS });
@@ -64,8 +65,12 @@ export function saveTextContentSuccess(data) {
   };
 }
 
-export function saveTextContentFailure() {
+export function saveFailure() {
   return { type: SAVE_FAILURE };
+}
+
+export function saveTextEditor(data) {
+  return apiCall(data, save, saveSuccess, saveFailure);
 }
 
 // Selectors
