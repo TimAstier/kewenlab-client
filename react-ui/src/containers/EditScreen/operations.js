@@ -71,8 +71,8 @@ export function saveTextEditor(data) {
   return dispatch => {
     // TODO: Use serializers to define which attributes to send in payload
     return dispatch(saveTextContent(data)).then(
-      () => {
-        dispatch(saveTextContentSuccess(data.content));
+      (res) => {
+        dispatch(saveTextContentSuccess(res.data));
       },
       () => {
         dispatch(saveTextContentFailure());

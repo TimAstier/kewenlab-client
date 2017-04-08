@@ -56,7 +56,8 @@ export function saveTextContent(data) {
   };
 }
 
-export function saveTextContentSuccess(content) {
+export function saveTextContentSuccess(data) {
+  const content = data.affected[1][0].content;
   return dispatch => {
     dispatch({ type: SAVE_SUCCESS });
     return dispatch(setCurrentContent(content));
