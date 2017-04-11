@@ -52,7 +52,6 @@ class Sidebar extends React.Component {
           :
           <TextItemsMenu
             textItems={this.props.textItems}
-            showFlashMessageWithTimeout={this.props.showFlashMessageWithTimeout}
           />
         }
         <CreateTextMenu

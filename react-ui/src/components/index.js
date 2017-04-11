@@ -21,6 +21,7 @@ export { default as SuggestionForm } from './SuggestionForm/SuggestionForm';
 export { default as TextControls } from './TextControls/TextControls';
 export { default as TextFieldGroup } from './TextFieldGroup/TextFieldGroup';
 export { default as TextInput } from './TextInput/TextInput';
+export { default as TextItem } from './TextItem/TextItem';
 export { default as TextItemsMenu } from './TextItemsMenu/TextItemsMenu';
 export { default as WordControls } from './WordControls/WordControls';
 export { default as WordItem } from './WordItem/WordItem';
