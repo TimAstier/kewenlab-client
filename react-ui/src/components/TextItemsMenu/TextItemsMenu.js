@@ -6,7 +6,8 @@ import { handleItemClick } from './operations';
 import { TextItem } from '../.';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
-import { reorder, updateTextItems } from '../../redux/sidebar';
+import { reorder, updateTextItems }
+  from '../../redux/sidebar';
 
 class TextItemsMenu extends React.Component {
   constructor(props) {
@@ -25,6 +26,7 @@ class TextItemsMenu extends React.Component {
       textItems: this.props.textItems,
       projectId: this.props.currentProjectId
     };
+    // Save order in DB
     return this.props.updateTextItems(data);
   }
 

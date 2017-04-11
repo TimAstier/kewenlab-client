@@ -3,6 +3,7 @@ import axios from 'axios';
 import apiCall from '../helpers/apiCall';
 import { deserializeTexts } from '../utils/deserializer';
 import { showFlashMessageWithTimeout } from './flashMessages';
+import { defineDisplayedOrder } from '../utils/custom';
 
 // Actions Types
 const SET = 'kewen-lab/sidebar/SET';
@@ -14,7 +15,6 @@ const REORDER = 'kewen-lab/sidebar/REORDER';
 const UPDATE = 'kewen-lab/sidebar/UPDATE';
 const UPDATE_SUCCESS = 'kewen-lab/sidebar/UPDATE_SUCCESS';
 const UPDATE_FAIL = 'kewen-lab/sidebar/UPDATE_FAIL';
-
 
 // Reducer
 const INITIAL_STATE = Map({
@@ -43,6 +43,14 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
       array[dragIndex] = array[hoverIndex];
       array[hoverIndex] = temp;
       return state.set('textItems', fromJS(array));
+    case UPDATE_SUCCESS:
+      console.log('Hoy yeah')
+      const itemsBeforeReorder = state.get('textItems').toJS();
+      const newArray = itemsBeforeReorder.map((item, i) => {
+        item.displayedOrder = defineDisplayedOrder(itemsBeforeReorder, i + 1);
+        return item;
+      });
+      return state.set('textItems', fromJS(newArray));
     default:
       return state;
   }
