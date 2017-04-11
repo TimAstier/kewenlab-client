@@ -15,6 +15,8 @@ const REORDER = 'kewen-lab/sidebar/REORDER';
 const UPDATE = 'kewen-lab/sidebar/UPDATE';
 const UPDATE_SUCCESS = 'kewen-lab/sidebar/UPDATE_SUCCESS';
 const UPDATE_FAIL = 'kewen-lab/sidebar/UPDATE_FAIL';
+const UPDATE_TITLE = 'kewen-lab/sidebar/UPDATE_TITLE';
+const UPDATE_BONUS = 'kewen-lab/sidebar/UPDATE_BONUS';
 
 // Reducer
 const INITIAL_STATE = Map({
@@ -43,6 +45,24 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
     case UPDATE_SUCCESS:
       const textItems = state.get('textItems').toJS();
       return state.set('textItems', fromJS(setDisplayedOrder(textItems)));
+    case UPDATE_TITLE:
+      return state.set('textItems',
+        fromJS(state.get('textItems').toJS().map(item => {
+          if (item.id === action.textId) {
+            item.title = action.title;
+          }
+          return item;
+        })
+      ));
+    case UPDATE_BONUS:
+      return state.set('textItems',
+        fromJS(state.get('textItems').toJS().map(item => {
+          if (item.id === action.textId) {
+            item.bonus = action.bonus;
+          }
+          return item;
+        })
+      ));
     default:
       return state;
   }
@@ -141,4 +161,33 @@ function updateFail() {
 
 export function updateTextItems(data) {
   return apiCall(data, update, updateSuccess, updateFail);
+}
+
+export function updateTitle(textId, title) {
+  return {
+    type: UPDATE_TITLE,
+    textId,
+    title
+  };
+}
+
+export function updateBonus(textId, bonus) {
+  return dispatch => {
+    dispatch({ type: UPDATE_BONUS, textId, bonus });
+    return dispatch({ type: UPDATE_SUCCESS });
+  };
+}
+
+// Selectors
+
+export function getCurrentTextTitle(state = INITIAL_STATE) {
+  const currentTextId = state.get('currentTextId');
+  const textItems = state.get('textItems').toJS();
+  return textItems.find(obj => obj.id === currentTextId).title;
+}
+
+export function isCurrentTextBonus(state = INITIAL_STATE) {
+  const currentTextId = state.get('currentTextId');
+  const textItems = state.get('textItems').toJS();
+  return textItems.find(obj => obj.id === currentTextId).bonus;
 }

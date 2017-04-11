@@ -20,15 +20,18 @@ h2 {
 
 #app {
   height: 100%;
+  position:fixed;
 }
 
 #main-container {
   height: 100%;
+  position: fixed;
 }
 
 #main-screen {
   height: 100%;
   width: 100%;
+  position: fixed;
 }
 
 .main-label {
@@ -59,11 +62,11 @@ h2 {
 .alert {
   position: fixed;
   text-align: center;
-  width: 70%;
-  margin-top: 10px;
-  margin-left: 300px;
+  width: 60%;
+  margin-top: -57px;
+  margin-left: 350px;
   margin-right: 300px;
-  z-index: 1;
+  z-index: 99999;
 }
 
 #login-error {
@@ -90,7 +93,7 @@ h2 {
 }
 
 #project-selector-menu {
-  height: 10%;
+  height: 7%;
   width: 100%;
   text-align:center;
 }
@@ -104,6 +107,7 @@ h2 {
 #text-items-menu {
   height: 83%;
   width: 100%;
+  max-height: 650px;
   margin-top: 0px;
   font-size: 15px;
   overflow-y: scroll;
@@ -153,6 +157,30 @@ h2 {
   height: 100%;
   width: 550px;
   float: left;
+}
+
+#text-settings {
+  height: 62px;
+  width: 490px;
+  margin: auto;
+  display: flex;
+  align-items: stretch;
+}
+
+#text-title {
+  flex-grow: 2;
+  display: flex;
+  flex direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#text-bonus {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #text-editor-form {
@@ -208,6 +236,7 @@ h2 {
 
 #words-area {
   height: 100%;
+  margin-top: 20px;
   margin-left: 1040px;
   padding-left: 30px;
   padding-right: 30px;
@@ -343,6 +372,6 @@ h2 {
   padding-top: 100px;
 }
 
-#edit-screen, #suggestion-screen {
+#suggestion-screen {
   padding-top: 20px;
 }
