@@ -4,6 +4,9 @@ import { Menu } from 'semantic-ui-react';
 import isEmpty from 'lodash/isEmpty';
 import { handleItemClick } from './operations';
 import { TextItem } from '../.';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+import { reorder, updateTextItems } from '../../redux/sidebar';
 
 class TextItemsMenu extends React.Component {
   constructor(props) {
@@ -11,6 +14,18 @@ class TextItemsMenu extends React.Component {
 
     this.handleItemClick = this.props.handleItemClick.bind(this);
     this.renderTextItem = this.renderTextItem.bind(this);
+  }
+
+  moveCard(dragIndex, hoverIndex) {
+    return this.props.reorder({ dragIndex, hoverIndex });
+  }
+
+  onEndDrag() {
+    const data = {
+      textItems: this.props.textItems,
+      projectId: this.props.currentProjectId
+    };
+    return this.props.updateTextItems(data);
   }
 
   renderTextItem(textItem, i) {
@@ -21,8 +36,11 @@ class TextItemsMenu extends React.Component {
         id={textItem.id}
         handleItemClick={this.handleItemClick}
         active={this.props.currentTextId === textItem.id}
-        key={i}
+        key={textItem.id}
+        index={i}
         projectId={this.props.currentProjectId}
+        moveCard={this.moveCard.bind(this)}
+        onEndDrag={this.onEndDrag.bind(this)}
       />
     );
   }
@@ -41,7 +59,9 @@ TextItemsMenu.propTypes = {
   textItems: PropTypes.array.isRequired,
   currentTextId: PropTypes.number.isRequired,
   currentProjectId: PropTypes.number.isRequired,
-  handleItemClick: PropTypes.func.isRequired
+  handleItemClick: PropTypes.func.isRequired,
+  reorder: PropTypes.func.isRequired,
+  updateTextItems: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -51,4 +71,9 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { handleItemClick })(TextItemsMenu);
+TextItemsMenu = DragDropContext(HTML5Backend)(TextItemsMenu);
+export default connect(mapStateToProps, {
+  handleItemClick,
+  reorder,
+  updateTextItems
+})(TextItemsMenu);

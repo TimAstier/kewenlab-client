@@ -1,7 +1,8 @@
-import { List, Map } from 'immutable';
+import { List, Map, fromJS } from 'immutable';
 import axios from 'axios';
 import apiCall from '../helpers/apiCall';
 import { deserializeTexts } from '../utils/deserializer';
+import { showFlashMessageWithTimeout } from './flashMessages';
 
 // Actions Types
 const SET = 'kewen-lab/sidebar/SET';
@@ -9,6 +10,10 @@ const SET_CURRENT_TEXT_ID = 'kewen-lab/sidebar/SET_CURRENT_TEXT_ID';
 const FETCH = 'kewen-lab/sidebar/FETCH';
 const FETCH_SUCCESS = 'kewen-lab/sidebar/FETCH_SUCCESS';
 const FETCH_FAILURE = 'kewen-lab/sidebar/FETCH_FAILURE';
+const REORDER = 'kewen-lab/sidebar/REORDER';
+const UPDATE = 'kewen-lab/sidebar/UPDATE';
+const UPDATE_SUCCESS = 'kewen-lab/sidebar/UPDATE_SUCCESS';
+const UPDATE_FAIL = 'kewen-lab/sidebar/UPDATE_FAIL';
 
 
 // Reducer
@@ -30,6 +35,14 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
       return state.set('isFetching', false);
     case FETCH_FAILURE:
       return state.set('isFetching', false);
+    case REORDER:
+      const dragIndex = action.data.dragIndex;
+      const hoverIndex = action.data.hoverIndex;
+      const array = state.get('textItems').toJS();
+      const temp = array[dragIndex];
+      array[dragIndex] = array[hoverIndex];
+      array[hoverIndex] = temp;
+      return state.set('textItems', fromJS(array));
     default:
       return state;
   }
@@ -85,4 +98,36 @@ export function getTextItems(data) {
 export function addText(data) {
   const fail = () => { return { type: 'kewen-lab/addText/FAIL' }; };
   return apiCall(data, createNewText, getTextItems, fail);
+}
+
+export function reorder(data) {
+  return {
+    type: REORDER,
+    data
+  };
+}
+
+function update(data) {
+  const textItemsToUpdate = data.textItems.filter((e, i) => {
+    return e.order - 1 !== i;
+  });
+  return dispatch => {
+    dispatch({ type: UPDATE });
+    return axios.put(`${process.env.REACT_APP_API_URL}/api/projects/${data.projectId}/textorder`, textItemsToUpdate);
+  };
+}
+
+function updateSuccess() {
+  return dispatch => {
+    dispatch({ type: UPDATE_SUCCESS });
+    dispatch(showFlashMessageWithTimeout('Texts reordered'));
+  };
+}
+
+function updateFail() {
+  return { type: UPDATE_FAIL };
+}
+
+export function updateTextItems(data) {
+  return apiCall(data, update, updateSuccess, updateFail);
 }
