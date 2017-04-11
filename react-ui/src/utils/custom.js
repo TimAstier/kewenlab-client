@@ -43,10 +43,10 @@ export function defineStatus(item) {
   } else if (item.texts.length === 1) {
     return 'new';
   }
-  const orders = item.texts.map(t => {
-    return t.textProjects[0].order;
+  const orderedTexts = item.texts.sort((a, b) => {
+    return a.textProjects[0].order - b.textProjects[0].order;
   });
-  return 'Text #' + _.min(orders);
+  return orderedTexts[0].title;
 }
 
 export function defineDisplayedOrder(textsArray, order) {
