@@ -28,6 +28,9 @@ class Sidebar extends React.Component {
   }
 
   onAddTextClick() {
+    if (document.activeElement !== document.body) {
+      document.activeElement.blur(); // Remove focus from button
+    }
     const { currentProjectId, currentUserId } = this.props;
     return this.props.addText({
       projectId: currentProjectId,
