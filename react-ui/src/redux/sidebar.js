@@ -36,15 +36,11 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
     case FETCH_FAILURE:
       return state.set('isFetching', false);
     case REORDER:
-      const dragIndex = action.data.dragIndex;
-      const hoverIndex = action.data.hoverIndex;
+      const { dragIndex, hoverIndex } = action.data;
       const array = state.get('textItems').toJS();
-      const temp = array[dragIndex];
-      array[dragIndex] = array[hoverIndex];
-      array[hoverIndex] = temp;
+      array.splice(hoverIndex, 0, array.splice(dragIndex, 1)[0]);
       return state.set('textItems', fromJS(array));
     case UPDATE_SUCCESS:
-      console.log('Hoy yeah')
       const itemsBeforeReorder = state.get('textItems').toJS();
       const newArray = itemsBeforeReorder.map((item, i) => {
         item.displayedOrder = defineDisplayedOrder(itemsBeforeReorder, i + 1);
