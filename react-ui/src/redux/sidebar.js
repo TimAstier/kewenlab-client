@@ -108,19 +108,30 @@ export function reorder(data) {
 }
 
 function update(data) {
-  const textItemsToUpdate = data.textItems.filter((e, i) => {
-    return e.order - 1 !== i;
+  // Add localIndex to data to send to the server
+  let textItemsToUpdate = data.textItems.map((t, i) => {
+    t.localIndex = i + 1;
+    return t;
   });
+
+  // Consider only textItems with a localIndex different than the order in DB
+  textItemsToUpdate = textItemsToUpdate.filter(t => {
+    return t.localIndex !== t.order;
+  });
+
   return dispatch => {
     dispatch({ type: UPDATE });
-    return axios.put(`${process.env.REACT_APP_API_URL}/api/projects/${data.projectId}/textorder`, textItemsToUpdate);
+    return axios.put(`${process.env.REACT_APP_API_URL}/api/projects/${data.projectId}/texts`, textItemsToUpdate);
   };
 }
 
 function updateSuccess() {
   return dispatch => {
     dispatch({ type: UPDATE_SUCCESS });
-    dispatch(showFlashMessageWithTimeout('Texts reordered'));
+    dispatch(showFlashMessageWithTimeout({
+      type: 'success',
+      text: 'Texts reordered'
+    }, 1000));
   };
 }
 

@@ -50,12 +50,12 @@ export function deleteFlashMessage(id) {
 
 // Based on: http://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout
 // Can use this to test: https://facebook.github.io/jest/docs/timer-mocks.html
-export function showFlashMessageWithTimeout(message) {
+export function showFlashMessageWithTimeout(message, duration = 5000) {
   const id = shortid.generate();
   return dispatch => {
     dispatch(addFlashMessage(message, id));
     setTimeout(() => {
       dispatch(deleteFlashMessage(id));
-    }, 5000);
+    }, duration);
   };
 }
