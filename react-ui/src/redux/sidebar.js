@@ -50,7 +50,7 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
 
 // Action Creators
 export function setTextItems(textItems) {
-  return { type: SET, textItems };
+  return { type: SET, textItems: deserializeTexts(textItems) };
 }
 
 export function setCurrentTextId(text) {
@@ -83,7 +83,7 @@ export function fetch(projectId) {
 export function fetchSuccess(data) {
   return dispatch => {
     dispatch({ type: FETCH_SUCCESS });
-    return dispatch(setTextItems(deserializeTexts(data.texts)));
+    return dispatch(setTextItems(data.texts));
   };
 }
 

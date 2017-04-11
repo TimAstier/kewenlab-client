@@ -76,7 +76,7 @@ const collectSource = (connect, monitor) => ({
 class TextItem extends Component {
 
   render() {
-    const { id, order, title, handleItemClick, active, projectId,
+    const { id, displayedOrder, title, handleItemClick, active, projectId,
       isDragging, connectDragSource, connectDropTarget,
       connectDragPreview } = this.props;
     const opacity = isDragging ? 0 : 1;
@@ -99,7 +99,7 @@ class TextItem extends Component {
                 size="large"
                 circular
               >
-                {order}
+                {displayedOrder}
               </Label>
             </div>
           )}
@@ -110,7 +110,7 @@ class TextItem extends Component {
 }
 
 TextItem.propTypes = {
-  order: PropTypes.number.isRequired,
+  displayedOrder: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   handleItemClick: PropTypes.func.isRequired,

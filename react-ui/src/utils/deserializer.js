@@ -1,4 +1,4 @@
-import { defineStatus } from './custom';
+import { defineStatus, defineDisplayedOrder } from './custom';
 
 export const deserializeChars = (charsArray) => {
   return charsArray.map(char => {
@@ -33,10 +33,12 @@ export const deserializeWords = (wordsArray) => {
 export const deserializeTexts = (textsArray) => {
   return textsArray
     .map(txt => {
+      const order = txt.textProject.order;
       return {
         id: txt.id,
         title: txt.title,
-        order: txt.textProject.order
+        order,
+        displayedOrder: defineDisplayedOrder(textsArray, order)
       };
     })
     .sort((a, b) => {

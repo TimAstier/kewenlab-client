@@ -48,3 +48,8 @@ export function defineStatus(item) {
   });
   return 'Text #' + _.min(orders);
 }
+
+export function defineDisplayedOrder(textsArray, order) {
+  // TODO: Calculate this depending on bonus texts
+  return order;
+}

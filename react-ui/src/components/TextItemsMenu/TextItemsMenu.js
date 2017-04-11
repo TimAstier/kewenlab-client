@@ -31,7 +31,7 @@ class TextItemsMenu extends React.Component {
   renderTextItem(textItem, i) {
     return (
       <TextItem
-        order={textItem.order}
+        displayedOrder={textItem.displayedOrder}
         title={textItem.title}
         id={textItem.id}
         handleItemClick={this.handleItemClick}
