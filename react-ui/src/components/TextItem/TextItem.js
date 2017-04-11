@@ -78,7 +78,7 @@ class TextItem extends Component {
   render() {
     const { id, displayedOrder, title, handleItemClick, active, projectId,
       isDragging, connectDragSource, connectDropTarget,
-      connectDragPreview } = this.props;
+      connectDragPreview, bonus } = this.props;
     const opacity = isDragging ? 0 : 1;
 
     return connectDropTarget(connectDragPreview(
@@ -95,7 +95,7 @@ class TextItem extends Component {
           {connectDragSource(
             <div className="label">
               <Label
-                color="teal"
+                color={bonus ? 'blue' : 'teal'}
                 size="large"
                 circular
               >
@@ -110,7 +110,7 @@ class TextItem extends Component {
 }
 
 TextItem.propTypes = {
-  displayedOrder: PropTypes.number.isRequired,
+  displayedOrder: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   id: PropTypes.number.isRequired,
   handleItemClick: PropTypes.func.isRequired,
@@ -122,7 +122,8 @@ TextItem.propTypes = {
   isDragging: PropTypes.bool.isRequired,
   moveCard: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  onEndDrag: PropTypes.func.isRequired
+  onEndDrag: PropTypes.func.isRequired,
+  bonus: PropTypes.bool.isRequired
 };
 
 export default compose(

@@ -1,5 +1,3 @@
-import _ from 'lodash';
-
 export function toChineseOnly(string) {
   // eslint-disable-next-line
   const allExceptChinese = /[A-z]|[0-9]|[$‘Œ.,\/#!?%\^&\*;:{}=\-_`~()。？！–•…@€£+àçèé~<>，；：'"＂、“”（）《》％·ĀāÁáǍǎÀàĒēÉéĚěÈèĪīÍíǏǐÌìŌōÓóǑǒÒòŪūÚúǓǔÙùÜüǗǘǙǚǛǜ˚ÅåE̊e̊i̊O̊o̊Ůů’]|\s/g;
@@ -49,7 +47,18 @@ export function defineStatus(item) {
   return orderedTexts[0].title;
 }
 
-export function defineDisplayedOrder(textsArray, order) {
-  // TODO: Calculate this depending on bonus texts
-  return order;
+export function setDisplayedOrder(textsArray) {
+  let num = 0;
+  let letter = 'a';
+  return textsArray.map(txt => {
+    if (txt.bonus) {
+      txt.displayedOrder = num + '.' + letter;
+      letter = String.fromCharCode(letter.charCodeAt(0) + 1);
+      return txt;
+    }
+    num++;
+    txt.displayedOrder = num.toString();
+    letter = 'a';
+    return txt;
+  });
 }

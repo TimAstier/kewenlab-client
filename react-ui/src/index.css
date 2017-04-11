@@ -126,6 +126,8 @@ h2 {
 
 .text-item > .title {
   display: inline-block;
+  max-width: 115px;
+  line-height: 20px;
 }
 
 .text-item > .label {
@@ -135,6 +137,9 @@ h2 {
   cursor: move;
 }
 
+.text-item > .label > .label {
+  font-size: 1.15rem !important;
+ }
 /* Project Selector */
 #project-selector .item {
   height: 40px;
