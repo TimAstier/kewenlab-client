@@ -20,11 +20,13 @@ h2 {
 
 #app {
   height: 100%;
+  width: 100%;
   position:fixed;
 }
 
 #main-container {
   height: 100%;
+  width: 100%;
   position: fixed;
 }
 
@@ -44,6 +46,15 @@ h2 {
   height: 100%;
   width: 100%;
   text-align: center;
+}
+
+#home-logo {
+  animation: scaly 5000ms ease-in-out 0ms infinite;
+}
+
+@keyframes scaly {
+  0% { transform: scale(1.0); }
+  50% { transform: scale(1.1); }
 }
 
 #greetings {

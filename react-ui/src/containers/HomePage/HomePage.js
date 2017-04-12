@@ -20,6 +20,7 @@ class HomePage extends React.Component {
         {isAuthenticated ?
           <Link to="/app" className="item color">
             <Image
+              id="home-logo"
               src={logo}
               alt="kewen-lab"
               shape="circular"

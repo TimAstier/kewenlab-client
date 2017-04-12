@@ -79,10 +79,12 @@ class TextItem extends Component {
     const { id, displayedOrder, title, handleItemClick, active, projectId,
       isDragging, connectDragSource, connectDropTarget,
       connectDragPreview, bonus } = this.props;
-    const opacity = isDragging ? 0 : 1;
-
+    const style = {
+      opacity: isDragging ? 0.2 : 1,
+      background: isDragging ? 'white' : 'black'
+    };
     return connectDropTarget(connectDragPreview(
-      <div style={{opacity}}>
+      <div style={style}>
         <Menu.Item
           active={active}
           onClick={handleItemClick}
