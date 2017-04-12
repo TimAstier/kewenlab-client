@@ -57,7 +57,7 @@ describe('custom utils', () => {
           { title: 'Bye', textProjects: [{ order: 3 }] }
         ]
       }
-      expect(customUtils.defineStatus(item)).toEqual('Text #1')
+      expect(customUtils.defineStatus(item)).toEqual('Hello')
     })
 
     it('should return "manuallydeleted" status for chars', () => {

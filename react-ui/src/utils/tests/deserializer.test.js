@@ -30,7 +30,7 @@ describe('deserializers', () => {
       order: 1,
       manuallyAdded: false,
       manuallyDeleted: false,
-      status: 'Text #1'
+      status: 'Hello'
     }]
     expect(deserializeChars(charsArray)).toEqual(expectedArray)
   })
