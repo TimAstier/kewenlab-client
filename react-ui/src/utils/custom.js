@@ -62,3 +62,10 @@ export function setDisplayedOrder(textsArray) {
     return txt;
   });
 }
+
+export function refreshOrders(textsArray) {
+  return textsArray.map((txt, i) => {
+    txt.order = i + 1;
+    return txt;
+  });
+}

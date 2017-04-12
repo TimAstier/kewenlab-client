@@ -3,7 +3,7 @@ import axios from 'axios';
 import apiCall from '../helpers/apiCall';
 import { deserializeTexts } from '../utils/deserializer';
 import { showFlashMessageWithTimeout } from './flashMessages';
-import { setDisplayedOrder } from '../utils/custom';
+import { setDisplayedOrder, refreshOrders } from '../utils/custom';
 
 // Actions Types
 const SET = 'kewen-lab/sidebar/SET';
@@ -13,10 +13,11 @@ const FETCH_SUCCESS = 'kewen-lab/sidebar/FETCH_SUCCESS';
 const FETCH_FAILURE = 'kewen-lab/sidebar/FETCH_FAILURE';
 const REORDER = 'kewen-lab/sidebar/REORDER';
 const UPDATE = 'kewen-lab/sidebar/UPDATE';
-const UPDATE_SUCCESS = 'kewen-lab/sidebar/UPDATE_SUCCESS';
+const REFRESH_DISPLAYED_ORDERS = 'kewen-lab/sidebar/REFRESH_DISPLAYED_ORDERS';
 const UPDATE_FAIL = 'kewen-lab/sidebar/UPDATE_FAIL';
 const UPDATE_LOCAL_TITLE = 'kewen-lab/sidebar/UPDATE_LOCAL_TITLE';
 const UPDATE_BONUS_SUCCESS = 'kewen-lab/sidebar/UPDATE_BONUS_SUCCESS';
+const REFRESH_ORDERS = 'kewen-lab/sidebar/REFRESH_ORDERS';
 
 // Reducer
 const INITIAL_STATE = Map({
@@ -42,9 +43,13 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
       const array = state.get('textItems').toJS();
       array.splice(hoverIndex, 0, array.splice(dragIndex, 1)[0]);
       return state.set('textItems', fromJS(array));
-    case UPDATE_SUCCESS:
+    case REFRESH_DISPLAYED_ORDERS:
       const textItems = state.get('textItems').toJS();
       return state.set('textItems', fromJS(setDisplayedOrder(textItems)));
+    case REFRESH_ORDERS:
+      return state.set('textItems', fromJS(refreshOrders(
+        state.get('textItems').toJS()
+      )));
     case UPDATE_LOCAL_TITLE:
       return state.set('textItems',
         fromJS(state.get('textItems').toJS().map(item => {
@@ -147,7 +152,8 @@ function update(data) {
 
 function updateSuccess() {
   return dispatch => {
-    dispatch({ type: UPDATE_SUCCESS });
+    dispatch({ type: REFRESH_ORDERS });
+    dispatch({ type: REFRESH_DISPLAYED_ORDERS });
     dispatch(showFlashMessageWithTimeout({
       type: 'success',
       text: 'Texts reordered'
@@ -180,7 +186,7 @@ function updateTextBonusSuccess(data) {
       textId: data.affected[1][0].textId,
       bonus: data.affected[1][0].bonus
     });
-    return dispatch({ type: UPDATE_SUCCESS });
+    return dispatch({ type: REFRESH_DISPLAYED_ORDERS });
   };
 }
 
