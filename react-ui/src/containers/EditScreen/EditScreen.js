@@ -83,6 +83,7 @@ class EditScreen extends React.Component {
             <TextEditor
               save={this.saveText.bind(this)}
               onChange={this.onTextEditorChange}
+              currentProjectId={this.props.currentProjectId}
             />
             <CharsArea save={this.saveChars.bind(this)} />
             <WordsArea

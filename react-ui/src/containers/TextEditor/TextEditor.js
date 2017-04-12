@@ -20,12 +20,21 @@ class TextEditor extends React.Component {
 
   onTitleChange(e) {
     // TODO: Save in DB
-    return this.props.updateTitle(this.props.currentTextId, e.target.value);
+    const data = {
+      textId: this.props.currentTextId,
+      title: e.target.value
+    };
+    return this.props.updateTitle(data);
   }
 
-  onBonusChange(e, data) {
+  onBonusChange(e, checkboxData) {
     // TODO: Save in DB
-    return this.props.updateBonus(this.props.currentTextId, data.checked);
+    const data = {
+      textId: this.props.currentTextId,
+      checked: checkboxData.checked,
+      currentProjectId: this.props.currentProjectId
+    };
+    return this.props.updateBonus(data);
   }
 
   // TODO: Switch to readonly when isSaving
@@ -76,7 +85,8 @@ TextEditor.propTypes = {
   title: PropTypes.string.isRequired,
   updateTitle: PropTypes.func.isRequired,
   isBonus: PropTypes.bool.isRequired,
-  updateBonus: PropTypes.func.isRequired
+  updateBonus: PropTypes.func.isRequired,
+  currentProjectId: PropTypes.number.isRequired
 };
 
 function mapStateToProps(state) {

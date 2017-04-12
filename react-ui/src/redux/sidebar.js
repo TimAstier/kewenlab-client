@@ -16,7 +16,8 @@ const UPDATE = 'kewen-lab/sidebar/UPDATE';
 const UPDATE_SUCCESS = 'kewen-lab/sidebar/UPDATE_SUCCESS';
 const UPDATE_FAIL = 'kewen-lab/sidebar/UPDATE_FAIL';
 const UPDATE_TITLE = 'kewen-lab/sidebar/UPDATE_TITLE';
-const UPDATE_BONUS = 'kewen-lab/sidebar/UPDATE_BONUS';
+// const UPDATE_BONUS = 'kewen-lab/sidebar/UPDATE_BONUS';
+const UPDATE_BONUS_SUCCESS = 'kewen-lab/sidebar/UPDATE_BONUS_SUCCESS';
 
 // Reducer
 const INITIAL_STATE = Map({
@@ -54,7 +55,7 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
           return item;
         })
       ));
-    case UPDATE_BONUS:
+    case UPDATE_BONUS_SUCCESS:
       return state.set('textItems',
         fromJS(state.get('textItems').toJS().map(item => {
           if (item.id === action.textId) {
@@ -163,21 +164,27 @@ export function updateTextItems(data) {
   return apiCall(data, update, updateSuccess, updateFail);
 }
 
-export function updateTitle(textId, title) {
+export function updateTitle(data) {
+  return { type: UPDATE_TITLE, textId: data.textId, title: data.title };
+}
+
+function updateTextBonus(data) {
+  return () => {
+    return axios.put(`${process.env.REACT_APP_API_URL}/api/texts/${data.textId}/bonus`, data);
+  };
+}
+
+function updateTextBonusSuccess(data) {
   return {
-    type: UPDATE_TITLE,
-    textId,
-    title
+    type: UPDATE_BONUS_SUCCESS,
+    textId: data.affected[1][0].textId,
+    bonus: data.affected[1][0].bonus
   };
 }
 
-export function updateBonus(textId, bonus) {
-  return dispatch => {
-    dispatch({ type: UPDATE_BONUS, textId, bonus });
-    return dispatch({ type: UPDATE_SUCCESS });
-  };
+export function updateBonus(data) {
+  return apiCall(data, updateTextBonus, updateTextBonusSuccess, () => {});
 }
-
 // Selectors
 
 export function getCurrentTextTitle(state = INITIAL_STATE) {
