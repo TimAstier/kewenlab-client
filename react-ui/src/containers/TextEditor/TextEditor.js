@@ -1,11 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Form, Input, Checkbox } from 'semantic-ui-react';
+import { Form, Input, Checkbox, Loader } from 'semantic-ui-react';
 import { getSaved } from '../../redux/textEditor';
 import { showFlashMessageWithTimeout } from '../../redux/flashMessages';
 import { TextControls, TextInput } from '../../components';
-import { getCurrentTextTitle, updateTitle, isCurrentTextBonus, updateBonus }
-  from '../../redux/sidebar';
+import { getCurrentTextTitle, updateLocalTitle, isCurrentTextBonus,
+  updateBonus, saveTitle } from '../../redux/sidebar';
 
 class TextEditor extends React.Component {
   constructor(props) {
@@ -19,16 +19,18 @@ class TextEditor extends React.Component {
   }
 
   onTitleChange(e) {
-    // TODO: Save in DB
+    e.persist();
     const data = {
       textId: this.props.currentTextId,
       title: e.target.value
     };
-    return this.props.updateTitle(data);
+    this.props.updateLocalTitle(data);
+    clearTimeout(this.timer); // Needs to be out of the function scope
+    this.timer = setTimeout(() => { this.props.saveTitle(data); }, 1000);
+    return this.timer;
   }
 
   onBonusChange(e, checkboxData) {
-    // TODO: Save in DB
     const data = {
       textId: this.props.currentTextId,
       checked: checkboxData.checked,
@@ -39,9 +41,16 @@ class TextEditor extends React.Component {
 
   // TODO: Switch to readonly when isSaving
   render() {
+    let loader = null;
+    if (this.props.isSaving) {
+      loader = <Loader active inline="centered" />;
+    }
     return (
       <div id="text-editor">
         <div id="text-settings">
+          <div id="text-saving-status">
+            {loader}
+          </div>
           <div id="text-title">
             <Input
               placeholder="Title..."
@@ -83,10 +92,11 @@ TextEditor.propTypes = {
   isSaving: PropTypes.bool.isRequired,
   onChange: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  updateTitle: PropTypes.func.isRequired,
+  updateLocalTitle: PropTypes.func.isRequired,
   isBonus: PropTypes.bool.isRequired,
   updateBonus: PropTypes.func.isRequired,
-  currentProjectId: PropTypes.number.isRequired
+  currentProjectId: PropTypes.number.isRequired,
+  saveTitle: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -102,5 +112,5 @@ function mapStateToProps(state) {
 
 export default connect(
   mapStateToProps,
-  { showFlashMessageWithTimeout, updateTitle, updateBonus }
+  { showFlashMessageWithTimeout, updateLocalTitle, updateBonus, saveTitle }
 )(TextEditor);

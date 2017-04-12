@@ -15,8 +15,7 @@ const REORDER = 'kewen-lab/sidebar/REORDER';
 const UPDATE = 'kewen-lab/sidebar/UPDATE';
 const UPDATE_SUCCESS = 'kewen-lab/sidebar/UPDATE_SUCCESS';
 const UPDATE_FAIL = 'kewen-lab/sidebar/UPDATE_FAIL';
-const UPDATE_TITLE = 'kewen-lab/sidebar/UPDATE_TITLE';
-// const UPDATE_BONUS = 'kewen-lab/sidebar/UPDATE_BONUS';
+const UPDATE_LOCAL_TITLE = 'kewen-lab/sidebar/UPDATE_LOCAL_TITLE';
 const UPDATE_BONUS_SUCCESS = 'kewen-lab/sidebar/UPDATE_BONUS_SUCCESS';
 
 // Reducer
@@ -46,7 +45,7 @@ export default function reducer(state = INITIAL_STATE, action = {}) {
     case UPDATE_SUCCESS:
       const textItems = state.get('textItems').toJS();
       return state.set('textItems', fromJS(setDisplayedOrder(textItems)));
-    case UPDATE_TITLE:
+    case UPDATE_LOCAL_TITLE:
       return state.set('textItems',
         fromJS(state.get('textItems').toJS().map(item => {
           if (item.id === action.textId) {
@@ -164,8 +163,8 @@ export function updateTextItems(data) {
   return apiCall(data, update, updateSuccess, updateFail);
 }
 
-export function updateTitle(data) {
-  return { type: UPDATE_TITLE, textId: data.textId, title: data.title };
+export function updateLocalTitle(data) {
+  return { type: UPDATE_LOCAL_TITLE, textId: data.textId, title: data.title };
 }
 
 function updateTextBonus(data) {
@@ -175,15 +174,39 @@ function updateTextBonus(data) {
 }
 
 function updateTextBonusSuccess(data) {
-  return {
-    type: UPDATE_BONUS_SUCCESS,
-    textId: data.affected[1][0].textId,
-    bonus: data.affected[1][0].bonus
+  return dispatch => {
+    dispatch({
+      type: UPDATE_BONUS_SUCCESS,
+      textId: data.affected[1][0].textId,
+      bonus: data.affected[1][0].bonus
+    });
+    return dispatch({ type: UPDATE_SUCCESS });
   };
 }
 
 export function updateBonus(data) {
-  return apiCall(data, updateTextBonus, updateTextBonusSuccess, () => {});
+  const fail = () => { return { type: 'kewen-lab/sidebar/UPDATE_BONUS_FAIL' }; };
+  return apiCall(data, updateTextBonus, updateTextBonusSuccess, fail);
+}
+
+function saveTextTitle(data) {
+  return () => {
+    return axios.put(`${process.env.REACT_APP_API_URL}/api/texts/${data.textId}/title`, data);
+  };
+}
+
+function saveTextTitleSuccess() {
+  return dispatch => {
+    dispatch(showFlashMessageWithTimeout({
+      type: 'success',
+      text: 'Title saved'
+    }, 1000));
+  };
+}
+
+export function saveTitle(data) {
+  const fail = () => { return { type: 'kewen-lab/sidebar/SAVE_TITLE_FAIL' }; };
+  return apiCall(data, saveTextTitle, saveTextTitleSuccess, fail);
 }
 // Selectors
 

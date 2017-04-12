@@ -178,6 +178,14 @@ h2 {
   align-items: stretch;
 }
 
+#text-saving-status {
+  flex: 1 0 116px;
+  display: flex;
+  flex direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 #text-title {
   flex-grow: 2;
   display: flex;
@@ -187,7 +195,7 @@ h2 {
 }
 
 #text-bonus {
-  flex-grow: 1;
+  flex: 1 0 116px;
   display: flex;
   flex-direction: column;
   justify-content: center;
