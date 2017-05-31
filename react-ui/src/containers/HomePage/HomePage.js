@@ -30,6 +30,7 @@ class HomePage extends React.Component {
           </Link>
           :
           <Image
+            id="home-logo"
             src={logo}
             alt="kewen-lab"
             shape="circular"
