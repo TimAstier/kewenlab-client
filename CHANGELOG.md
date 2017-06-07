@@ -4,9 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-##[UNRELEASED]
-## Fixed
-- Successive reordering not saved correclt in DB (added REFRESH_ORDERS action)
+## [UNRELEASED]
+### Added
+### Modified
+### Fixed
+
+##[1.1.1] - 2017-06-07
+## Added
+- Forest "Clone Project" smart action
+
+### Fixed
+- Fix bug when switching project
+- Successive reordering not saved correct in DB (added REFRESH_ORDERS action)
 
 ##[1.1.0] - 2017-04-12
 ### Added
