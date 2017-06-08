@@ -1,0 +1,48 @@
+#suggestion-chars-list {
+  float: left;
+  height: 100%;
+  width: 280px;
+}
+
+#suggestion-words-list {
+  height: 100%;
+  margin-left: 1040px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.suggestion-item-ban {
+  display: inline-block;
+  margin-top: -3px;
+  opacity: 0;
+  width: 10%;
+}
+
+.suggestion-item-ban:hover {
+  opacity: 1;
+}
+
+.suggestion-item-hide {
+  display: inline-block;
+  margin-top: -3px;
+  opacity: 0;
+  width: 10%;
+}
+
+.suggestion-item-hide:hover {
+  opacity: 1;
+}
+
+.suggestion-item-chinese {
+  display: inline-block;
+  width: 60%;
+}
+
+.suggestion-item-favorite {
+  display: inline-block;
+  width: 20%;
+}
+
+.suggestion-item-favorite > i {
+  cursor: pointer;
+}

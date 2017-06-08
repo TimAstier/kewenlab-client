@@ -1,9 +1,54 @@
-/* General rules */
 body {
   display: block;
-  padding-top: 59px;
   font-family: sans-serif;
   overflow: hidden; }
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
 
 .center {
   text-align: center; }
@@ -13,38 +58,174 @@ h2 {
   height: 50px;
   padding-top: 7px; }
 
+.main-label {
+  font-size: 17px !important; }
+
+#create-text-menu {
+  height: 7%;
+  width: 100%;
+  margin-top: 0px;
+  text-align: center; }
+
+.alert {
+  position: fixed;
+  text-align: center;
+  width: 40%;
+  margin-top: 3px;
+  margin-left: 30%;
+  margin-right: 30%;
+  z-index: 102;
+  /* Semantic-ui fixed navbar is 101 */ }
+
+#login-error {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  z-index: 1; }
+
+.table-wrapper {
+  height: 620px;
+  overflow-y: scroll; }
+
+.tablestats {
+  height: 57px;
+  width: 110px;
+  float: right; }
+
+.tablestats div.item {
+  height: 15px; }
+
+#login-form {
+  padding-top: 50px; }
+
+#project-selector .item {
+  height: 40px;
+  font-size: 14px;
+  color: black; }
+
+#select-message {
+  margin-top: 0px;
+  float: left;
+  height: 100%;
+  width: 1230px;
+  text-align: center;
+  padding-top: 100px; }
+
+#signup-form {
+  padding-top: 50px; }
+
+#suggestion-chars-list {
+  float: left;
+  height: 100%;
+  width: 280px; }
+
+#suggestion-words-list {
+  height: 100%;
+  margin-left: 1040px;
+  padding-left: 30px;
+  padding-right: 30px; }
+
+.suggestion-item-ban {
+  display: inline-block;
+  margin-top: -3px;
+  opacity: 0;
+  width: 10%; }
+
+.suggestion-item-ban:hover {
+  opacity: 1; }
+
+.suggestion-item-hide {
+  display: inline-block;
+  margin-top: -3px;
+  opacity: 0;
+  width: 10%; }
+
+.suggestion-item-hide:hover {
+  opacity: 1; }
+
+.suggestion-item-chinese {
+  display: inline-block;
+  width: 60%; }
+
+.suggestion-item-favorite {
+  display: inline-block;
+  width: 20%; }
+
+.suggestion-item-favorite > i {
+  cursor: pointer; }
+
+#suggestion-input {
+  height: 100%;
+  width: 550px;
+  float: left; }
+
+#suggestion-form {
+  margin-top: 250px;
+  margin-left: 30px;
+  margin-right: 30px;
+  text-align: center; }
+
+#suggestion-form input {
+  width: 50px;
+  height: 30px;
+  font-size: 14px;
+  text-align: center; }
+
+#suggestion-form label {
+  font-size: 16px; }
+
+.text-item > .title {
+  display: inline-block;
+  max-width: 115px;
+  line-height: 20px; }
+
+.text-item > .label {
+  display: inline-block;
+  background-color: transparent !important;
+  margin-top: -5px !important;
+  cursor: move; }
+
+.text-item > .label > .label {
+  font-size: 0.8rem !important; }
+
 #app {
   height: 100%;
   width: 100%;
   position: fixed; }
 
-#main-container {
+#chars-area {
+  float: left;
   height: 100%;
-  width: 100%;
-  position: fixed; }
+  width: 280px; }
 
-#main-screen {
-  height: 100%;
-  width: 100%;
-  position: fixed; }
+#chars-area > table {
+  margin-top: 0px; }
 
-.main-label {
-  font-size: 17px !important; }
+#chars-list > .infos {
+  height: 50px;
+  margin-bottom: 10px; }
 
-/* Home page */
+#chars-list > .infos > .main-label {
+  margin-top: 7px;
+  margin-left: 47px;
+  display: inline-block; }
+
+#chars-list > .infos > .tablestats {
+  margin-top: 5px;
+  height: 45px;
+  width: 110px;
+  padding-top: 5px;
+  margin-right: 20px; }
+
 #home-screen {
+  padding-top: 40px;
   height: 100%;
   width: 100%;
   text-align: center; }
 
 #home-logo {
   animation: scaly 5000ms ease-in-out 0ms infinite; }
-
-@keyframes scaly {
-  0% {
-    transform: scale(1); }
-  50% {
-    transform: scale(1.1); } }
 
 #greetings {
   margin-top: 5%;
@@ -55,28 +236,12 @@ h2 {
 #get-started-btn {
   margin-top: 20px; }
 
-/* FlashMessages */
-.alert {
-  position: fixed;
-  text-align: center;
-  width: 60%;
-  margin-top: -57px;
-  margin-left: 350px;
-  margin-right: 300px;
-  z-index: 99999; }
-
-#login-error {
-  position: relative;
+#main-screen {
+  height: 100%;
   width: 100%;
-  text-align: center;
-  margin: 0;
-  z-index: 1; }
+  position: fixed;
+  margin-top: 61px; }
 
-/* Signup & Login pages */
-#login-form, #signup-form {
-  padding-top: 50px; }
-
-/* Sidebar */
 #sidebar {
   height: 100%;
   width: 210px;
@@ -103,38 +268,11 @@ h2 {
   overflow-x: hidden;
   margin-bottom: 0px; }
 
-#create-text-menu {
-  height: 7%;
-  width: 100%;
-  margin-top: 0px;
-  text-align: center; }
-
 #sidebar-loader {
   position: relative;
   top: 50%;
   transform: perspective(1px) translateY(-50%); }
 
-.text-item > .title {
-  display: inline-block;
-  max-width: 115px;
-  line-height: 20px; }
-
-.text-item > .label {
-  display: inline-block;
-  background-color: transparent !important;
-  margin-top: -5px !important;
-  cursor: move; }
-
-.text-item > .label > .label {
-  font-size: 1.15rem !important; }
-
-/* Project Selector */
-#project-selector .item {
-  height: 40px;
-  font-size: 14px;
-  color: black; }
-
-/* TextEditor */
 #text-editor {
   height: 100%;
   width: 550px;
@@ -182,32 +320,6 @@ h2 {
 #text-editor-save-btn, #chars-area-save-btn, #words-area-save-btn, #wors-area-refresh-btn {
   margin-top: 10px; }
 
-/* CharsArea */
-#chars-area {
-  float: left;
-  height: 100%;
-  width: 280px; }
-
-#chars-area > table {
-  margin-top: 0px; }
-
-#chars-list > .infos {
-  height: 50px;
-  margin-bottom: 10px; }
-
-#chars-list > .infos > .main-label {
-  margin-top: 7px;
-  margin-left: 47px;
-  display: inline-block; }
-
-#chars-list > .infos > .tablestats {
-  margin-top: 5px;
-  height: 45px;
-  width: 110px;
-  padding-top: 5px;
-  margin-right: 20px; }
-
-/* WordsArea */
 #words-area {
   height: 100%;
   margin-top: 20px;
@@ -234,90 +346,8 @@ h2 {
   padding-top: 5px;
   margin-right: 10px; }
 
-/* Char & Word Areas */
-.table-wrapper {
-  height: 620px;
-  overflow-y: scroll; }
-
-.tablestats {
-  height: 57px;
-  width: 110px;
-  float: right; }
-
-.tablestats div.item {
-  height: 15px; }
-
-/* SuggestionInput */
-#suggestion-input {
-  height: 100%;
-  width: 550px;
-  float: left; }
-
-#suggestion-form {
-  margin-top: 250px;
-  margin-left: 30px;
-  margin-right: 30px;
-  text-align: center; }
-
-#suggestion-form input {
-  width: 50px;
-  height: 30px;
-  font-size: 14px;
-  text-align: center; }
-
-#suggestion-form label {
-  font-size: 16px; }
-
-/* Suggestion CharsList */
-#suggestion-chars-list {
-  float: left;
-  height: 100%;
-  width: 280px; }
-
-/* Suggestion WordsList */
-#suggestion-words-list {
-  height: 100%;
-  margin-left: 1040px;
-  padding-left: 30px;
-  padding-right: 30px; }
-
-.suggestion-item-ban {
-  display: inline-block;
-  margin-top: -3px;
-  opacity: 0;
-  width: 10%; }
-
-.suggestion-item-ban:hover {
-  opacity: 1; }
-
-.suggestion-item-hide {
-  display: inline-block;
-  margin-top: -3px;
-  opacity: 0;
-  width: 10%; }
-
-.suggestion-item-hide:hover {
-  opacity: 1; }
-
-.suggestion-item-chinese {
-  display: inline-block;
-  width: 60%; }
-
-.suggestion-item-favorite {
-  display: inline-block;
-  width: 20%; }
-
-.suggestion-item-favorite > i {
-  cursor: pointer; }
-
-/* screen level */
-#screen-message {
-  margin-top: 0px;
-  float: left;
-  height: 100%;
-  width: 1230px;
-  text-align: center;
-  padding-top: 100px; }
-
-#suggestion-screen {
-  padding-top: 20px; }
+@keyframes scaly {
+  0% {
+    transform: scale(1); }
+  50% {
+    transform: scale(1.1); } }

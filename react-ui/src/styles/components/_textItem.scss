@@ -1,0 +1,16 @@
+.text-item > .title {
+  display: inline-block;
+  max-width: 115px;
+  line-height: 20px;
+}
+
+.text-item > .label {
+  display: inline-block;
+  background-color: transparent !important;
+  margin-top: -5px !important;
+  cursor: move;
+}
+
+.text-item > .label > .label {
+  font-size: 0.8rem !important;
+ }

@@ -7,7 +7,6 @@ const CreateTextMenu = ({ onClick }) => {
       <Menu.Item>
         <Button
           color="teal"
-          size="big"
           data-position="top center"
           onClick={onClick}
         >

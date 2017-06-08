@@ -3,11 +3,11 @@ import { Table, Label, Icon, Popup } from 'semantic-ui-react';
 
 function statusLabel(status) {
   if (status === 'new') {
-    return (<Label color="blue" size="big">New</Label>);
+    return (<Label color="blue">New</Label>);
   } else if (status === 'notsaved') {
-    return (<Label color="red" size="big">Not saved</Label>);
+    return (<Label color="red">Not saved</Label>);
   } else if (status === 'manuallydeleted') {
-    return (<Label color="red" size="big">Banned</Label>);
+    return (<Label color="red">Banned</Label>);
   }
   return status;
 }

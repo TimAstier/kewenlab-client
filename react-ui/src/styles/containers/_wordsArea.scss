@@ -1,0 +1,30 @@
+#words-area {
+  height: 100%;
+  margin-top: 20px;
+  margin-left: 1040px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+#words-area > table {
+  margin-top: 0px;
+}
+
+#words-list > .infos {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+#words-list > .infos > .main-label {
+  margin-top: 7px;
+  margin-left: 87px;
+  display: inline-block;
+}
+
+#words-list > .infos > .tablestats {
+  margin-top: 5px;
+  height: 45px;
+  width: 110px;
+  padding-top: 5px;
+  margin-right: 10px;
+}

@@ -56,7 +56,6 @@ class TextEditor extends React.Component {
               placeholder="Title..."
               value={this.props.title}
               onChange={this.onTitleChange.bind(this)}
-              size="large"
             />
           </div>
           <div id="text-bonus">

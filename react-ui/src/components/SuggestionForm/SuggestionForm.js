@@ -24,7 +24,6 @@ const SuggestionForm = ({checked, value, handleChange,
         </Form.Field>
         <Button
           type="submit"
-          size="big"
           onClick={onClick}
           loading={isFetching}
           disabled={isFetching}

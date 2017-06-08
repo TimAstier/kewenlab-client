@@ -1,0 +1,129 @@
+// Mixins
+// ======
+
+// Animation
+@mixin animation ($delay, $duration, $animation, $direction: normal, $count: 1) {
+  -webkit-animation-delay: $delay;
+  -webkit-animation-duration: $duration;
+  -webkit-animation-name: $animation;
+  -webkit-animation-direction: $direction;
+  -webkit-animation-iteration-count: $count;
+  -webkit-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+
+  -moz-animation-delay: $delay;
+  -moz-animation-duration: $duration;
+  -moz-animation-name: $animation;
+  -moz-animation-direction: $direction;
+  -moz-animation-iteration-count: $count;
+  -moz-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+
+  -o-animation-delay: $delay;
+  -o-animation-duration: $duration;
+  -o-animation-name: $animation;
+  -o-animation-direction: $direction;
+  -o-animation-iteration-count: $count;
+  -o-animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+
+  animation-delay: $delay;
+  animation-duration: $duration;
+  animation-name: $animation;
+  animation-direction: $direction;
+  animation-iteration-count: $count;
+  animation-fill-mode: forwards; /* this prevents the animation from restarting! */
+}
+
+// Avatar
+@mixin avatar($height, $border-radius: $height) {
+  border-radius: $border-radius;
+  height: $height;
+  width: $height;
+}
+
+// Clearfix
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+
+// Image rendering
+@mixin image-rendering() {
+  image-rendering: optimize-contrast;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  -ms-interpolation-mode: nearest-neighbor;
+}
+
+
+// Keyframe animation
+@mixin keyframes($animation_name) {
+  @-webkit-keyframes #{$animation_name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation_name} {
+    @content;
+  }
+  @-o-keyframes #{$animation_name} {
+    @content;
+  }
+  @keyframes #{$animation_name} {
+    @content;
+  }
+}
+
+
+// Placeholder
+@mixin placeholder() {
+  ::-webkit-input-placeholder {
+    @content
+  }
+  :-moz-placeholder {
+    @content
+  }
+  ::-moz-placeholder {
+    @content
+  }
+  :-ms-input-placeholder {
+    @content
+  }
+}
+
+
+// Text ellipsis
+@mixin ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Horinzontal scrolling
+@mixin h-scrolling {
+  overflow-y: hidden;
+  overflow-x: auto;
+
+  // iOS Momentum scroll
+  @media screen and (max-device-width: 480px) {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+
+// Vertical scrolling
+@mixin scrolling {
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  // iOS Momentum scroll
+  @media screen and (max-device-width: 480px) {
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+}

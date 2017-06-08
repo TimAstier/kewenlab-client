@@ -1,0 +1,35 @@
+#sidebar {
+  height: 100%;
+  width: 210px;
+  float: left;
+  background-color: black;
+}
+
+#project-selector-menu {
+  height: 7%;
+  width: 100%;
+  text-align:center;
+}
+
+#project-selector {
+  position: relative;
+  top: 50%;
+  transform: perspective(1px) translateY(-50%);
+}
+
+#text-items-menu {
+  height: 83%;
+  width: 100%;
+  max-height: 650px;
+  margin-top: 0px;
+  font-size: 15px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  margin-bottom: 0px;
+}
+
+#sidebar-loader {
+  position: relative;
+  top: 50%;
+  transform: perspective(1px) translateY(-50%);
+}

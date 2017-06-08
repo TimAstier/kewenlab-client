@@ -3,7 +3,6 @@ import { Menu } from 'semantic-ui-react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { logout } from '../../redux/auth';
-import './NavigationBar.css';
 import logo from '../../logo.png';
 import { AppMenu } from '../../components';
 import { setMode } from '../../redux/mode';

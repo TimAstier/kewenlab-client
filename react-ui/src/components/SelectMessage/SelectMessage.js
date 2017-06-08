@@ -14,7 +14,7 @@ const SelectMessage = ({ mode }) => {
   }
 
   return (
-    <Header as="h1" icon id="screen-message">
+    <Header as="h1" icon id="select-message">
       <Icon name={icon} />
       {headerMessage}
       <Header.Subheader>

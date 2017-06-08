@@ -1,0 +1,17 @@
+.alert {
+  position: fixed;
+  text-align: center;
+  width: 40%;
+  margin-top: 3px;
+  margin-left: 30%;
+  margin-right: 30%;
+  z-index: 102; /* Semantic-ui fixed navbar is 101 */
+}
+
+#login-error {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  z-index: 1;
+}

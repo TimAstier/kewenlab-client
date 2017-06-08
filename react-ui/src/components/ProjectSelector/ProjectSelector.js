@@ -55,6 +55,7 @@ export default class ProjectSelector extends Component {
           id="project-selector"
           placeholder="Select Project"
           selection
+          fluid
           search={search}
           options={this.props.options}
           value={value}
