@@ -4,6 +4,7 @@ import Validator from 'validator';
 import isEmpty from 'lodash/isEmpty';
 import { TextFieldGroup } from '../';
 import { login } from '../../redux/auth';
+import { Header } from 'semantic-ui-react';
 
 function validateInput(data) {
   const errors = {};
@@ -80,7 +81,9 @@ class LoginForm extends React.Component {
     const { errors, identifier, password, isLoading } = this.state;
     return (
       <form onSubmit={this.onSubmit} id="login-form">
-        <h1>Login</h1>
+        <Header as="h1" textAlign="center">
+          Login
+        </Header>
 
         { errors.hasOwnProperty('status') && errors.status !== 500 &&
           <div className="alert alert-danger" id="login-error">{errors.message}</div> }

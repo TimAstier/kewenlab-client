@@ -3,12 +3,14 @@ import { TextArea } from 'semantic-ui-react';
 
 const TextInput = ({ value, onChange, readOnly }) => {
   return (
-    <TextArea
-      placeholder="Write a text here..."
-      value={value}
-      onChange={onChange}
-      readOnly={readOnly}
-    />
+    <div id="text-input">
+      <TextArea
+        placeholder="Write a text here..."
+        value={value}
+        onChange={onChange}
+        readOnly={readOnly}
+      />
+    </div>
   );
 };
 

@@ -1,19 +1,17 @@
 import React from 'react';
-import { Menu, Button } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 
 const CreateTextMenu = ({ onClick }) => {
   return (
-    <Menu inverted vertical id="create-text-menu">
-      <Menu.Item>
-        <Button
-          color="teal"
-          data-position="top center"
-          onClick={onClick}
-        >
-          Add text
-        </Button>
-      </Menu.Item>
-    </Menu>
+    <div id="create-text-menu">
+      <Button
+        color="teal"
+        onClick={onClick}
+        size="tiny"
+      >
+        Add text
+      </Button>
+    </div>
   );
 };
 

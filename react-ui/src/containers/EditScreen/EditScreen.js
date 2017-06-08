@@ -74,28 +74,37 @@ class EditScreen extends React.Component {
     return this.props.saveTextEditor(data);
   }
 
-  render() {
-    const { currentTextId } = this.props;
+  renderWithText() {
     return (
       <div id="edit-screen">
-        { currentTextId !== 0 ?
-          <div>
-            <TextEditor
-              save={this.saveText.bind(this)}
-              onChange={this.onTextEditorChange}
-              currentProjectId={this.props.currentProjectId}
-            />
-            <CharsArea save={this.saveChars.bind(this)} />
-            <WordsArea
-              tokenize={this.tokenize.bind(this)}
-              save={this.saveWords.bind(this)}
-            />
-          </div>
-            :
-          <SelectMessage mode="Edit"/>
-        }
+        <TextEditor
+          save={this.saveText.bind(this)}
+          onChange={this.onTextEditorChange}
+          currentProjectId={this.props.currentProjectId}
+        />
+        <CharsArea save={this.saveChars.bind(this)} />
+        <WordsArea
+          tokenize={this.tokenize.bind(this)}
+          save={this.saveWords.bind(this)}
+        />
       </div>
     );
+  }
+
+  renderWithMessage() {
+    return (
+      <div id="edit-screen">
+        <SelectMessage mode="Edit"/>
+      </div>
+    );
+  }
+
+  render() {
+    const { currentTextId } = this.props;
+    if (currentTextId !== 0) {
+      return this.renderWithText();
+    }
+    return this.renderWithMessage();
   }
 }
 

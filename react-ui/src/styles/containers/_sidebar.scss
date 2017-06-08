@@ -1,25 +1,25 @@
 #sidebar {
-  height: 100%;
-  width: 210px;
-  float: left;
+  padding-top: 15px;
+  flex: 0 0 210px;
   background-color: black;
+  display: flex;
+  flex-direction: column;
+  max-width: 210px;
 }
 
 #project-selector-menu {
-  height: 7%;
-  width: 100%;
-  text-align:center;
-}
-
-#project-selector {
-  position: relative;
-  top: 50%;
-  transform: perspective(1px) translateY(-50%);
+  flex-grow: 1;
+  min-height: 42px;
+  max-height: 42px;
+  display: flex;
+  align-items: center;
+  padding-right: 10px;
+  padding-left: 10px;
 }
 
 #text-items-menu {
-  height: 83%;
-  width: 100%;
+  flex-grow: 6;
+  max-width: 210px;
   max-height: 650px;
   margin-top: 0px;
   font-size: 15px;
@@ -28,8 +28,16 @@
   margin-bottom: 0px;
 }
 
+#create-text-menu {
+  flex-grow: 1;
+  min-height: 65px;
+  max-height: 65px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: black;
+}
+
 #sidebar-loader {
-  position: relative;
-  top: 50%;
-  transform: perspective(1px) translateY(-50%);
+  flex-grow: 6;
 }
