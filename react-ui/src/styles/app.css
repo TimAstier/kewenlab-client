@@ -80,7 +80,8 @@ h2 {
 
 .table-wrapper {
   height: 620px;
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  font-size: 14px; }
 
 .tablestats {
   height: 57px;
@@ -91,7 +92,7 @@ h2 {
   height: 15px; }
 
 .tablestats > .ui.list {
-  font-size: 0.9em; }
+  font-size: 13px; }
 
 #login-form {
   padding-top: 50px; }
@@ -194,7 +195,7 @@ h2 {
 
 #chars-area {
   padding-top: 15px;
-  flex: 1.5 0 0;
+  flex: 2 0 0;
   padding-right: 10px; }
 
 #chars-area > table {
@@ -335,6 +336,9 @@ h2 {
 
 #text-editor-save-btn, #chars-area-save-btn, #words-area-save-btn, #wors-area-refresh-btn {
   margin-top: 10px; }
+
+#text-bonus {
+  font-size: 14px; }
 
 #words-area {
   padding-top: 15px;

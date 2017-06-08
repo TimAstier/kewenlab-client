@@ -28,7 +28,7 @@ const CharItemList = ({ filteredLocalChars, onFilterClick, visibilityFilter, isS
       <div className="infos">
         <Label basic circular color="black" className="main-label">
           {isSaving ? (
-            <Loader active inline />
+            <Loader active inline size="tiny"/>
           ) : (
             '字'
           )}

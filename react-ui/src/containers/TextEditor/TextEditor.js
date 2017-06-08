@@ -43,7 +43,7 @@ class TextEditor extends React.Component {
   render() {
     let loader = null;
     if (this.props.isSaving) {
-      loader = <Loader active inline="centered" />;
+      loader = <Loader active inline="centered" size="tiny" />;
     }
     return (
       <div id="text-editor">
@@ -64,6 +64,7 @@ class TextEditor extends React.Component {
               toggle
               onChange={this.onBonusChange.bind(this)}
               checked={this.props.isBonus}
+              size="tiny"
             />
           </div>
         </div>
