@@ -195,7 +195,7 @@ h2 {
 
 #chars-area {
   padding-top: 15px;
-  flex: 2 0 0;
+  flex: 0 0 305px;
   padding-right: 10px; }
 
 #chars-area > table {
@@ -286,7 +286,7 @@ h2 {
 
 #text-editor {
   padding-top: 15px;
-  flex: 4 0 0;
+  flex: 0 0 600px;
   display: flex;
   flex-direction: column; }
 
@@ -342,7 +342,7 @@ h2 {
 
 #words-area {
   padding-top: 15px;
-  flex: 2 0 0;
+  flex: 0 0 305px;
   padding-left: 10px;
   padding-right: 20px; }
 
