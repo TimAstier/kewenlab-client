@@ -1,14 +1,14 @@
 #suggestion-chars-list {
-  float: left;
-  height: 100%;
-  width: 280px;
+  padding-top: 15px;
+  flex: 0 0 200px;
+  padding-right: 10px;
 }
 
 #suggestion-words-list {
-  height: 100%;
-  margin-left: 1040px;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-top: 15px;
+  flex: 0 0 500px;
+  padding-left: 10px;
+  padding-right: 20px;
 }
 
 .suggestion-item-ban {

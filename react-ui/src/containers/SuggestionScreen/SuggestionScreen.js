@@ -9,36 +9,37 @@ class SuggestionScreen extends React.Component {
 
   render() {
     const { currentTextId } = this.props;
+    if (currentTextId !== 0) {
+      return (
+        <div id="suggestion-screen">
+          <SuggestionInput
+            currentTextId={this.props.currentTextId}
+            findSuggestions={this.props.getSuggestions}
+            isFetching={this.props.isFetching}
+            currentUserId={this.props.currentUserId}
+            currentProjectId={this.props.currentProjectId}
+          />
+          <SuggestionItemList
+            suggestedItems={this.props.suggestedChars}
+            type={'chars'}
+            isFetching={this.props.isFetching}
+          />
+          <SuggestionItemList
+            banWord={this.props.banWord}
+            hideWord={this.props.hideWord}
+            favoriteWord={this.props.favoriteWord}
+            unfavoriteWord={this.props.unfavoriteWord}
+            currentUserId={this.props.currentUserId}
+            suggestedItems={this.props.suggestedWords}
+            type={'words'}
+            isFetching={this.props.isFetching}
+          />
+        </div>
+      );
+    }
     return (
       <div id="suggestion-screen">
-        { currentTextId !== 0 ?
-          <div>
-            <SuggestionInput
-              currentTextId={this.props.currentTextId}
-              findSuggestions={this.props.getSuggestions}
-              isFetching={this.props.isFetching}
-              currentUserId={this.props.currentUserId}
-              currentProjectId={this.props.currentProjectId}
-            />
-            <SuggestionItemList
-              suggestedItems={this.props.suggestedChars}
-              type={'chars'}
-              isFetching={this.props.isFetching}
-            />
-            <SuggestionItemList
-              banWord={this.props.banWord}
-              hideWord={this.props.hideWord}
-              favoriteWord={this.props.favoriteWord}
-              unfavoriteWord={this.props.unfavoriteWord}
-              currentUserId={this.props.currentUserId}
-              suggestedItems={this.props.suggestedWords}
-              type={'words'}
-              isFetching={this.props.isFetching}
-            />
-          </div>
-            :
-          <SelectMessage mode="Suggestion"/>
-        }
+        <SelectMessage mode="Suggestion"/>
       </div>
     );
   }
