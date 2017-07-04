@@ -7,6 +7,7 @@ import { toArrayOfUniqueChars } from '../../utils/custom';
 import { TextEditor, CharsArea, WordsArea } from '../';
 import { SelectMessage } from '../../components';
 import { tokenizeWords } from './operations';
+import logCurrentContent from '../../helpers/logCurrentContent';
 
 class EditScreen extends React.Component {
   constructor(props) {
@@ -67,6 +68,7 @@ class EditScreen extends React.Component {
   saveText(e) {
     // Not sure why this save method does not work as the other 2 without this
     e.preventDefault();
+    logCurrentContent(this.props.currentContent);
     const data = {
       id: this.props.currentTextId,
       content: this.props.localContent
@@ -111,6 +113,7 @@ class EditScreen extends React.Component {
 EditScreen.propTypes = {
   currentTextId: PropTypes.number.isRequired,
   localContent: PropTypes.string.isRequired,
+  currentContent: PropTypes.string.isRequired,
   localChars: PropTypes.array.isRequired,
   charsToDelete: PropTypes.array.isRequired,
   charsToUpdate: PropTypes.array.isRequired,
@@ -132,6 +135,7 @@ function mapStateToProps(state) {
   return {
     currentTextId: state.get('sidebar').get('currentTextId'),
     localContent: state.get('textEditor').get('localContent'),
+    currentContent: state.get('textEditor').get('currentContent'),
     localChars: state.get('chars').get('localItems').toJS(),
     charsToDelete: state.get('chars').get('itemsToDelete').toJS(),
     charsToUpdate: state.get('chars').get('itemsToUpdate').toJS(),
