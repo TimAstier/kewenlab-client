@@ -1,13 +1,13 @@
 export function toChineseOnly(string) {
   // eslint-disable-next-line
-  const allExceptChinese = /[A-z]|[0-9]|[$↗‘Œ.,\/#!?%\^&\*;:{}=\-_`~()。？！–•…@€£+àçèé~<>，；：'"＂、“”（）《》％·ĀāÁáǍǎÀàĒēÉéĚěÈèĪīÍíǏǐÌìŌōÓóǑǒÒòŪūÚúǓǔÙùÜüǗǘǙǚǛǜ˚ÅåE̊e̊i̊O̊o̊Ůů’]|\s/g;
+  const allExceptChinese = /[A-z]|[0-9]|[$／↗‘Œ.,\/#!?%\^&\*;:{}=\-_`~()。？！–•…@€£+àçèé~<>，；：'"＂、“”（）《》％·ĀāÁáǍǎÀàĒēÉéĚěÈèĪīÍíǏǐÌìŌōÓóǑǒÒòŪūÚúǓǔÙùÜüǗǘǙǚǛǜ˚ÅåE̊e̊i̊O̊o̊Ůů’]|\s/g;
   return string.replace(allExceptChinese, '');
 }
 
 export function preTokenization(string) {
   const dollarSeparatedString = string.replace(/\n/g, '$');
   // eslint-disable-next-line
-  const allExceptChinese = /[A-z]|[0-9]|[↗‘Œ.,\/#!?%\^&\*;:{}=\-_`~()。？！–•…@€£+àçèé~<>，；：'"＂、“”（）《》％·ĀāÁáǍǎÀàĒēÉéĚěÈèĪīÍíǏǐÌìŌōÓóǑǒÒòŪūÚúǓǔÙùÜüǗǘǙǚǛǜ˚ÅåE̊e̊i̊O̊o̊Ůů’]|\s/g;
+  const allExceptChinese = /[A-z]|[0-9]|[／↗‘Œ.,\/#!?%\^&\*;:{}=\-_`~()。？！–•…@€£+àçèé~<>，；：'"＂、“”（）《》％·ĀāÁáǍǎÀàĒēÉéĚěÈèĪīÍíǏǐÌìŌōÓóǑǒÒòŪūÚúǓǔÙùÜüǗǘǙǚǛǜ˚ÅåE̊e̊i̊O̊o̊Ůů’]|\s/g;
   return dollarSeparatedString.replace(allExceptChinese, '');
 }
 
