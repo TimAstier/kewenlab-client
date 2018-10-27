@@ -2,7 +2,9 @@
   "name": "kewen-lab-server",
   "version": "1.0.0",
   "description": "",
-  "private": true,
+  "author": "Timothée Astier",
+  "license": "GPL-3.0",
+  "private": false,
   "engines": {
     "node": "6.9.x"
   },
@@ -23,6 +25,5 @@
     "create-react-app",
     "react"
   ],
-  "license": "ISC",
   "devDependencies": {}
 }

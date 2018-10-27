@@ -1,12 +1,13 @@
 {
   "name": "kewen-lab-client",
   "version": "0.1.0",
-  "private": true,
   "description": "A client for the Kewen Lab application.",
   "author": {
-    "name": "Tim Astier",
+    "name": "Timothée Astier",
     "url": "https://github.com/TimAstier"
   },
+  "license": "GPL-3.0",
+  "private": false,
   "scripts": {
     "build-css": "node-sass src/ -o src/",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
